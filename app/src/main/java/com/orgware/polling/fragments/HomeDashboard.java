@@ -24,6 +24,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        makeToast("Git Test");
     }
 
     @Nullable
