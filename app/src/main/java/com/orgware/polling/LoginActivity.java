@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by nandagopal on 23/10/15.
@@ -42,15 +43,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     boolean get_device_token;
     AutoCompleteTextView mCountryAutoComplete;
     CountryAutoCompleteAdapter mCountryAdapter;
-
+    List<CountryItem> countryList = new ArrayList<>();
+    String[] locales;
+    Locale obj;
     private String mGCM_ID;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        locales = Locale.getISOCountries();
         setContentView(R.layout.activity_login);
         (mCountryAutoComplete = (AutoCompleteTextView) findViewById(R.id.country)).setOnItemClickListener(this);
-        mCountryAutoComplete.setThreshold(1);
+        mCountryAutoComplete.setThreshold(2);
         get_device_token = preferences.getBoolean(GET_DEVICE_TOKEN_KEY, true);
         editor.putString(OTP_VALUE, "").commit();
         if (NetworkHelper.checkActiveInternet(this)) {
@@ -79,14 +83,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             e.printStackTrace();
         }
         mAccept = (Button) findViewById(R.id.acceptBtn);
+//        mCountryAdapter = new CountryAutoCompleteAdapter(this, R.layout.spinner_menu, getCountries());
         mCountryAdapter = new CountryAutoCompleteAdapter(this, R.layout.spinner_menu, mCountryNameList);
-//        mCountryNameSpinner = (Spinner) findViewById(R.id.countryNameSpinner);
-//        mCountryNameSpinner.setOnItemSelectedListener(this);
-
-//        mCountryNameAdapter = new OTPSpinnerAdapter(LoginActivity.this, R.layout.spinner_menu, COUNTRY_NAME_ID, mCountryNameList);
-//        mCountryNameSpinner.setAdapter(mCountryNameAdapter);
         mCountryAutoComplete.setAdapter(mCountryAdapter);
-//        mCountryNameAdapter.setDropDownViewResource(R.layout.dropdown_item);
         mAccept.setOnClickListener(this);
     }
 
@@ -133,6 +132,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     });
                 break;
         }
+    }
+
+    private List<CountryItem> getCountries() {
+        for (String countryCode : locales) {
+
+            obj = new Locale("", countryCode);
+            countryList.add(new CountryItem("" + obj.getDisplayCountry()));
+
+        }
+        return countryList;
     }
 
     private String prepareLoginParams() {
@@ -206,7 +215,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * selected. This callback is invoked only when the newly selected
      * position is different from the previously selected position or if
      * there was no selected item.</p>
-     * <p/>
+     * <p>
      * Impelmenters can call getItemAtPosition(position) if they need to access the
      * data associated with the selected item.
      *
@@ -242,7 +251,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

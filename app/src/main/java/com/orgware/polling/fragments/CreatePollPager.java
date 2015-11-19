@@ -71,8 +71,8 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((HomeActivity) act).mPageTitle.setText("Create Poll");
-        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+//        ((HomeActivity) act).mPageTitle.setText("Create Poll");
+//        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
         mViewPager.setAdapter(mAdapter);
     }
 
@@ -142,19 +142,19 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
         switch (position) {
             case 0:
                 mTabOpinion.setChecked(true);
-                ((HomeActivity) act).mPageTitle.setText("Opinion Poll");
+//                ((HomeActivity) act).mPageTitle.setText("Opinion Poll");
                 break;
             case 1:
                 mTabQuick.setChecked(true);
-                ((HomeActivity) act).mPageTitle.setText("Quick Poll");
+//                ((HomeActivity) act).mPageTitle.setText("Quick Poll");
                 break;
             case 2:
                 mTabSurvey.setChecked(true);
-                ((HomeActivity) act).mPageTitle.setText("Survey Poll");
+//                ((HomeActivity) act).mPageTitle.setText("Survey Poll");
                 break;
             case 3:
                 mTabSocial.setChecked(true);
-                ((HomeActivity) act).mPageTitle.setText("Social Poll");
+//                ((HomeActivity) act).mPageTitle.setText("Social Poll");
                 break;
         }
     }

@@ -17,15 +17,20 @@
             android:layout_width="@dimen/size_home_hamMenu"
             android:layout_height="@dimen/size_home_hamMenu"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:padding="@dimen/padding_small"
             android:src="@drawable/menu_ham" />
+
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/app_name"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_poll_logo"
+            android:text="POLL"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txtLarge" />
 
@@ -33,6 +38,7 @@
             android:id="@+id/imgHomeHome"
             android:layout_width="@dimen/size_home_home"
             android:layout_height="@dimen/size_home_home"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imgHomeSettings"
             android:src="@drawable/home" />
 
@@ -42,9 +48,50 @@
             android:layout_height="@dimen/size_home_settings"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/padding_small"
             android:src="@drawable/menu_settings"
             android:tint="@android:color/white" />
+
+
+        <EditText
+            android:id="@+id/edittext_search_poll"
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_toLeftOf="@+id/layout_search"
+            android:background="@drawable/edit_text_corner"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/txtSmall"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/layout_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_toLeftOf="@+id/imgHomeHome">
+
+            <ImageView
+                android:id="@+id/img_searchPoll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:src="@drawable/ic_search"
+                android:tint="@android:color/white"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/img_closePoll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:src="@drawable/ic_close_search"
+                android:visibility="gone" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <FrameLayout

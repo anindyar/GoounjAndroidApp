@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,8 +24,9 @@ import net.simonvt.menudrawer.Position;
 
 public class HomeActivity extends BaseActivity implements Appinterface, View.OnClickListener, AdapterView.OnItemClickListener {
 
-    public ImageView openMenu, openHome, openSettings;
+    public ImageView openMenu, openHome, openSettings, openSearch, openClose;
     public TextView mPageTitle;
+    public EditText mSearchPollsTxt;
     MenuDrawer mSlidingMenu;
     RecyclerView mRecyclerView;
     MenuAdapter menuAdapter;
@@ -67,7 +69,12 @@ public class HomeActivity extends BaseActivity implements Appinterface, View.OnC
         mRecyclerView.setAdapter(menuAdapter);
         openMenu = (ImageView) findViewById(R.id.imgHomeMenu);
         openHome = (ImageView) findViewById(R.id.imgHomeHome);
+        mSearchPollsTxt = (EditText) findViewById(R.id.edittext_search_poll);
+        (openSearch = (ImageView) findViewById(R.id.img_searchPoll)).setOnClickListener(this);
+        openClose = (ImageView) findViewById(R.id.img_closePoll);
         openHome.setVisibility(View.GONE);
+        openSearch.setVisibility(View.GONE);
+        openClose.setVisibility(View.GONE);
         mPageTitle = (TextView) findViewById(R.id.pageTitle);
         openSettings = (ImageView) findViewById(R.id.imgHomeSettings);
         openMenu.setOnClickListener(this);

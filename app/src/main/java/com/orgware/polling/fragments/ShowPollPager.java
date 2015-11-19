@@ -41,7 +41,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((HomeActivity) act).mPageTitle.setText("Current Poll");
+//        ((HomeActivity) act).mPageTitle.setText("Current Poll");
         mFragmentList = new ArrayList<>();
         mFragmentList.clear();
         mGridList = new ArrayList<GridItems>();
@@ -79,11 +79,12 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+        ((HomeActivity) act).mPageTitle.setText("Poll");
+        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
         mPollGrid.setAdapter(mGridAdapter);
         mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);
-        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -125,10 +126,10 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onPageSelected(int position) {
         mPollGrid.setItemChecked(position, true);
-        if (position == 0)
-            ((HomeActivity) act).mPageTitle.setText("Current Poll");
-        else
-            ((HomeActivity) act).mPageTitle.setText("Poll History");
+//        if (position == 0)
+//            ((HomeActivity) act).mPageTitle.setText("Current Poll");
+//        else
+//            ((HomeActivity) act).mPageTitle.setText("Poll History");
     }
 
     /**

@@ -75,7 +75,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        ((HomeActivity) act).mPageTitle.setText("Poll History");
+//        ((HomeActivity) act).mPageTitle.setText("Poll History");
         if (NetworkHelper.checkActiveInternet(act))
             getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
         else

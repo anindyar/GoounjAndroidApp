@@ -1,14 +1,19 @@
 package com.orgware.polling.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
@@ -19,12 +24,15 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.utils.Methodutils;
+import com.orgware.polling.utils.SuperSwipeRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by nandagopal on 26/10/15.
@@ -38,6 +46,16 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     int limit = 15, dashboardId;
     GoounjDatabase db;
     boolean currentPollService;
+    private SuperSwipeRefreshLayout swipeRefreshLayout;
+    // Header View
+    private ProgressBar progressBar;
+    private TextView textView;
+    private ImageView imageView;
+
+    // Footer View
+    private ProgressBar footerProgressBar;
+    private TextView footerTextView;
+    private ImageView footerImageView;
 
     @Override
     public void setTitle() {
@@ -52,7 +70,26 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         singleItemList = new ArrayList<>();
         dashboardId = preferences.getInt(DASHBOARD_ID, 0);
         Log.e("DashBoard", "" + dashboardId);
-//        mAdapter = new CurrentPollAdapter(act, itemList);
+//        splitFromString("2015-10-31T09:16:02.000Z");
+
+    }
+
+    private String splitFromString(String stringName) {
+        StringBuilder sb = new StringBuilder();
+        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
+        StringTokenizer tokenize = new StringTokenizer(stringName, ".");
+        wanted = "" + tokenize.nextToken();
+        unwanted = "" + tokenize.nextToken();
+        StringTokenizer tokenizer = new StringTokenizer(wanted, "T");
+        sb.append("" + tokenizer.nextToken());
+        sb.append(" ");
+        unWantedone = "" + tokenizer.nextToken();
+        String[] wantedTime = unWantedone.split(":");
+        wantedOne = wantedTime[0];
+        wantedTwo = wantedTime[1];
+        sb.append(wantedOne + ":" + wantedTwo);
+        Log.e("Date", "" + sb.toString());
+        return sb.toString();
     }
 
     @Nullable
@@ -60,21 +97,66 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
         mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
+        swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mCurrentPollList.setLayoutManager(new LinearLayoutManager(act));
 //        db = new GoounjDatabase(act);
         currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
+        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
+        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
+        swipeRefreshLayout.setFooterView(null);
+        swipeRefreshLayout.setTargetScrollWithLayout(true);
+        swipeRefreshLayout
+                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+
+                    @Override
+                    public void onRefresh() {
+                        textView.setText("Pull Down To Refresh");
+                        imageView.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        if (NetworkHelper.checkActiveInternet(act)) {
+                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
+                            progressBar.setVisibility(View.GONE);
+                        } else
+                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    act.getSupportFragmentManager().popBackStack();
+                                    return;
+                                }
+                            });
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onPullDistance(int distance) {
+                        // pull distance
+                    }
+
+                    @Override
+                    public void onPullEnable(boolean enable) {
+                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView.setRotation(enable ? 180 : 0);
+                    }
+                });
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (preferences.getInt(DASHBOARD_ID, 0) == 1)
-            ((HomeActivity) act).mPageTitle.setText("Survey Poll");
-        else
-            ((HomeActivity) act).mPageTitle.setText("Current Poll");
+        ((HomeActivity) act).mPageTitle.setText("Poll");
+        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
+        ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
+        if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
+//            ((HomeActivity) act).mPageTitle.setText("Survey Poll");
+            ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+        } else {
+//            ((HomeActivity) act).mPageTitle.setText("Current Poll");
+            ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+        }
         if (NetworkHelper.checkActiveInternet(act))
-            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
         else
             Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                 @Override
@@ -102,12 +184,37 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        editor.putInt(QUESTION_SIZE, 3).commit();
-//        ((HomeActivity) act).setNewFragment(new CurrentPollPager(), "Current Poll Pager", true);
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-//        makeToast("Id- " + itemList.get(position).currentPollId + " Name- " + itemList.get(position).mCurrentPollTitle + " By- " + itemList.get(position).mCreatedUserName);
-//        getPollDetailPage("http://192.168.0.112:3000/polls/v1/poll/3");
         getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+    }
+
+    private View createFooterView() {
+        View footerView = LayoutInflater.from(swipeRefreshLayout.getContext())
+                .inflate(R.layout.layout_footer, null);
+        footerProgressBar = (ProgressBar) footerView
+                .findViewById(R.id.footer_pb_view);
+        footerImageView = (ImageView) footerView
+                .findViewById(R.id.footer_image_view);
+        footerTextView = (TextView) footerView
+                .findViewById(R.id.footer_text_view);
+        footerProgressBar.setVisibility(View.GONE);
+        footerImageView.setVisibility(View.VISIBLE);
+        footerImageView.setImageResource(R.drawable.arrow_refresh);
+        footerTextView.setText("Push");
+        return footerView;
+    }
+
+    private View createHeaderView() {
+        View headerView = LayoutInflater.from(swipeRefreshLayout.getContext())
+                .inflate(R.layout.layout_head, null);
+        progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
+        textView = (TextView) headerView.findViewById(R.id.text_view);
+        textView.setText("Pull Down To Refresh");
+        imageView = (ImageView) headerView.findViewById(R.id.image_view);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setImageResource(R.drawable.arrow_refresh);
+        progressBar.setVisibility(View.GONE);
+        return headerView;
     }
 
     private String showPollParams() {
@@ -122,8 +229,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         return mShowPollOnject.toString();
     }
 
-    private void getPollForCreatedUser(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+    private void getPollForCreatedUser(String url, boolean pullDownType) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Poll List Response", "" + response.toString());
@@ -179,7 +286,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                     JSONObject objectPolls = objectArray.optJSONObject(i);
                     Log.e("Array Values", "" + i);
                     if (objectPolls.optString("isAnswered").equals("0")) {
-                        itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), objectPolls.optString("startDate"), objectPolls.optString("endDate"),
+                        itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
                                 objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
                     }
                 }
@@ -188,7 +295,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                 for (int i = 0; i < objectArray.length(); i++) {
                     JSONObject objectPolls = objectArray.optJSONObject(i);
                     Log.e("Array Values", "" + i);
-                    itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), objectPolls.optString("startDate"), objectPolls.optString("endDate"),
+                    itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
                             objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
                 }
             }

@@ -24,7 +24,6 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        makeToast("Git Test");
     }
 
     @Nullable
@@ -46,7 +45,8 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((HomeActivity) act).openHome.setVisibility(View.GONE);
-        ((HomeActivity) act).mPageTitle.setText("Goounj");
+        ((HomeActivity) act).mPageTitle.setText("Home");
+        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
     }
 
 
