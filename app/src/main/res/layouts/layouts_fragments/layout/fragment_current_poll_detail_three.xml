@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_small"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/padding_small">
+
+            <ImageView
+                android:id="@+id/qts_detail_one_cimage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_mediapollunelected" />
+
+            <TextView
+                android:id="@+id/qts_detail_three_poll_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/qts_detail_one_cimage"
+                android:padding="@dimen/padding_small"
+                android:text="Best Footballer"
+                android:textColor="#000000"
+                android:textSize="@dimen/txtNormal" />
+
+            <TextView
+                android:id="@+id/qts_detail_three_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qts_detail_three_poll_title"
+                android:layout_toRightOf="@+id/qts_detail_one_cimage"
+                android:padding="@dimen/padding_small"
+                android:paddingLeft="@dimen/padding_small"
+                android:text="Created By: UserNamexyz"
+                android:textColor="#F0AA4C"
+                android:textSize="@dimen/txtNormal" />
+
+            <TextView
+                android:id="@+id/qts_detail_one_starttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qts_detail_one_user_name"
+                android:layout_toRightOf="@+id/qts_detail_one_cimage"
+                android:paddingLeft="@dimen/padding_small"
+                android:text="START ON :"
+                android:textColor="#3C746B"
+                android:textSize="@dimen/txtSmall"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/qts_detail_one_strtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qts_detail_one_user_name"
+                android:layout_toRightOf="@+id/qts_detail_one_starttxt"
+                android:text="03:00 PM,23 NOV 2015"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txtSmall"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qts_detail_one_starttxt"
+                android:layout_toRightOf="@+id/qts_detail_one_cimage"
+                android:paddingLeft="@dimen/padding_small"
+                android:text="ENDS ON :"
+                android:textColor="#3C746B"
+                android:textSize="@dimen/txtSmall"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/qts_detail_one_endtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qts_detail_one_strtime"
+                android:layout_toRightOf="@+id/qts_detail_one_starttxt"
+                android:text="03:00 PM,23 NOV 2015"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txtSmall"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/qts_detail_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:gravity="left"
+                android:padding="@dimen/padding_small"
+                android:text="Who is the top goal scorer?"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/txtNormal" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/choicesListviewThree"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:choiceMode="singleChoice"
+            android:divider="@null">
+
+        </ListView>
+
+    </LinearLayout>
+</ScrollView>

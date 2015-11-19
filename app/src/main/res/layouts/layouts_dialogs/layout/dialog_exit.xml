@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text="Message"
+        android:textColor="@color/orange_bg"
+        android:textSize="@dimen/txtLarge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text="Are you sure to exit?"
+        android:textColor="@color/orange_bg"
+        android:textSize="@dimen/txtLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@color/orange_bg"
+            android:text="Exit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@color/orange_bg"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+    </LinearLayout>
+
+</LinearLayout>

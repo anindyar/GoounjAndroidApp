@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/contact_dialog_height"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_small"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_contacts_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/arrow_left" />
+
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:background="@drawable/edit_text_corner"
+            android:drawableRight="@drawable/search_icon"
+            android:inputType="textFilter"
+            android:padding="@dimen/padding_small" />
+
+        <CheckBox
+            android:id="@+id/btnCheckedAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="Select All"
+            android:textSize="@dimen/txtVerySmall" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gridListview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_contact_done"
+        android:layout_below="@+id/layout_search">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/layout_contact_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_created_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:drawableLeft="@drawable/ic_create"
+            android:text="Create List"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+        <Button
+            android:id="@+id/btnContacts_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:text="Done"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+    </LinearLayout>
+
+</RelativeLayout>

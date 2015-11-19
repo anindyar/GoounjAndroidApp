@@ -1,0 +1,772 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_btn_complete"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/poll_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="Poll Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+                <EditText
+                    android:id="@+id/edittext_quick_pollname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="Enter poll name"
+                    android:padding="@dimen/padding_small"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_layout"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="No Of Questions"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+                <TextView
+                    android:id="@+id/catg_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="Category"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_small"
+                android:weightSum="2">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_quick_qtsno_one"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/selector_bg_circle_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_small"
+                        android:text="1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_quick_qtsno_two"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@drawable/selector_bg_circle_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_small"
+                        android:text="2" />
+
+                    <RadioButton
+                        android:id="@+id/radio_quick_qtsno_three"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@drawable/selector_bg_circle_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_small"
+                        android:text="3" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_lay"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="@dimen/padding_small"
+                    android:text="Select Category" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_quick_qts_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/edit_text_corner"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/layout_quick_ques_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 1"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <CheckBox
+                        android:id="@+id/cb_quick_qts_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"></View>
+
+                <LinearLayout
+                    android:id="@+id/quick_qts_one_exten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/poll_type_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_one_polltype_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_one_polltype_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtNormal" />
+
+                        <EditText
+                            android:id="@+id/edittext_quick_qts_one_pollqts_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter question one"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Choices"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/group_lay_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/choice"
+                        android:layout_marginBottom="@dimen/margin_small">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="YES"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="NO"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="Maybe"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtVerySmall" />
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_quick_qts_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/edit_text_corner"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/layout_quick_ques_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 2"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <CheckBox
+                        android:id="@+id/cb_quick_qts_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"></View>
+
+                <LinearLayout
+                    android:id="@+id/quick_qts_two_exten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_two_polltype_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_two_polltype_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtNormal" />
+
+                        <EditText
+                            android:id="@+id/edittext_quick_qts_two_pollqts_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter question two"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Choices"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/choice"
+                        android:layout_marginBottom="@dimen/margin_small">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="YES"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="NO"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="Maybe"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtVerySmall" />
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_quick_qts_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/edit_text_corner"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/layout_quick_ques_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 3"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <CheckBox
+                        android:id="@+id/cb_quick_qts_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"></View>
+
+                <LinearLayout
+                    android:id="@+id/quick_qts_three_exten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_three_polltype_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:id="@+id/radio_quick_qts_three_polltype_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtNormal" />
+
+                        <EditText
+                            android:id="@+id/edittext_quick_qts_three_pollqts_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter question three"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Choices"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/choice"
+                        android:layout_marginBottom="@dimen/margin_small">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="YES"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="NO"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtSmall" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:background="@drawable/selector_bg_circle_radio"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="Maybe"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/txtVerySmall" />
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
+
+                    <!--<View-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="@android:color/darker_gray"></View>-->
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/choosegroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Choose Audience Group From"
+                android:textColor="@android:color/black"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:id="@+id/check_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/choosegroup"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/dc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Device Contacts"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="true" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/closefrinds_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/frinds_lay"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/btnQuickContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/edit_text_corner"
+                    android:text="Choose From Contact"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_btn_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btnReset_Quick"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_reset"
+            android:gravity="center"
+            android:text="RESET"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+        <TextView
+            android:id="@+id/btnSubmit_quick"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_submit"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+    </LinearLayout>
+
+</RelativeLayout>

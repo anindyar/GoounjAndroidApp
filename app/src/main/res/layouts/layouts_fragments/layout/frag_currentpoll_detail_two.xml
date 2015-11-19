@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/qts_detail_two_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#ffffff"
+            android:padding="6dp"
+            android:src="@drawable/back_arrow_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="210dp"
+            android:drawableLeft="@drawable/stats"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="Satistics" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/qts_detail_two_cimage"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_mediapollunelected" />
+
+        <TextView
+            android:id="@+id/qts_detail_two_poll_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/qts_detail_two_cimage"
+            android:padding="3dp"
+            android:text="Weekend Movie"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/create_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qts_detail_two_poll_title"
+            android:layout_toRightOf="@+id/qts_detail_two_cimage"
+            android:padding="2dp"
+            android:text="Created By:"
+            android:textColor="#F0AA4C" />
+
+        <TextView
+            android:id="@+id/qts_detail_two_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qts_detail_two_poll_title"
+            android:layout_toRightOf="@+id/create_text"
+            android:padding="2dp"
+            android:text="UserNamexyz"
+            android:textColor="#F0AA4C" />
+
+        <TextView
+            android:id="@+id/qts_detail_two_starttxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_text"
+            android:layout_toRightOf="@+id/qts_detail_two_cimage"
+            android:padding="3dp"
+            android:text="START ON :"
+            android:textColor="#3C746B" />
+
+        <TextView
+            android:id="@+id/qts_detail_two_strtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qts_detail_two_user_name"
+            android:layout_toRightOf="@+id/qts_detail_two_starttxt"
+            android:padding="3dp"
+            android:text="03:00 PM,23 NOV 2015" />
+
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qts_detail_two_starttxt"
+            android:layout_toRightOf="@+id/qts_detail_two_cimage"
+            android:padding="3dp"
+            android:text="ENDS ON :"
+            android:textColor="#3C746B" />
+
+        <TextView
+            android:id="@+id/qts_detail_two_endtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qts_detail_two_strtime"
+            android:layout_toRightOf="@+id/qts_detail_two_starttxt"
+            android:padding="3dp"
+            android:text="03:00 PM,23 NOV 2015" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/qts_detail_two_decs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet,consectetur adipiscing edit.Donec sodales, orci at tincidunt ullamcorper,arcu nunc imperdiet,in pharetra veit lectures, in pharetra velit leo id felis?" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+            <RadioButton
+                android:id="@+id/qts_detail_two_first_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/qts_detail_two_second_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/qts_detail_third_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet"></RadioButton>
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</LinearLayout>

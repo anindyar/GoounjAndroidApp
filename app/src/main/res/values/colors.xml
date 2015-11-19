@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="example_color">#ffffff</color>
+    <color name="bg_menu_profile">#292929</color>
+    <color name="white">#ffffff</color>
+
+    <color name="circular_progress_default_progress">#E9632D</color>
+    <color name="circular_progress_default_background">#DBDBDB</color>
+    <color name="circular_progress_default_title">#bada55</color>
+    <color name="circular_progress_default_subtitle">#D1D1D1</color>
+
+    <color name="circular_progress_custom_title_color">#7C7C7C</color>
+
+    <color name="default_background_color">@android:color/transparent</color>
+    <color name="default_progress_color">#33b5e5</color>
+    <color name="default_stroke_color">#33b5e5</color>
+    <color name="default_text_color">#333333</color>
+
+    <color name="colorBg">#E9632D</color>
+    <color name="txtGreyColor">#7F7F7F</color>
+
+    <color name="progressFillBG">#FBCF1B</color>
+    <color name="progressFillProgress">#E85E2E</color>
+    <color name="progressStroke">#ffffff</color>
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+
+    <!--Menu-->
+    <color name="home_bg">#3C746B</color>
+    <color name="text_color">#555555</color>
+    <color name="ash_bg">#F1F3F3</color>
+    <color name="drawer_profile_bg">#292929</color>
+    <color name="txt_menu_item">#000000</color>
+    <color name="btn_bg_normal">#417F75</color>
+    <color name="btn_bg_click">#265D54</color>
+
+    <!--Poll Tab-->
+    <color name="tab_social">#901D78</color>
+    <color name="tab_survey">#FFDE00</color>
+    <color name="tab_quick">#007CC2</color>
+    <color name="tab_opinion">#84C225</color>
+
+    <!--Home-->
+    <color name="home_profile_bg">#EEEEEE</color>
+
+
+    <!--Login-->
+    <color name="orange_bg">#ef9929</color>
+    <color name="login_accept_bg">#d7670e</color>
+    <color name="login_line">#ffffff</color>
+
+    <color name="bg">#F67D12</color>
+</resources>

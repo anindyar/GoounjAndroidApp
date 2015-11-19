@@ -1,0 +1,34 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Marzin Sizes -->
+    <dimen name="margin_small">15dp</dimen>
+    <dimen name="margin_normal">20dp</dimen>
+
+    <!-- Padding Sizes -->
+    <dimen name="padding_small">15dp</dimen>
+    <dimen name="padding_normal">20dp</dimen>
+    <dimen name="padding_max">25dp</dimen>
+
+    <!--Text Sizes-->
+    <dimen name="txtVerySmall">15sp</dimen>
+    <dimen name="txtSmall">18sp</dimen>
+    <dimen name="txtNormal">20sp</dimen>
+    <dimen name="txtLarge">28sp</dimen>
+    <dimen name="txtVeryLarge">30sp</dimen>
+
+    <!--Home Dashboard-->
+    <dimen name="size_home_profileImg">200dp</dimen>
+    <dimen name="size_home_hamMenu">85dp</dimen>
+    <dimen name="size_home_settings">85dp</dimen>
+    <dimen name="size_home_home">85dp</dimen>
+
+    <!--Opinion Choices Radio Button-->
+    <dimen name="opinion_choices_radio">100dp</dimen>
+
+    <!--Contacts Dialog-->
+    <dimen name="contact_dialog_height">600dp</dimen>
+
+</resources>

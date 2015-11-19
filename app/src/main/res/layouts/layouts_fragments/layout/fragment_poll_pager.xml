@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/tab_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_opinion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/tab_opinion"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="@string/opinion_poll"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtVerySmall" />
+
+        <RadioButton
+            android:id="@+id/tab_quick"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_quick_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_quick"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="@string/quick_poll"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtVerySmall" />
+
+        <RadioButton
+            android:id="@+id/tab_survey"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_survey_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_survey"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="@string/feedback_poll"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtVerySmall" />
+
+        <RadioButton
+            android:id="@+id/tab_social"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_social_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_social"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="@string/social_trends"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtVerySmall" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_radio"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:background="@android:color/white">
+
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

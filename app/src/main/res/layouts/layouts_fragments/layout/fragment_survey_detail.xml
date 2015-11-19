@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_survey_detail_submit"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_survey_detail_qts_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/layout_statics_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/resultBack"
+                        android:layout_width="40dp "
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/rotate_arrow_toright"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:drawableLeft="@drawable/stats"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding_small"
+                        android:text="STATISTICS"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@android:color/darker_gray" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/title_qts_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Question 1 :"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <TextView
+                    android:id="@+id/qts_survey_detail_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Who is the top goal scorer?"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="20dp"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp">
+
+                        <RadioButton
+                            android:id="@+id/qts_detail_one_first_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/selector_radio_checked_bg"
+                            android:padding="@dimen/padding_small"
+                            android:text="Messi"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/txtNormal"></RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/qts_detail_one_second_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/selector_radio_checked_bg"
+                            android:padding="@dimen/padding_small"
+                            android:text="Ronaldo"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/txtNormal"></RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/qts_detail_one_third_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/selector_radio_checked_bg"
+                            android:padding="@dimen/padding_small"
+                            android:text="Suarez"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/txtNormal"></RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/qts_detail_one_fourth_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/selector_radio_checked_bg"
+                            android:padding="@dimen/padding_small"
+                            android:text="Suarez"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/txtNormal"
+                            android:visibility="invisible"></RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/qts_detail_one_fifth_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/selector_radio_checked_bg"
+                            android:padding="@dimen/padding_small"
+                            android:text="Suarez"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/txtNormal"
+                            android:visibility="invisible"></RadioButton>
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/choicesListviewOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:choiceMode="singleChoice"
+                    android:divider="@null"></ListView>
+
+                <FrameLayout
+                    android:id="@+id/layout_progress_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:padding="@dimen/padding_small"
+                    android:visibility="gone">
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/first_circular_progressbar"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/second_circular_progressbar"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/third_circular_progressbar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_survey_detail_qts_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_qts_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Question 2 :"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <TextView
+                    android:id="@+id/qts_survey_detail_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Who is the top goal scorer?"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <ListView
+                    android:id="@+id/choicesListviewTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:choiceMode="singleChoice"
+                    android:divider="@null"></ListView>
+
+                <FrameLayout
+                    android:id="@+id/layout_progress_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone">
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_two_first_circular_progressbar"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_two_second_circular_progressbar"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_two_third_circular_progressbar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+                </FrameLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_survey_detail_qts_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_qts_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Question 3 :"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <TextView
+                    android:id="@+id/qts_survey_detail_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:gravity="left"
+                    android:padding="@dimen/padding_small"
+                    android:text="Who is the top goal scorer?"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/txtNormal" />
+
+                <ListView
+                    android:id="@+id/choicesListviewThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:choiceMode="singleChoice"
+                    android:divider="@null"></ListView>
+
+                <FrameLayout
+                    android:id="@+id/layout_progress_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone">
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_th_first_circular_progressbar"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_th_second_circular_progressbar"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+
+                    <com.orgware.polling.utils.CircularProg
+                        android:id="@+id/qts_th_third_circular_progressbar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:background_progressbar_color="@android:color/transparent"
+                        app:background_progressbar_width="0dp"
+                        app:progressbar_color="@color/bg"
+                        app:progressbar_width="50dp" />
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_survey_detail_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/home_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/home_bg"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_submit"
+            android:padding="8dp"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

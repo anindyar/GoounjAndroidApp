@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pagerCurrentPoll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/radio_currentpoll_pager"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/white" />
+
+    <RadioGroup
+        android:id="@+id/radio_currentpoll_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/currentpoll_submission"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small">
+
+        <RadioButton
+            android:id="@+id/radio_currentpoll_fragment_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_page_indecator" />
+
+        <RadioButton
+            android:id="@+id/radio_currentpoll_fragment_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_page_indecator" />
+
+        <RadioButton
+            android:id="@+id/radio_currentpoll_fragment_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_page_indecator" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/currentpoll_submission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/home_bg"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small">
+
+        <TextView
+            android:id="@+id/btn_previous"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/home_bg"
+            android:drawableLeft="@drawable/ic_previous"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="PREVIOUS"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/home_bg"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_submit"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@color/home_bg"
+            android:drawableRight="@drawable/rotation_next"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="NEXT"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
