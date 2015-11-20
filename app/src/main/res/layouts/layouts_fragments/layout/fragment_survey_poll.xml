@@ -3,13 +3,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">-->
+    android:background="@android:color/white">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/closefrinds_lay"
+        android:layout_above="@+id/btn_complete"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/margin_normal">
 
@@ -856,65 +856,63 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/closefrinds_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/choosegroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Choose Audience Group From"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/check_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/choosegroup"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/dc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="Device Contacts"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:checked="true" />
+
+                </RelativeLayout>
+
+
+                <Button
+                    android:id="@+id/btncontactFromDevice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/bg_lay"
+                    android:text="Choose From Contact"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/closefrinds_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_complete"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/choosegroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Choose Audience Group From"
-            android:textColor="@android:color/black"
-            android:textSize="17sp" />
-
-
-        <RelativeLayout
-            android:id="@+id/check_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/choosegroup"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/dc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="Device Contacts"
-                android:textColor="@android:color/black"
-                android:textSize="15dp" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:checked="true" />
-
-        </RelativeLayout>
-
-
-        <Button
-            android:id="@+id/btncontactFromDevice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="4"
-            android:background="@drawable/bg_lay"
-            android:text="Choose From Contact"
-            android:textAllCaps="false" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btn_complete"

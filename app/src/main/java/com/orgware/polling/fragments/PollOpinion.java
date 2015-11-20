@@ -672,7 +672,6 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
             if (mLayoutQtsOneTwo.getVisibility() != View.VISIBLE)
                 mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
-            mLayoutQtsOneTwo.setVisibility(View.GONE);
             mLayoutQtsOneThree.setVisibility(View.GONE);
             mLayoutQtsOneFour.setVisibility(View.GONE);
             mLayoutQtsOneFive.setVisibility(View.GONE);

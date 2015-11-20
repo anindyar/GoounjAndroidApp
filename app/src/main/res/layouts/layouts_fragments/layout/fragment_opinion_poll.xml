@@ -7,7 +7,7 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/closefrinds_lay"
+        android:layout_above="@+id/btn_complete"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
@@ -278,7 +278,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_one"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
                                 android:button="@null"
@@ -291,7 +291,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_two"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -305,7 +305,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_three"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -318,7 +318,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_four"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -331,7 +331,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_five"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_toRightOf="@+id/two_text_view"
                                 android:layout_weight="1"
@@ -342,20 +342,6 @@
                                 android:text="5"
                                 android:textSize="@dimen/txtSmall" />
 
-                            <RadioButton
-                                android:id="@+id/radio_opinion_qts_one_choices_six"
-                                android:layout_width="0dp"
-                                android:visibility="gone"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_toRightOf="@+id/two_text_view"
-                                android:layout_weight="1"
-                                android:background="@drawable/selector_radio_checked"
-                                android:button="@null"
-                                android:gravity="center"
-                                android:padding="@dimen/padding_small"
-                                android:text="6"
-                                android:textSize="@dimen/txtSmall" />
                         </RadioGroup>
                     </LinearLayout>
 
@@ -502,6 +488,7 @@
                                 android:paddingBottom="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
+
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_six"
                             android:layout_width="wrap_content"
@@ -523,10 +510,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/margin_small"
+                                android:background="@null"
                                 android:gravity="bottom"
-                                android:text="No Opinion"
                                 android:paddingBottom="@dimen/padding_small"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="No Opinion" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -678,7 +666,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_one"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
                                 android:button="@null"
@@ -690,7 +678,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_two"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -703,7 +691,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_three"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -716,7 +704,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_four"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -729,7 +717,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_five"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_toRightOf="@+id/two_text_view"
                                 android:layout_weight="1"
@@ -887,6 +875,34 @@
                                 android:singleLine="true" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layout_opinion_qts_two_edittext_choice_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:text="6"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <EditText
+                                android:id="@+id/edittext_opinion_qts_two_choice_six"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:background="@null"
+                                android:gravity="bottom"
+                                android:paddingBottom="@dimen/padding_small"
+                                android:singleLine="true"
+                                android:text="No Opinion" />
+                        </RelativeLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1041,7 +1057,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_one"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
                                 android:button="@null"
@@ -1053,7 +1069,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_two"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -1066,7 +1082,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_three"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -1079,7 +1095,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_four"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_radio_checked"
@@ -1092,7 +1108,7 @@
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_five"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:layout_toRightOf="@+id/two_text_view"
                                 android:layout_weight="1"
@@ -1103,20 +1119,6 @@
                                 android:text="5"
                                 android:textSize="@dimen/txtSmall" />
 
-                            <RadioButton
-                                android:id="@+id/radio_opinion_qts_three_choices_six"
-                                android:layout_width="0dp"
-                                android:visibility="gone"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_toRightOf="@+id/two_text_view"
-                                android:layout_weight="1"
-                                android:background="@drawable/selector_radio_checked"
-                                android:button="@null"
-                                android:gravity="center"
-                                android:padding="@dimen/padding_small"
-                                android:text="6"
-                                android:textSize="@dimen/txtSmall" />
                         </RadioGroup>
                     </LinearLayout>
 
@@ -1264,67 +1266,94 @@
                                 android:singleLine="true" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layout_opinion_qts_three_edittext_choice_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:text="6"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <EditText
+                                android:id="@+id/edittext_opinion_qts_three_choice_six"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:background="@null"
+                                android:gravity="bottom"
+                                android:paddingBottom="@dimen/padding_small"
+                                android:singleLine="true"
+                                android:text="No Opinion" />
+                        </RelativeLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/closefrinds_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/choosegroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Choose Audience Group From"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+                <RelativeLayout
+                    android:id="@+id/check_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/choosegroup"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/dc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="Device Contacts"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:checked="true" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btnOpinionContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/bg_lay"
+                    android:text="Choose From Contact"
+                    android:textAllCaps="false" />
+            </LinearLayout>
         </LinearLayout>
 
         <!--Header layout-->
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/closefrinds_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_complete"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/choosegroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Choose Audience Group From"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/txtNormal" />
-
-        <RelativeLayout
-            android:id="@+id/check_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/choosegroup"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/dc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="Device Contacts"
-                android:textColor="@android:color/black"
-                android:textSize="15dp" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:checked="true" />
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/btnOpinionContact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_lay"
-            android:text="Choose From Contact"
-            android:textAllCaps="false" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btn_complete"

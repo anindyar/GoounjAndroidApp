@@ -43,7 +43,6 @@ import java.util.Random;
 public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     ListView mChoiceListviewOne, mChoiceListviewTwo, mChoiceListviewThree;
     ChoicesListviewAdapter mAdapterOne, mAdapterTwo, mAdapterThree;
-    //    List<ChoicesItem> itemList = new ArrayList<>();
     List<ChoicesItem> itemListOne = new ArrayList<>();
     List<ChoicesItem> itemListTwo = new ArrayList<>();
     List<ChoicesItem> itemListThree = new ArrayList<>();
@@ -280,7 +279,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

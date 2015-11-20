@@ -155,7 +155,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
                 if (objectPolls.optString("isAnswered").equals("1")) {
-                    itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), objectPolls.optString("startDate"), objectPolls.optString("endDate"),
+                    itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
                             objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
                 }
             }

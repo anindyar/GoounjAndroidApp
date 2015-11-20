@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
@@ -46,12 +47,12 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     int limit = 15, dashboardId;
     GoounjDatabase db;
     boolean currentPollService;
+    RelativeLayout mPollNoError, mPollError;
     private SuperSwipeRefreshLayout swipeRefreshLayout;
     // Header View
     private ProgressBar progressBar;
     private TextView textView;
     private ImageView imageView;
-
     // Footer View
     private ProgressBar footerProgressBar;
     private TextView footerTextView;
@@ -74,24 +75,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 
     }
 
-    private String splitFromString(String stringName) {
-        StringBuilder sb = new StringBuilder();
-        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
-        StringTokenizer tokenize = new StringTokenizer(stringName, ".");
-        wanted = "" + tokenize.nextToken();
-        unwanted = "" + tokenize.nextToken();
-        StringTokenizer tokenizer = new StringTokenizer(wanted, "T");
-        sb.append("" + tokenizer.nextToken());
-        sb.append(" ");
-        unWantedone = "" + tokenizer.nextToken();
-        String[] wantedTime = unWantedone.split(":");
-        wantedOne = wantedTime[0];
-        wantedTwo = wantedTime[1];
-        sb.append(wantedOne + ":" + wantedTwo);
-        Log.e("Date", "" + sb.toString());
-        return sb.toString();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,6 +82,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mCurrentPollList.setLayoutManager(new LinearLayoutManager(act));
+        mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
+        mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
 //        db = new GoounjDatabase(act);
         currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
         swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
@@ -245,6 +230,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 
             @Override
             public void onRequestFailed(Exception e) {
+                mCurrentPollList.setVisibility(View.GONE);
+                mPollError.setVisibility(View.VISIBLE);
                 if (e == null) {
                     Log.e("Error", "" + e.getMessage());
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
@@ -306,9 +293,17 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     private void refreshCurrentPollListview() {
-        mAdapter = new CurrentPollAdapter(act, itemList);
-        mAdapter.setOnItemClickListener(this);
-        mCurrentPollList.setAdapter(mAdapter);
+        if (itemList.size() > 0) {
+            mCurrentPollList.setVisibility(View.VISIBLE);
+            mPollNoError.setVisibility(View.GONE);
+            mPollError.setVisibility(View.GONE);
+            mAdapter = new CurrentPollAdapter(act, itemList);
+            mAdapter.setOnItemClickListener(this);
+            mCurrentPollList.setAdapter(mAdapter);
+        } else {
+            mCurrentPollList.setVisibility(View.GONE);
+            mPollNoError.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getPollDetailPage(String url) {

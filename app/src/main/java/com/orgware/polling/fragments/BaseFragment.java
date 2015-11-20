@@ -16,6 +16,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 /*This is the Parent fragment for all the fragment classes. */
@@ -134,6 +136,24 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
                 changeTypeface((ViewGroup) v);
             }
         }
+    }
+
+    public String splitFromString(String stringName) {
+        StringBuilder sb = new StringBuilder();
+        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
+        StringTokenizer tokenize = new StringTokenizer(stringName, ".");
+        wanted = "" + tokenize.nextToken();
+        unwanted = "" + tokenize.nextToken();
+        StringTokenizer tokenizer = new StringTokenizer(wanted, "T");
+        sb.append("" + tokenizer.nextToken());
+        sb.append(" ");
+        unWantedone = "" + tokenizer.nextToken();
+        String[] wantedTime = unWantedone.split(":");
+        wantedOne = wantedTime[0];
+        wantedTwo = wantedTime[1];
+        sb.append(wantedOne + ":" + wantedTwo);
+        Log.e("Date", "" + sb.toString());
+        return sb.toString();
     }
 
     public List<ContactItem> getNumber(ContentResolver cr, List<ContactItem> contactList) {
