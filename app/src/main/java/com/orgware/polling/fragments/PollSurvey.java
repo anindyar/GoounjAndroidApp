@@ -90,11 +90,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < 2; i++) {
-//            mCategoryList.add(" Category - " + i);
-            mContactArray.put("909591454" + i);
-        }
-        mChoicesArray.put("Bad").put("Average").put("Ok").put("Good").put("Excellent");
+        mChoicesArray.put("Totally Agree").put("Somewhat Agree").put("Satisfactory").put("Somewhat Disagree").put("Totally Disagree");
     }
 
     @Nullable

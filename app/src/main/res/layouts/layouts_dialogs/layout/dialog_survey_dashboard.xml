@@ -51,7 +51,7 @@
         android:background="@drawable/bg_curved_rect"
         android:hint="Enter mobile number"
         android:inputType="phone"
-        android:maxLength="10"
+        android:maxLength="12"
         android:padding="@dimen/padding_normal"
         android:singleLine="true"
         android:textColor="@color/home_bg"

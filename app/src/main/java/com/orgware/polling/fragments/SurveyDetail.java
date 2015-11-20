@@ -301,12 +301,18 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void pushAnwersPoll(String url, String params) throws Exception {
+        mSurveyDialog.dismiss();
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                Log.e("Answer Response", "" + response);
-//                act.getSupportFragmentManager().popBackStack();
-                makeToast("survey answered successfully!");
+//                Log.e("Answer Response", "" + response);
+//                makeToast("survey answered successfully!");
+                Methodutils.message(act, "Thanks for your support", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        return;
+                    }
+                });
             }
 
             @Override
@@ -382,22 +388,19 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                     return;
                 }
                 if (mMobileNumber.getText().toString().equals("")) {
-                    makeToast("Please enter mobile number");
+                    makeToast("Please put a valid mobile number");
                     return;
                 }
-
-                if (mMobileNumber.getText().toString().length() != 10) {
-                    makeToast("Mobile number should be valueable!");
+                if (mMobileNumber.getText().toString().length() != 10 ) {
+                    makeToast("Please put a valid mobile number!");
                     return;
                 }
-
                 editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(LASTNAME_SURVEY, mLastName.getText().toString())
                         .putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
                 submitParams(qtsSize);
                 Log.e("Survey Params", "" + answerSurveyParams().toString());
                 try {
                     pushAnwersPoll(BASE_URL + SURVEY_POLL_URL, answerSurveyParams().toString());
-                    mSurveyDialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

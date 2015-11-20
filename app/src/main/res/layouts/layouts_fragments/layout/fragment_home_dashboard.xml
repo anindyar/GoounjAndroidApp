@@ -85,7 +85,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:alpha="0.5"
+                    android:alpha="0.3"
                     android:src="@drawable/ic_vote" />
 
                 <TextView
@@ -145,7 +145,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.4"
-                    android:alpha="0.5"
+                    android:alpha="0.3"
                     android:src="@drawable/ic_chat" />
 
                 <TextView
@@ -193,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:alpha="0.5"
+        android:alpha="0.3"
         android:background="@android:color/white"
         android:orientation="vertical">
 

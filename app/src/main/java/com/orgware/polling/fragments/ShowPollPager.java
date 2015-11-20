@@ -82,6 +82,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
         ((HomeActivity) act).mPageTitle.setText("Poll");
         ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
+        ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
         mPollGrid.setAdapter(mGridAdapter);
         mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);

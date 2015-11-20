@@ -36,6 +36,7 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
         mFragmentList = new ArrayList<>();
         mFragmentList.add(setPagerFragment(new PollOpinion(),
                 mFragmentList.size()));

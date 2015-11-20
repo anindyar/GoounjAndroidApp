@@ -1,856 +1,870 @@
 <?xml version="1.0"?>
 
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@android:color/white">&ndash;&gt;-->
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentTop="true"
-    android:layout_margin="@dimen/margin_normal">
+    android:background="@android:color/white">-->
 
-    <!--</RelativeLayout>-->
-
-
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/closefrinds_lay"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_normal">
+
+        <!--</RelativeLayout>-->
 
 
         <LinearLayout
-            android:id="@+id/poll_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+
+            <LinearLayout
+                android:id="@+id/poll_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="Poll Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+                <EditText
+                    android:id="@+id/edittext_survey_pollname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="Enter Poll Name"
+                    android:padding="10dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_layout"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="No Of Questions"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+                <TextView
+                    android:id="@+id/catg_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="Category"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtNormal" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
-                android:text="Poll Name"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txtNormal" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_small"
+                android:weightSum="2">
 
-            <EditText
-                android:id="@+id/edittext_survey_pollname"
+
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_survey_qtsno_one"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/selector_bg_yellow_checked"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_small"
+                        android:text="1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_survey_qtsno_two"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:background="@drawable/selector_bg_yellow_checked"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_small"
+                        android:text="2" />
+
+                    <RadioButton
+                        android:id="@+id/radio_survey_qtsno_three"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:background="@drawable/selector_bg_yellow_checked"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_small"
+                        android:text="3" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_lay"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="@dimen/padding_small"
+                    android:text="Select Category" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_survey_qts_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_corner"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_survey_ques_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:padding="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 1"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <CheckBox
+                        android:id="@+id/cb_survey_qts_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+
+                <LinearLayout
+                    android:id="@+id/ques_survey_one_exten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+
+                        <RadioGroup
+                            android:id="@+id/radio_txtpoll_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:id="@+id/radio_survey_qts_one_polltype_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:id="@+id/radio_survey_qts_one_polltype_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtNormal" />
+
+                        <EditText
+                            android:id="@+id/edittext_survey_qts_one_pollqts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter Question One"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Choices"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Totally Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Somewhat Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Satisfactory"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Somewhat Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Totally Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_corner"
+                            android:text="Ok"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="@dimen/txtSmall" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_survey_qts_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:background="@drawable/edit_text_corner"
-                android:hint="Enter Poll Name"
-                android:padding="10dp"
-                android:singleLine="true" />
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_survey_ques_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:padding="@dimen/padding_small">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/poll_layout"
-            android:orientation="horizontal"
-            android:weightSum="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 2"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                    <CheckBox
+                        android:id="@+id/cb_survey_qts_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+
+                <LinearLayout
+                    android:id="@+id/ques_survey_two_exten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtNormal" />
+
+                        <EditText
+                            android:id="@+id/edittext_survey_qts_two_pollqts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter Question Two"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Choices"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Totally Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Somewhat Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Satisfactory"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Somewhat Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Totally Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
+
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Ok"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="@dimen/txtSmall" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_survey_qts_three"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
-                android:layout_weight="1"
-                android:text="No Of Questions"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txtNormal" />
-
-            <TextView
-                android:id="@+id/catg_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_weight="1"
-                android:text="Category"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txtNormal" />
-
-        </LinearLayout>
+                android:background="@drawable/edit_text_corner"
+                android:orientation="vertical">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_small"
-            android:weightSum="2">
-
-
-            <RadioGroup
-                android:id="@+id/radioGroup1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_survey_qtsno_one"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/selector_bg_yellow_checked"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:padding="@dimen/padding_small"
-                    android:text="1" />
-
-                <RadioButton
-                    android:id="@+id/radio_survey_qtsno_two"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="@dimen/margin_normal"
-                    android:background="@drawable/selector_bg_yellow_checked"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_small"
-                    android:text="2" />
-
-                <RadioButton
-                    android:id="@+id/radio_survey_qtsno_three"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="@dimen/margin_normal"
-                    android:background="@drawable/selector_bg_yellow_checked"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:padding="@dimen/padding_small"
-                    android:text="3" />
-
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/txtCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_lay"
-                android:drawableRight="@drawable/arrow_right"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="@dimen/padding_small"
-                android:text="Select Category" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/layout_survey_qts_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_corner"
-            android:orientation="vertical">
-
-
-            <RelativeLayout
-                android:id="@+id/layout_survey_ques_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:padding="@dimen/padding_small">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/layout_survey_ques_three"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Question 1"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
+                    android:layout_margin="@dimen/margin_small"
+                    android:padding="@dimen/padding_small">
 
-                <CheckBox
-                    android:id="@+id/cb_survey_qts_one"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Question 3"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <CheckBox
+                        android:id="@+id/cb_survey_qts_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:button="@drawable/selector_qts_plus_minus"
+                        android:padding="@dimen/padding_small" />
+
+                </RelativeLayout>
+
+                <View
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:button="@drawable/selector_qts_plus_minus"
-                    android:padding="@dimen/padding_small" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
-            <LinearLayout
-                android:id="@+id/ques_survey_one_exten"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:text="Poll Type"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
 
 
                 <LinearLayout
+                    android:id="@+id/ques_survey_three_exten"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="vertical">
+                    android:layout_margin="@dimen/margin_small"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:text="Poll Type"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
 
 
-                    <RadioGroup
-                        android:id="@+id/radio_txtpoll_one"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding_small">
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/radio_survey_qts_one_polltype_one"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_normal"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/textpoll_selecter"
-                            android:checked="true"
-                            android:clickable="false"
-                            android:text="Text Poll"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_small">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_normal"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/textpoll_selecter"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:text="Text Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:button="@drawable/media_poll_selecter"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:text="Media Poll"
+                                android:textSize="@dimen/txtNormal" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="Poll Question"
+                            android:textColor="@android:color/black"
                             android:textSize="@dimen/txtNormal" />
 
-                        <RadioButton
-                            android:id="@+id/radio_survey_qts_one_polltype_two"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/edittext_survey_qts_three_pollqts"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_small"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/media_poll_selecter"
-                            android:checked="false"
-                            android:clickable="false"
-                            android:text="Media Poll"
-                            android:textSize="@dimen/txtNormal" />
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/edit_text_corner"
+                            android:hint="Enter Question Three"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/padding_max" />
 
-                    </RadioGroup>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
-                        android:text="Poll Question"
+                        android:text="Choices"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/txtNormal" />
 
-                    <EditText
-                        android:id="@+id/edittext_survey_qts_one_pollqts"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:background="@drawable/edit_text_corner"
-                        android:hint="Enter Question One"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/padding_max" />
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Totally Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="Choices"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Somewhat Agree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
 
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Satisfactory"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Totally Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Somewhat Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Satisfactory"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                </LinearLayout>
+                    </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Somewhat Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Totally Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_corner"
-                        android:text="Ok"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall"
-                        android:visibility="invisible" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/txtSmall" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/layout_survey_qts_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@drawable/edit_text_corner"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/layout_survey_ques_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:padding="@dimen/padding_small">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Question 2"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-                <CheckBox
-                    android:id="@+id/cb_survey_qts_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:button="@drawable/selector_qts_plus_minus"
-                    android:padding="@dimen/padding_small" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
-            <LinearLayout
-                android:id="@+id/ques_survey_two_exten"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:text="Poll Type"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="vertical">
-
-
-                    <RadioGroup
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding_small">
+                        android:layout_below="@+id/check_lay"
+                        android:orientation="horizontal">
 
-                        <RadioButton
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:layout_margin="@dimen/margin_small"
                             android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/textpoll_selecter"
-                            android:checked="true"
-                            android:clickable="false"
-                            android:text="Text Poll"
-                            android:textSize="@dimen/txtNormal" />
+                            android:background="@drawable/bg_lay"
+                            android:text="Somewhat Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
 
-                        <RadioButton
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_small"
+                            android:layout_margin="@dimen/margin_small"
                             android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/media_poll_selecter"
-                            android:checked="false"
-                            android:clickable="false"
-                            android:text="Media Poll"
-                            android:textSize="@dimen/txtNormal" />
+                            android:background="@drawable/bg_lay"
+                            android:text="Totally Disagree"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall" />
 
-                    </RadioGroup>
+                        <Button
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_small"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_lay"
+                            android:text="Ok"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txtSmall"
+                            android:visibility="invisible" />
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:text="Poll Question"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtNormal" />
-
-                    <EditText
-                        android:id="@+id/edittext_survey_qts_two_pollqts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:background="@drawable/edit_text_corner"
-                        android:hint="Enter Question Two"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/padding_max" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="Choices"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Totally Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Somewhat Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Satisfactory"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
+                        android:text=""
                         android:textSize="@dimen/txtSmall" />
 
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Somewhat Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Totally Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Ok"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall"
-                        android:visibility="invisible" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/txtSmall" />
 
             </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-
-        <LinearLayout
-            android:id="@+id/layout_survey_qts_three"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@drawable/edit_text_corner"
-            android:orientation="vertical">
-
-
-            <RelativeLayout
-                android:id="@+id/layout_survey_ques_three"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:padding="@dimen/padding_small">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Question 3"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-                <CheckBox
-                    android:id="@+id/cb_survey_qts_three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:button="@drawable/selector_qts_plus_minus"
-                    android:padding="@dimen/padding_small" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
-            <LinearLayout
-                android:id="@+id/ques_survey_three_exten"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:text="Poll Type"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="vertical">
-
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding_small">
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_normal"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/textpoll_selecter"
-                            android:checked="true"
-                            android:clickable="false"
-                            android:text="Text Poll"
-                            android:textSize="@dimen/txtNormal" />
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_small"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:button="@drawable/media_poll_selecter"
-                            android:checked="false"
-                            android:clickable="false"
-                            android:text="Media Poll"
-                            android:textSize="@dimen/txtNormal" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:text="Poll Question"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtNormal" />
-
-                    <EditText
-                        android:id="@+id/edittext_survey_qts_three_pollqts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:background="@drawable/edit_text_corner"
-                        android:hint="Enter Question Three"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/padding_max" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="Choices"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Totally Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Somewhat Agree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Satisfactory"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/check_lay"
-                    android:orientation="horizontal">
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Somewhat Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Totally Disagree"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall" />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_lay"
-                        android:text="Ok"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txtSmall"
-                        android:visibility="invisible" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/txtSmall" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/closefrinds_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_complete"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/choosegroup"
@@ -858,6 +872,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Choose Audience Group From"
+            android:textColor="@android:color/black"
             android:textSize="17sp" />
 
 
@@ -875,6 +890,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="Device Contacts"
+                android:textColor="@android:color/black"
                 android:textSize="15dp" />
 
             <CheckBox
@@ -888,65 +904,52 @@
         </RelativeLayout>
 
 
-        <LinearLayout
-            android:id="@+id/closefrinds_lay"
+        <Button
+            android:id="@+id/btncontactFromDevice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/frinds_lay"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btncontactFromDevice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="4"
-                android:background="@drawable/bg_lay"
-                android:text="Choose From Contact"
-                android:textAllCaps="false" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/btn_complete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/btnReset_survey"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_click"
-                android:clickable="true"
-                android:drawableLeft="@drawable/ic_reset"
-                android:gravity="center"
-                android:text="RESET"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/btnSubmit_Survey"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_click"
-                android:clickable="true"
-                android:drawableLeft="@drawable/ic_submit"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="SUBMIT"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-        </LinearLayout>
+            android:layout_margin="5dp"
+            android:layout_weight="4"
+            android:background="@drawable/bg_lay"
+            android:text="Choose From Contact"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/btn_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
 
-</ScrollView>
+        <TextView
+            android:id="@+id/btnReset_survey"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_reset"
+            android:gravity="center"
+            android:text="RESET"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btnSubmit_Survey"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_submit"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -57,10 +58,6 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mContactJsonArray = new JSONArray("[]");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        for (int i = 0; i < 2; i++) {
-//            mCategoryList.add(" Category - " + i);
-            mContactArray.put("909591454" + i);
         }
     }
 
@@ -673,6 +670,8 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         if (mRbQtsOneChoiceOne.isChecked()) {
             editor.putInt(OPNINON_RB_ONE, 1).commit();
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
+            if (mLayoutQtsOneTwo.getVisibility() != View.VISIBLE)
+                mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
             mLayoutQtsOneTwo.setVisibility(View.GONE);
             mLayoutQtsOneThree.setVisibility(View.GONE);
             mLayoutQtsOneFour.setVisibility(View.GONE);
@@ -715,7 +714,8 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         if (mRbQtsTwoChoiceOne.isChecked()) {
             editor.putInt(OPNINON_RB_TWO, 1).commit();
             mLayoutQtsTwoOne.setVisibility(View.VISIBLE);
-            mLayoutQtsTwoTwo.setVisibility(View.GONE);
+            if (mLayoutQtsTwoTwo.getVisibility() != View.VISIBLE)
+                mLayoutQtsTwoTwo.setVisibility(View.VISIBLE);
             mLayoutQtsTwoThree.setVisibility(View.GONE);
             mLayoutQtsTwoFour.setVisibility(View.GONE);
             mLayoutQtsTwoFive.setVisibility(View.GONE);
@@ -757,7 +757,8 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         if (mRbQtsThChoiceOne.isChecked()) {
             editor.putInt(OPNINON_RB_THREE, 1).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
-            mLayoutQtsThTwo.setVisibility(View.GONE);
+            if (mLayoutQtsThTwo.getVisibility() != View.VISIBLE)
+                mLayoutQtsThTwo.setVisibility(View.VISIBLE);
             mLayoutQtsThThree.setVisibility(View.GONE);
             mLayoutQtsThFour.setVisibility(View.GONE);
             mLayoutQtsThFive.setVisibility(View.GONE);

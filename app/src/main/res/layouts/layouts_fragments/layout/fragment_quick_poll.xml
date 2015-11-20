@@ -7,7 +7,7 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/layout_btn_complete"
+        android:layout_above="@+id/closefrinds_lay"
         android:layout_alignParentTop="true">
 
         <LinearLayout
@@ -675,63 +675,60 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/choosegroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Choose Audience Group From"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
-
-            <RelativeLayout
-                android:id="@+id/check_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/choosegroup"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/dc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Device Contacts"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dp" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:checked="true" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:id="@+id/closefrinds_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/frinds_lay"
-                android:orientation="horizontal">
-
-
-                <Button
-                    android:id="@+id/btnQuickContact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="4"
-                    android:background="@drawable/edit_text_corner"
-                    android:text="Choose From Contact"
-                    android:textAllCaps="false" />
-            </LinearLayout>
-
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/closefrinds_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_btn_complete"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/choosegroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Choose Audience Group From"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+        <RelativeLayout
+            android:id="@+id/check_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/dc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Device Contacts"
+                android:textColor="@android:color/black"
+                android:textSize="15dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:checked="true" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btnQuickContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_corner"
+            android:text="Choose From Contact"
+            android:textAllCaps="false" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_btn_complete"
