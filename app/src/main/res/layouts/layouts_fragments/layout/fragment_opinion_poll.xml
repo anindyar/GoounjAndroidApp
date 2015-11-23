@@ -513,6 +513,7 @@
                                 android:background="@null"
                                 android:gravity="bottom"
                                 android:paddingBottom="@dimen/padding_small"
+                                android:paddingLeft="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -899,6 +900,7 @@
                                 android:background="@null"
                                 android:gravity="bottom"
                                 android:paddingBottom="@dimen/padding_small"
+                                android:paddingLeft="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -1270,7 +1272,7 @@
                             android:id="@+id/layout_opinion_qts_three_edittext_choice_six"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1290,6 +1292,7 @@
                                 android:background="@null"
                                 android:gravity="bottom"
                                 android:paddingBottom="@dimen/padding_small"
+                                android:paddingLeft="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>

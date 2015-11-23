@@ -74,6 +74,9 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
         super.onActivityCreated(savedInstanceState);
 //        ((HomeActivity) act).mPageTitle.setText("Create Poll");
 //        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+        ((HomeActivity) act).openClose.setVisibility(View.GONE);
+        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         mViewPager.setAdapter(mAdapter);
     }
 

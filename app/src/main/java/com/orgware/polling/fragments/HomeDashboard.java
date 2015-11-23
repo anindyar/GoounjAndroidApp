@@ -48,6 +48,9 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
         ((HomeActivity) act).mPageTitle.setText("Home");
         ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+        ((HomeActivity) act).openClose.setVisibility(View.GONE);
+        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+
     }
 
 

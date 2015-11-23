@@ -249,18 +249,20 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
     @Override
     protected void onPostExecute(String response) {
         super.onPostExecute(response);
+        Log.e("Error", " " + response);
         if (!showProgress)
-            Log.e("No Dialog", "No Dialog");
+            Log.e("No Dialog", "No Dialog - " + response);
         else if (mProgressDialog != null && mProgressDialog.isShowing()) mProgressDialog.dismiss();
         if (mException != null) {
             if (mException instanceof NoNetworkException || mException instanceof ConnectException) {
                 Log.e("Exception", "" + mException.getMessage());
-                Toast.makeText(mContext, "Failed to connect to server", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Failed to connect to server", Toast.LENGTH_SHORT).show();
+                mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
                 return;
             }
         }
 
-        if (response == null) {
+        if (response == null || response.equals("null") || response.equals("")) {
             mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
             return;
         }

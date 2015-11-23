@@ -71,7 +71,7 @@ public class HomeActivity extends BaseActivity implements Appinterface, View.OnC
         openHome = (ImageView) findViewById(R.id.imgHomeHome);
         mSearchPollsTxt = (EditText) findViewById(R.id.edittext_search_poll);
         (openSearch = (ImageView) findViewById(R.id.img_searchPoll)).setOnClickListener(this);
-        openClose = (ImageView) findViewById(R.id.img_closePoll);
+        (openClose = (ImageView) findViewById(R.id.img_closePoll)).setOnClickListener(this);
         openHome.setVisibility(View.GONE);
         openSearch.setVisibility(View.GONE);
         openClose.setVisibility(View.GONE);
@@ -173,6 +173,19 @@ public class HomeActivity extends BaseActivity implements Appinterface, View.OnC
                 break;
             case R.id.imgHomeSettings:
 //                setNewFragment(new CircleProgressTest(), "PROG", true);
+                break;
+            case R.id.img_searchPoll:
+                openClose.setVisibility(View.VISIBLE);
+                openSearch.setVisibility(View.GONE);
+                mSearchPollsTxt.setVisibility(View.VISIBLE);
+                mSearchPollsTxt.setText("");
+                mPageTitle.setVisibility(View.GONE);
+                break;
+            case R.id.img_closePoll:
+                openClose.setVisibility(View.GONE);
+                openSearch.setVisibility(View.VISIBLE);
+                mSearchPollsTxt.setVisibility(View.GONE);
+                mPageTitle.setVisibility(View.VISIBLE);
                 break;
         }
     }

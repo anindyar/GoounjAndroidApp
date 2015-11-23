@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +14,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
@@ -23,6 +29,7 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.utils.Methodutils;
+import com.orgware.polling.utils.SuperSwipeRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,6 +47,16 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     ProgressDialog mProgress;
     CurrentPollAdapter mAdapter;
     int limit = 15;
+    RelativeLayout mPollNoError, mPollError;
+    private SuperSwipeRefreshLayout swipeRefreshLayout;
+    // Header View
+    private ProgressBar progressBar;
+    private TextView textView;
+    private ImageView imageView;
+    // Footer View
+    private ProgressBar footerProgressBar;
+    private TextView footerTextView;
+    private ImageView footerImageView;
 
     @Override
     public void setTitle() {
@@ -64,11 +81,102 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragments_history_poll, container, false);
+        View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
 
-        mHistoryPollList = (RecyclerView) v.findViewById(R.id.historyPollListview);
+        mHistoryPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
+        mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
+        mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
+        swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
+        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
+        swipeRefreshLayout.setFooterView(null);
+        swipeRefreshLayout.setTargetScrollWithLayout(true);
+        swipeRefreshLayout
+                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+
+                    @Override
+                    public void onRefresh() {
+                        textView.setText("Pull Down To Refresh");
+                        imageView.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        if (NetworkHelper.checkActiveInternet(act)) {
+                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+                            progressBar.setVisibility(View.GONE);
+                        } else
+                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    act.getSupportFragmentManager().popBackStack();
+                                    return;
+                                }
+                            });
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onPullDistance(int distance) {
+                        // pull distance
+                    }
+
+                    @Override
+                    public void onPullEnable(boolean enable) {
+                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView.setRotation(enable ? 180 : 0);
+                    }
+                });
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
+        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals("")) {
+                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+                    for (int i = 0; i < itemList.size(); i++) {
+                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+                            filteredTitles.add(itemList.get(i));
+                        }
+                    }
+                    mAdapter = new CurrentPollAdapter(act, filteredTitles);
+                    mHistoryPollList.setAdapter(mAdapter);
+//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+//                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter = new CurrentPollAdapter(act, itemList);
+                    mHistoryPollList.setAdapter(mAdapter);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0)
+                    Log.e("Search", "Yes");
+                else
+                    Log.e("Search", "No");
+//                    makeToast("No records found");
+
+            }
+        });
         return v;
+    }
+
+    private View createHeaderView() {
+        View headerView = LayoutInflater.from(swipeRefreshLayout.getContext())
+                .inflate(R.layout.layout_head, null);
+        progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
+        textView = (TextView) headerView.findViewById(R.id.text_view);
+        textView.setText("Pull Down To Refresh");
+        imageView = (ImageView) headerView.findViewById(R.id.image_view);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setImageResource(R.drawable.arrow_refresh);
+        progressBar.setVisibility(View.GONE);
+        return headerView;
     }
 
     @Override
@@ -104,6 +212,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
+                mHistoryPollList.setVisibility(View.VISIBLE);
+                mPollError.setVisibility(View.GONE);
                 if (response.equals("[]"))
                     makeToast("No records found");
                 else
@@ -116,30 +226,32 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
 
             @Override
             public void onRequestFailed(Exception e) {
-                if (e == null)
-                    Methodutils.messageWithTitle(act, "Failed", "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                        }
-                    });
-                else {
-                    if (e.getMessage() == null)
-                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-                    else
-                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-
-                }
+                mHistoryPollList.setVisibility(View.GONE);
+                mPollError.setVisibility(View.VISIBLE);
+//                if (e == null)
+//                    Methodutils.messageWithTitle(act, "Failed", "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            act.getSupportFragmentManager().popBackStack();
+//                        }
+//                    });
+//                else {
+//                    if (e.getMessage() == null)
+//                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                act.getSupportFragmentManager().popBackStack();
+//                            }
+//                        });
+//                    else
+//                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                act.getSupportFragmentManager().popBackStack();
+//                            }
+//                        });
+//
+//                }
             }
         });
         processor.execute(showPollParams().toString());
@@ -166,9 +278,17 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     private void refreshCurrentPollListview() {
-        mAdapter = new CurrentPollAdapter(act, itemList);
-        mAdapter.setOnItemClickListener(this);
-        mHistoryPollList.setAdapter(mAdapter);
+        if (itemList.size() > 0) {
+            mHistoryPollList.setVisibility(View.VISIBLE);
+            mPollNoError.setVisibility(View.GONE);
+            mPollError.setVisibility(View.GONE);
+            mAdapter = new CurrentPollAdapter(act, itemList);
+            mAdapter.setOnItemClickListener(this);
+            mHistoryPollList.setAdapter(mAdapter);
+        } else {
+            mHistoryPollList.setVisibility(View.GONE);
+            mPollNoError.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -199,6 +319,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
+//                mHistoryPollList.setVisibility(View.VISIBLE);
+//                mPollError.setVisibility(View.GONE);
                 if (response.equals("[]"))
                     makeToast("No Records Found");
                 else
@@ -212,6 +334,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
 
             @Override
             public void onRequestFailed(Exception e) {
+//                mHistoryPollList.setVisibility(View.GONE);
+//                mPollError.setVisibility(View.VISIBLE);
                 if (e == null) {
                     Log.e("Error", "" + e.getMessage());
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {

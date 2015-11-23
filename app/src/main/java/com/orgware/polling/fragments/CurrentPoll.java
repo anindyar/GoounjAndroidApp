@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +20,13 @@ import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
+import com.orgware.polling.adapters.ContactGridviewAdapter;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.database.GoounjDatabase;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
+import com.orgware.polling.pojo.ContactItem;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.utils.Methodutils;
 import com.orgware.polling.utils.SuperSwipeRefreshLayout;
@@ -124,6 +128,43 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                         imageView.setRotation(enable ? 180 : 0);
                     }
                 });
+        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals("")) {
+                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+                    for (int i = 0; i < itemList.size(); i++) {
+                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+                            filteredTitles.add(itemList.get(i));
+                        }
+                    }
+                    mAdapter = new CurrentPollAdapter(act, filteredTitles);
+                    mCurrentPollList.setAdapter(mAdapter);
+//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+//                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter = new CurrentPollAdapter(act, itemList);
+                    mCurrentPollList.setAdapter(mAdapter);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0)
+                    Log.e("Search", "Yes");
+                else
+                    Log.e("Search", "No");
+//                    makeToast("No records found");
+
+            }
+        });
         return v;
     }
 
@@ -218,6 +259,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
+                mCurrentPollList.setVisibility(View.VISIBLE);
+                mPollError.setVisibility(View.GONE);
                 Log.e("Poll List Response", "" + response.toString());
                 if (response.equals("[]"))
                     makeToast("No records found");
@@ -232,31 +275,33 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             public void onRequestFailed(Exception e) {
                 mCurrentPollList.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
-                if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
-                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                        }
-                    });
-                } else {
-                    if (e.getMessage() == null)
-                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-                    else
-                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-
-                }
+                makeToast("Failed to connect to server");
+//                if (e == null) {
+//                    Log.e("Error", "" + e.getMessage());
+//                    makeToast("Failed to connect to server");
+////                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+////                        @Override
+////                        public void onClick(View v) {
+////                            act.getSupportFragmentManager().popBackStack();
+////                        }
+////                    });
+//                } else {
+//                    if (e.getMessage() == null)
+//                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                act.getSupportFragmentManager().popBackStack();
+//                            }
+//                        });
+//                    else
+//                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                act.getSupportFragmentManager().popBackStack();
+//                            }
+//                        });
+//
+//                }
             }
         });
         processor.execute(showPollParams().toString());
