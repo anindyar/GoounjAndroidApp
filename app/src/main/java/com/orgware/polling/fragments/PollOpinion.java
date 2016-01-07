@@ -228,9 +228,14 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             if (mTxtQtsOneOne.getText().toString().equals("")) {
                 makeToast("Question one Choice 1 should not be empty");
                 return;
+            } else if (mTxtQtsOneTwo.getText().toString().equals("")) {
+                makeToast("Question one Choice 2 should not be empty");
+                return;
             } else {
                 mChoicesArrayOne = new JSONArray();
                 mChoicesArrayOne.put(mTxtQtsOneOne.getText().toString());
+                mChoicesArrayOne.put(mTxtQtsOneTwo.getText().toString());
+                mChoicesArrayOne.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayOne);
             }
         } else if (numOfQtsChoiceOne == 2) {
@@ -244,6 +249,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayOne = new JSONArray();
                 mChoicesArrayOne.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneTwo.getText().toString());
+                mChoicesArrayOne.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayOne);
             }
         } else if (numOfQtsChoiceOne == 3) {
@@ -261,6 +267,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayOne.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneThree.getText().toString());
+                mChoicesArrayOne.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayOne);
             }
         } else if (numOfQtsChoiceOne == 4) {
@@ -282,6 +289,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayOne.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneFour.getText().toString());
+                mChoicesArrayOne.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayOne);
             }
         } else if (numOfQtsChoiceOne == 5) {
@@ -307,6 +315,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayOne.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneFour.getText().toString());
                 mChoicesArrayOne.put(mTxtQtsOneFive.getText().toString());
+                mChoicesArrayOne.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayOne);
             }
         } else {
@@ -325,6 +334,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             } else {
                 mChoicesArrayTwo = new JSONArray();
                 mChoicesArrayTwo.put(mTxtQtsOneOne.getText().toString());
+                mChoicesArrayTwo.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayTwo);
             }
         } else if (numOfQtsChoiceTwo == 2) {
@@ -338,6 +348,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayTwo = new JSONArray();
                 mChoicesArrayTwo.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneTwo.getText().toString());
+                mChoicesArrayTwo.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayTwo);
             }
         } else if (numOfQtsChoiceTwo == 3) {
@@ -355,6 +366,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayTwo.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneThree.getText().toString());
+                mChoicesArrayTwo.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayTwo);
             }
         } else if (numOfQtsChoiceTwo == 4) {
@@ -376,6 +388,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayTwo.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneFour.getText().toString());
+                mChoicesArrayTwo.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayTwo);
             }
         } else if (numOfQtsChoiceTwo == 5) {
@@ -401,6 +414,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayTwo.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneFour.getText().toString());
                 mChoicesArrayTwo.put(mTxtQtsOneFive.getText().toString());
+                mChoicesArrayTwo.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayTwo);
             }
         } else {
@@ -419,6 +433,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             } else {
                 mChoicesArrayThree = new JSONArray();
                 mChoicesArrayThree.put(mTxtQtsOneOne.getText().toString());
+                mChoicesArrayThree.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayThree);
             }
         } else if (numOfQtsChoiceThree == 2) {
@@ -432,6 +447,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayThree = new JSONArray();
                 mChoicesArrayThree.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneTwo.getText().toString());
+                mChoicesArrayThree.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayThree);
             }
         } else if (numOfQtsChoiceThree == 3) {
@@ -449,6 +465,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayThree.put(mTxtQtsOneOne.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneThree.getText().toString());
+                mChoicesArrayThree.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayThree);
             }
         } else if (numOfQtsChoiceThree == 4) {
@@ -470,6 +487,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayThree.put(mTxtQtsOneTwo.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneFour.getText().toString());
+                mChoicesArrayThree.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayThree);
             }
         } else if (numOfQtsChoiceThree == 5) {
@@ -495,6 +513,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mChoicesArrayThree.put(mTxtQtsOneThree.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneFour.getText().toString());
                 mChoicesArrayThree.put(mTxtQtsOneFive.getText().toString());
+                mChoicesArrayThree.put("No opinion");
                 Log.e("Choice Array", "" + mChoicesArrayThree);
             }
         } else {

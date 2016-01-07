@@ -177,20 +177,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             @Override
             public void onRequestFailed(Exception e) {
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(LoginActivity.this, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish();
                         }
                     });
-                } else
+                } else {
+                    Log.e("Error", "Exception is not null");
                     Methodutils.message(LoginActivity.this, "" + e.getMessage(), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish();
                         }
                     });
+                }
             }
         });
         processor.execute(prepareLoginParams().toString());
@@ -215,7 +217,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * selected. This callback is invoked only when the newly selected
      * position is different from the previously selected position or if
      * there was no selected item.</p>
-     * <p>
+     * <p/>
      * Impelmenters can call getItemAtPosition(position) if they need to access the
      * data associated with the selected item.
      *
@@ -251,7 +253,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

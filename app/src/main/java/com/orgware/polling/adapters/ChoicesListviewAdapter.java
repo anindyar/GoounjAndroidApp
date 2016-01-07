@@ -24,6 +24,7 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
     List<ChoicesItem> itemList = new ArrayList<>();
     Context mContext;
     LayoutInflater inflater;
+    int choiceImage[];
 
     /**
      * Constructor
@@ -38,6 +39,8 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
         this.mContext = context;
         this.itemList = itemList;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        choiceImage = new int[]{R.drawable.bg_choice_circle_opinion, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_feedback,
+                R.drawable.bg_choice_circle_social, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_social};
     }
 
     @Override
@@ -51,7 +54,7 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
             convertView = inflater.inflate(R.layout.item_choices, parent, false);
         final CheckedTextView mTxtChoice = (CheckedTextView) convertView.findViewById(android.R.id.text1);
         mTxtChoice.setCheckMarkDrawable(null);
-        mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(R.drawable.selector_radio_checked_bg, 0, 0, 0);
+        mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(choiceImage[position], 0, 0, 0);
         ChoicesItem item = itemList.get(position);
         mTxtChoice.setText("" + item.mChoiceName);
 

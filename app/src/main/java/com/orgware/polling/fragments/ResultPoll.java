@@ -56,12 +56,14 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     LinearLayout mLayoutOne, mLayoutTwo, mLayoutThree, mLayoutSubmit;
     RelativeLayout mBackToLayout;
     ImageView mResultBack;
+
     private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
             mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1)
             setQtsOneContent();

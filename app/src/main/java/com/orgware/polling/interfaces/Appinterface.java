@@ -50,7 +50,7 @@ public interface Appinterface {
             CURRENT_CREATED_USER_NAME = "createdUserName", CURRENT_POLL_ID = "pollId", CONTACT_ARRAY = "CONTACT_ARRAY";
 
     /*Web Services*/
-    String BASE_URL = "http://goounjdb.cloudapp.net/", BASE_URL_ONE = "http://192.168.0.135:3000/", ID = "id";
+    String BASE_URL = "http://192.168.10.127:3000/", BASE_URL_ONE = "http://192.168.0.131:3000/", ID = "id", BASE_URL_TWO = "http://goounjdb.cloudapp.net/";
 
     String RESULT_URL = "polls/v1/result/", RESULT_QUESTION_SIZE = "RESULT_QUESTION_SIZE", RES_COUNT_0 = "RES_COUNT_0", RES_COUNT_1 = "RES_COUNT_1", RES_COUNT_2 = "RES_COUNT_2",
             RES_COUNT_3 = "RES_COUNT_3", RES_COUNT_4 = "RES_COUNT_4", RES_COUNT_5 = "RES_COUNT_5", RES_COUNT_6 = "RES_COUNT_6", RES_COUNT_7 = "RES_COUNT_7", RES_COUNT_8 = "RES_COUNT_8",

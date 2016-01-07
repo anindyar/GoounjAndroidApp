@@ -291,7 +291,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll ", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
