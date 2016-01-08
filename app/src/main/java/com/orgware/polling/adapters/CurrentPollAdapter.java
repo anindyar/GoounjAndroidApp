@@ -23,20 +23,22 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
     List<CurrentPollItem> itemList;
     Context mContext;
     AdapterView.OnItemClickListener mOnItemClickListener;
+    int type;
 
-    public CurrentPollAdapter(Context mContext, List<CurrentPollItem> itemList) {
+    public CurrentPollAdapter(Context mContext, List<CurrentPollItem> itemList, int type) {
         this.mContext = mContext;
         this.itemList = itemList;
+        this.type = type;
     }
 
     /**
      * Called when RecyclerView needs a new {@link CurrentPollViewHolder} of the given type to represent
      * an item.
-     * <p/>
+     * <p>
      * This new ViewHolder should be constructed with a new View that can represent the items
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
-     * <p/>
+     * <p>
      * The new ViewHolder will be used to display items of the adapter using
      * {@link #onBindViewHolder(CurrentPollViewHolder, int)}. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
@@ -60,7 +62,7 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
      * Called by RecyclerView to display the data at the specified position. This method should
      * update the contents of the {@link CurrentPollViewHolder#itemView} to reflect the item at the given
      * position.
-     * <p/>
+     * <p>
      * Note that unlike {@link ListView}, RecyclerView will not call this method
      * again if the position of the item changes in the data set unless the item itself is
      * invalidated or the new position cannot be determined. For this reason, you should only
@@ -68,7 +70,7 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
      * this method and should not keep a copy of it. If you need the position of an item later
      * on (e.g. in a click listener), use {@link CurrentPollViewHolder#getAdapterPosition()} which will
      * have the updated adapter position.
-     * <p/>
+     * <p>
      * Override {@link #onBindViewHolder(CurrentPollViewHolder, int)} instead if Adapter can
      * handle effcient partial bind.
      *
@@ -79,6 +81,13 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
     @Override
     public void onBindViewHolder(CurrentPollViewHolder holder, int position) {
         CurrentPollItem items = itemList.get(position);
+        if (type == 1) {
+            holder.imgRightArrow.setVisibility(View.VISIBLE);
+            holder.imgStatistics.setVisibility(View.GONE);
+        } else {
+            holder.imgRightArrow.setVisibility(View.GONE);
+            holder.imgStatistics.setVisibility(View.VISIBLE);
+        }
         holder.txtPollTitle.setText("" + items.mCurrentPollTitle);
         holder.txtPollCreatedBy.setText("Created by: " + items.mCreatedUserName);
         holder.txtPollStartDate.setText("" + items.mCurrentPollStart);
@@ -111,7 +120,7 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
     public class CurrentPollViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView txtPollTitle, txtPollCreatedBy, txtPollStartDate, txtPollEndDate;
-        ImageView imgPollImage;
+        ImageView imgPollImage, imgRightArrow, imgStatistics;
 
         CurrentPollAdapter mAdapter;
 
@@ -124,6 +133,8 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
             txtPollStartDate = (TextView) itemView.findViewById(R.id.poll_startDate);
             txtPollEndDate = (TextView) itemView.findViewById(R.id.poll_endDate);
             imgPollImage = (ImageView) itemView.findViewById(R.id.poll_image);
+            imgRightArrow = (ImageView) itemView.findViewById(R.id.logo_right_arrow);
+            imgStatistics = (ImageView) itemView.findViewById(R.id.logo_statistics);
         }
 
         /**

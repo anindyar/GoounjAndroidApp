@@ -145,12 +145,12 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                             filteredTitles.add(itemList.get(i));
                         }
                     }
-                    mAdapter = new CurrentPollAdapter(act, filteredTitles);
+                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 1);
                     mCurrentPollList.setAdapter(mAdapter);
 //                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
 //                    mRecyclerView.setAdapter(mAdapter);
                 } else {
-                    mAdapter = new CurrentPollAdapter(act, itemList);
+                    mAdapter = new CurrentPollAdapter(act, itemList, 1);
                     mCurrentPollList.setAdapter(mAdapter);
                 }
             }
@@ -342,7 +342,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             mCurrentPollList.setVisibility(View.VISIBLE);
             mPollNoError.setVisibility(View.GONE);
             mPollError.setVisibility(View.GONE);
-            mAdapter = new CurrentPollAdapter(act, itemList);
+            mAdapter = new CurrentPollAdapter(act, itemList, 1);
             mAdapter.setOnItemClickListener(this);
             mCurrentPollList.setAdapter(mAdapter);
         } else {

@@ -46,7 +46,6 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     List<ChoicesItem> itemListOne = new ArrayList<>();
     List<ChoicesItem> itemListTwo = new ArrayList<>();
     List<ChoicesItem> itemListThree = new ArrayList<>();
-    Random random = new Random();
     int qtsSize, mQtsIdOne, mQtsIdTwo, mQtsIdThree;
     String mQuestionOne, mQuestionTwo, mQuestionThree;
     JSONArray mChoiceArrayOne, mChoiceArrayTwo, mChoiceArrayThree, mSubmitValuesArray;
@@ -63,7 +62,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1)
             setQtsOneContent();
@@ -78,13 +77,18 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_survey_detail, container, false);
+        return inflater.inflate(R.layout.fragment_survey_detail, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
         (mChoiceListviewOne = (ListView) v.findViewById(R.id.choicesListviewOne)).setOnItemClickListener(this);
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
         mBackToLayout = (RelativeLayout) v.findViewById(R.id.layout_statics_back);
+        mBackToLayout.setOnClickListener(this);
         (mResultBack = (ImageView) v.findViewById(R.id.resultBack)).setOnClickListener(this);
-        mBackToLayout.setVisibility(View.VISIBLE);
         mFrameLayoutOne = (FrameLayout) v.findViewById(R.id.layout_progress_one);
         mFrameLayoutTwo = (FrameLayout) v.findViewById(R.id.layout_progress_two);
         mFrameLayoutThree = (FrameLayout) v.findViewById(R.id.layout_progress_three);
@@ -101,8 +105,6 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         mFrameLayoutTwo.setVisibility(View.VISIBLE);
         mFrameLayoutThree.setVisibility(View.VISIBLE);
         initCircularProgressBar(v);
-
-        return v;
     }
 
     @Override
@@ -281,7 +283,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -315,6 +317,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.resultBack:
+                act.getSupportFragmentManager().popBackStack(3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                break;
+            case R.id.layout_statics_back:
                 act.getSupportFragmentManager().popBackStack(3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
         }

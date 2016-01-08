@@ -143,12 +143,12 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                             filteredTitles.add(itemList.get(i));
                         }
                     }
-                    mAdapter = new CurrentPollAdapter(act, filteredTitles);
+                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
                     mHistoryPollList.setAdapter(mAdapter);
 //                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
 //                    mRecyclerView.setAdapter(mAdapter);
                 } else {
-                    mAdapter = new CurrentPollAdapter(act, itemList);
+                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
                     mHistoryPollList.setAdapter(mAdapter);
                 }
             }
@@ -282,7 +282,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
             mHistoryPollList.setVisibility(View.VISIBLE);
             mPollNoError.setVisibility(View.GONE);
             mPollError.setVisibility(View.GONE);
-            mAdapter = new CurrentPollAdapter(act, itemList);
+            mAdapter = new CurrentPollAdapter(act, itemList, 2);
             mAdapter.setOnItemClickListener(this);
             mHistoryPollList.setAdapter(mAdapter);
         } else {
@@ -294,7 +294,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
