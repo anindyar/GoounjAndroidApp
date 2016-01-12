@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
+import com.orgware.polling.fragments.vote.VotePager;
 
 /**
  * Created by nandagopal on 21/10/15.
@@ -63,7 +64,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_vote:
-//                ((HomeActivity) act).setNewFragment(new ContactGrid(), "Poll Pager", true);
+                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
                 break;
             case R.id.home_poll:
                 ((HomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);

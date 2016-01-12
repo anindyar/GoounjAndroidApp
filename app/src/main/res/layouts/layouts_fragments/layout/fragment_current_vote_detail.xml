@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/layout_back_vote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:drawableLeft="@drawable/rotate_arrow_toright"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text=""
+        android:textSize="@dimen/txtNormal" />
+
+    <View
+        android:id="@+id/line_vote"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/layout_back_vote"
+        android:background="@color/home_bg" />
+
+    <RelativeLayout
+        android:id="@+id/layout_vote_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_vote"
+        android:padding="@dimen/padding_normal">
+
+        <ImageView
+            android:id="@+id/poll_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/padding_small"
+            android:src="@drawable/ic_usericon_blue" />
+
+        <TextView
+            android:id="@+id/poll_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/poll_image"
+            android:padding="3dp"
+            android:text="Weekend Movie"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/poll_createdBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/poll_title"
+            android:layout_toRightOf="@+id/poll_image"
+            android:padding="2dp"
+            android:text="Created By:"
+            android:textColor="#F0AA4C" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/poll_createdBy"
+            android:layout_toRightOf="@+id/poll_image"
+            android:padding="3dp"
+            android:text="START ON :"
+            android:textColor="#3C746B" />
+
+        <TextView
+            android:id="@+id/poll_startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/poll_createdBy"
+            android:layout_toRightOf="@+id/start"
+            android:padding="3dp"
+            android:text="03:00 PM,23 NOV 2015" />
+
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start"
+            android:layout_toRightOf="@+id/poll_image"
+            android:padding="3dp"
+            android:text="ENDS ON :"
+            android:textColor="#3C746B" />
+
+        <TextView
+            android:id="@+id/poll_endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/poll_startDate"
+            android:layout_toRightOf="@+id/start"
+            android:padding="3dp"
+            android:text="03:00 PM,23 NOV 2015" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_candidate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_vote_detail"
+        android:layout_marginTop="@dimen/margin_small">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_vote_bg" />
+
+        <TextView
+            android:id="@+id/vote_candidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_about_us"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="Candidate : 05"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_content_candidate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/layout_candidate"
+        android:background="@android:color/white"></FrameLayout>
+
+</RelativeLayout>

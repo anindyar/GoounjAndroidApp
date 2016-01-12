@@ -26,6 +26,8 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
     LayoutInflater inflater;
     int choiceImage[];
 
+    int type;
+
     /**
      * Constructor
      *
@@ -34,10 +36,11 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
      *                 instantiating views.
      * @param itemList The objects to represent in the ListView.
      */
-    public ChoicesListviewAdapter(Context context, int resource, List<ChoicesItem> itemList) {
+    public ChoicesListviewAdapter(Context context, int resource, List<ChoicesItem> itemList, int type) {
         super(context, resource, itemList);
         this.mContext = context;
         this.itemList = itemList;
+        this.type = type;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         choiceImage = new int[]{R.drawable.bg_choice_circle_opinion, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_feedback,
                 R.drawable.bg_choice_circle_social, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_social};
@@ -53,10 +56,16 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.item_choices, parent, false);
         final CheckedTextView mTxtChoice = (CheckedTextView) convertView.findViewById(android.R.id.text1);
-        mTxtChoice.setCheckMarkDrawable(null);
-        mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(choiceImage[position], 0, 0, 0);
-        ChoicesItem item = itemList.get(position);
-        mTxtChoice.setText("" + item.mChoiceName);
+        if (type == 1) {
+            mTxtChoice.setCheckMarkDrawable(null);
+            ChoicesItem item = itemList.get(position);
+            mTxtChoice.setText("" + item.mChoiceName);
+        } else {
+            mTxtChoice.setCheckMarkDrawable(null);
+            mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(choiceImage[position], 0, 0, 0);
+            ChoicesItem item = itemList.get(position);
+            mTxtChoice.setText("" + item.mChoiceName);
+        }
 
         return convertView;
     }

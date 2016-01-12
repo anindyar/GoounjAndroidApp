@@ -70,7 +70,7 @@ public class Methodutils {
         menuItems.add("General Reference");
         menuItems.add("Geography & Places");
         menuItems.add("Health & Fitness");
-        menuItems.add("History & Events");
+        menuItems.add("HistoryVote & Events");
         menuItems.add("Latest Trends");
         menuItems.add("Life & Concepts");
         menuItems.add("Lifestyle & Shopping");

@@ -2,34 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radio_current_vote"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/bg_tab_quick_selector"
             android:button="@null"
-            android:gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_current_poll"
+            android:drawablePadding="@dimen/padding_small"
+            android:gravity="center_horizontal|center_vertical"
             android:padding="@dimen/padding_normal"
-            android:text="Current Vote" />
+            android:text="Current Vote"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
 
         <RadioButton
+            android:id="@+id/radio_history_vote"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/bg_tab_selector"
             android:button="@null"
-            android:gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_history"
+            android:drawablePadding="@dimen/padding_small"
+            android:gravity="center_horizontal|center_vertical"
             android:padding="@dimen/padding_normal"
-            android:text="History" />
+            android:text="History"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
 
     </RadioGroup>
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/pager_vote"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

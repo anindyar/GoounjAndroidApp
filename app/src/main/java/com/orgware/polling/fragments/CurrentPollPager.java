@@ -111,6 +111,12 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewPager.setAdapter(mPagerAdapter);

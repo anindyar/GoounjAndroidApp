@@ -54,7 +54,6 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     FrameLayout mFrameLayoutOne, mFrameLayoutTwo, mFrameLayoutThree;
     LinearLayout mLayoutOne, mLayoutTwo, mLayoutThree, mLayoutSubmit;
     RelativeLayout mBackToLayout;
-    ImageView mResultBack;
 
     private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
             mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
@@ -62,7 +61,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1)
             setQtsOneContent();
@@ -77,7 +76,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_survey_detail, container, false);
+        return inflater.inflate(R.layout.fragment_result_poll, container, false);
     }
 
     @Override
@@ -87,8 +86,14 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
         mBackToLayout = (RelativeLayout) v.findViewById(R.id.layout_statics_back);
-        mBackToLayout.setOnClickListener(this);
-        (mResultBack = (ImageView) v.findViewById(R.id.resultBack)).setOnClickListener(this);
+        mBackToLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                act.getSupportFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                makeToast("Test");
+            }
+        });
+//        (mResultBack = (ImageView) v.findViewById(R.id.resultBack)).setOnClickListener(this);
         mFrameLayoutOne = (FrameLayout) v.findViewById(R.id.layout_progress_one);
         mFrameLayoutTwo = (FrameLayout) v.findViewById(R.id.layout_progress_two);
         mFrameLayoutThree = (FrameLayout) v.findViewById(R.id.layout_progress_three);
@@ -209,7 +214,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 itemListOne.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
                 Log.e("Qts One", "" + itemListOne.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, R.layout.item_choices, itemListOne);
+            mAdapterOne = new ChoicesListviewAdapter(act, R.layout.item_choices, itemListOne, 2);
 //            editor.putInt(RES_COUNT_0, itemListOne.get(0).mChoiceOptionId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,8 +239,8 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 itemListTwo.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
                 Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne);
-            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo);
+            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
+            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
 //            editor.putInt(RES_COUNT_0, itemListTwo.get(0).mChoiceOptionId);
 //            editor.putInt(RES_COUNT_1, itemListTwo.get(1).mChoiceOptionId);
         } catch (Exception e) {
@@ -269,9 +274,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 itemListThree.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
                 Log.e("Qts One", "" + itemListThree.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne);
-            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo);
-            mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree);
+            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
+            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
+            mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree, 2);
 //            editor.putInt(RES_COUNT_0, itemListThree.get(0).mChoiceOptionId);
 //            editor.putInt(RES_COUNT_1, itemListThree.get(1).mChoiceOptionId);
         } catch (Exception e) {
@@ -316,12 +321,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.resultBack:
-                act.getSupportFragmentManager().popBackStack(3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                break;
-            case R.id.layout_statics_back:
-                act.getSupportFragmentManager().popBackStack(3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                break;
+
         }
     }
 }

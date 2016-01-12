@@ -59,7 +59,7 @@ public class CurrentPollDetailTwo extends BaseFragment implements CompoundButton
 //        for (int i = 0; i < 5; i++) {
 //            itemList.add(new ChoicesItem("Choice - " + i));
 //        }
-        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList);
+        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList, 1);
         mQuestionTwo = preferences.getString(QUESTION_SIZE_1, "");
         mChoiceSize = preferences.getInt(CHOICE_SIZE_1, 0);
         mPollNameValue = preferences.getString(POLL_NAME, "");
@@ -182,7 +182,7 @@ public class CurrentPollDetailTwo extends BaseFragment implements CompoundButton
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

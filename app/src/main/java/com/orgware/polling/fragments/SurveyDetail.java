@@ -116,6 +116,12 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (qtsSize == 1) {
@@ -198,7 +204,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                 itemListOne.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("optionId")));
                 Log.e("Qts One", "" + itemListOne.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne);
+            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -224,8 +230,8 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                 itemListTwo.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("optionId")));
                 Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne);
-            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo);
+            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 1);
+            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -260,9 +266,9 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                 itemListThree.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("optionId")));
                 Log.e("Qts One", "" + itemListThree.get(i).mChoiceName);
             }
-            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne);
-            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo);
-            mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree);
+            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 1);
+            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 1);
+            mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -272,7 +278,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -391,7 +397,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                     makeToast("Please put a valid mobile number");
                     return;
                 }
-                if (mMobileNumber.getText().toString().length() != 10 ) {
+                if (mMobileNumber.getText().toString().length() != 10) {
                     makeToast("Please put a valid mobile number!");
                     return;
                 }

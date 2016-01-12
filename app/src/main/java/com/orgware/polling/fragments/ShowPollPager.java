@@ -47,7 +47,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         mGridList = new ArrayList<GridItems>();
         mGridList.clear();
         mGridList.add(new GridItems("Current Poll", R.drawable.ic_current_poll));
-        mGridList.add(new GridItems("History", R.drawable.ic_history));
+        mGridList.add(new GridItems("HistoryVote", R.drawable.ic_history));
 
         mFragmentList.add(setPagerFragment(new CurrentPoll(),
                 mFragmentList.size()));
@@ -132,7 +132,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
 //        if (position == 0)
 //            ((HomeActivity) act).mPageTitle.setText("Current Poll");
 //        else
-//            ((HomeActivity) act).mPageTitle.setText("Poll History");
+//            ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
     }
 
     /**

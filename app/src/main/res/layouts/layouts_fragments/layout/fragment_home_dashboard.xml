@@ -47,13 +47,30 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txtVeryLarge" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_currency"
-                    android:text="\u20B9 150"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txtNormal" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_circle_dark_green"
+                        android:padding="@dimen/padding_small"
+                        android:src="@drawable/ic_currency"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtNormal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/padding_small"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txtLarge" />
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 

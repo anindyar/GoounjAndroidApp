@@ -59,7 +59,7 @@ public class CurrentPollDetailThree extends BaseFragment implements CompoundButt
 //        for (int i = 0; i < 5; i++) {
 //            itemList.add(new ChoicesItem("Choice - " + i));
 //        }
-        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList);
+        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList,1);
         mQuestionThree = preferences.getString(QUESTION_SIZE_2, "");
         mChoiceSize = preferences.getInt(CHOICE_SIZE_2, 0);
         mPollNameValue = preferences.getString(POLL_NAME, "");

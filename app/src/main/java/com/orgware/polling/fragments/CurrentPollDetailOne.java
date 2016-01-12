@@ -57,7 +57,7 @@ public class CurrentPollDetailOne extends BaseFragment implements CompoundButton
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList);
+        mAdapter = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemList,1);
         mQuestionOne = preferences.getString(QUESTION_SIZE_0, "");
         mChoiceSize = preferences.getInt(CHOICE_SIZE_0, 0);
         mPollNameValue = preferences.getString(POLL_NAME, "");

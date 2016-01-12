@@ -10,16 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/resultBack"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/rotate_arrow_toright"
-            android:visibility="visible" />
+            android:drawableLeft="@drawable/rotate_arrow_toright"
+            android:padding="@dimen/padding_small"
+            android:textColor="@android:color/darker_gray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +106,7 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Question 1 :"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/txtNormal" />
 
                 <TextView
@@ -112,7 +117,7 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Who is the top goal scorer?"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/txtNormal" />
 
                 <RelativeLayout
@@ -194,47 +199,47 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_one"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:padding="@dimen/padding_small"
-                    android:visibility="gone">
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_one"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/first_circular_progressbar"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/first_circular_progressbar"-->
+                <!--android:layout_width="180dp"-->
+                <!--android:layout_height="180dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/second_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/second_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/third_circular_progressbar"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/third_circular_progressbar"-->
+                <!--android:layout_width="60dp"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
+                <!--</FrameLayout>-->
 
             </LinearLayout>
 
@@ -254,7 +259,7 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Question 2 :"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/txtNormal" />
 
                 <TextView
@@ -265,7 +270,7 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Who is the top goal scorer?"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/txtNormal" />
 
                 <ListView
@@ -276,46 +281,46 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:visibility="gone">
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_two"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_first_circular_progressbar"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_first_circular_progressbar"-->
+                <!--android:layout_width="180dp"-->
+                <!--android:layout_height="180dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_second_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_second_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_third_circular_progressbar"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_third_circular_progressbar"-->
+                <!--android:layout_width="60dp"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
+                <!--</FrameLayout>-->
             </LinearLayout>
 
 
@@ -357,46 +362,46 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_three"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:visibility="gone">
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_three"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_first_circular_progressbar"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_first_circular_progressbar"-->
+                <!--android:layout_width="180dp"-->
+                <!--android:layout_height="180dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_second_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_second_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_third_circular_progressbar"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="50dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_third_circular_progressbar"-->
+                <!--android:layout_width="60dp"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="50dp" />-->
+                <!--</FrameLayout>-->
             </LinearLayout>
 
         </LinearLayout>

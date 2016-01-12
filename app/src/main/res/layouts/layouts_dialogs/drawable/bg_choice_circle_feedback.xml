@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <size
-        android:width="5dp"
-        android:height="5dp" />
+        android:width="20dp"
+        android:height="20dp" />
     <solid android:color="@color/tab_survey" />
 </shape>
