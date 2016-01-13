@@ -64,7 +64,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_vote:
-                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
+//                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
                 break;
             case R.id.home_poll:
                 ((HomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);

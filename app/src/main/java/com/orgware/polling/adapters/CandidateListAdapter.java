@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orgware.polling.R;
+import com.orgware.polling.pojo.CandidateItem;
 import com.orgware.polling.pojo.CurrentPollItem;
 
 import java.util.List;
@@ -18,17 +21,15 @@ import java.util.List;
 /**
  * Created by nandagopal on 12/1/16.
  */
-public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdapter.CurrentPollViewHolder> {
+public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdapter.CurrentPollViewHolder> implements View.OnClickListener {
 
-    List<CurrentPollItem> itemList;
+    List<CandidateItem> itemList;
     Context mContext;
     AdapterView.OnItemClickListener mOnItemClickListener;
-    int type;
 
-    public CandidateListAdapter(Context mContext, List<CurrentPollItem> itemList, int type) {
+    public CandidateListAdapter(Context mContext, List<CandidateItem> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
-        this.type = type;
     }
 
     /**
@@ -80,20 +81,12 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
      */
     @Override
     public void onBindViewHolder(CurrentPollViewHolder holder, int position) {
-        CurrentPollItem items = itemList.get(position);
-        if (type == 1) {
-            holder.imgRightArrow.setVisibility(View.VISIBLE);
-            holder.imgStatistics.setVisibility(View.GONE);
-        } else {
-            holder.imgRightArrow.setVisibility(View.GONE);
-            holder.imgStatistics.setVisibility(View.VISIBLE);
-        }
-        holder.txtPollTitle.setText("" + items.mCurrentPollTitle);
-        holder.txtPollCreatedBy.setText("Created by: " + items.mCreatedUserName);
-        holder.txtPollStartDate.setText("" + items.mCurrentPollStart);
-        holder.txtPollEndDate.setText("" + items.mCurrentPollEnd);
-        holder.txtSelfNominationDate.setText("" + items.mSelfNominationDate);
-//        holder.imgPollImage.setImageResource(items.mCurrentPollImage);
+        CandidateItem items = itemList.get(position);
+        holder.candidaterName.setText(items.candidateName);
+        holder.candidateAbout.setText(items.candidateAbout);
+        holder.imgCandidateImage.setImageResource(items.candidateImage);
+        holder.mBtnCandidateVote.setOnClickListener(this);
+        holder.mBtnCandidateView.setOnClickListener(this);
 
     }
 
@@ -118,25 +111,38 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
         return itemList.size();
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.candidate_vote:
+                Toast.makeText(mContext, "Vote", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.candidate_detail_view:
+                Toast.makeText(mContext, "Detail", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
     public class CurrentPollViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView txtPollTitle, txtPollCreatedBy, txtPollStartDate, txtPollEndDate, txtSelfNominationDate;
-        ImageView imgPollImage, imgRightArrow, imgStatistics;
-
+        TextView candidaterName, candidateAbout;
+        ImageView imgCandidateImage, mBtnCandidateVote, mBtnCandidateView;
         CandidateListAdapter mAdapter;
 
         public CurrentPollViewHolder(View itemView, CandidateListAdapter mAdapter) {
             super(itemView);
             itemView.setOnClickListener(this);
             this.mAdapter = mAdapter;
-            txtPollTitle = (TextView) itemView.findViewById(R.id.poll_title);
-            txtPollCreatedBy = (TextView) itemView.findViewById(R.id.poll_createdBy);
-            txtPollStartDate = (TextView) itemView.findViewById(R.id.poll_startDate);
-            txtPollEndDate = (TextView) itemView.findViewById(R.id.poll_endDate);
-            imgPollImage = (ImageView) itemView.findViewById(R.id.poll_image);
-            imgRightArrow = (ImageView) itemView.findViewById(R.id.logo_right_arrow);
-            imgStatistics = (ImageView) itemView.findViewById(R.id.logo_statistics);
-            txtSelfNominationDate = (TextView) itemView.findViewById(R.id.date_selfNomination);
+            candidaterName = (TextView) itemView.findViewById(R.id.candidate_name);
+            candidateAbout = (TextView) itemView.findViewById(R.id.candidate_content);
+            imgCandidateImage = (ImageView) itemView.findViewById(R.id.candidate_icon);
+            mBtnCandidateView = (ImageView) itemView.findViewById(R.id.candidate_detail_view);
+            mBtnCandidateVote = (ImageView) itemView.findViewById(R.id.candidate_vote);
         }
 
         /**

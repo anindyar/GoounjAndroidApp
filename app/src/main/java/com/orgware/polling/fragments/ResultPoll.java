@@ -120,7 +120,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
 //        qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1) {
 //            setQtsOneContent();

@@ -118,12 +118,12 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
         if (qtsSize == 1) {
             mChoiceListviewOne.setAdapter(mAdapterOne);
             mQuestionTitleOne.setText(mQuestionOne);

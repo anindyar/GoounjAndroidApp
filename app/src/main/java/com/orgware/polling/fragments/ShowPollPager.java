@@ -47,7 +47,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         mGridList = new ArrayList<GridItems>();
         mGridList.clear();
         mGridList.add(new GridItems("Current Poll", R.drawable.ic_current_poll));
-        mGridList.add(new GridItems("HistoryVote", R.drawable.ic_history));
+        mGridList.add(new GridItems("History", R.drawable.ic_history));
 
         mFragmentList.add(setPagerFragment(new CurrentPoll(),
                 mFragmentList.size()));
@@ -153,7 +153,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

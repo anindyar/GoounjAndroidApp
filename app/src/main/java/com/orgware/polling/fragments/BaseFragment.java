@@ -11,6 +11,8 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -120,6 +122,23 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         fragment.setArguments(args);
         return fragment;
     }
+
+    /*This method is used to call the new Fragment and sets into the Frame Layout */
+    public void setNewFragment(Fragment fragment, int fragment_content, String title,
+                               boolean addbackstack) {
+        FragmentManager manager = act.getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.slideout2, R.anim.slidein2,
+                R.anim.slidein, R.anim.slideout);
+
+        transaction.replace(fragment_content, fragment);
+        if (addbackstack)
+            transaction.addToBackStack(title);
+        transaction.commit();
+
+    }
+
 
     public void makeToast(String value) {
         Toast.makeText(act, " " + value, Toast.LENGTH_SHORT).show();

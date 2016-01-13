@@ -76,6 +76,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         dashboardId = preferences.getInt(DASHBOARD_ID, 0);
         Log.e("DashBoard", "" + dashboardId);
 //        splitFromString("2015-10-31T09:16:02.000Z");
+//        if (dashboardId == 0)
+//            ((HomeActivity) act).mSearchPollsTxt.setText("Poll");
+//        else
+//            ((HomeActivity) act).mSearchPollsTxt.setText("Survey");
 
     }
 
@@ -390,8 +394,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                 makeToast("Sorry,No Questions to answer!");
             if (dashboardId == 0) {
                 ((HomeActivity) act).setNewFragment(new CurrentPollPager(), "Pager", true);
+                ((HomeActivity) act).mSearchPollsTxt.setText("Poll");
             } else if (dashboardId == 1) {
                 ((HomeActivity) act).setNewFragment(new SurveyDetail(), "Pager", true);
+                ((HomeActivity) act).mSearchPollsTxt.setText("Survey");
             } else
                 Log.e("No DashBoard", "" + dashboardId);
 
