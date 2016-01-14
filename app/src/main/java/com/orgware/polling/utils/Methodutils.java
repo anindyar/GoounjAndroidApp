@@ -4,14 +4,24 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.orgware.polling.R;
+import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.SpinnerAdapter;
+import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pojo.MenuListItem;
 
 import org.json.JSONException;
@@ -40,6 +50,72 @@ public class Methodutils {
                 mCategoryDialog.dismiss();
             }
         });
+        mCategoryDialog.show();
+
+    }
+
+    public static void showListSearch(final Context mContext, final List<CurrentPollItem> itemList, final RecyclerView mCurrentPollList) {
+        final Dialog mCategoryDialog = new Dialog(mContext);
+        mCategoryDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mCategoryDialog.setCancelable(true);
+        mCategoryDialog.setContentView(R.layout.dialog_search);
+        Window window = mCategoryDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        wlp.gravity = Gravity.TOP;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);
+
+        ImageView dlg_clear = (ImageView) mCategoryDialog.findViewById(R.id.search_close);
+        ImageView dlg_back = (ImageView) mCategoryDialog.findViewById(R.id.search_back);
+        final EditText dlg_textbox = (EditText) mCategoryDialog.findViewById(R.id.search_text);
+        dlg_textbox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                CurrentPollAdapter mAdapter;
+                if (!s.toString().equals("")) {
+                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+                    for (int i = 0; i < itemList.size(); i++) {
+                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+                            filteredTitles.add(itemList.get(i));
+                        }
+                    }
+                    mAdapter = new CurrentPollAdapter(mContext, filteredTitles, 1);
+                    mCurrentPollList.setAdapter(mAdapter);
+//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+//                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter = new CurrentPollAdapter(mContext, itemList, 1);
+                    mCurrentPollList.setAdapter(mAdapter);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        dlg_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dlg_textbox.setText("");
+            }
+        });
+        dlg_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategoryDialog.dismiss();
+            }
+        });
+
         mCategoryDialog.show();
 
     }

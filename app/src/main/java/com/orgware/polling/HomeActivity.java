@@ -175,11 +175,11 @@ public class HomeActivity extends BaseActivity implements Appinterface, View.OnC
 //                setNewFragment(new CircleProgressTest(), "PROG", true);
                 break;
             case R.id.img_searchPoll:
-                openClose.setVisibility(View.VISIBLE);
-                openSearch.setVisibility(View.GONE);
-                mSearchPollsTxt.setVisibility(View.VISIBLE);
-                mSearchPollsTxt.setText("");
-                mPageTitle.setVisibility(View.GONE);
+//                openClose.setVisibility(View.VISIBLE);
+//                openSearch.setVisibility(View.GONE);
+//                mSearchPollsTxt.setVisibility(View.VISIBLE);
+//                mSearchPollsTxt.setText("");
+//                mPageTitle.setVisibility(View.GONE);
                 break;
             case R.id.img_closePoll:
                 openClose.setVisibility(View.GONE);

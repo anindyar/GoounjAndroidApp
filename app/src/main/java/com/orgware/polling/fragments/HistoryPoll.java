@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener {
+public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     RecyclerView mHistoryPollList;
     //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
@@ -184,6 +184,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
 //        ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
+        ((HomeActivity) act).openSearch.setOnClickListener(this);
         if (NetworkHelper.checkActiveInternet(act))
             getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
         else
@@ -294,7 +295,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -383,5 +384,15 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        Methodutils.showListSearch(act, itemList, mHistoryPollList);
     }
 }

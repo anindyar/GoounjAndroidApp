@@ -42,7 +42,7 @@ import java.util.StringTokenizer;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClickListener {
+public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     RecyclerView mCurrentPollList;
     CurrentPollAdapter mAdapter;
@@ -74,13 +74,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         itemList = new ArrayList<>();
         singleItemList = new ArrayList<>();
         dashboardId = preferences.getInt(DASHBOARD_ID, 0);
-        Log.e("DashBoard", "" + dashboardId);
-//        splitFromString("2015-10-31T09:16:02.000Z");
-//        if (dashboardId == 0)
-//            ((HomeActivity) act).mSearchPollsTxt.setText("Poll");
-//        else
-//            ((HomeActivity) act).mSearchPollsTxt.setText("Survey");
-
     }
 
     @Nullable
@@ -175,16 +168,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((HomeActivity) act).mPageTitle.setText("Poll");
         ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
         ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
-        if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
-//            ((HomeActivity) act).mPageTitle.setText("Survey Poll");
-            ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        } else {
-//            ((HomeActivity) act).mPageTitle.setText("Current Poll");
-            ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        }
+        ((HomeActivity) act).openSearch.setOnClickListener(this);
+        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
         if (NetworkHelper.checkActiveInternet(act))
             getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
         else
@@ -202,7 +189,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -251,7 +238,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-//            mShowPollOnject.put(USER_ID, "3");
             mShowPollOnject.put(POLL_LIMIT, limit);
         } catch (Exception e) {
             e.printStackTrace();
@@ -280,32 +266,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                 mCurrentPollList.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
                 makeToast("Failed to connect to server");
-//                if (e == null) {
-//                    Log.e("Error", "" + e.getMessage());
-//                    makeToast("Failed to connect to server");
-////                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
-////                        @Override
-////                        public void onClick(View v) {
-////                            act.getSupportFragmentManager().popBackStack();
-////                        }
-////                    });
-//                } else {
-//                    if (e.getMessage() == null)
-//                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                act.getSupportFragmentManager().popBackStack();
-//                            }
-//                        });
-//                    else
-//                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                act.getSupportFragmentManager().popBackStack();
-//                            }
-//                        });
-//
-//                }
             }
         });
         processor.execute(showPollParams().toString());
@@ -406,91 +366,13 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         }
     }
 
-    private void setQuestions(int questionLength, JSONArray mQuestionssArray) {
-        if (questionLength == 1) {
-            for (int j = 0; j < mQuestionssArray.length(); j++) {
-                JSONObject mQuestions = mQuestionssArray.optJSONObject(j);
-                JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
-                Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
-
-                editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
-                        putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
-//                        .putInt(CHOICE_SIZE_1, mChoicesArray.length()).commit();
-//                setChoices(j, mChoicesArray.length(), mChoicesArray);
-            }
-        }
-        if (questionLength == 2) {
-            for (int j = 0; j < mQuestionssArray.length(); j++) {
-                JSONObject mQuestions = mQuestionssArray.optJSONObject(j);
-                JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
-                Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
-                editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
-                Log.e("QUESTION_SIZE_" + j, "" + preferences.getString("QUESTION_SIZE_" + j, ""));
-//                setChoices(j, mChoicesArray.length(), mChoicesArray);
-            }
-        }
-        if (questionLength == 3) {
-            for (int j = 0; j < mQuestionssArray.length(); j++) {
-                editor.putString("QUESTION_SIZE_" + j, "" + mQuestionssArray.optString(j)).commit();
-                JSONObject mQuestions = mQuestionssArray.optJSONObject(j);
-                JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
-                editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
-                Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
-//                editor.putInt(QUESTION_SIZE, 1).putInt(CHOICE_1, mChoicesArray.length()).commit();
-//                setChoices(j, mChoicesArray.length(), mChoicesArray);
-            }
-        }
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        Methodutils.showListSearch(act, itemList, mCurrentPollList);
     }
-
-    private void setChoices(int i, int mChoicesLength, JSONArray mChoicesArray) {
-        editor.putInt("CHOICE_SIZE_" + i, mChoicesLength).commit();
-        Log.e("Choice Size - " + i, "" + mChoicesLength);
-        if (mChoicesLength == 1) {
-            for (int j = 0; j < mChoicesArray.length(); j++) {
-                JSONObject mChoiceObject = mChoicesArray.optJSONObject(j);
-                Log.e("Choice Object - " + i, "" + mChoiceObject.toString());
-                editor.putString("CHOICE_" + i + "_" + j, "" + mChoiceObject.optString("choice")).
-                        putInt("OPTION_" + i + "_" + j, mChoiceObject.optInt("optionId")).commit();
-
-            }
-        }
-        if (mChoicesLength == 2) {
-            for (int j = 0; j < mChoicesArray.length(); j++) {
-//                editor.putString("CHOICE_" + i + "_" + j, "" + mChoicesArray.optString(j));
-                JSONObject mChoiceObject = mChoicesArray.optJSONObject(j);
-                Log.e("Choice Object - " + i, "" + mChoiceObject.toString());
-                editor.putString("CHOICE_" + i + "_" + j, "" + mChoiceObject.optString("choice")).
-                        putInt("OPTION_" + i + "_" + j, mChoiceObject.optInt("optionId")).commit();
-            }
-        }
-        if (mChoicesLength == 3) {
-            for (int j = 0; j < mChoicesArray.length(); j++) {
-                Log.e("CHOICE_" + i + "_" + j, "" + mChoicesArray.optString(j));
-//                editor.putString("CHOICE_" + i + "_" + j, "" + mChoicesArray.optString(j));
-                JSONObject mChoiceObject = mChoicesArray.optJSONObject(j);
-                Log.e("Choice Object - " + i, "" + mChoiceObject.toString());
-                editor.putString("CHOICE_" + i + "_" + j, "" + mChoiceObject.optString("choice")).
-                        putInt("OPTION_" + i + "_" + j, mChoiceObject.optInt("optionId")).commit();
-            }
-        }
-        if (mChoicesLength == 4) {
-            for (int j = 0; j < mChoicesArray.length(); j++) {
-//                Log.e("" + j, "" + mChoicesArray.optString(j));
-//                editor.putString("CHOICE_" + i + "_" + j, "" + mChoicesArray.optString(j));
-                JSONObject mChoiceObject = mChoicesArray.optJSONObject(j);
-                editor.putString("CHOICE_" + i + "_" + j, "" + mChoiceObject.optString("choice")).
-                        putInt("OPTION_" + i + "_" + j, mChoiceObject.optInt("optionId")).commit();
-            }
-        }
-        if (mChoicesLength == 5) {
-            for (int j = 0; j < mChoicesArray.length(); j++) {
-//                Log.e("" + j, "" + mChoicesArray.optString(j));
-//                editor.putString("CHOICE_" + i + "_" + j, "" + mChoicesArray.optString(j));
-                JSONObject mChoiceObject = mChoicesArray.optJSONObject(j);
-                editor.putString("CHOICE_" + i + "_" + j, "" + mChoiceObject.optString("choice")).
-                        putInt("OPTION_" + i + "_" + j, mChoiceObject.optInt("optionId")).commit();
-            }
-        }
-    }
-
 }

@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,7 +34,7 @@ import com.orgware.polling.interfaces.Appinterface;
 /**
  * Created by Nandagopal on 31-Aug-15.
  */
-public class BaseActivity extends FragmentActivity implements Appinterface {
+public class BaseActivity extends AppCompatActivity implements Appinterface {
 
 
     /*The Pixel variables used to get the maximum pixels of width and height of the current mobile and menuWidth is used to
