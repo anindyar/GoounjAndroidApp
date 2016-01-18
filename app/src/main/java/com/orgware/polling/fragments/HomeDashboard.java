@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.fragments.vote.VotePager;
 
@@ -45,12 +46,12 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((HomeActivity) act).openHome.setVisibility(View.GONE);
-        ((HomeActivity) act).mPageTitle.setText("Home");
-        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-        ((HomeActivity) act).openClose.setVisibility(View.GONE);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+//        ((HomeActivity) act).openHome.setVisibility(View.GONE);
+//        ((HomeActivity) act).mPageTitle.setText("Home");
+//        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+//        ((HomeActivity) act).openClose.setVisibility(View.GONE);
+//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
 
     }
 
@@ -64,7 +65,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_vote:
-//                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
+                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
                 break;
             case R.id.home_poll:
                 ((HomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);

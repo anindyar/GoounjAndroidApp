@@ -1,27 +1,24 @@
 package com.orgware.polling;
 
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orgware.polling.fragments.PollOpinion;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.orgware.polling.fragments.HomeDashboard;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
-/**
- * Created by nandagopal on 14/1/16.
- */
 public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
@@ -30,11 +27,11 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     private TextView mUserName, mEmailId;
     private ImageView mProfileImage;
 
-    @Override
-    protected void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        setContentView(R.layout.activity_menu);
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,19 +51,20 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 
             }
         };
+
         mDrawerLayout.setDrawerListener(mBarDrawerToggle);
         mBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_adwithus));
+        navigationView.setItemIconTintList(null);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_profile));
         navigationView.getMenu().getItem(0).setChecked(true);
         addHeader();
+        setNewFragment(new HomeDashboard(), "Dashboard", false);
     }
 
     private void addHeader() {
-
-
-        View view = LayoutInflater.from(this).inflate(R.layout.nav_header_navigation_drawer, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.nav_header_profile, null);
         navigationView.addHeaderView(view);
         mUserName = (TextView) view.findViewById(R.id.name);
         mEmailId = (TextView) view
@@ -76,7 +74,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 //        mEmailId.setText(preferences.getString("email", ""));
 //        File cacheDir = GraphicsUtil.getCacheFolder(this);
 //        File cacheFile = new File(cacheDir, AppConstants.profile_picture_thump_url + ".jpg");
-//
+
 //        if (cacheFile.exists()) {
 //            Picasso.with(getApplicationContext())
 //                    .load(cacheFile)
@@ -94,64 +92,30 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.nav_profile:
-                setNewFragment(new PollOpinion(), "DashBoardFragment", false);
-                break;
-            case R.id.nav_aboutus:
-                setNewFragment(new PollOpinion(), "Profile Wallet Fragment", false);
-                break;
-            case R.id.nav_timeline:
-                setNewFragment(new PollOpinion(), "Profile Wallet Fragment", false);
-                break;
-            case R.id.nav_changenumber:
-                break;
-            case R.id.nav_adwithus:
-                setNewFragment(new PollOpinion(), "Profile Wallet Fragment", false);
-                break;
-            case R.id.nav_settings:
-                setNewFragment(new PollOpinion(), "AboutFragment", false);
-                break;
-        }
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_options, menu);
         return true;
     }
 
-    /*This method is used to call the new Fragment and sets into the Frame Layout */
-    public void setNewFragment(Fragment fragment, String title,
-                               boolean addbackstack) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        transaction.setCustomAnimations(R.anim.slideout2, R.anim.slidein2,
-                R.anim.slidein, R.anim.slideout);
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.nav_profile) {
+//            return true;
+//        }
 
-        transaction.replace(R.id.fragment_content, fragment);
-        if (addbackstack)
-            transaction.addToBackStack(title);
-        transaction.commit();
-
+        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
 
+    }
 }

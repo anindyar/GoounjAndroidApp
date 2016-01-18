@@ -7,7 +7,10 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -141,6 +144,23 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
 
         }
         return evnt;
+    }
+
+    public void setNewFragment(Fragment fragment, String title, boolean addStack) {
+
+        FragmentManager manager = getSupportFragmentManager();
+
+        if (!addStack && manager.getBackStackEntryCount() > 0) {
+            manager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            Fragment mCurrentFragment = manager.findFragmentById(R.id.fragment_content);
+            if (mCurrentFragment != null)
+                manager.beginTransaction().remove(mCurrentFragment).commit();
+        }
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_content, fragment, title);
+        if (addStack)
+            transaction.addToBackStack(title);
+        transaction.commit();
     }
 
     /*This sets the menu size for the corresponding devices
