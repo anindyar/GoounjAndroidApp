@@ -35,8 +35,8 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+//        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
+//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
         mFragmentList = new ArrayList<>();
         mFragmentList.add(setPagerFragment(new PollOpinion(),
                 mFragmentList.size()));
@@ -74,9 +74,9 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
         super.onActivityCreated(savedInstanceState);
 //        ((HomeActivity) act).mPageTitle.setText("Create Poll");
 //        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-        ((HomeActivity) act).openClose.setVisibility(View.GONE);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+//        ((HomeActivity) act).openClose.setVisibility(View.GONE);
+//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         mViewPager.setAdapter(mAdapter);
     }
 

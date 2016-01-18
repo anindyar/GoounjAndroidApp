@@ -3,14 +3,17 @@ package com.orgware.polling.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.HistoryPollAdapter;
@@ -40,7 +44,7 @@ import java.util.List;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener, SearchView.OnQueryTextListener {
     RecyclerView mHistoryPollList;
     //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
@@ -126,44 +130,69 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                     }
                 });
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
-        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals("")) {
-                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
-                    for (int i = 0; i < itemList.size(); i++) {
-                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
-                            filteredTitles.add(itemList.get(i));
-                        }
-                    }
-                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
-                    mHistoryPollList.setAdapter(mAdapter);
-//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
-//                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
-                    mHistoryPollList.setAdapter(mAdapter);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0)
-                    Log.e("Search", "Yes");
-                else
-                    Log.e("Search", "No");
-//                    makeToast("No records found");
-
-            }
-        });
+//        ((MainHomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (!s.toString().equals("")) {
+//                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+//                    for (int i = 0; i < itemList.size(); i++) {
+//                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+//                            filteredTitles.add(itemList.get(i));
+//                        }
+//                    }
+//                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
+//                    mHistoryPollList.setAdapter(mAdapter);
+////                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+////                    mRecyclerView.setAdapter(mAdapter);
+//                } else {
+//                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
+//                    mHistoryPollList.setAdapter(mAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s.length() > 0)
+//                    Log.e("Search", "Yes");
+//                else
+//                    Log.e("Search", "No");
+////                    makeToast("No records found");
+//
+//            }
+//        });
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
+
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item,
+                new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem item) {
+                        // Do something when collapsed
+                        mAdapter.setFilter(itemList);
+                        return true; // Return true to collapse action view
+                    }
+
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem item) {
+                        // Do something when expanded
+                        return true; // Return true to expand action view
+                    }
+                });
     }
 
     private View createHeaderView() {
@@ -184,7 +213,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
 //        ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
-        ((HomeActivity) act).openSearch.setOnClickListener(this);
+//        ((HomeActivity) act).openSearch.setOnClickListener(this);
         if (NetworkHelper.checkActiveInternet(act))
             getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
         else
@@ -327,8 +356,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 else
                     try {
                         showResultPollList(response);
-                        ((HomeActivity) act).setNewFragment(new ResultPoll(), "", true);
-                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+//                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -394,5 +423,48 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public void onClick(View v) {
         Methodutils.showListSearch(act, itemList, mHistoryPollList);
+    }
+
+    /**
+     * Called when the user submits the query. This could be due to a key press on the
+     * keyboard or due to pressing a submit button.
+     * The listener can override the standard behavior by returning true
+     * to indicate that it has handled the submit request. Otherwise return false to
+     * let the SearchView handle the submission by launching any associated intent.
+     *
+     * @param query the query text that is to be submitted
+     * @return true if the query has been handled by the listener, false to let the
+     * SearchView perform the default action.
+     */
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    /**
+     * Called when the query text is changed by the user.
+     *
+     * @param newText the new content of the query text field.
+     * @return false if the SearchView should perform the default action of showing any
+     * suggestions if available, true if the action was handled by the listener.
+     */
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final List<CurrentPollItem> filteredModelList = filter(itemList, newText);
+        mAdapter.setFilter(filteredModelList);
+        return true;
+    }
+
+    private List<CurrentPollItem> filter(List<CurrentPollItem> models, String query) {
+        query = query.toLowerCase();
+
+        final List<CurrentPollItem> filteredModelList = new ArrayList<>();
+        for (CurrentPollItem model : models) {
+            final String text = model.mCurrentPollTitle.toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }

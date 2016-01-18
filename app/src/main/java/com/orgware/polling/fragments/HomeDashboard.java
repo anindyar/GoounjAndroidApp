@@ -3,6 +3,7 @@ package com.orgware.polling.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -46,6 +48,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((MainHomeActivity) act).setTitle("Home");
 //        ((HomeActivity) act).openHome.setVisibility(View.GONE);
 //        ((HomeActivity) act).mPageTitle.setText("Home");
 //        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -55,6 +58,11 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
 
     }
 
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     /**
      * Called when a view has been clicked.
@@ -65,16 +73,16 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_vote:
-                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
+//                ((HomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
                 break;
             case R.id.home_poll:
-                ((HomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);
                 editor.putInt(DASHBOARD_ID, 0).commit();
                 break;
             case R.id.home_chat:
                 break;
             case R.id.home_survey:
-                ((HomeActivity) act).setNewFragment(new CurrentPoll(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new CurrentPoll(), "Poll Pager", true);
                 editor.putInt(DASHBOARD_ID, 1).commit();
                 break;
         }

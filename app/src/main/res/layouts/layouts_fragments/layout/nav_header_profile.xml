@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="@android:color/white"
-    android:gravity="bottom"
+    android:background="@color/bg_menu_profile"
+    android:gravity="center"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -30,18 +30,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|left"
+                android:gravity="center_vertical|left"
                 android:text="Android Studio"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txtNormal" />
 
             <TextView
                 android:id="@+id/emailid"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="android.studio@android.com"
-                android:textColor="@android:color/black" />
+                android:drawableLeft="@drawable/ic_currency"
+                android:drawablePadding="@dimen/padding_small"
+                android:gravity="center_vertical|left"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txtNormal" />
 
         </LinearLayout>
 

@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.GridTabAdapter;
 import com.orgware.polling.adapters.PollPagerAdapter;
@@ -41,7 +44,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ((HomeActivity) act).mPageTitle.setText("Current Poll");
+        setHasOptionsMenu(true);
         mFragmentList = new ArrayList<>();
         mFragmentList.clear();
         mGridList = new ArrayList<GridItems>();
@@ -79,12 +82,8 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        ((HomeActivity) act).mPageTitle.setText("Poll");
-        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
-        ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
-        ((HomeActivity) act).openClose.setVisibility(View.GONE);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+//        MenuItem menuItem = ((MainHomeActivity) act).mMenu.findItem(R.id.menu_group_three_search);
+//        menuItem.setVisible(true);
         mPollGrid.setAdapter(mGridAdapter);
         mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);
@@ -99,13 +98,19 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnCreate:
-                ((HomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
                 break;
             case R.id.layout_create:
-                ((HomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
                 break;
         }
     }
+
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(true);
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     /**
      * This method will be invoked when the current page is scrolled, either as part
@@ -153,7 +158,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

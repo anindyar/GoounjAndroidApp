@@ -1,17 +1,31 @@
 package com.orgware.polling;
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.orgware.polling.fragments.HomeDashboard;
@@ -21,19 +35,23 @@ import java.io.File;
 
 public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public Menu mMenu;
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mEmailId;
     private ImageView mProfileImage;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.home_bg));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mBarDrawerToggle = new ActionBarDrawerToggle(
@@ -57,8 +75,6 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_profile));
-        navigationView.getMenu().getItem(0).setChecked(true);
         addHeader();
         setNewFragment(new HomeDashboard(), "Dashboard", false);
     }
@@ -93,8 +109,12 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.mMenu = menu;
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_options, menu);
+        getMenuInflater().inflate(R.menu.menu_options, mMenu);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return true;
     }
 
@@ -103,15 +123,16 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.nav_profile) {
-//            return true;
-//        }
 
         return super.onOptionsItemSelected(item);
     }
+
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
