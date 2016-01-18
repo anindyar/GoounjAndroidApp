@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.orgware.polling.R;
 import com.orgware.polling.pojo.CurrentPollItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,6 +107,13 @@ public class CurrentPollAdapter extends RecyclerView.Adapter<CurrentPollAdapter.
                     itemHolder.getAdapterPosition(), itemHolder.getItemId());
         }
     }
+
+    public void setFilter(List<CurrentPollItem> countryModels) {
+        itemList = new ArrayList<>();
+        itemList.addAll(countryModels);
+        notifyDataSetChanged();
+    }
+
 
     /**
      * Returns the total number of items in the data set hold by the adapter.

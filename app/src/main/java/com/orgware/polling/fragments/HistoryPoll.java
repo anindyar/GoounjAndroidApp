@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.HistoryPollAdapter;
@@ -126,43 +127,43 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                     }
                 });
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
-        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals("")) {
-                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
-                    for (int i = 0; i < itemList.size(); i++) {
-                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
-                            filteredTitles.add(itemList.get(i));
-                        }
-                    }
-                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
-                    mHistoryPollList.setAdapter(mAdapter);
-//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
-//                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
-                    mHistoryPollList.setAdapter(mAdapter);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0)
-                    Log.e("Search", "Yes");
-                else
-                    Log.e("Search", "No");
-//                    makeToast("No records found");
-
-            }
-        });
+//        ((MainHomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (!s.toString().equals("")) {
+//                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+//                    for (int i = 0; i < itemList.size(); i++) {
+//                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+//                            filteredTitles.add(itemList.get(i));
+//                        }
+//                    }
+//                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
+//                    mHistoryPollList.setAdapter(mAdapter);
+////                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+////                    mRecyclerView.setAdapter(mAdapter);
+//                } else {
+//                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
+//                    mHistoryPollList.setAdapter(mAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s.length() > 0)
+//                    Log.e("Search", "Yes");
+//                else
+//                    Log.e("Search", "No");
+////                    makeToast("No records found");
+//
+//            }
+//        });
         return v;
     }
 
@@ -184,7 +185,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
 //        ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
-        ((HomeActivity) act).openSearch.setOnClickListener(this);
+//        ((HomeActivity) act).openSearch.setOnClickListener(this);
         if (NetworkHelper.checkActiveInternet(act))
             getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
         else
@@ -295,7 +296,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -327,8 +328,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 else
                     try {
                         showResultPollList(response);
-                        ((HomeActivity) act).setNewFragment(new ResultPoll(), "", true);
-                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+//                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

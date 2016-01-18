@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/Android%20New/Workspace/Goounj/Goounj%20Old/goounj-android/menudrawer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace%20Android/Goounj/Goounj%20New/goounj-android/menudrawer/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string-array name="dogs_array">
         <item>Pug</item>

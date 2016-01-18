@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
@@ -113,7 +114,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
     }
 
     @Override
@@ -381,7 +382,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 else
                     try {
                         showResultPollList(response);
-                        ((HomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
