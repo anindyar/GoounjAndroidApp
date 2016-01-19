@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.VoteListAdapter;
@@ -79,6 +80,6 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ((HomeActivity) act).setNewFragment(setPagerFragment(new CurrentVoteDetail(), "PAGER", 1, "PAGER_VALUE", "test"), "Vote Detail", true);
+        ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentVoteDetail(), "PAGER", 1, "PAGER_VALUE", "test"), "Vote Detail", true);
     }
 }

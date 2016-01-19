@@ -38,7 +38,7 @@ public class CurrentVoteDetail extends BaseFragment implements ViewPager.OnPageC
         makeToast("" + value);
         mFragmentList.add(setPagerFragment(new CandidateDetail(),
                 mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new CandidateDetail(),
+        mFragmentList.add(setPagerFragment(new CandidateDescription(),
                 mFragmentList.size()));
 
     }
