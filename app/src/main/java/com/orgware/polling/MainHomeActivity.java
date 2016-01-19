@@ -8,8 +8,10 @@ import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,6 +31,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.orgware.polling.fragments.HomeDashboard;
+import com.orgware.polling.fragments.ResultPoll;
+import com.orgware.polling.utils.Methodutils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -132,6 +136,36 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_group_three_search).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        }
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() == ResultPoll.class) {
+            getSupportFragmentManager().popBackStack(2, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() == HomeDashboard.class) {
+            Methodutils.message2btn(MainHomeActivity.this, "Are you sure to exit?", "Yes", "No", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    return;
+                }
+            });
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+
     }
 
     @Override
