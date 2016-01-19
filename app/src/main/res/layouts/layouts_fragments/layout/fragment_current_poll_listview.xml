@@ -16,7 +16,9 @@
             android:id="@+id/currentPollListview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"></android.support.v7.widget.RecyclerView>
+            android:background="@android:color/white">
+
+        </android.support.v7.widget.RecyclerView>
 
         <RelativeLayout
             android:id="@+id/layout_poll_error"

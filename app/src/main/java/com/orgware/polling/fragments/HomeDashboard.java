@@ -58,11 +58,11 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
 
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_group_three_search).setVisible(false);
-        super.onPrepareOptionsMenu(menu);
-    }
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     /**
      * Called when a view has been clicked.

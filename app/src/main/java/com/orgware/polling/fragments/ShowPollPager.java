@@ -82,8 +82,8 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MenuItem menuItem = ((MainHomeActivity) act).mMenu.findItem(R.id.menu_group_three_search);
-        menuItem.setVisible(true);
+//        MenuItem menuItem = ((MainHomeActivity) act).mMenu.findItem(R.id.menu_group_three_search);
+//        menuItem.setVisible(true);
         mPollGrid.setAdapter(mGridAdapter);
         mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);
@@ -106,11 +106,11 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         }
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_group_three_search).setVisible(true);
-        super.onPrepareOptionsMenu(menu);
-    }
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(true);
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     /**
      * This method will be invoked when the current page is scrolled, either as part
@@ -158,7 +158,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

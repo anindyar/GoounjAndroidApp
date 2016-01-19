@@ -120,7 +120,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
+//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
 //        qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1) {
 //            setQtsOneContent();
@@ -288,7 +288,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

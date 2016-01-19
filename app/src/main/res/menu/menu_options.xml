@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <item
-        android:id="@+id/menu_group_three_search"
-        android:enabled="false"
-        android:icon="@drawable/ic_search_menu"
-        android:title=""
-        android:visible="true"
-        app:showAsAction="always"></item>
+    <!--<item-->
+    <!--android:id="@+id/menu_group_three_search"-->
+    <!--android:enabled="false"-->
+    <!--android:icon="@drawable/ic_search_menu"-->
+    <!--android:title=""-->
+    <!--android:visible="true"-->
+    <!--app:showAsAction="always"></item>-->
 
     <item
         android:id="@+id/menu_group_three_home"

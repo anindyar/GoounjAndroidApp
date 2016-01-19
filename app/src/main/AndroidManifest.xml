@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.orgware.polling.MainHomeActivity"
+            android:name="com.orgware.polling.WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
 
         </activity>
         <activity android:name="com.orgware.polling.LoginActivity"></activity>
-        <activity android:name="com.orgware.polling.HomeActivity"></activity>
+        <activity android:name="com.orgware.polling.MainHomeActivity"></activity>
 
         <activity android:name="com.orgware.polling.OTPActivity"></activity>
 
@@ -48,6 +48,9 @@
         </receiver>
 
         <service android:name=".service.GcmIntentService" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f2790a4fe67b643607c17a4eb95c66075a4fb5e7" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.orgware.polling.HomeActivity;
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.receiver.GCMBroadcastreceiver;
@@ -87,7 +88,7 @@ public class GcmIntentService extends IntentService implements Appinterface {
         mNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent launchintent = new Intent(this, HomeActivity.class);
+        Intent launchintent = new Intent(this, MainHomeActivity.class);
 
 
         int uniqueInt = (int) (System.currentTimeMillis() & 0xfffffff);

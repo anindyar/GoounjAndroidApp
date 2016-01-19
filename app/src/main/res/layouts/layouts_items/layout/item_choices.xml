@@ -7,4 +7,5 @@
     android:checkMark="@drawable/selector_radio_checked"
     android:drawableLeft="@drawable/selector_radio_checked_bg"
     android:gravity="center_vertical"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:textColor="@color/text_color" />

@@ -14,16 +14,6 @@
         <item name="color">@android:color/black</item>
     </style>
 
-    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-    <!--<item name="windowActionBar">false</item>-->
-    <!--<item name="windowNoTitle">true</item>-->
-    <!--<item name="windowActionBarOverlay">false</item>-->
-    <!--<item name="android:windowIsFloating">false</item>-->
-    <!--<item name="android:windowFullscreen">true</item>-->
-    <!--<item name="windowActionModeOverlay">false</item>-->
-    <!--</style>-->
 
     <style name="OverlayDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>

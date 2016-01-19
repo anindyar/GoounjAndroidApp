@@ -102,7 +102,7 @@ public class OTPActivity extends BaseActivity implements View.OnClickListener {
             public void onRequestCompleted(String response) {
                 try {
                     Log.e("Otp response", "" + response);
-                    startActivity(new Intent(OTPActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    startActivity(new Intent(OTPActivity.this, MainHomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
                 } catch (Exception e) {
                     e.printStackTrace();

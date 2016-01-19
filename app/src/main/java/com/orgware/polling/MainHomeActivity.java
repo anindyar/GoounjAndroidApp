@@ -29,11 +29,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.orgware.polling.fragments.HomeDashboard;
 import com.orgware.polling.fragments.ResultPoll;
 import com.orgware.polling.utils.Methodutils;
 import com.squareup.picasso.Picasso;
+
+import io.fabric.sdk.android.Fabric;
 
 import java.io.File;
 
@@ -50,6 +53,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer);
+        editor.putBoolean(WELCOME_SCREEN, false).putString(OTP_VALUE, "").commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.home_bg));
         toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
@@ -69,6 +73,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                Fabric.with(MainHomeActivity.this, new Crashlytics());
                 hideSoftInput();
 
             }
@@ -132,11 +137,11 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_group_three_search).setVisible(false);
-        return super.onPrepareOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
 
     @Override

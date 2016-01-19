@@ -37,7 +37,7 @@ public class WelcomeActivity extends BaseActivity {
     Runnable homeHandler = new Runnable() {
         @Override
         public void run() {
-            startActivity(new Intent(WelcomeActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            startActivity(new Intent(WelcomeActivity.this, MainHomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
     };
