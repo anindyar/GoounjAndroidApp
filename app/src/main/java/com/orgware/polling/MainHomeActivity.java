@@ -46,7 +46,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
-    private TextView mUserName, mEmailId;
+    private TextView mUserName, mUserAmount;
     private ImageView mProfileImage;
 
     @Override
@@ -91,10 +91,11 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     private void addHeader() {
         View view = LayoutInflater.from(this).inflate(R.layout.nav_header_profile, null);
         navigationView.addHeaderView(view);
-        mUserName = (TextView) view.findViewById(R.id.name);
-        mEmailId = (TextView) view
-                .findViewById(R.id.emailid);
+        mUserName = (TextView) view.findViewById(R.id.username);
+        mUserAmount = (TextView) view
+                .findViewById(R.id.user_amount);
         mProfileImage = (ImageView) view.findViewById(R.id.profile_image);
+        mUserName.setText("" + preferences.getString(USERNAME, "NA"));
 //        mUserName.setText(preferences.getString(AppConstants.first_name, "") + "" + preferences.getString(AppConstants.last_name, ""));
 //        mEmailId.setText(preferences.getString("email", ""));
 //        File cacheDir = GraphicsUtil.getCacheFolder(this);

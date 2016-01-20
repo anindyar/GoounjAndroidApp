@@ -185,6 +185,7 @@ public class Methodutils {
     public static void messageWithTitle(Context context, String title, String message, final View.OnClickListener onClickListener) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.setMessage(message);
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

@@ -1,6 +1,9 @@
 package com.orgware.polling.fragments;
 
 import android.app.Dialog;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
@@ -29,6 +33,8 @@ import com.orgware.polling.pojo.ChoicesItem;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.utils.CircularProg;
 import com.orgware.polling.utils.Methodutils;
+import com.orgware.polling.utils.piegraph.PieGraph;
+import com.orgware.polling.utils.piegraph.PieSlice;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,9 +60,10 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     FrameLayout mFrameLayoutOne, mFrameLayoutTwo, mFrameLayoutThree;
     LinearLayout mLayoutOne, mLayoutTwo, mLayoutThree, mLayoutSubmit;
     RelativeLayout mBackToLayout;
-
-    private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
-            mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
+    Resources resources;
+    PieGraph pg;
+//    private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
+//            mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,9 +86,43 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         return inflater.inflate(R.layout.fragment_result_poll, container, false);
     }
 
+    private void setPieGraph() {
+        PieSlice slice = new PieSlice();
+        slice.setColor(resources.getColor(R.color.home_bg));
+        slice.setSelectedColor(resources.getColor(R.color.ash_bg));
+        slice.setValue(2);
+        slice.setTitle("first");
+        pg.addSlice(slice);
+        slice = new PieSlice();
+        slice.setColor(resources.getColor(R.color.holo_purple));
+        slice.setValue(3);
+        pg.addSlice(slice);
+        slice = new PieSlice();
+        slice.setColor(resources.getColor(R.color.holo_red_light));
+        slice.setValue(8);
+        pg.addSlice(slice);
+        pg.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+
+            @Override
+            public void onClick(int index) {
+                Toast.makeText(getActivity(),
+                        "Slice " + index + " clicked",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        pg.setBackgroundBitmap(b);
+        pg.setInnerCircleRatio(128);
+        pg.setPadding(2);
+    }
+
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        resources = getResources();
+        pg = (PieGraph) v.findViewById(R.id.piegraph);
         (mChoiceListviewOne = (ListView) v.findViewById(R.id.choicesListviewOne)).setOnItemClickListener(this);
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
@@ -94,9 +135,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             }
         });
 //        (mResultBack = (ImageView) v.findViewById(R.id.resultBack)).setOnClickListener(this);
-        mFrameLayoutOne = (FrameLayout) v.findViewById(R.id.layout_progress_one);
-        mFrameLayoutTwo = (FrameLayout) v.findViewById(R.id.layout_progress_two);
-        mFrameLayoutThree = (FrameLayout) v.findViewById(R.id.layout_progress_three);
+//        mFrameLayoutOne = (FrameLayout) v.findViewById(R.id.layout_progress_one);
+//        mFrameLayoutTwo = (FrameLayout) v.findViewById(R.id.layout_progress_two);
+//        mFrameLayoutThree = (FrameLayout) v.findViewById(R.id.layout_progress_three);
         (mLayoutSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         (mBtnSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         mLayoutQtsOne = (LinearLayout) v.findViewById(R.id.layout_survey_detail_qts_one);
@@ -109,7 +150,8 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         mFrameLayoutOne.setVisibility(View.VISIBLE);
         mFrameLayoutTwo.setVisibility(View.VISIBLE);
         mFrameLayoutThree.setVisibility(View.VISIBLE);
-        initCircularProgressBar(v);
+//        initCircularProgressBar(v);
+        setPieGraph();
     }
 
     @Override
@@ -128,9 +170,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleOne.setText(mQuestionOne);
             mLayoutQtsTwo.setVisibility(View.GONE);
             mLayoutQtsThree.setVisibility(View.GONE);
-            mQtsOneProgressOne.setProgressWithAnimation(0, 2000);
-            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
+//            mQtsOneProgressOne.setProgressWithAnimation(0, 2000);
+//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
+//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
         } else if (qtsSize == 2) {
 //            setQtsTwoContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
@@ -138,12 +180,12 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleOne.setText(mQuestionOne);
             mQuestionTitleTwo.setText(mQuestionTwo);
             mLayoutQtsThree.setVisibility(View.GONE);
-            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
-            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
-            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
-            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
-            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
+//            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
+//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
+//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
+//            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
+//            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
+//            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
         } else if (qtsSize == 3) {
 //            setQtsThreeContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
@@ -152,57 +194,57 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleOne.setText(mQuestionOne);
             mQuestionTitleTwo.setText(mQuestionTwo);
             mQuestionTitleThree.setText(mQuestionThree);
-            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
-            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
-            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
-            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
-            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
-            mQtsThProgressOne.setProgressWithAnimation(-57, 2000);
-            mQtsThProgressTwo.setProgressWithAnimation(79, 1500);
-            mQtsThProgressTh.setProgressWithAnimation(-51, 3000);
+//            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
+//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
+//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
+//            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
+//            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
+//            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
+//            mQtsThProgressOne.setProgressWithAnimation(-57, 2000);
+//            mQtsThProgressTwo.setProgressWithAnimation(79, 1500);
+//            mQtsThProgressTh.setProgressWithAnimation(-51, 3000);
         }
 
     }
 
-    private void initCircularProgressBar(View v) {
-        mQtsOneProgressOne = (CircularProg) v.findViewById(R.id.first_circular_progressbar);
-        mQtsOneProgressOne.setProgressBarWidth(20.0f);
-        mQtsOneProgressOne.setColor(getResources().getColor(R.color.bg));
-        mQtsOneProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsOneProgressTwo = (CircularProg) v.findViewById(R.id.second_circular_progressbar);
-        mQtsOneProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-        mQtsOneProgressTwo.setProgressBarWidth(20.0f);
-        mQtsOneProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsOneProgressTh = (CircularProg) v.findViewById(R.id.third_circular_progressbar);
-        mQtsOneProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-        mQtsOneProgressTh.setProgressBarWidth(20.0f);
-        mQtsOneProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsTwoProgressOne = (CircularProg) v.findViewById(R.id.qts_two_first_circular_progressbar);
-        mQtsTwoProgressOne.setProgressBarWidth(20.0f);
-        mQtsTwoProgressOne.setColor(getResources().getColor(R.color.bg));
-        mQtsTwoProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsTwoProgressTwo = (CircularProg) v.findViewById(R.id.qts_two_second_circular_progressbar);
-        mQtsTwoProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-        mQtsTwoProgressTwo.setProgressBarWidth(20.0f);
-        mQtsTwoProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsTwoProgressTh = (CircularProg) v.findViewById(R.id.qts_two_third_circular_progressbar);
-        mQtsTwoProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-        mQtsTwoProgressTh.setProgressBarWidth(20.0f);
-        mQtsTwoProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsThProgressOne = (CircularProg) v.findViewById(R.id.qts_th_first_circular_progressbar);
-        mQtsThProgressOne.setProgressBarWidth(20.0f);
-        mQtsThProgressOne.setColor(getResources().getColor(R.color.bg));
-        mQtsThProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsThProgressTwo = (CircularProg) v.findViewById(R.id.qts_th_second_circular_progressbar);
-        mQtsThProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-        mQtsThProgressTwo.setProgressBarWidth(20.0f);
-        mQtsThProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mQtsThProgressTh = (CircularProg) v.findViewById(R.id.qts_th_third_circular_progressbar);
-        mQtsThProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-        mQtsThProgressTh.setProgressBarWidth(20.0f);
-        mQtsThProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-    }
+//    private void initCircularProgressBar(View v) {
+//        mQtsOneProgressOne = (CircularProg) v.findViewById(R.id.first_circular_progressbar);
+//        mQtsOneProgressOne.setProgressBarWidth(20.0f);
+//        mQtsOneProgressOne.setColor(getResources().getColor(R.color.bg));
+//        mQtsOneProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsOneProgressTwo = (CircularProg) v.findViewById(R.id.second_circular_progressbar);
+//        mQtsOneProgressTwo.setColor(getResources().getColor(R.color.tab_social));
+//        mQtsOneProgressTwo.setProgressBarWidth(20.0f);
+//        mQtsOneProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsOneProgressTh = (CircularProg) v.findViewById(R.id.third_circular_progressbar);
+//        mQtsOneProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
+//        mQtsOneProgressTh.setProgressBarWidth(20.0f);
+//        mQtsOneProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsTwoProgressOne = (CircularProg) v.findViewById(R.id.qts_two_first_circular_progressbar);
+//        mQtsTwoProgressOne.setProgressBarWidth(20.0f);
+//        mQtsTwoProgressOne.setColor(getResources().getColor(R.color.bg));
+//        mQtsTwoProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsTwoProgressTwo = (CircularProg) v.findViewById(R.id.qts_two_second_circular_progressbar);
+//        mQtsTwoProgressTwo.setColor(getResources().getColor(R.color.tab_social));
+//        mQtsTwoProgressTwo.setProgressBarWidth(20.0f);
+//        mQtsTwoProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsTwoProgressTh = (CircularProg) v.findViewById(R.id.qts_two_third_circular_progressbar);
+//        mQtsTwoProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
+//        mQtsTwoProgressTh.setProgressBarWidth(20.0f);
+//        mQtsTwoProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsThProgressOne = (CircularProg) v.findViewById(R.id.qts_th_first_circular_progressbar);
+//        mQtsThProgressOne.setProgressBarWidth(20.0f);
+//        mQtsThProgressOne.setColor(getResources().getColor(R.color.bg));
+//        mQtsThProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsThProgressTwo = (CircularProg) v.findViewById(R.id.qts_th_second_circular_progressbar);
+//        mQtsThProgressTwo.setColor(getResources().getColor(R.color.tab_social));
+//        mQtsThProgressTwo.setProgressBarWidth(20.0f);
+//        mQtsThProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//        mQtsThProgressTh = (CircularProg) v.findViewById(R.id.qts_th_third_circular_progressbar);
+//        mQtsThProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
+//        mQtsThProgressTh.setProgressBarWidth(20.0f);
+//        mQtsThProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//    }
 
     private void setQtsOneContent() {
         try {
@@ -288,7 +330,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

@@ -26,7 +26,7 @@ public class CountryAutoCompleteAdapter extends ArrayAdapter<CountryItem> {
      * Custom Filter implementation for custom suggestions we provide.
      */
     Filter nameFilter = new Filter() {
-        ;
+
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {

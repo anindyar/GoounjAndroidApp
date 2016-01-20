@@ -6,11 +6,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 import com.orgware.polling.interfaces.Appinterface;
+import com.orgware.polling.pojo.CityCountry;
 import com.orgware.polling.pojo.CountryItem;
 import com.orgware.polling.pojo.CurrentPollItem;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +26,7 @@ public class GoounjDatabase extends SQLiteOpenHelper implements Appinterface {
 
     String CURRENT_POLL_TABLE = "CREATE TABLE IF NOT EXISTS " + CURRENT_POLL_TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + CURRENT_POLL_ID + " INTEGER," + CURRENT_POLL_START_DATE + " VARCHAR," + CURRENT_POLL_END_DATE + " VARCHAR," + CURRENT_POLL_NAME + " VARCHAR," + CURRENT_ISBOOST + " INTEGER," + CURRENT_CREATED_USER_NAME + " VARCHAR)";
 
+    String DBDIR = "GOOUNJDB", DBPATH = Environment.getExternalStorageDirectory() + File.separator + DBDIR, DBNAME = "countrydb";
 
     /**
      * Create a helper object to create, open, and/or manage a database.
@@ -103,6 +107,32 @@ public class GoounjDatabase extends SQLiteOpenHelper implements Appinterface {
         } finally {
             db.close();
         }
+    }
+
+    public ArrayList<CountryItem> getCountrycityValues() {
+
+        SQLiteDatabase dbGoounj = SQLiteDatabase.openDatabase(
+                DBPATH + File.separator + DBNAME, null,
+                SQLiteDatabase.OPEN_READWRITE);
+
+        Cursor countryCursor = dbGoounj.rawQuery("select country from table_country_city", null);
+        // Cursor medicineCursor = dbPregnancy.rawQuery("select * from "
+        // + TABLE_CALENDAR + " where " + EVENT_TYPE + " = 0 " + " and "
+        // + EVENT_DATE + " = " + "'" + selectedDate + "'", null);
+        ArrayList<CountryItem> itemList = new ArrayList<CountryItem>();
+        if (countryCursor.moveToFirst()) {
+            do {
+
+                CountryItem items = new CountryItem();
+                items.mCountryName = countryCursor.getString(countryCursor.getColumnIndex("country"));
+//                items.mCityName = countryCursor.getString(countryCursor.getColumnIndex("city"));
+
+                itemList.add(items);
+            } while (countryCursor.moveToNext());
+        }
+        countryCursor.close();
+        dbGoounj.close();
+        return itemList;
     }
 
     public void insertCountryAndCodeValues(String countryNames, String countryCodes) {

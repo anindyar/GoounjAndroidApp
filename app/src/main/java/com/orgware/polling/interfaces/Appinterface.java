@@ -50,8 +50,10 @@ public interface Appinterface {
             CURRENT_CREATED_USER_NAME = "createdUserName", CURRENT_POLL_ID = "pollId", CONTACT_ARRAY = "CONTACT_ARRAY";
 
     /*Web Services*/
-    String BASE_URL = "http://api.goounj.com/",
-            BASE_URL_ONE = "http://192.168.0.131:3000/", ID = "id", BASE_URL_TWO = "http://goounjdb.cloudapp.net/", BASE_URL_MAIN = "http://goounjdb.cloudapp.net/";
+//    String BASE_URL = "http://api.goounj.com/";
+    String BASE_URL = "http://goounjdb.cloudapp.net/";
+
+    String BASE_URL_ONE = "http://192.168.0.131:3000/", ID = "id", BASE_URL_TWO = "http://goounjdb.cloudapp.net/", BASE_URL_MAIN = "http://goounjdb.cloudapp.net/";
 
     String RESULT_URL = "polls/v1/result/", RESULT_QUESTION_SIZE = "RESULT_QUESTION_SIZE", RES_COUNT_0 = "RES_COUNT_0", RES_COUNT_1 = "RES_COUNT_1", RES_COUNT_2 = "RES_COUNT_2",
             RES_COUNT_3 = "RES_COUNT_3", RES_COUNT_4 = "RES_COUNT_4", RES_COUNT_5 = "RES_COUNT_5", RES_COUNT_6 = "RES_COUNT_6", RES_COUNT_7 = "RES_COUNT_7", RES_COUNT_8 = "RES_COUNT_8",
@@ -61,7 +63,7 @@ public interface Appinterface {
 
     /*Api Login*/
 
-    String USER_LOGIN_URL = "users/v1/user", COUNTRY = "country", CITY = "city", PHONE = "phone", DEVICE_ID = "device_id", DEVICE_TOKEN = "device_token", OS_TYPE = "os_type", OS_VERSION = "os_version",
+    String USER_LOGIN_URL = "users/v1/user", COUNTRY = "country", USERNAME = "USERNAME", CITY = "city", PHONE = "phone", DEVICE_ID = "device_id", DEVICE_TOKEN = "device_token", OS_TYPE = "os_type", OS_VERSION = "os_version",
             SECRET_KEY = "secretKey", PUBLIC_KEY = "publicKey", USER_ID = "userId", ERROR = "error", MOBILE = "mobile";
 
     /*OTP Validation*/
@@ -110,7 +112,7 @@ public interface Appinterface {
 
     /*Parameters*/
     /*LoginActivity*/
-    String P_COUNRTY = "country", P_CITY = "city", P_PHONE = "phone", P_DEVICEID = "deviceId", P_DEVICETOKEN = "deviceToken", P_OSTYPE = "osType", P_OSVERSION = "osVersion";
+    String P_NAME = "name", P_COUNRTY = "country", P_CITY = "city", P_PHONE = "phone", P_DEVICEID = "deviceId", P_DEVICETOKEN = "deviceToken", P_OSTYPE = "osType", P_OSVERSION = "osVersion";
 
 
 }

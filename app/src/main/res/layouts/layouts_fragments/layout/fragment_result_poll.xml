@@ -67,37 +67,6 @@
                 android:background="@android:color/white"
                 android:orientation="vertical">
 
-                <!--<RelativeLayout-->
-                <!--android:id="@+id/layout_statics_back"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:visibility="visible">-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/resultBack"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:src="@drawable/rotate_arrow_toright"-->
-                <!--android:visibility="visible" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:drawableLeft="@drawable/stats"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:padding="@dimen/padding_small"-->
-                <!--android:text="STATISTICS"-->
-                <!--android:textColor="@android:color/darker_gray" />-->
-
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.2dp"-->
-                <!--android:background="@android:color/darker_gray" />-->
-                <!--</RelativeLayout>-->
-
                 <TextView
                     android:id="@+id/title_qts_one"
                     android:layout_width="match_parent"
@@ -120,126 +89,136 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/txtNormal" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="20dp"
-                    android:visibility="gone">
+                <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:padding="20dp"-->
+                <!--android:visibility="gone">-->
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp">
+                <!--<RadioGroup-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp">-->
 
-                        <RadioButton
-                            android:id="@+id/qts_detail_one_first_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:button="@drawable/selector_radio_checked_bg"
-                            android:padding="@dimen/padding_small"
-                            android:text="Messi"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/txtNormal"></RadioButton>
+                <!--<RadioButton-->
+                <!--android:id="@+id/qts_detail_one_first_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:button="@drawable/selector_radio_checked_bg"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:text="Messi"-->
+                <!--android:textColor="@android:color/darker_gray"-->
+                <!--android:textSize="@dimen/txtNormal"></RadioButton>-->
 
-                        <RadioButton
-                            android:id="@+id/qts_detail_one_second_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:button="@drawable/selector_radio_checked_bg"
-                            android:padding="@dimen/padding_small"
-                            android:text="Ronaldo"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/txtNormal"></RadioButton>
+                <!--<RadioButton-->
+                <!--android:id="@+id/qts_detail_one_second_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:button="@drawable/selector_radio_checked_bg"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:text="Ronaldo"-->
+                <!--android:textColor="@android:color/darker_gray"-->
+                <!--android:textSize="@dimen/txtNormal"></RadioButton>-->
 
-                        <RadioButton
-                            android:id="@+id/qts_detail_one_third_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:button="@drawable/selector_radio_checked_bg"
-                            android:padding="@dimen/padding_small"
-                            android:text="Suarez"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/txtNormal"></RadioButton>
+                <!--<RadioButton-->
+                <!--android:id="@+id/qts_detail_one_third_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:button="@drawable/selector_radio_checked_bg"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:text="Suarez"-->
+                <!--android:textColor="@android:color/darker_gray"-->
+                <!--android:textSize="@dimen/txtNormal"></RadioButton>-->
 
-                        <RadioButton
-                            android:id="@+id/qts_detail_one_fourth_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:button="@drawable/selector_radio_checked_bg"
-                            android:padding="@dimen/padding_small"
-                            android:text="Suarez"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/txtNormal"
-                            android:visibility="invisible"></RadioButton>
+                <!--<RadioButton-->
+                <!--android:id="@+id/qts_detail_one_fourth_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:button="@drawable/selector_radio_checked_bg"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:text="Suarez"-->
+                <!--android:textColor="@android:color/darker_gray"-->
+                <!--android:textSize="@dimen/txtNormal"-->
+                <!--android:visibility="invisible"></RadioButton>-->
 
-                        <RadioButton
-                            android:id="@+id/qts_detail_one_fifth_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:button="@drawable/selector_radio_checked_bg"
-                            android:padding="@dimen/padding_small"
-                            android:text="Suarez"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/txtNormal"
-                            android:visibility="invisible"></RadioButton>
-                    </RadioGroup>
-                </RelativeLayout>
+                <!--<RadioButton-->
+                <!--android:id="@+id/qts_detail_one_fifth_radio"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:button="@drawable/selector_radio_checked_bg"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:text="Suarez"-->
+                <!--android:textColor="@android:color/darker_gray"-->
+                <!--android:textSize="@dimen/txtNormal"-->
+                <!--android:visibility="invisible"></RadioButton>-->
+                <!--</RadioGroup>-->
+                <!--</RelativeLayout>-->
 
                 <ListView
                     android:id="@+id/choicesListviewOne"
                     android:layout_width="wrap_content"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_one"
+                <com.orgware.polling.utils.piegraph.PieGraph
+                    android:id="@+id/piegraph"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_alignParentBottom="true"
-                    android:padding="@dimen/padding_small"
-                    android:visibility="gone">
+                    android:layout_margin="@dimen/margin_small"
+                    android:layout_weight="1"
+                    app:pieInnerCircleRatio="128"
+                    app:pieSlicePadding="0dp" />
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/first_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_one"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:padding="@dimen/padding_small"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/second_circular_progressbar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/first_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/third_circular_progressbar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/second_circular_progressbar"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
+
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/third_circular_progressbar"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
+                <!--</FrameLayout>-->
 
             </LinearLayout>
 
@@ -281,46 +260,46 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:visibility="gone">
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_two"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_first_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_first_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_second_circular_progressbar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_second_circular_progressbar"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_two_third_circular_progressbar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_two_third_circular_progressbar"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
+                <!--</FrameLayout>-->
             </LinearLayout>
 
 
@@ -362,46 +341,46 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <FrameLayout
-                    android:id="@+id/layout_progress_three"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:visibility="gone">
+                <!--<FrameLayout-->
+                <!--android:id="@+id/layout_progress_three"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:visibility="gone">-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_first_circular_progressbar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_first_circular_progressbar"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_second_circular_progressbar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_second_circular_progressbar"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
 
-                    <com.orgware.polling.utils.CircularProg
-                        android:id="@+id/qts_th_third_circular_progressbar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:background_progressbar_color="@android:color/transparent"
-                        app:background_progressbar_width="0dp"
-                        app:progressbar_color="@color/bg"
-                        app:progressbar_width="70dp" />
-                </FrameLayout>
+                <!--<com.orgware.polling.utils.CircularProg-->
+                <!--android:id="@+id/qts_th_third_circular_progressbar"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--app:background_progressbar_color="@android:color/transparent"-->
+                <!--app:background_progressbar_width="0dp"-->
+                <!--app:progressbar_color="@color/bg"-->
+                <!--app:progressbar_width="70dp" />-->
+                <!--</FrameLayout>-->
             </LinearLayout>
 
         </LinearLayout>

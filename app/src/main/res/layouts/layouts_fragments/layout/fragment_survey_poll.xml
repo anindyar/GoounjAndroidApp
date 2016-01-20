@@ -869,7 +869,8 @@
                     android:padding="10dp"
                     android:text="Choose Audience Group From"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
 
 
                 <RelativeLayout

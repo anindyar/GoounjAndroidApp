@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="@android:color/white"
-    android:checkMark="@drawable/selector_radio_checked"
-    android:drawableLeft="@drawable/selector_radio_checked_bg"
-    android:gravity="center_vertical"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@color/text_color" />
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white"
+        android:checkMark="@drawable/selector_radio_checked"
+        android:drawableLeft="@drawable/selector_radio_checked_bg"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="@color/text_color" />
+
+</LinearLayout>

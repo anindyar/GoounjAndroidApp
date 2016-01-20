@@ -20,6 +20,7 @@ import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
+import com.orgware.polling.pojo.CityCountry;
 import com.orgware.polling.pojo.CountryItem;
 import com.orgware.polling.utils.Methodutils;
 
@@ -69,7 +70,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     finish();
                 }
             });
-
         mCountryCode = (TextView) findViewById(R.id.countryCode);
         mCountryCode.setText("0");
         mCity = (EditText) findViewById(R.id.city);
@@ -217,7 +217,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * selected. This callback is invoked only when the newly selected
      * position is different from the previously selected position or if
      * there was no selected item.</p>
-     * <p/>
+     * <p>
      * Impelmenters can call getItemAtPosition(position) if they need to access the
      * data associated with the selected item.
      *
@@ -253,7 +253,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

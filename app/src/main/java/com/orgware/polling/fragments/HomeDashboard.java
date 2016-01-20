@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
@@ -18,6 +19,7 @@ import com.orgware.polling.fragments.vote.VotePager;
  */
 public class HomeDashboard extends BaseFragment implements View.OnClickListener {
     ImageView imgVote, imgPoll, imgChat, imgSurvey;
+    TextView mUsername;
 
     @Override
     public void setTitle() {
@@ -38,6 +40,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
         imgPoll = (ImageView) v.findViewById(R.id.home_poll);
         imgChat = (ImageView) v.findViewById(R.id.home_chat);
         imgSurvey = (ImageView) v.findViewById(R.id.home_survey);
+        mUsername = (TextView) v.findViewById(R.id.username);
         imgVote.setOnClickListener(this);
         imgPoll.setOnClickListener(this);
         imgChat.setOnClickListener(this);
@@ -49,20 +52,8 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((MainHomeActivity) act).setTitle("Home");
-//        ((HomeActivity) act).openHome.setVisibility(View.GONE);
-//        ((HomeActivity) act).mPageTitle.setText("Home");
-//        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-//        ((HomeActivity) act).openClose.setVisibility(View.GONE);
-//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
-
+        mUsername.setText("" + preferences.getString(USERNAME, "NA"));
     }
-
-//    @Override
-//    public void onPrepareOptionsMenu(Menu menu) {
-//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
-//        super.onPrepareOptionsMenu(menu);
-//    }
 
     /**
      * Called when a view has been clicked.
