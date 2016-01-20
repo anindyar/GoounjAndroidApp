@@ -133,7 +133,13 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                setNewFragment(new HomeDashboard(), "Home", true);
+                break;
+            case R.id.menu_settings:
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }

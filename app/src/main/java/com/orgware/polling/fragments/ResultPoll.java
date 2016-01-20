@@ -1,9 +1,12 @@
 package com.orgware.polling.fragments;
 
+import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,11 +61,12 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     JSONArray mChoiceArrayOne, mChoiceArrayTwo, mChoiceArrayThree, mSubmitValuesArray;
     LinearLayout mLayoutQtsOne, mLayoutQtsTwo, mLayoutQtsThree, mBtnSubmit;
     TextView mQuestionTitleOne, mQuestionTitleTwo, mQuestionTitleThree;
-    FrameLayout mFrameLayoutOne, mFrameLayoutTwo, mFrameLayoutThree;
+    //    FrameLayout mFrameLayoutOne, mFrameLayoutTwo, mFrameLayoutThree;
     LinearLayout mLayoutOne, mLayoutTwo, mLayoutThree, mLayoutSubmit;
     RelativeLayout mBackToLayout;
     Resources resources;
-    PieGraph pg;
+    PieGraph mPieOne, mPieTwo, mPieThree;
+    private int mTotalCountOne, mTotalCountTwo, mTotalCountThree;
 //    private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
 //            mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
 
@@ -86,7 +91,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         return inflater.inflate(R.layout.fragment_result_poll, container, false);
     }
 
-    private void setPieGraph() {
+    private void setPieGraph(PieGraph pg) {
         PieSlice slice = new PieSlice();
         slice.setColor(resources.getColor(R.color.home_bg));
         slice.setSelectedColor(resources.getColor(R.color.ash_bg));
@@ -112,17 +117,73 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             }
         });
 
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_app_icon);
         pg.setBackgroundBitmap(b);
         pg.setInnerCircleRatio(128);
         pg.setPadding(2);
+        for (PieSlice s : pg.getSlices())
+            s.setGoalValue((float) 10);
+        pg.setDuration(2000);//default if unspecified is 300 ms
+        pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
+        pg.setAnimationListener(getAnimationListener());
+        pg.animateToGoalValues();
+    }
+
+    private void setPieGraph(PieGraph pg, final int mTotalCount, final List<ChoicesItem> itemList) throws Exception {
+        Random random = new Random();
+        int testCount, totalPercent = 0;
+        PieSlice slice;
+        for (int i = 0; i < mTotalCount; i++) {
+            slice = new PieSlice();
+            slice.setColor(resources.getColor(Methodutils.mResultColor[i]));
+//            slice.setSelectedColor(resources.getColor(R.color.ash_bg));
+            testCount = ((itemList.get(i).mChoiceOptionId * 100) / mTotalCount);
+//            testCount = "" + Math.abs(Math.round((itemList.get(i).mChoiceOptionId / mTotalCount) * 100));
+            Log.e("Total count", "" + mTotalCount);
+            Log.e("Test Count", itemList.get(i).mChoiceOptionId + " - " + itemList.get(i).mChoiceName + " - " + testCount);
+            slice.setValue(testCount);
+            slice.setTitle("first");
+            totalPercent = totalPercent + testCount;
+            pg.addSlice(slice);
+        }
+        if (totalPercent != 100) {
+            Log.e("Percent Total", "" + totalPercent);
+            slice = new PieSlice();
+            slice.setColor(resources.getColor(Methodutils.mResultColor[4]));
+            int test = 100 - totalPercent;
+            slice.setValue(test);
+            slice.setTitle("first");
+            pg.addSlice(slice);
+        }
+        pg.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+
+            @Override
+            public void onClick(int position) {
+                if (position != -1) {
+                    int value = ((itemList.get(position).mChoiceOptionId * 100) / mTotalCount);
+                    makeToast(" " + value + "%");
+                }
+            }
+        });
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_app_icon);
+        pg.setBackgroundBitmap(b);
+        pg.setInnerCircleRatio(128);
+        pg.setPadding(2);
+//        for (PieSlice s : pg.getSlices())
+//            s.setGoalValue((float) 10);
+//        pg.setDuration(2000);//default if unspecified is 300 ms
+//        pg.setInterpolator(new AccelerateDecelerateInterpolator());//default if unspecified is linear; constant speed
+//        pg.setAnimationListener(getAnimationListener());
+//        pg.animateToGoalValues();
     }
 
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         resources = getResources();
-        pg = (PieGraph) v.findViewById(R.id.piegraph);
+        mPieOne = (PieGraph) v.findViewById(R.id.piegraphOne);
+        mPieTwo = (PieGraph) v.findViewById(R.id.piegraphTwo);
+        mPieThree = (PieGraph) v.findViewById(R.id.piegraphThree);
         (mChoiceListviewOne = (ListView) v.findViewById(R.id.choicesListviewOne)).setOnItemClickListener(this);
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
@@ -134,10 +195,6 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
 //                makeToast("Test");
             }
         });
-//        (mResultBack = (ImageView) v.findViewById(R.id.resultBack)).setOnClickListener(this);
-//        mFrameLayoutOne = (FrameLayout) v.findViewById(R.id.layout_progress_one);
-//        mFrameLayoutTwo = (FrameLayout) v.findViewById(R.id.layout_progress_two);
-//        mFrameLayoutThree = (FrameLayout) v.findViewById(R.id.layout_progress_three);
         (mLayoutSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         (mBtnSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         mLayoutQtsOne = (LinearLayout) v.findViewById(R.id.layout_survey_detail_qts_one);
@@ -147,11 +204,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         mQuestionTitleTwo = (TextView) v.findViewById(R.id.qts_survey_detail_two);
         mQuestionTitleThree = (TextView) v.findViewById(R.id.qts_survey_detail_three);
         mLayoutSubmit.setVisibility(View.GONE);
-        mFrameLayoutOne.setVisibility(View.VISIBLE);
-        mFrameLayoutTwo.setVisibility(View.VISIBLE);
-        mFrameLayoutThree.setVisibility(View.VISIBLE);
-//        initCircularProgressBar(v);
-        setPieGraph();
+//        setPieGraph(mPieOne);
+//        setPieGraph(mPieTwo);
+//        setPieGraph(mPieThree);
     }
 
     @Override
@@ -162,17 +217,17 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-//        qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
         if (qtsSize == 1) {
 //            setQtsOneContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
             mQuestionTitleOne.setText(mQuestionOne);
             mLayoutQtsTwo.setVisibility(View.GONE);
             mLayoutQtsThree.setVisibility(View.GONE);
-//            mQtsOneProgressOne.setProgressWithAnimation(0, 2000);
-//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
+            try {
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (qtsSize == 2) {
 //            setQtsTwoContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
@@ -180,12 +235,12 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleOne.setText(mQuestionOne);
             mQuestionTitleTwo.setText(mQuestionTwo);
             mLayoutQtsThree.setVisibility(View.GONE);
-//            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
-//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
-//            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
-//            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
-//            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
+            try {
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
+                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), itemListTwo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (qtsSize == 3) {
 //            setQtsThreeContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
@@ -194,57 +249,17 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleOne.setText(mQuestionOne);
             mQuestionTitleTwo.setText(mQuestionTwo);
             mQuestionTitleThree.setText(mQuestionThree);
-//            mQtsOneProgressOne.setProgressWithAnimation(-60, 2000);
-//            mQtsOneProgressTwo.setProgressWithAnimation(72, 1500);
-//            mQtsOneProgressTh.setProgressWithAnimation(-89, 3000);
-//            mQtsTwoProgressOne.setProgressWithAnimation(-90, 2000);
-//            mQtsTwoProgressTwo.setProgressWithAnimation(85, 1500);
-//            mQtsTwoProgressTh.setProgressWithAnimation(-54, 3000);
-//            mQtsThProgressOne.setProgressWithAnimation(-57, 2000);
-//            mQtsThProgressTwo.setProgressWithAnimation(79, 1500);
-//            mQtsThProgressTh.setProgressWithAnimation(-51, 3000);
+            try {
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
+                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), itemListTwo);
+                setPieGraph(mPieThree, preferences.getInt("mTotalCountThree", 0), itemListThree);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
-//    private void initCircularProgressBar(View v) {
-//        mQtsOneProgressOne = (CircularProg) v.findViewById(R.id.first_circular_progressbar);
-//        mQtsOneProgressOne.setProgressBarWidth(20.0f);
-//        mQtsOneProgressOne.setColor(getResources().getColor(R.color.bg));
-//        mQtsOneProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsOneProgressTwo = (CircularProg) v.findViewById(R.id.second_circular_progressbar);
-//        mQtsOneProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-//        mQtsOneProgressTwo.setProgressBarWidth(20.0f);
-//        mQtsOneProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsOneProgressTh = (CircularProg) v.findViewById(R.id.third_circular_progressbar);
-//        mQtsOneProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-//        mQtsOneProgressTh.setProgressBarWidth(20.0f);
-//        mQtsOneProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsTwoProgressOne = (CircularProg) v.findViewById(R.id.qts_two_first_circular_progressbar);
-//        mQtsTwoProgressOne.setProgressBarWidth(20.0f);
-//        mQtsTwoProgressOne.setColor(getResources().getColor(R.color.bg));
-//        mQtsTwoProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsTwoProgressTwo = (CircularProg) v.findViewById(R.id.qts_two_second_circular_progressbar);
-//        mQtsTwoProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-//        mQtsTwoProgressTwo.setProgressBarWidth(20.0f);
-//        mQtsTwoProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsTwoProgressTh = (CircularProg) v.findViewById(R.id.qts_two_third_circular_progressbar);
-//        mQtsTwoProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-//        mQtsTwoProgressTh.setProgressBarWidth(20.0f);
-//        mQtsTwoProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsThProgressOne = (CircularProg) v.findViewById(R.id.qts_th_first_circular_progressbar);
-//        mQtsThProgressOne.setProgressBarWidth(20.0f);
-//        mQtsThProgressOne.setColor(getResources().getColor(R.color.bg));
-//        mQtsThProgressOne.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsThProgressTwo = (CircularProg) v.findViewById(R.id.qts_th_second_circular_progressbar);
-//        mQtsThProgressTwo.setColor(getResources().getColor(R.color.tab_social));
-//        mQtsThProgressTwo.setProgressBarWidth(20.0f);
-//        mQtsThProgressTwo.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//        mQtsThProgressTh = (CircularProg) v.findViewById(R.id.qts_th_third_circular_progressbar);
-//        mQtsThProgressTh.setColor(getResources().getColor(R.color.tab_opinion));
-//        mQtsThProgressTh.setProgressBarWidth(20.0f);
-//        mQtsThProgressTh.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//    }
 
     private void setQtsOneContent() {
         try {
@@ -254,8 +269,10 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             for (int i = 0; i < mChoiceArrayOne.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayOne.optJSONObject(i);
                 itemListOne.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName);
+                mTotalCountOne = mTotalCountOne + itemListOne.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName + " - One1 -" + mTotalCountOne);
             }
+            editor.putInt("mTotalCountOne", mTotalCountOne).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, R.layout.item_choices, itemListOne, 2);
 //            editor.putInt(RES_COUNT_0, itemListOne.get(0).mChoiceOptionId);
         } catch (Exception e) {
@@ -274,13 +291,16 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             for (int i = 0; i < mChoiceArrayOne.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayOne.optJSONObject(i);
                 itemListOne.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName);
+                mTotalCountOne = mTotalCountOne + itemListOne.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName + " - One2 -" + mTotalCountOne);
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayTwo.optJSONObject(i);
                 itemListTwo.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName);
+                mTotalCountTwo = mTotalCountTwo + itemListTwo.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName + " - Two2 - " + mTotalCountTwo);
             }
+            editor.putInt("mTotalCountOne", mTotalCountOne).putInt("mTotalCountTwo", mTotalCountTwo).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
             mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
 //            editor.putInt(RES_COUNT_0, itemListTwo.get(0).mChoiceOptionId);
@@ -304,18 +324,22 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             for (int i = 0; i < mChoiceArrayOne.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayOne.optJSONObject(i);
                 itemListOne.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName);
+                mTotalCountOne = mTotalCountOne + itemListOne.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListOne.get(i).mChoiceName + " - One3 -" + mTotalCountOne);
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayTwo.optJSONObject(i);
                 itemListTwo.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName);
+                mTotalCountTwo = mTotalCountTwo + itemListTwo.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName + " - Two3 -" + mTotalCountThree);
             }
             for (int i = 0; i < mChoiceArrayThree.length(); i++) {
                 JSONObject mChoiceObject = mChoiceArrayThree.optJSONObject(i);
                 itemListThree.add(new ChoicesItem("" + mChoiceObject.optString("choice"), mChoiceObject.optInt("resultCount")));
-                Log.e("Qts One", "" + itemListThree.get(i).mChoiceName);
+                mTotalCountThree = mTotalCountThree + itemListThree.get(i).mChoiceOptionId;
+                Log.e("Qts One", "" + itemListThree.get(i).mChoiceName + " - Three3 -" + mTotalCountThree);
             }
+            editor.putInt("mTotalCountOne", mTotalCountOne).putInt("mTotalCountTwo", mTotalCountTwo).putInt("mTotalCountThree", mTotalCountThree).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
             mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
             mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree, 2);
@@ -326,6 +350,33 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+    public Animator.AnimatorListener getAnimationListener() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1)
+            return new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    Log.d("piefrag", "anim end");
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {//you might want to call slice.setvalue(slice.getGoalValue)
+                    Log.d("piefrag", "anim cancel");
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            };
+        else return null;
+
+    }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has

@@ -43,7 +43,7 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
         this.type = type;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         choiceImage = new int[]{R.drawable.bg_choice_circle_opinion, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_feedback,
-                R.drawable.bg_choice_circle_social, R.drawable.bg_choice_circle_quick, R.drawable.bg_choice_circle_social};
+                R.drawable.bg_choice_circle_red, R.drawable.bg_circle_home_green, R.drawable.bg_circle_dark_grey};
     }
 
     @Override

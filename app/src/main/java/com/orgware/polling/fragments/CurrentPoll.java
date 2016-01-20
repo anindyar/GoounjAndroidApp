@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -207,7 +208,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -373,7 +374,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             if (dashboardId == 0) {
                 ((MainHomeActivity) act).setNewFragment(new CurrentPollPager(), "Pager", true);
 //                ((MainHomeActivity) act).mSearchPollsTxt.setText("Poll");
-                ((MainHomeActivity) act).setTitle("Survey");
+                ((MainHomeActivity) act).setTitle("Poll");
             } else if (dashboardId == 1) {
                 ((MainHomeActivity) act).setNewFragment(new SurveyDetail(), "Pager", true);
                 ((MainHomeActivity) act).setTitle("Survey");
@@ -401,6 +402,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHint("Search");
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
         searchView.setOnQueryTextListener(this);
 
         MenuItemCompat.setOnActionExpandListener(item,

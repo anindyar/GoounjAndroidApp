@@ -129,11 +129,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_lay"
+                    android:background="@drawable/edit_text_corner"
                     android:drawableRight="@drawable/arrow_right"
                     android:gravity="center_horizontal|center_vertical"
                     android:padding="@dimen/padding_small"
-                    android:text="Select Category" />
+                    android:text="General Reference" />
             </LinearLayout>
 
             <LinearLayout
@@ -286,7 +286,8 @@
                                 android:gravity="center"
                                 android:padding="@dimen/padding_small"
                                 android:text="1"
-                                android:textSize="@dimen/txtSmall" />
+                                android:textSize="@dimen/txtSmall"
+                                android:visibility="invisible" />
 
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_one_choices_two"
@@ -357,163 +358,194 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_normal"
-                        android:layout_marginRight="@dimen/margin_normal"
                         android:orientation="vertical"
                         android:visibility="visible">
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_one"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="1"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_one"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_one"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_two"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="2"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_two"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_two"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_three"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_three"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="3"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_three"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_three"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_four"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_four"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="4"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_four"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_four"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_five"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_five"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="5"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_five"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_five"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:paddingBottom="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_one_edittext_choice_six"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_one_choice_six"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="6"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_one_choice_six"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
-                                android:background="@null"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_one_choice_six"
+                                android:background="@drawable/edit_text_corner"
+                                android:clickable="false"
                                 android:gravity="bottom"
                                 android:paddingBottom="@dimen/padding_small"
-                                android:paddingLeft="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -674,7 +706,8 @@
                                 android:gravity="center"
                                 android:padding="@dimen/padding_small"
                                 android:text="1"
-                                android:textSize="@dimen/txtSmall" />
+                                android:textSize="@dimen/txtSmall"
+                                android:visibility="invisible" />
 
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_two_choices_two"
@@ -751,37 +784,44 @@
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_one"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="1"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_two_choice_one"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_one"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_two"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -795,18 +835,23 @@
                                 android:id="@+id/edittext_opinion_qts_two_choice_two"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_two"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
-                                android:singleLine="true" />
+                                android:padding="@dimen/padding_small"
+                                android:singleLine="true"
+                                android:textColor="@android:color/black" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_three"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_three"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -820,87 +865,105 @@
                                 android:id="@+id/edittext_opinion_qts_two_choice_three"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_three"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
-                                android:singleLine="true" />
+                                android:padding="@dimen/padding_small"
+                                android:singleLine="true"
+                                android:textColor="@android:color/black" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_four"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_four"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="4"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_two_choice_four"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_four"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_five"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_five"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="5"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_two_choice_five"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_five"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
-                                android:paddingBottom="@dimen/padding_small"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_two_edittext_choice_six"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_two_choice_six"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="6"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_two_choice_six"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
-                                android:background="@null"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_two_choice_six"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
                                 android:paddingBottom="@dimen/padding_small"
-                                android:paddingLeft="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -1066,7 +1129,8 @@
                                 android:gravity="center"
                                 android:padding="@dimen/padding_small"
                                 android:text="1"
-                                android:textSize="@dimen/txtSmall" />
+                                android:textSize="@dimen/txtSmall"
+                                android:visibility="invisible" />
 
                             <RadioButton
                                 android:id="@+id/radio_opinion_qts_three_choices_two"
@@ -1143,52 +1207,64 @@
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_three_edittext_choice_one"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_three_choice_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="1"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_three_choice_one"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_three_choice_one"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_opinion_qts_three_edittext_choice_two"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/text_opinion_qts_three_choice_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="2"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
                                 android:id="@+id/edittext_opinion_qts_three_choice_two"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/text_opinion_qts_three_choice_two"
+                                android:background="@drawable/edit_text_corner"
                                 android:gravity="bottom"
+                                android:padding="@dimen/padding_small"
                                 android:singleLine="true" />
                         </RelativeLayout>
 
@@ -1205,7 +1281,9 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="3"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
@@ -1230,7 +1308,9 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="4"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
@@ -1255,7 +1335,9 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="5"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
@@ -1281,7 +1363,9 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
+                                android:padding="@dimen/padding_small"
                                 android:text="6"
+                                android:textColor="@android:color/black"
                                 android:textSize="@dimen/txtNormal" />
 
                             <EditText
