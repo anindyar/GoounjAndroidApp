@@ -48,11 +48,12 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
                         currentLat = intent.getExtras().getDouble("currentLat");
                         currentLongt = intent.getExtras().getDouble(
                                 "currentLong");
-                        try {
-                            getLocationDetails(currentLat, currentLongt);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        if (preferences.getString(COUNTRY, "").equals("") && preferences.getString(CITY, "").equals(""))
+                            try {
+                                getLocationDetails(currentLat, currentLongt);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                     }
                 }
 
@@ -81,6 +82,8 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
         Log.e("Country", " - " + sb.toString());
         mCountryText.setText("" + country);
         mCityText.setText("" + city);
+        editor.putString(COUNTRY, "" + mCountryText.getText().toString()).
+                putString(CITY, "" + mCityText.getText().toString()).commit();
 
     }
 
@@ -163,7 +166,8 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_termsofuse:
-
+                Intent intentTermsOfUse = new Intent(this, TermsAndConditionsActivity.class);
+                startActivity(intentTermsOfUse);
                 break;
             case R.id.login_btn_accept:
                 if (NetworkHelper.checkActiveInternet(this)) {
@@ -187,7 +191,7 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
                     }
 
                     if (!mCBAccept.isChecked()) {
-                        makeToast(this, "Please accept the terms opf use!");
+                        makeToast(this, "Please accept the terms of use!");
                         return;
                     }
 

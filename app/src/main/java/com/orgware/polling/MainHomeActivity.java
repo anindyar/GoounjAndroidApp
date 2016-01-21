@@ -40,14 +40,14 @@ import io.fabric.sdk.android.Fabric;
 
 import java.io.File;
 
-public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     public Menu mMenu;
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mUserAmount;
-    private ImageView mProfileImage;
+    private ImageView mProfileImage, mLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         mDrawerLayout.setDrawerListener(mBarDrawerToggle);
         mBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        (mLogout = (ImageView) findViewById(R.id.menu_logout)).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
         addHeader();
@@ -138,6 +139,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
                 setNewFragment(new HomeDashboard(), "Home", true);
                 break;
             case R.id.menu_settings:
+                makeToast(this, "Under Development");
                 break;
         }
 
@@ -182,7 +184,42 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_profile:
+            case R.id.nav_aboutus:
+            case R.id.nav_timeline:
+            case R.id.nav_changenumber:
+            case R.id.nav_adwithus:
+            case R.id.nav_settings:
+                makeToast(this, "Under Development");
+                mDrawerLayout.closeDrawers();
+                break;
+        }
         return false;
+    }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.menu_logout:
+                Methodutils.message2btn(MainHomeActivity.this, "Are you sure to logout?", "Confirm", "Cancel", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        preferences.edit().clear().commit();
+                        finish();
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        return;
+                    }
+                });
+                break;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.orgware.polling.network;
 
 import android.content.Context;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -21,6 +22,13 @@ public class NetworkHelper {
 
         return activeNetworkInfo != null && activeNetworkInfo.isAvailable();
     }
+
+    public static boolean isGpsEnabled(Context context) {
+        LocationManager locationManager = (LocationManager) context
+                .getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
 
     public static NetworkInfo getActiveNetwork(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context

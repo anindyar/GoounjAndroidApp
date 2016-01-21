@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,7 +42,7 @@ import java.util.Locale;
 /**
  * Created by Nandagopal on 31-Aug-15.
  */
-public class WelcomeActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class WelcomeActivity extends BaseActivity {
 
     private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 100;
@@ -49,11 +50,6 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.Con
     boolean welcomeScreen, countryScreen;
     String device_id, os_release;
     int os_version;
-    LocationRequest mLocationRequest;
-    LocationManager locManager;
-    Location currentLocation;
-    GoogleApiClient client;
-    String DBDIR = "GOOUNJDB", DBPATH = Environment.getExternalStorageDirectory() + File.separator + DBDIR, DBNAME = "countrydb";
 
     Runnable loginHandler = new Runnable() {
         @Override
@@ -75,7 +71,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.Con
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         welcomeScreen = preferences.getBoolean(WELCOME_SCREEN, true);
-        countryScreen = preferences.getBoolean(COUNTRY_DATA, true);
+
         device_id = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         os_version = android.os.Build.VERSION.SDK_INT;
@@ -84,15 +80,21 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.Con
 
         try {
             editor.putString(DEVICE_ID, "" + device_id).putString(OS_TYPE, "Android").putString(OS_VERSION, "" + os_release).commit();
-//                getJsonData(loadJSONFromAsset());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (!preferences.getString(COUNTRY, "").equals("NA")) {
-            startService(new Intent(this, CurrentLocationService.class));
-        } else
-            stopService(new Intent(this, CurrentLocationService.class));
+        if (preferences.getString(COUNTRY, "").equals("")) {
+            if (!NetworkHelper.isGpsEnabled(this))
+                Methodutils.messageWithTitle(WelcomeActivity.this, "No Gps Connection", "Please check your gps connection.", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                });
+            else
+                startService(new Intent(this, CurrentLocationService.class));
+        }
 
         if (!NetworkHelper.checkActiveInternet(this)) {
             Methodutils.messageWithTitle(WelcomeActivity.this, "No Internet Connection", "Please check your internet connection.", new View.OnClickListener() {
@@ -109,184 +111,34 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.Con
         }
     }
 
-    private void enableGPS() {
-        if (!isGooglePlayServicesAvailable()) {
-            Toast.makeText(this, "No Google Play", Toast.LENGTH_LONG)
-                    .show();
-            System.exit(0);
-        }
-        createLocationRequest();
-        client = new GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API).addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).build();
-        client.connect();
-    }
+    public void turnGPSOn() {
+        Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
+        intent.putExtra("enabled", true);
+        this.sendBroadcast(intent);
 
-    private void getLocationDetails(double latitude, double longitude) {
-        Geocoder geocoder;
-        StringBuilder sb = new StringBuilder();
-        List<Address> addresses = null;
-        geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-        } catch (Exception e) {
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if (!provider.contains("gps")) { //if gps is disabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            this.sendBroadcast(poke);
+
 
         }
-        String city = addresses.get(0).getLocality();
-        String country = addresses.get(0).getCountryName();
-        sb.append("City - " + city).append(" \n ").append("Country - " + country);
-        Log.e("Country", " - " + sb.toString());
-
     }
 
-    public void getJsonData(String jsonFile) throws Exception {
-        try {
-            JSONObject obj = new JSONObject(jsonFile);
-            JSONArray m_jArry = obj.getJSONArray("country");
-
-            for (int i = 0; i < m_jArry.length(); i++) {
-                JSONObject jo_inside = m_jArry.getJSONObject(i);
-                JSONObject jo_inside_names = jo_inside.optJSONObject("name");
-                String country_name = "" + jo_inside_names.getString("common");
-                String country_code = "" + jo_inside.getString("callingCode");
-                country_code = country_code.replaceAll("[\\[\\]\"]", "");
-                Log.d("Total-->", i + " - " + country_name);
-                db.insertCountryAndCodeValues("" + country_name, "+" + country_code);
-                editor.putBoolean(COUNTRY_DATA, false).commit();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    // automatic turn off the gps
+    public void turnGPSOff() {
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if (provider.contains("gps")) { //if gps is enabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            this.sendBroadcast(poke);
         }
     }
 
-    public void copyDbToSdcard(File dbFilePath) throws Exception {
-        AssetManager assetManager = getResources().getAssets();
-        Log.e("File Path", "" + dbFilePath.toString());
-        InputStream in;
-        FileOutputStream out;
-        try {
-            in = assetManager.open("countrydb");
-            if (in != null)
-                Log.e("Is File Exist?", "Yes");
-            else
-                Log.e("Is File Exist? ", "No");
-            out = new FileOutputStream(dbFilePath);
-            byte[] buffer = new byte[8024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            out.close();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public String loadJSONFromAsset() throws Exception {
-        String json = null;
-        try {
-            InputStream is = getAssets().open("country.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        startLocationUpdates();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        client.disconnect();
-
-    }
-
-    protected void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(client,
-                mLocationRequest, this);
-        Log.d(TAG, "Location update started ..............: ");
-    }
-
-    protected void stopLocationUpdates() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(client, this);
-        Log.d(TAG, "Location update stopped .......................");
-    }
-
-    private boolean isGooglePlayServicesAvailable() {
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (ConnectionResult.SUCCESS == status) {
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
-            return false;
-        }
-    }
-
-    protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        client.connect();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        client.disconnect();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        client.disconnect();
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//        super.onLowMemory();
-//    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        location = LocationServices.FusedLocationApi.getLastLocation(client);
-        if (location != null) {
-            try {
-                editor.putString("latitude", "" + location.getLatitude()).putString("longitude", "" + location.getLongitude()).commit();
-                getLocationDetails(location.getLatitude(), location.getLongitude());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
