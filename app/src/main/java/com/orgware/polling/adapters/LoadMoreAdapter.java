@@ -90,11 +90,11 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof StudentViewHolder) {
 
-            CurrentPollItem singleStudent = (CurrentPollItem) studentList.get(position);
+            CurrentPollItem singleStudent = studentList.get(position);
 
             ((StudentViewHolder) holder).tvName.setText(singleStudent.mCurrentPollTitle);
 
-            ((StudentViewHolder) holder).tvEmailId.setText(singleStudent.mCreatedUserName);
+            ((StudentViewHolder) holder).tvEmailId.setText(singleStudent.mCurrentPollCreatedBy);
 
             ((StudentViewHolder) holder).student = singleStudent;
 

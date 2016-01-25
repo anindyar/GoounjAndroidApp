@@ -34,6 +34,8 @@ import android.widget.Toast;
 import com.orgware.polling.database.GoounjDatabase;
 import com.orgware.polling.interfaces.Appinterface;
 
+import java.util.Locale;
+
 /**
  * Created by Nandagopal on 31-Aug-15.
  */
@@ -63,7 +65,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
     FragmentActivity activity;
 
     GoounjDatabase db;
-
+    Configuration configuration;
     /*Typeface is the class to change the font style of an application*/
     private Typeface typefaceMuliRegular;
 
@@ -74,6 +76,10 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+//        configuration = new Configuration();
+//        configuration.locale = Locale.JAPANESE;
+//        this.getResources().updateConfiguration(configuration, null);
+
         activity = this;
         preferences = getSharedPreferences(SHARED_PREFERENCES_POLLING, Context.MODE_PRIVATE);
         editor = preferences.edit();

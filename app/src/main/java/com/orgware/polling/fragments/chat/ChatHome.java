@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,12 @@ import com.orgware.polling.R;
 import com.orgware.polling.adapters.LoadMoreAdapter;
 import com.orgware.polling.fragments.BaseFragment;
 import com.orgware.polling.interfaces.OnLoadMoreListener;
+import com.orgware.polling.interfaces.RestApiListener;
+import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +65,12 @@ public class ChatHome extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadData();
+        getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
+//        loadData();
+
+    }
+
+    private void refreshList() {
         mAdapter = new LoadMoreAdapter(studentList, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
         if (studentList.isEmpty()) {
@@ -88,10 +99,11 @@ public class ChatHome extends BaseFragment {
                         int start = studentList.size();
                         int end = start + 20;
 
-                        for (int i = start + 1; i <= end; i++) {
-                            studentList.add(new CurrentPollItem("Student " + i, "AndroidStudent" + i + "@gmail.com"));
-                            mAdapter.notifyItemInserted(studentList.size());
-                        }
+//                        for (int i = start + 1; i <= end; i++) {
+//                            studentList.add(new CurrentPollItem("Student " + i, "AndroidStudent" + i + "@gmail.com"));
+//                            mAdapter.notifyItemInserted(studentList.size());
+//                        }
+                        getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
                         mAdapter.setLoaded();
                         //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
                     }
@@ -99,6 +111,57 @@ public class ChatHome extends BaseFragment {
 
             }
         });
+    }
+
+
+    private String showPollParams() {
+        JSONObject mShowPollOnject = new JSONObject();
+        try {
+            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, "7"));
+            mShowPollOnject.put(POLL_LIMIT, 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mShowPollOnject.toString();
+    }
+
+    private void getPollForCreatedUser(String url, boolean pullDownType) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                Log.e("Poll List Response", "" + response.toString());
+                if (response.equals("[]"))
+                    makeToast("No records found");
+                try {
+                    showPollList(response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                makeToast("Failed to connect to server");
+            }
+        });
+        processor.execute(showPollParams().toString());
+    }
+
+    public void showPollList(String response) {
+        try {
+            JSONArray objectArray = new JSONArray(response);
+            for (int i = 0; i < objectArray.length(); i++) {
+                JSONObject objectPolls = objectArray.optJSONObject(i);
+                Log.e("Array Values", "" + i);
+                if (objectPolls.optString("isAnswered").equals("0")) {
+                    studentList.add(new CurrentPollItem(objectPolls.optString("pollName"), objectPolls.optString("createdUserName")));
+                }
+            }
+//            refreshCurrentPollListview();
+            refreshList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // load initial data

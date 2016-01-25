@@ -57,6 +57,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
 
     public FragmentActivity act;
     public SharedPreferences preferences;
+    public SharedPreferences.Editor editor;
     protected View mParentView;
     RecyclerView mRecyclerView;
     ContactGridviewAdapter mAdapter;
@@ -66,7 +67,6 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     GridLayoutManager gridLayoutManager;
     Button mContactsDone, mCreatedList;
     EditText inputSearch;
-    SharedPreferences.Editor editor;
     LayoutInflater inflater;
     private Typeface typeface;
 

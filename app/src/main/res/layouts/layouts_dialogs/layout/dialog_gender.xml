@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@color/home_bg"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:text="Choose Gender"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txtLarge" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal">
+
+        <RadioButton
+            android:id="@+id/gender_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_radio_checked_bg"
+            android:padding="@dimen/padding_max"
+            android:text="Male"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+
+        <RadioButton
+            android:id="@+id/gender_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_radio_checked_bg"
+            android:padding="@dimen/padding_max"
+            android:text="Female"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+    </RadioGroup>
+
+</LinearLayout>

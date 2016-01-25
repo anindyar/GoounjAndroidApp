@@ -114,5 +114,8 @@ public interface Appinterface {
     /*LoginActivity*/
     String P_NAME = "name", P_COUNRTY = "country", P_CITY = "city", P_PHONE = "phone", P_DEVICEID = "deviceId", P_DEVICETOKEN = "deviceToken", P_OSTYPE = "osType", P_OSVERSION = "osVersion";
 
+    /*Profile*/
+    String GENDER = "GENDER";
+
 
 }

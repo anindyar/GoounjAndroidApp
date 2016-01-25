@@ -15,8 +15,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/padding_small"
@@ -34,13 +34,14 @@
             android:textColor="@color/home_bg"
             android:textSize="@dimen/txtLarge" />
 
-        <ImageView
+        <CheckBox
             android:id="@+id/profile_edit_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_edit_profile" />
+            android:background="@drawable/selector_profile_edit"
+            android:button="@null" />
     </RelativeLayout>
 
     <LinearLayout
@@ -68,22 +69,25 @@
                 android:textSize="@dimen/txtLarge" />
 
             <TextView
+                android:id="@+id/profile_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_normal"
                 android:layout_toRightOf="@+id/gender"
                 android:padding="@dimen/padding_normal"
-                android:text="@string/app_name"
+                android:text="Select Gender"
                 android:textColor="@color/home_bg"
                 android:textSize="@dimen/txtLarge" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <CheckBox
+                android:id="@+id/profile_edit_gender"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_edit_profile" />
+                android:background="@drawable/selector_profile_edit"
+                android:button="@null" />
         </RelativeLayout>
 
         <View
@@ -120,12 +124,14 @@
                 android:textColor="@color/home_bg"
                 android:textSize="@dimen/txtLarge" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <CheckBox
+                android:id="@+id/profile_edit_age"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_edit_profile" />
+                android:background="@drawable/selector_profile_edit"
+                android:button="@null" />
         </RelativeLayout>
 
         <View

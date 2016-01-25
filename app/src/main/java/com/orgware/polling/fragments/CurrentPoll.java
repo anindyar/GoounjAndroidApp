@@ -60,6 +60,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     GoounjDatabase db;
     boolean currentPollService;
     RelativeLayout mPollNoError, mPollError;
+    int firstVisibleItem, visibleItemCount, totalItemCount;
+    LinearLayoutManager mLayoutManager;
     private SuperSwipeRefreshLayout swipeRefreshLayout;
     // Header View
     private ProgressBar progressBar;
@@ -69,6 +71,9 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     private ProgressBar footerProgressBar;
     private TextView footerTextView;
     private ImageView footerImageView;
+    private int previousTotal = 0;
+    private boolean loading = true;
+    private int visibleThreshold = 5;
 
     @Override
     public void setTitle() {
@@ -89,9 +94,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
+        mLayoutManager = new LinearLayoutManager(act);
         mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
-        mCurrentPollList.setLayoutManager(new LinearLayoutManager(act));
+        mCurrentPollList.setLayoutManager(mLayoutManager);
         mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
         mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
 //        db = new GoounjDatabase(act);
@@ -204,6 +210,45 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             });
 
 //        getPollForCreatedUser("http://192.168.0.112:3000/polls/v1/pollList");
+        mCurrentPollList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            /**
+             * Callback method to be invoked when the RecyclerView has been scrolled. This will be
+             * called after the scroll has completed.
+             * <p>
+             * This callback will also be called if visible item range changes after a layout
+             * calculation. In that case, dx and dy will be 0.
+             *
+             * @param recyclerView The RecyclerView which scrolled.
+             * @param dx           The amount of horizontal scroll.
+             * @param dy           The amount of vertical scroll.
+             */
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                visibleItemCount = mRecyclerView.getChildCount();
+                totalItemCount = mLayoutManager.getItemCount();
+                firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
+
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false;
+                        previousTotal = totalItemCount;
+                    }
+                }
+                if (!loading && (totalItemCount - visibleItemCount)
+                        <= (firstVisibleItem + visibleThreshold)) {
+                    // End has been reached
+
+                    Log.i("Yaeye!", "end called");
+
+                    // Do something
+                    makeToast("End Called");
+
+                    loading = true;
+                }
+            }
+        });
     }
 
     /**

@@ -37,6 +37,7 @@ import com.orgware.polling.fragments.ResultPoll;
 import com.orgware.polling.utils.Methodutils;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.fabric.sdk.android.Fabric;
 
 import java.io.File;
@@ -48,7 +49,8 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mUserAmount;
-    private ImageView mProfileImage, mLogout;
+    private CircleImageView mProfileImage;
+    private ImageView mLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +98,12 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         mUserName = (TextView) view.findViewById(R.id.username);
         mUserAmount = (TextView) view
                 .findViewById(R.id.user_amount);
-        mProfileImage = (ImageView) view.findViewById(R.id.profile_image);
+        mProfileImage = (CircleImageView) view.findViewById(R.id.profile_image);
         mUserName.setText("" + preferences.getString(USERNAME, "NA"));
+
+//        Picasso.with(this)
+//                .load("")
+//                .into(mProfileImage);
 //        mUserName.setText(preferences.getString(AppConstants.first_name, "") + "" + preferences.getString(AppConstants.last_name, ""));
 //        mEmailId.setText(preferences.getString("email", ""));
 //        File cacheDir = GraphicsUtil.getCacheFolder(this);
