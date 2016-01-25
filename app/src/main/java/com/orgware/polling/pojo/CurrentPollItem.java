@@ -17,6 +17,12 @@ public class CurrentPollItem {
 
     }
 
+    public CurrentPollItem(String mCurrentPollTitle, String mCurrentPollCreatedBy) {
+        this.mCurrentPollTitle = mCurrentPollTitle;
+        this.mCurrentPollCreatedBy = mCurrentPollCreatedBy;
+
+    }
+
 
     public CurrentPollItem(int pollId, String mCurrentPollStart, String mCurrentPollEnd, String mCurrentPollName, int mIsBoost, String mCreatedUserName) {
         this.currentPollId = pollId;

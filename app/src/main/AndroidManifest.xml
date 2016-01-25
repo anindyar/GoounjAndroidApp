@@ -12,6 +12,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,9 @@
         <activity android:name="com.orgware.polling.LoginActivity"></activity>
         <activity android:name="com.orgware.polling.LoginActivityNew" />
         <activity android:name="com.orgware.polling.MainHomeActivity"></activity>
+        <activity
+            android:name=".MenuDetailActivity"
+            android:parentActivityName=".MainHomeActivity" />
 
         <activity android:name="com.orgware.polling.OTPActivity"></activity>
         <activity

@@ -146,6 +146,12 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         return evnt;
     }
 
+    public void setMenuintent(int type) {
+        Intent menuDetailIntent = new Intent(this, MenuDetailActivity.class);
+        menuDetailIntent.putExtra("Menu_Detail", type);
+        startActivity(menuDetailIntent);
+    }
+
     public void setNewFragment(Fragment fragment, String title, boolean addStack) {
 
         FragmentManager manager = getSupportFragmentManager();
@@ -157,7 +163,26 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
                 manager.beginTransaction().remove(mCurrentFragment).commit();
         }
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.fragment_attach, R.anim.fragment_detach);
         transaction.replace(R.id.fragment_content, fragment, title);
+        if (addStack)
+            transaction.addToBackStack(title);
+        transaction.commit();
+    }
+
+    public void setNewFragment(Fragment fragment, int fragment_content, String title, boolean addStack) {
+
+        FragmentManager manager = getSupportFragmentManager();
+
+        if (!addStack && manager.getBackStackEntryCount() > 0) {
+            manager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            Fragment mCurrentFragment = manager.findFragmentById(fragment_content);
+            if (mCurrentFragment != null)
+                manager.beginTransaction().remove(mCurrentFragment).commit();
+        }
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.fragment_attach, R.anim.fragment_detach);
+        transaction.replace(fragment_content, fragment, title);
         if (addStack)
             transaction.addToBackStack(title);
         transaction.commit();

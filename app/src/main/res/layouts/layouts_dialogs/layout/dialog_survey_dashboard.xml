@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal"
         android:background="@drawable/bg_curved_rect"
-        android:hint="Enter first name"
+        android:hint="Enter your name"
         android:inputType="text"
         android:padding="@dimen/padding_normal"
         android:singleLine="true"
@@ -41,7 +41,8 @@
         android:padding="@dimen/padding_normal"
         android:singleLine="true"
         android:textColor="@color/home_bg"
-        android:textSize="@dimen/txtLarge" />
+        android:textSize="@dimen/txtLarge"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/txt_survey_mobile"

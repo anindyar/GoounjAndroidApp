@@ -23,12 +23,13 @@ public class TermsAndConditionsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_webview_terms);
+
         mPrgress = new ProgressDialog(this);
         mPrgress.setCancelable(false);
         mPrgress.setMessage("Loading...");
         mWebview = (WebView) findViewById(R.id.webview);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.home_bg));
+        mToolbar.setContentInsetsAbsolute(0, 0);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

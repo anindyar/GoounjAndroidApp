@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal"
+            android:text="Old Number"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+
+        <EditText
+            android:id="@+id/change_number_old"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/edit_text_corner"
+            android:padding="@dimen/padding_normal"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:padding="@dimen/padding_normal"
+            android:text="New Number"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+
+        <EditText
+            android:id="@+id/change_number_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/edit_text_corner"
+            android:padding="@dimen/padding_normal"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/change_number_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/home_bg"
+        android:padding="@dimen/padding_normal"
+        android:text="Done"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txtNormal" />
+
+</RelativeLayout>

@@ -4,27 +4,27 @@
     <group android:enabled="true">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/menu_profile_ic"
-            android:title="Profile" />
-        <item
-            android:id="@+id/nav_aboutus"
-            android:icon="@drawable/ic_about_us"
-            android:title="About Us" />
+            android:icon="@drawable/ic_menu_profile"
+            android:title="My Profile" />
         <item
             android:id="@+id/nav_timeline"
-            android:icon="@drawable/menu_timeline"
+            android:icon="@drawable/ic_menu_timeline"
             android:title="TimeLine" />
         <item
             android:id="@+id/nav_changenumber"
-            android:icon="@drawable/menu_change_number"
+            android:icon="@drawable/ic_menu_change_number"
             android:title="Change Number" />
         <item
-            android:id="@+id/nav_adwithus"
-            android:icon="@drawable/menu_adwith_us"
-            android:title="AD With Us" />
+            android:id="@+id/nav_wallet"
+            android:icon="@drawable/ic_menu_wallet"
+            android:title="Wallet" />
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/ic_menu_about"
+            android:title="About Us" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/menu_settings"
+            android:icon="@drawable/ic_menu_settings"
             android:title="Settings" />
     </group>
 

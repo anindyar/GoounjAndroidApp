@@ -56,6 +56,7 @@ import java.util.StringTokenizer;
 public abstract class BaseFragment extends Fragment implements Appinterface {
 
     public FragmentActivity act;
+    public SharedPreferences preferences;
     protected View mParentView;
     RecyclerView mRecyclerView;
     ContactGridviewAdapter mAdapter;
@@ -65,7 +66,6 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     GridLayoutManager gridLayoutManager;
     Button mContactsDone, mCreatedList;
     EditText inputSearch;
-    SharedPreferences preferences;
     SharedPreferences.Editor editor;
     LayoutInflater inflater;
     private Typeface typeface;

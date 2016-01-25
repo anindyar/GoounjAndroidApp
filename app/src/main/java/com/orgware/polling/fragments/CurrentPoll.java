@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -405,6 +406,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.white));
         searchEditText.setHint("Search");
+        searchEditText.setBackgroundColor(Color.TRANSPARENT);
         searchEditText.setHintTextColor(getResources().getColor(R.color.white));
         searchView.setOnQueryTextListener(this);
 

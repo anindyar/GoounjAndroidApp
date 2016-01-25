@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,6 +40,7 @@ import java.util.Locale;
 public class LoginActivityNew extends BaseActivity implements View.OnClickListener {
 
     boolean get_device_token;
+    Animation mSlideFromLeftAnimation, mSlideFromRightAnimation;
     private double currentLat, currentLongt;
     // receives new location when location changes
     BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -54,6 +58,8 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        else
+                            stopService(new Intent(LoginActivityNew.this, CurrentLocationService.class));
                     }
                 }
 
@@ -91,6 +97,9 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        mSlideFromLeftAnimation = AnimationUtils.loadAnimation(this, R.anim.slideleft_to_right);
+        mSlideFromRightAnimation = AnimationUtils.loadAnimation(this, R.anim.slideleft_to_right);
+
         setContentView(R.layout.activity_login_new);
         get_device_token = preferences.getBoolean(GET_DEVICE_TOKEN_KEY, true);
         if (NetworkHelper.checkActiveInternet(this)) {
@@ -110,9 +119,15 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
         mCountryText = (EditText) findViewById(R.id.login_country);
         mCityText = (EditText) findViewById(R.id.login_city);
         mMobileNumber = (EditText) findViewById(R.id.login_mobile);
+        mNameText.startAnimation(mSlideFromLeftAnimation);
+        mCountryText.startAnimation(mSlideFromLeftAnimation);
+        mCityText.startAnimation(mSlideFromLeftAnimation);
+        mMobileNumber.startAnimation(mSlideFromLeftAnimation);
         mCBAccept = (CheckBox) findViewById(R.id.login_cb_accept);
         (mBtnAccept = (Button) findViewById(R.id.login_btn_accept)).setOnClickListener(this);
         ((mTermsOfUse = (TextView) findViewById(R.id.login_termsofuse))).setOnClickListener(this);
+        mCountryText.setText("" + preferences.getString(COUNTRY, ""));
+        mCityText.setText("" + preferences.getString(CITY, ""));
 
     }
 

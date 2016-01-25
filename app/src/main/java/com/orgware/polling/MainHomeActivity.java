@@ -3,6 +3,7 @@ package com.orgware.polling;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -55,8 +56,8 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         setContentView(R.layout.activity_nav_drawer);
         editor.putBoolean(WELCOME_SCREEN, false).putString(OTP_VALUE, "").commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.home_bg));
         toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
+        toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -139,18 +140,12 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
                 setNewFragment(new HomeDashboard(), "Home", true);
                 break;
             case R.id.menu_settings:
-                makeToast(this, "Under Development");
+                setMenuintent(6);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        menu.findItem(R.id.menu_group_three_search).setVisible(false);
-//        return super.onPrepareOptionsMenu(menu);
-//    }
 
 
     @Override
@@ -186,15 +181,25 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_profile:
-            case R.id.nav_aboutus:
+                setMenuintent(1);
+                break;
             case R.id.nav_timeline:
+                setMenuintent(2);
+                break;
             case R.id.nav_changenumber:
-            case R.id.nav_adwithus:
+                setMenuintent(3);
+                break;
+            case R.id.nav_wallet:
+                setMenuintent(4);
+                break;
+            case R.id.nav_aboutus:
+                setMenuintent(5);
+                break;
             case R.id.nav_settings:
-                makeToast(this, "Under Development");
-                mDrawerLayout.closeDrawers();
+                setMenuintent(6);
                 break;
         }
+        mDrawerLayout.closeDrawers();
         return false;
     }
 

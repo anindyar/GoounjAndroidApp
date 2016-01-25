@@ -361,8 +361,9 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
         JSONObject mAnswerObject = new JSONObject();
         try {
             mAnswerObject.put("pollId", "" + preferences.getInt(POLL_ID, 0));
-            mAnswerObject.put("fname", "" + preferences.getString(FIRSTNAME_SURVEY, ""));
-            mAnswerObject.put("lname", "" + preferences.getString(LASTNAME_SURVEY, ""));
+//            mAnswerObject.put("fname", "" + preferences.getString(FIRSTNAME_SURVEY, ""));
+//            mAnswerObject.put("lname", "" + preferences.getString(LASTNAME_SURVEY, ""));
+            mAnswerObject.put("name", "" + preferences.getString(FIRSTNAME_SURVEY, ""));
             mAnswerObject.put("phone", "" + preferences.getString(SURVEY_MOBILE, ""));
             mAnswerObject.put("questionList", mSubmitValuesArray);
             Log.e("Answer Params", "" + mAnswerObject.toString());
@@ -389,10 +390,10 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                     makeToast("Please enter firstname");
                     return;
                 }
-                if (mLastName.getText().toString().equals("")) {
-                    makeToast("Please enter lastname");
-                    return;
-                }
+//                if (mLastName.getText().toString().equals("")) {
+//                    makeToast("Please enter lastname");
+//                    return;
+//                }
                 if (mMobileNumber.getText().toString().equals("")) {
                     makeToast("Please put a valid mobile number");
                     return;
@@ -401,8 +402,9 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                     makeToast("Please put a valid mobile number!");
                     return;
                 }
-                editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(LASTNAME_SURVEY, mLastName.getText().toString())
-                        .putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
+//                editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(LASTNAME_SURVEY, mLastName.getText().toString())
+//                        .putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
+                editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
                 submitParams(qtsSize);
                 Log.e("Survey Params", "" + answerSurveyParams().toString());
                 try {

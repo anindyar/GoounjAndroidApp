@@ -129,38 +129,39 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         pg.animateToGoalValues();
     }
 
-    private void setPieGraph(PieGraph pg, final int mTotalCount, final List<ChoicesItem> itemList) throws Exception {
-        Random random = new Random();
-        int testCount, totalPercent = 0;
+    private void setPieGraph(PieGraph pg, final int mTotalCount, final int mTotal, final List<ChoicesItem> itemList) throws Exception {
+        float testCount, totalPercent = 0;
         PieSlice slice;
         for (int i = 0; i < mTotalCount; i++) {
-            slice = new PieSlice();
-            slice.setColor(resources.getColor(Methodutils.mResultColor[i]));
+            if (itemList.get(i).mChoiceOptionId != 0) {
+                slice = new PieSlice();
+                slice.setColor(resources.getColor(Methodutils.mResultColor[i]));
 //            slice.setSelectedColor(resources.getColor(R.color.ash_bg));
-            testCount = ((itemList.get(i).mChoiceOptionId * 100) / mTotalCount);
+                testCount = ((itemList.get(i).mChoiceOptionId * 100) / mTotal);
 //            testCount = "" + Math.abs(Math.round((itemList.get(i).mChoiceOptionId / mTotalCount) * 100));
-            Log.e("Total count", "" + mTotalCount);
-            Log.e("Test Count", itemList.get(i).mChoiceOptionId + " - " + itemList.get(i).mChoiceName + " - " + testCount);
-            slice.setValue(testCount);
-            slice.setTitle("first");
-            totalPercent = totalPercent + testCount;
-            pg.addSlice(slice);
+                Log.e("Total count", "" + mTotalCount);
+                Log.e("Test Count", itemList.get(i).mChoiceOptionId + " - " + itemList.get(i).mChoiceName + " - " + testCount);
+                slice.setValue(testCount);
+                slice.setTitle("first");
+//            totalPercent = totalPercent + testCount;
+                pg.addSlice(slice);
+            }
         }
-        if (totalPercent != 100) {
-            Log.e("Percent Total", "" + totalPercent);
-            slice = new PieSlice();
-            slice.setColor(resources.getColor(Methodutils.mResultColor[4]));
-            int test = 100 - totalPercent;
-            slice.setValue(test);
-            slice.setTitle("first");
-            pg.addSlice(slice);
-        }
+//        if (totalPercent != 100) {
+//            Log.e("Percent Total", "" + totalPercent);
+//            slice = new PieSlice();
+//            slice.setColor(resources.getColor(Methodutils.mResultColor[4]));
+//            int test = 100 - totalPercent;
+//            slice.setValue(test);
+//            slice.setTitle("first");
+//            pg.addSlice(slice);
+//        }
         pg.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
 
             @Override
             public void onClick(int position) {
                 if (position != -1) {
-                    int value = ((itemList.get(position).mChoiceOptionId * 100) / mTotalCount);
+                    float value = ((itemList.get(position).mChoiceOptionId * 100) / mTotal);
                     makeToast(" " + value + "%");
                 }
             }
@@ -204,9 +205,6 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         mQuestionTitleTwo = (TextView) v.findViewById(R.id.qts_survey_detail_two);
         mQuestionTitleThree = (TextView) v.findViewById(R.id.qts_survey_detail_three);
         mLayoutSubmit.setVisibility(View.GONE);
-//        setPieGraph(mPieOne);
-//        setPieGraph(mPieTwo);
-//        setPieGraph(mPieThree);
     }
 
     @Override
@@ -224,7 +222,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mLayoutQtsTwo.setVisibility(View.GONE);
             mLayoutQtsThree.setVisibility(View.GONE);
             try {
-                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -236,8 +234,8 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleTwo.setText(mQuestionTwo);
             mLayoutQtsThree.setVisibility(View.GONE);
             try {
-                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
-                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), itemListTwo);
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
+                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -250,9 +248,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             mQuestionTitleTwo.setText(mQuestionTwo);
             mQuestionTitleThree.setText(mQuestionThree);
             try {
-                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), itemListOne);
-                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), itemListTwo);
-                setPieGraph(mPieThree, preferences.getInt("mTotalCountThree", 0), itemListThree);
+                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
+                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
+                setPieGraph(mPieThree, preferences.getInt("mTotalCountThree", 0), preferences.getInt("mTotalThree", 0), itemListThree);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -272,7 +270,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 mTotalCountOne = mTotalCountOne + itemListOne.get(i).mChoiceOptionId;
                 Log.e("Qts One", "" + itemListOne.get(i).mChoiceName + " - One1 -" + mTotalCountOne);
             }
-            editor.putInt("mTotalCountOne", mTotalCountOne).commit();
+            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, R.layout.item_choices, itemListOne, 2);
 //            editor.putInt(RES_COUNT_0, itemListOne.get(0).mChoiceOptionId);
         } catch (Exception e) {
@@ -300,7 +298,8 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 mTotalCountTwo = mTotalCountTwo + itemListTwo.get(i).mChoiceOptionId;
                 Log.e("Qts One", "" + itemListTwo.get(i).mChoiceName + " - Two2 - " + mTotalCountTwo);
             }
-            editor.putInt("mTotalCountOne", mTotalCountOne).putInt("mTotalCountTwo", mTotalCountTwo).commit();
+            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).
+                    putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalTwo", mTotalCountTwo).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
             mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
 //            editor.putInt(RES_COUNT_0, itemListTwo.get(0).mChoiceOptionId);
@@ -339,7 +338,10 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 mTotalCountThree = mTotalCountThree + itemListThree.get(i).mChoiceOptionId;
                 Log.e("Qts One", "" + itemListThree.get(i).mChoiceName + " - Three3 -" + mTotalCountThree);
             }
-            editor.putInt("mTotalCountOne", mTotalCountOne).putInt("mTotalCountTwo", mTotalCountTwo).putInt("mTotalCountThree", mTotalCountThree).commit();
+//            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalCountThree", mChoiceArrayThree.length()).commit();
+            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).
+                    putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalTwo", mTotalCountTwo).
+                    putInt("mTotalCountThree", mChoiceArrayThree.length()).putInt("mTotalThree", mTotalCountThree).commit();
             mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
             mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
             mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree, 2);

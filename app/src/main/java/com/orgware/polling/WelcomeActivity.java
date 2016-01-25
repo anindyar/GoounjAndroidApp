@@ -1,5 +1,6 @@
 package com.orgware.polling;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -13,8 +14,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -47,13 +53,20 @@ public class WelcomeActivity extends BaseActivity {
     private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 100;
     private static final long FASTEST_INTERVAL = 50;
+    private static final int REQUEST_CODE_CONTACTS = 1, REQUEST_CODE_LOCATION = 2, REQUEST_READ_SMS = 3, REQUEST_CODE_STORAGE = 4;
+    private static String[] PERMISSIONS_CONTACT = {Manifest.permission.READ_CONTACTS};
     boolean welcomeScreen, countryScreen;
     String device_id, os_release;
     int os_version;
-
+    int[] test = {1, 2};
+    String[] mPermission = {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    ImageView mSplashLogo;
+    int INTERNET_CODE = 1, GPS_CODE = 2;
     Runnable loginHandler = new Runnable() {
+
         @Override
         public void run() {
+            mSplashLogo.startAnimation(mEndAnimation);
             startActivity(new Intent(WelcomeActivity.this, LoginActivityNew.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
@@ -61,17 +74,22 @@ public class WelcomeActivity extends BaseActivity {
     Runnable homeHandler = new Runnable() {
         @Override
         public void run() {
+            mSplashLogo.startAnimation(mEndAnimation);
             startActivity(new Intent(WelcomeActivity.this, MainHomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
     };
+    Animation mStartAnimation, mEndAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        mSplashLogo = (ImageView) findViewById(R.id.splash_logo);
+        mStartAnimation = AnimationUtils.makeInAnimation(this, true);
+        mEndAnimation = AnimationUtils.makeOutAnimation(this, true);
+        mSplashLogo.startAnimation(mStartAnimation);
         welcomeScreen = preferences.getBoolean(WELCOME_SCREEN, true);
-
         device_id = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         os_version = android.os.Build.VERSION.SDK_INT;
@@ -84,18 +102,132 @@ public class WelcomeActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        if (preferences.getString(COUNTRY, "").equals("")) {
-            if (!NetworkHelper.isGpsEnabled(this))
-                Methodutils.messageWithTitle(WelcomeActivity.this, "No Gps Connection", "Please check your gps connection.", new View.OnClickListener() {
+
+        try {
+            if (ActivityCompat.checkSelfPermission(this, mPermission[0])
+                    != MockPackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, mPermission[1])
+                            != MockPackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, mPermission[2])
+                            != MockPackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, mPermission[3])
+                            != MockPackageManager.PERMISSION_GRANTED) {
+                // Request missing location permission.
+                ActivityCompat.requestPermissions(this,
+                        mPermission, REQUEST_CODE_LOCATION);
+            } else {
+                try {
+                    if (preferences.getString(COUNTRY, "").equals("")) {
+                        startService(new Intent(this, CurrentLocationService.class));
+                        checkInternetAndGpsConnection();
+                    } else
+                        checkInternetConnection();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.e("Req Code", "" + requestCode);
+        if (requestCode == 2) {
+            if (grantResults.length == 4 &&
+                    grantResults[0] == MockPackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == MockPackageManager.PERMISSION_GRANTED &&
+                    grantResults[2] == MockPackageManager.PERMISSION_GRANTED &&
+                    grantResults[3] == MockPackageManager.PERMISSION_GRANTED) {
+                // success!
+                try {
+                    if (preferences.getString(COUNTRY, "").equals("")) {
+                        startService(new Intent(this, CurrentLocationService.class));
+                        checkInternetAndGpsConnection();
+                    } else
+                        checkInternetConnection();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Methodutils.message(this, "Permission Denied", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        finish();
                     }
                 });
-            else
-                startService(new Intent(this, CurrentLocationService.class));
+            }
         }
 
+//        if (requestCode == REQUEST_CODE_LOCATION) {
+//            if (grantResults.length == 1
+//                    && grantResults[0] == MockPackageManager.PERMISSION_GRANTED) {
+//                // success!
+//
+//            } else {
+////                PopUp.showAlertDialog(act, Sorry, "Permission Cancelled");
+//            }
+//        }
+//
+//        if (requestCode == INTERNET_CODE || requestCode == GPS_CODE) {
+//            if (grantResults.length == 1
+//                    && grantResults[0] == MockPackageManager.PERMISSION_GRANTED) {
+//                try {
+//                    if (preferences.getString(COUNTRY, "").equals("")) {
+//                        startService(new Intent(this, CurrentLocationService.class));
+//                        checkInternetAndGpsConnection();
+//                    } else
+//                        checkInternetConnection();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            } else {
+////                PopUp.showAlertDialog(act, Sorry, "Permission Cancelled");
+//                Methodutils.message(this, "Permission Denied", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                });
+//            }
+//
+//        }
+    }
+
+    private void checkInternetAndGpsConnection() throws Exception {
+        if (!NetworkHelper.checkActiveInternet(this)) {
+            Methodutils.messageWithTitle(WelcomeActivity.this, "No Internet Connection", "Please check your internet connection.", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        } else if (!NetworkHelper.isGpsEnabled(this)) {
+            Methodutils.messageWithTitle(WelcomeActivity.this, "No Gps Connection", "Please enable your Gps connection.", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        } else {
+            if (welcomeScreen) {
+                new Handler().postDelayed(loginHandler, 2000);
+            } else
+                new Handler().postDelayed(homeHandler, 2000);
+        }
+    }
+
+    private void checkInternetConnection() throws Exception {
         if (!NetworkHelper.checkActiveInternet(this)) {
             Methodutils.messageWithTitle(WelcomeActivity.this, "No Internet Connection", "Please check your internet connection.", new View.OnClickListener() {
                 @Override
@@ -110,35 +242,5 @@ public class WelcomeActivity extends BaseActivity {
                 new Handler().postDelayed(homeHandler, 2000);
         }
     }
-
-    public void turnGPSOn() {
-        Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
-        intent.putExtra("enabled", true);
-        this.sendBroadcast(intent);
-
-        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if (!provider.contains("gps")) { //if gps is disabled
-            final Intent poke = new Intent();
-            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
-            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
-            poke.setData(Uri.parse("3"));
-            this.sendBroadcast(poke);
-
-
-        }
-    }
-
-    // automatic turn off the gps
-    public void turnGPSOff() {
-        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if (provider.contains("gps")) { //if gps is enabled
-            final Intent poke = new Intent();
-            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
-            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
-            poke.setData(Uri.parse("3"));
-            this.sendBroadcast(poke);
-        }
-    }
-
 
 }
