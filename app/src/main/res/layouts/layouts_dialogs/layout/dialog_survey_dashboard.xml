@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/padding_small"
-    android:paddingRight="@dimen/padding_small">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +12,7 @@
         android:background="@color/home_bg"
         android:gravity="center_horizontal"
         android:padding="@dimen/padding_max"
-        android:text="Survey Poll"
+        android:text="SURVEY POLL"
         android:textColor="@android:color/white" />
 
     <EditText
@@ -62,7 +60,6 @@
         android:id="@+id/btn_survey_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_normal"
         android:background="@color/home_bg"
         android:text="SUBMIT"

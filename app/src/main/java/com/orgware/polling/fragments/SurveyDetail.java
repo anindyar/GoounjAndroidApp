@@ -278,7 +278,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -344,7 +344,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void showSurveyDialog() {
-        mSurveyDialog = new Dialog(act);
+        mSurveyDialog = new Dialog(act, R.style.dialog);
         mSurveyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mSurveyDialog.setCancelable(true);
         mSurveyDialog.setContentView(R.layout.dialog_survey_dashboard);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -62,7 +63,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     RelativeLayout mPollNoError, mPollError;
     int firstVisibleItem, visibleItemCount, totalItemCount;
     LinearLayoutManager mLayoutManager;
-    private SuperSwipeRefreshLayout swipeRefreshLayout;
+    //    private SuperSwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     // Header View
     private ProgressBar progressBar;
     private TextView textView;
@@ -94,52 +96,44 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
-        mLayoutManager = new LinearLayoutManager(act);
-        mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
-        swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
-        mCurrentPollList.setLayoutManager(mLayoutManager);
-        mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
-        mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
-//        db = new GoounjDatabase(act);
-        currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
-        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
-        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
-        swipeRefreshLayout.setFooterView(null);
-        swipeRefreshLayout.setTargetScrollWithLayout(true);
-        swipeRefreshLayout
-                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
-
-                    @Override
-                    public void onRefresh() {
-                        textView.setText("Pull Down To Refresh");
-                        imageView.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        if (NetworkHelper.checkActiveInternet(act)) {
-                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
-                            progressBar.setVisibility(View.GONE);
-                        } else
-                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    act.getSupportFragmentManager().popBackStack();
-                                    return;
-                                }
-                            });
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onPullDistance(int distance) {
-                        // pull distance
-                    }
-
-                    @Override
-                    public void onPullEnable(boolean enable) {
-                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView.setRotation(enable ? 180 : 0);
-                    }
-                });
+//        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
+//        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
+//        swipeRefreshLayout.setFooterView(null);
+//        swipeRefreshLayout.setTargetScrollWithLayout(true);
+//        swipeRefreshLayout
+//                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+//
+//                    @Override
+//                    public void onRefresh() {
+//                        textView.setText("Pull Down To Refresh");
+//                        imageView.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.VISIBLE);
+//                        if (NetworkHelper.checkActiveInternet(act)) {
+//                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
+//                            progressBar.setVisibility(View.GONE);
+//                        } else
+//                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    act.getSupportFragmentManager().popBackStack();
+//                                    return;
+//                                }
+//                            });
+//                        swipeRefreshLayout.setRefreshing(false);
+//                    }
+//
+//                    @Override
+//                    public void onPullDistance(int distance) {
+//                        // pull distance
+//                    }
+//
+//                    @Override
+//                    public void onPullEnable(boolean enable) {
+//                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
+//                        imageView.setVisibility(View.VISIBLE);
+//                        imageView.setRotation(enable ? 180 : 0);
+//                    }
+//                });
 //        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -180,81 +174,80 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         return v;
     }
 
-//    @Override
-//    public void onPrepareOptionsMenu(Menu menu) {
-//        menu.findItem(R.id.menu_group_three_search).setVisible(true);
-//        super.onPrepareOptionsMenu(menu);
-//    }
+    @Override
+    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        mLayoutManager = new LinearLayoutManager(act);
+        mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+        mCurrentPollList.setLayoutManager(mLayoutManager);
+        mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
+        mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.home_bg, R.color.bg, R.color.tab_opinion, R.color.tab_quick, R.color.tab_social, R.color.tab_survey);
+        currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (dashboardId == 0) {
-            ((MainHomeActivity) act).setTitle("Poll");
+            act.setTitle("Poll");
         } else {
-            ((MainHomeActivity) act).setTitle("Survey");
+            act.setTitle("Survey");
         }
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (NetworkHelper.checkActiveInternet(act))
+                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
+            }
+        });
+
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (NetworkHelper.checkActiveInternet(act))
+                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
+            }
+        });
 //        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
 //        ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
 //        ((HomeActivity) act).openSearch.setOnClickListener(this);
 //        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-        if (NetworkHelper.checkActiveInternet(act))
-            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-        else
-            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    act.getSupportFragmentManager().popBackStack();
-                    return;
-                }
-            });
+//        if (NetworkHelper.checkActiveInternet(act))
+//            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+//        else
+//            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    act.getSupportFragmentManager().popBackStack();
+//                    return;
+//                }
+//            });
 
-//        getPollForCreatedUser("http://192.168.0.112:3000/polls/v1/pollList");
-        mCurrentPollList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            /**
-             * Callback method to be invoked when the RecyclerView has been scrolled. This will be
-             * called after the scroll has completed.
-             * <p>
-             * This callback will also be called if visible item range changes after a layout
-             * calculation. In that case, dx and dy will be 0.
-             *
-             * @param recyclerView The RecyclerView which scrolled.
-             * @param dx           The amount of horizontal scroll.
-             * @param dy           The amount of vertical scroll.
-             */
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                visibleItemCount = mRecyclerView.getChildCount();
-                totalItemCount = mLayoutManager.getItemCount();
-                firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
-
-                if (loading) {
-                    if (totalItemCount > previousTotal) {
-                        loading = false;
-                        previousTotal = totalItemCount;
-                    }
-                }
-                if (!loading && (totalItemCount - visibleItemCount)
-                        <= (firstVisibleItem + visibleThreshold)) {
-                    // End has been reached
-
-                    Log.i("Yaeye!", "end called");
-
-                    // Do something
-                    makeToast("End Called");
-
-                    loading = true;
-                }
-            }
-        });
     }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -270,34 +263,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
     }
 
-    private View createFooterView() {
-        View footerView = LayoutInflater.from(swipeRefreshLayout.getContext())
-                .inflate(R.layout.layout_footer, null);
-        footerProgressBar = (ProgressBar) footerView
-                .findViewById(R.id.footer_pb_view);
-        footerImageView = (ImageView) footerView
-                .findViewById(R.id.footer_image_view);
-        footerTextView = (TextView) footerView
-                .findViewById(R.id.footer_text_view);
-        footerProgressBar.setVisibility(View.GONE);
-        footerImageView.setVisibility(View.VISIBLE);
-        footerImageView.setImageResource(R.drawable.arrow_refresh);
-        footerTextView.setText("Push");
-        return footerView;
-    }
-
-    private View createHeaderView() {
-        View headerView = LayoutInflater.from(swipeRefreshLayout.getContext())
-                .inflate(R.layout.layout_head, null);
-        progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
-        textView = (TextView) headerView.findViewById(R.id.text_view);
-        textView.setText("Pull Down To Refresh");
-        imageView = (ImageView) headerView.findViewById(R.id.image_view);
-        imageView.setVisibility(View.VISIBLE);
-        imageView.setImageResource(R.drawable.arrow_refresh);
-        progressBar.setVisibility(View.GONE);
-        return headerView;
-    }
 
     private String showPollParams() {
         JSONObject mShowPollOnject = new JSONObject();
@@ -314,8 +279,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                mCurrentPollList.setVisibility(View.VISIBLE);
-                mPollError.setVisibility(View.GONE);
                 Log.e("Poll List Response", "" + response.toString());
                 if (response.equals("[]"))
                     makeToast("No records found");
@@ -329,6 +292,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             @Override
             public void onRequestFailed(Exception e) {
                 mCurrentPollList.setVisibility(View.GONE);
+                mPollNoError.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
                 makeToast("Failed to connect to server");
             }
@@ -361,6 +325,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                 }
             }
             refreshCurrentPollListview();
+            mSwipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

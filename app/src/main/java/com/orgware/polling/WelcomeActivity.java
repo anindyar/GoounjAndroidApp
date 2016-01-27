@@ -169,39 +169,6 @@ public class WelcomeActivity extends BaseActivity {
             }
         }
 
-//        if (requestCode == REQUEST_CODE_LOCATION) {
-//            if (grantResults.length == 1
-//                    && grantResults[0] == MockPackageManager.PERMISSION_GRANTED) {
-//                // success!
-//
-//            } else {
-////                PopUp.showAlertDialog(act, Sorry, "Permission Cancelled");
-//            }
-//        }
-//
-//        if (requestCode == INTERNET_CODE || requestCode == GPS_CODE) {
-//            if (grantResults.length == 1
-//                    && grantResults[0] == MockPackageManager.PERMISSION_GRANTED) {
-//                try {
-//                    if (preferences.getString(COUNTRY, "").equals("")) {
-//                        startService(new Intent(this, CurrentLocationService.class));
-//                        checkInternetAndGpsConnection();
-//                    } else
-//                        checkInternetConnection();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
-////                PopUp.showAlertDialog(act, Sorry, "Permission Cancelled");
-//                Methodutils.message(this, "Permission Denied", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        finish();
-//                    }
-//                });
-//            }
-//
-//        }
     }
 
     private void checkInternetAndGpsConnection() throws Exception {

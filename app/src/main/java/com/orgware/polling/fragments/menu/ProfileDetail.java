@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -89,8 +90,9 @@ public class ProfileDetail extends BaseFragment implements CompoundButton.OnChec
     }
 
     private void showGenderDialog() {
-        mGenderDialog = new Dialog(act);
+        mGenderDialog = new Dialog(act, R.style.dialog);
         mGenderDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mGenderDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         mGenderDialog.setContentView(R.layout.dialog_gender);
         mMale = (RadioButton) mGenderDialog.findViewById(R.id.gender_male);
         mFemale = (RadioButton) mGenderDialog.findViewById(R.id.gender_female);

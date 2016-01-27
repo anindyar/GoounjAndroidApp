@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -53,8 +54,9 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     CurrentPollAdapter mAdapter;
     int limit = 15;
     RelativeLayout mPollNoError, mPollError;
-    private SuperSwipeRefreshLayout swipeRefreshLayout;
+    //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     // Header View
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar progressBar;
     private TextView textView;
     private ImageView imageView;
@@ -87,49 +89,11 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mHistoryPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
         mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
-        swipeRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
-        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
-        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
-        swipeRefreshLayout.setFooterView(null);
-        swipeRefreshLayout.setTargetScrollWithLayout(true);
-        swipeRefreshLayout
-                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
-
-                    @Override
-                    public void onRefresh() {
-                        textView.setText("Pull Down To Refresh");
-                        imageView.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        if (NetworkHelper.checkActiveInternet(act)) {
-                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
-                            progressBar.setVisibility(View.GONE);
-                        } else
-                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    act.getSupportFragmentManager().popBackStack();
-                                    return;
-                                }
-                            });
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onPullDistance(int distance) {
-                        // pull distance
-                    }
-
-                    @Override
-                    public void onPullEnable(boolean enable) {
-                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView.setRotation(enable ? 180 : 0);
-                    }
-                });
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.home_bg, R.color.bg, R.color.tab_opinion, R.color.tab_quick, R.color.tab_social, R.color.tab_survey);
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
 //        ((MainHomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -200,18 +164,18 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 });
     }
 
-    private View createHeaderView() {
-        View headerView = LayoutInflater.from(swipeRefreshLayout.getContext())
-                .inflate(R.layout.layout_head, null);
-        progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
-        textView = (TextView) headerView.findViewById(R.id.text_view);
-        textView.setText("Pull Down To Refresh");
-        imageView = (ImageView) headerView.findViewById(R.id.image_view);
-        imageView.setVisibility(View.VISIBLE);
-        imageView.setImageResource(R.drawable.arrow_refresh);
-        progressBar.setVisibility(View.GONE);
-        return headerView;
-    }
+//    private View createHeaderView() {
+//        View headerView = LayoutInflater.from(swipeRefreshLayout.getContext())
+//                .inflate(R.layout.layout_head, null);
+//        progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
+//        textView = (TextView) headerView.findViewById(R.id.text_view);
+//        textView.setText("Pull Down To Refresh");
+//        imageView = (ImageView) headerView.findViewById(R.id.image_view);
+//        imageView.setVisibility(View.VISIBLE);
+//        imageView.setImageResource(R.drawable.arrow_refresh);
+//        progressBar.setVisibility(View.GONE);
+//        return headerView;
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -219,16 +183,39 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         setHasOptionsMenu(true);
 //        ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
 //        ((HomeActivity) act).openSearch.setOnClickListener(this);
-        if (NetworkHelper.checkActiveInternet(act))
-            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
-        else
-            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    act.getSupportFragmentManager().popBackStack();
-                    return;
-                }
-            });
+
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (NetworkHelper.checkActiveInternet(act))
+                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+                else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
+            }
+        });
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (NetworkHelper.checkActiveInternet(act))
+                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+                else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
+            }
+        });
+
     }
 
 
@@ -247,8 +234,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                mHistoryPollList.setVisibility(View.VISIBLE);
-                mPollError.setVisibility(View.GONE);
+//                mHistoryPollList.setVisibility(View.VISIBLE);
+//                mPollError.setVisibility(View.GONE);
                 if (response.equals("[]"))
                     makeToast("No records found");
                 else
@@ -263,30 +250,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
             public void onRequestFailed(Exception e) {
                 mHistoryPollList.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
-//                if (e == null)
-//                    Methodutils.messageWithTitle(act, "Failed", "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            act.getSupportFragmentManager().popBackStack();
-//                        }
-//                    });
-//                else {
-//                    if (e.getMessage() == null)
-//                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                act.getSupportFragmentManager().popBackStack();
-//                            }
-//                        });
-//                    else
-//                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                act.getSupportFragmentManager().popBackStack();
-//                            }
-//                        });
-//
-//                }
             }
         });
         processor.execute(showPollParams().toString());
@@ -307,6 +270,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 }
             }
             refreshCurrentPollListview();
+            mSwipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -329,7 +293,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

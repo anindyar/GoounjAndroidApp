@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.orgware.polling.utils.SuperSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:visibility="visible">
+        android:layout_alignParentTop="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/currentPollListview"
@@ -85,7 +84,7 @@
                 android:textSize="@dimen/txtVeryLarge" />
 
         </RelativeLayout>
-    </RelativeLayout>
+    </FrameLayout>
 
 
-</com.orgware.polling.utils.SuperSwipeRefreshLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -28,6 +28,8 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
     </style>
 
     <style name="CustomDialog" parent="@android:style/Theme.Dialog">
