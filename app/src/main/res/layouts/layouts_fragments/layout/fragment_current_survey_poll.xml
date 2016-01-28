@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_create"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/currentPollListview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/layout_poll_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_small"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgPoll_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_error_poll" />
+
+                <TextView
+                    android:id="@+id/txtPollErrorThanks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPoll_error"
+                    android:gravity="center_horizontal"
+                    android:text="Thanks For Your Patience While \n We Get It Fixed"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtVeryLarge" />
+
+                <TextView
+                    android:id="@+id/txtPollErrorTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtPollErrorThanks"
+                    android:gravity="center_horizontal"
+                    android:text="Looks like we almost found your page"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtVeryLarge" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_no_poll_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_small"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgNoPoll_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_message_poll_logo" />
+
+                <TextView
+                    android:id="@+id/txtNoPollErrorThanks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgNoPoll_error"
+                    android:gravity="center_horizontal"
+                    android:text="Oops No Poll Lines \n Open Right Now"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtVeryLarge" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/home_bg"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnCreate"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/home_bg"
+            android:drawableLeft="@drawable/ic_create"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small"
+            android:text="CREATE"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+    </LinearLayout>
+</RelativeLayout>

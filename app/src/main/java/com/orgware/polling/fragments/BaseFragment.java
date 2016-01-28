@@ -18,7 +18,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +48,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -184,12 +182,6 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         Log.e("Date", "" + sb.toString());
         return sb.toString();
     }
-
-//    public String splitFromString(String serverDate) {
-//        Date date = new Date(serverDate);
-//        CharSequence s = DateFormat.format("yyyy-MM-dd HH:MM", date);
-//        return s.toString();
-//    }
 
     public List<ContactItem> getNumber(ContentResolver cr, List<ContactItem> contactList) {
         Cursor phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);

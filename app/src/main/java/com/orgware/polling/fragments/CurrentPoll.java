@@ -68,7 +68,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // Header View
-    private LinearLayout mBtnCreatePoll;
     private ProgressBar progressBar;
     private TextView textView;
     private ImageView imageView;
@@ -106,7 +105,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         mLayoutManager = new LinearLayoutManager(act);
-        (mBtnCreatePoll = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
         mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mCurrentPollList.setLayoutManager(mLayoutManager);
@@ -119,13 +117,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (dashboardId == 0) {
-            act.setTitle("Poll");
-            mBtnCreatePoll.setVisibility(View.GONE);
-        } else {
-            act.setTitle("Survey");
-            mBtnCreatePoll.setVisibility(View.VISIBLE);
-        }
+        act.setTitle("Poll");
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -223,20 +215,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 //            JSONArray objectArray = object.optJSONArray(response);
             JSONArray objectArray = new JSONArray(response);
             itemList.clear();
-            if (preferences.getInt(DASHBOARD_ID, 0) == 0) {
-                for (int i = 0; i < objectArray.length(); i++) {
-                    JSONObject objectPolls = objectArray.optJSONObject(i);
-                    Log.e("Array Values", "" + i);
-                    if (objectPolls.optString("isAnswered").equals("0")) {
-                        itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
-                                objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
-                    }
-                }
-            }
-            if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
-                for (int i = 0; i < objectArray.length(); i++) {
-                    JSONObject objectPolls = objectArray.optJSONObject(i);
-                    Log.e("Array Values", "" + i);
+            for (int i = 0; i < objectArray.length(); i++) {
+                JSONObject objectPolls = objectArray.optJSONObject(i);
+                Log.e("Array Values", "" + i);
+                if (objectPolls.optString("isAnswered").equals("0")) {
                     itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
                             objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
                 }
@@ -299,15 +281,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 //                setQuestions(mQuestionsArray.length(), mQuestionsArray);
             else
                 makeToast("Sorry,No Questions to answer!");
-            if (dashboardId == 0) {
-                ((MainHomeActivity) act).setNewFragment(new CurrentPollPager(), "Pager", true);
-//                ((MainHomeActivity) act).mSearchPollsTxt.setText("Poll");
-                ((MainHomeActivity) act).setTitle("Poll");
-            } else if (dashboardId == 1) {
-                ((MainHomeActivity) act).setNewFragment(new SurveyDetail(), "Pager", true);
-                ((MainHomeActivity) act).setTitle("Survey");
-            } else
-                Log.e("No DashBoard", "" + dashboardId);
+
+            ((MainHomeActivity) act).setNewFragment(new CurrentPollPager(), "Pager", true);
+            ((MainHomeActivity) act).setTitle("Poll");
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -321,10 +298,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onClick(View v) {
-//        Methodutils.showListSearch(act, itemList, mCurrentPollList);
-        if (v.getId() == R.id.layout_create) {
-            ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
-        }
     }
 
     @Override

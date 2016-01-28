@@ -55,7 +55,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     CurrentPollAdapter mAdapter;
     int limit = 15;
     RelativeLayout mPollNoError, mPollError;
-    private LinearLayout mBtnCreatePoll;
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     // Header View
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -91,7 +90,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
-        (mBtnCreatePoll = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mHistoryPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
@@ -152,9 +150,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        if (preferences.getInt(DASHBOARD_ID, 0) == 0) {
-            mBtnCreatePoll.setVisibility(View.GONE);
-        }
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
