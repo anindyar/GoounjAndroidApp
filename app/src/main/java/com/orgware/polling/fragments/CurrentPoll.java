@@ -20,8 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,6 +68,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // Header View
+    private LinearLayout mBtnCreatePoll;
     private ProgressBar progressBar;
     private TextView textView;
     private ImageView imageView;
@@ -96,81 +99,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
-//        swipeRefreshLayout.setHeaderViewBackgroundColor(getResources().getColor(R.color.ash_bg));
-//        swipeRefreshLayout.setHeaderView(createHeaderView());// add headerView
-//        swipeRefreshLayout.setFooterView(null);
-//        swipeRefreshLayout.setTargetScrollWithLayout(true);
-//        swipeRefreshLayout
-//                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
-//
-//                    @Override
-//                    public void onRefresh() {
-//                        textView.setText("Pull Down To Refresh");
-//                        imageView.setVisibility(View.GONE);
-//                        progressBar.setVisibility(View.VISIBLE);
-//                        if (NetworkHelper.checkActiveInternet(act)) {
-//                            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
-//                            progressBar.setVisibility(View.GONE);
-//                        } else
-//                            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    act.getSupportFragmentManager().popBackStack();
-//                                    return;
-//                                }
-//                            });
-//                        swipeRefreshLayout.setRefreshing(false);
-//                    }
-//
-//                    @Override
-//                    public void onPullDistance(int distance) {
-//                        // pull distance
-//                    }
-//
-//                    @Override
-//                    public void onPullEnable(boolean enable) {
-//                        textView.setText(enable ? "Release To Refresh" : "Pull Down To Refresh");
-//                        imageView.setVisibility(View.VISIBLE);
-//                        imageView.setRotation(enable ? 180 : 0);
-//                    }
-//                });
-//        ((HomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (!s.toString().equals("")) {
-//                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
-//                    for (int i = 0; i < itemList.size(); i++) {
-//                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
-//                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
-//                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
-//                            filteredTitles.add(itemList.get(i));
-//                        }
-//                    }
-//                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 1);
-//                    mCurrentPollList.setAdapter(mAdapter);
-////                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
-////                    mRecyclerView.setAdapter(mAdapter);
-//                } else {
-//                    mAdapter = new CurrentPollAdapter(act, itemList, 1);
-//                    mCurrentPollList.setAdapter(mAdapter);
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (s.length() > 0)
-//                    Log.e("Search", "Yes");
-//                else
-//                    Log.e("Search", "No");
-////                    makeToast("No records found");
-//
-//            }
-//        });
         return v;
     }
 
@@ -178,6 +106,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         mLayoutManager = new LinearLayoutManager(act);
+        (mBtnCreatePoll = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
         mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mCurrentPollList.setLayoutManager(mLayoutManager);
@@ -192,8 +121,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         if (dashboardId == 0) {
             act.setTitle("Poll");
+            mBtnCreatePoll.setVisibility(View.GONE);
         } else {
             act.setTitle("Survey");
+            mBtnCreatePoll.setVisibility(View.VISIBLE);
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -227,27 +158,13 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                     });
             }
         });
-//        ((HomeActivity) act).mPageTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poll_logo, 0, 0, 0);
-//        ((HomeActivity) act).openSearch.setVisibility(View.VISIBLE);
-//        ((HomeActivity) act).openSearch.setOnClickListener(this);
-//        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-//        if (NetworkHelper.checkActiveInternet(act))
-//            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-//        else
-//            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    act.getSupportFragmentManager().popBackStack();
-//                    return;
-//                }
-//            });
 
     }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -404,7 +321,10 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onClick(View v) {
-        Methodutils.showListSearch(act, itemList, mCurrentPollList);
+//        Methodutils.showListSearch(act, itemList, mCurrentPollList);
+        if (v.getId() == R.id.layout_create) {
+            ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+        }
     }
 
     @Override

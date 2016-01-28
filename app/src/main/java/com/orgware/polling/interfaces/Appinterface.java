@@ -90,7 +90,7 @@ public interface Appinterface {
     /*Create Poll*/
     String CREATE_POLL_URL = "polls/v1/poll", POLL_NAME = "pollName", POLL_ISBOOST = "isBoost", POLL_VISIBILITY_TYPE = "visibilityType", POLL_REWARD_TYPE = "rewardType",
             POLL_CATEGORY = "category", POLL_CREATE_USERID = "createdUserId", POLL_TYPE = "pollType", POLL_QUESTION = "question", POLL_QUESTION_TYPE = "questionType", POLL_choicesS = "choices",
-            POLL_AUDIENCE = "audience", SURVEY_POLL = "survey", OPINION_POLL = "opinion", QUICK_POLL = "quick", SOCIAL_POLL = "social", QUESTION = "question", CHOICES = "choices", QUESTION_ID = "questionId";
+            POLL_AUDIENCE = "audience", FEEDBACK = "FEEDBACK", SURVEY_POLL = "survey", OPINION_POLL = "opinion", QUICK_POLL = "quick", SOCIAL_POLL = "social", QUESTION = "question", CHOICES = "choices", QUESTION_ID = "questionId";
 
     /*Delete Poll*/
     String DELETE_POLL_URL = "polls/v1/poll/:id";

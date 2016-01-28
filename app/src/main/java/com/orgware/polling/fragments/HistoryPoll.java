@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     CurrentPollAdapter mAdapter;
     int limit = 15;
     RelativeLayout mPollNoError, mPollError;
+    private LinearLayout mBtnCreatePoll;
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     // Header View
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -89,50 +91,19 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
+        (mBtnCreatePoll = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         mHistoryPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
         mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.home_bg, R.color.bg, R.color.tab_opinion, R.color.tab_quick, R.color.tab_social, R.color.tab_survey);
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
-//        ((MainHomeActivity) act).mSearchPollsTxt.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (!s.toString().equals("")) {
-//                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
-//                    for (int i = 0; i < itemList.size(); i++) {
-//                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
-//                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
-//                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
-//                            filteredTitles.add(itemList.get(i));
-//                        }
-//                    }
-//                    mAdapter = new CurrentPollAdapter(act, filteredTitles, 2);
-//                    mHistoryPollList.setAdapter(mAdapter);
-////                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
-////                    mRecyclerView.setAdapter(mAdapter);
-//                } else {
-//                    mAdapter = new CurrentPollAdapter(act, itemList, 2);
-//                    mHistoryPollList.setAdapter(mAdapter);
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (s.length() > 0)
-//                    Log.e("Search", "Yes");
-//                else
-//                    Log.e("Search", "No");
-////                    makeToast("No records found");
-//
-//            }
-//        });
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -181,9 +152,9 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-//        ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
-//        ((HomeActivity) act).openSearch.setOnClickListener(this);
-
+        if (preferences.getInt(DASHBOARD_ID, 0) == 0) {
+            mBtnCreatePoll.setVisibility(View.GONE);
+        }
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -293,7 +264,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

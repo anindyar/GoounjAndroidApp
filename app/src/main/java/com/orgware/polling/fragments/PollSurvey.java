@@ -187,7 +187,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
             userdetails.put(POLL_REWARD_TYPE, "free");
             userdetails.put(POLL_CATEGORY, "" + txtCategory.getText().toString());
             userdetails.put(POLL_CREATE_USERID, "" + preferences.getString(USER_ID, ""));
-            userdetails.put(POLL_TYPE, SURVEY_POLL);
+            userdetails.put(POLL_TYPE, FEEDBACK);
             userdetails.put(POLL_QUESTION_LIST, mQtsOne);
             userdetails.put(POLL_AUDIENCE, mContactJsonArray);
             Log.e("jsonmessage", userdetails.toString());
@@ -343,7 +343,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                Methodutils.messageWithTitle(act, "Success", "Survey Poll Created successfully", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Success", "Feedback Poll Created successfully", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         act.getSupportFragmentManager().popBackStack();
@@ -356,7 +356,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll ", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        return;
                     }
                 });
             }
