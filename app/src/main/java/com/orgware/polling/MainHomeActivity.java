@@ -31,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.orgware.polling.fragments.HomeDashboard;
 import com.orgware.polling.fragments.ResultPoll;
@@ -39,9 +38,7 @@ import com.orgware.polling.utils.Methodutils;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.fabric.sdk.android.Fabric;
 
-import java.io.File;
 
 public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -78,7 +75,6 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                Fabric.with(MainHomeActivity.this, new Crashlytics());
                 hideSoftInput();
 
             }

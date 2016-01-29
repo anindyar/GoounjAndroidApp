@@ -2,235 +2,242 @@
 <items version="2" >
 
     <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-09b98c8307f2389d67980fbf1dddd860b78705b2.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-97000748f1585def903a56c77eb6ab03df4ba516.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="95758a2905669affbffc5ddd262921d375674fad">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-514d687a935db7047284d3c505ecbf6064df735c.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-cf67a87f72410eb689faedbc8b35f571ace22ba7.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3178362320bcf51228835b60ff978efadfd1f783">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-eb55887742fcf719adfbcd85a5cb048f0064bf17.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="997773777cf3904c11d6764fe3b7668538220e49">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-8220bc4c454635c490a9ef3ae2d1b995d8b6ef05.jar" />
-    </item>
-    <item
-        jar="/home/nandagopal/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-236d1f22dca5c8f5c82abdf5c56205b668a23e56.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-ddfa3e451bea22e1c00f2f48ccff9eea650c4af8.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="17449c47df35c754b257532052f1270c444f7993">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-52b4b26d6b3ca21bba0d7775a6f970baa9225ebb.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-bd4d1a165860bd01d1bc53aa8286b233a3d5db01.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-3c66190477bf121dd0e8e225d68fe8d2961b28e1.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-ea011e296bd6c8655d7aef08a82c7b057a9a1cee.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.4/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ad5bb101ced4d3939225c9b57e5a3d81547c1fbb">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-1171798e71e80c7b7b8e4d0a247f1a4f7db5cca3.jar" />
-    </item>
-    <item
-        jar="/home/nandagopal/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-0a6598bab1ea4870b578fa3cc730b59822b866fa.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.10/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="a5db9a2dd46d84285ef737f65030b74b6e8ee2a4">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-5f1265c82fdd536a0494e8a2f31a432f59ea8693.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-cb449ee17dda1d550fcbd32bd6d3884768473f23.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-5ad065beb6bdeb99e0d12a5d1e4aded673f5c54c.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/goounj-android/menudrawer/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="1e4aa0580e412a2b4e1e44e7051cf3a303ad2106">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-5bc463db30ebc5790c662245b731a766f35f47d5.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-39402a35d21d3a1a8ddfbaf5947a84598f613dda.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-3b722a953e27a7eec6cb5a58a30e4db959016268.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.5.5/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="611605b6b640c1558f9bdea41de8ff837ab68ca8">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-a625f02b932ae9c7ca41385092a0ab532cc79225.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-4dfaff9bc7b4fc8e611c74f5abda80ef47d902ac.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-efc399601028a7040f3b08b53f497ec24a5d41f3.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="482de223655d06253cc6a4955d653f8994169500">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-fae75d1d42d8242d0d69ab6fb7d9a1cead021329.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-5394c817a4e4c79730d9340017da613c6ffce9ca.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-4ec2ab5729d3a3d21f46e29ef20fa1b847644786.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-8dccdeea3ee74225ad7304f927e14239d5a87a16.jar" />
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-876e213119d262caa2bb22026ec2c6de4c7bcc28.jar" />
     </item>
     <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.8/jars/classes.jar"
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="c9ef45dcbd082cd63aac09a5e2cd443adb5df837">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-4a450d494365fb2a365b154b921cdf433995ac8d.jar" />
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-4895ecd0417b092f8ed8df66e6092dc164591e5e.jar" />
     </item>
     <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-65c4d0d9b8998c7751ea9913a9373d361da1bbd7.jar" />
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-681d78c0ceedf6b7007566d40d7e5dead8e37975.jar" />
     </item>
     <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.3.6/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="9af3b9b8114e685291aa00e6572b0a9131244956">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-ad322f2fa264b2491f78907fd8695f2801c3d2d2.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-bde4ecdbd50bd9340d332ebbb6dfbb0f492e0aed.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/classes-2d30189063b91609d0a6a381de11b977aa23ddea.jar" />
-    </item>
-    <item
-        jar="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/media/nandagopal/1ABEEBEDBEEBBF7F/WorkSpace Android/Goounj/Goounj New/goounj-android/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-1226a8b4a1152a347d6e61d5bcbc0fae6976b194.jar" />
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\internal_impl-23.1.1-c7f44915eefc1f51c07e9431835db08df9fe78c8.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-70282372405ac419b8d75ee618eabeb1f8a2072a.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-1ca948f3e369cb9ba67fad410bee6e2320d60a60.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-06f06474c04fdd015827f6e0b098d8647705c060.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-6c91f79000d8064cdfe6024e45e81674578c84a0.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-ba3ad20a58d57a76735071017664e519b48626b6.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-48d29f3a74f529bc3105cede4cc3fa3cca831e18.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-208a766db22e023dd7604e67d7eb19f4f35b6570.jar" />
+    </item>
+    <item
+        jar="C:\Users\raja\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\support-annotations-23.1.1-41de12386376f4a7ca7ad6ffd3e2451a4c3f68e6.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-474d727fe4a63a1d93bc84d67aba294af60c903f.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-d805190443932eadcbb7605dd7619c2bdc368385.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-4a25ba122546a809a5875865fcb8934b2e504ce7.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-a97bc3c975c6392fcf097c70cc2a004532382257.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-3caf1bae78cb812278232110c663f57b95b94162.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-0394525f896e2e257dbfd69e8ead52c275050169.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-167f04aec19781ae617e4d2c980813a249006514.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-ac2dba305d81b4de06461fe39ea9beb32da99842.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-e39d8a9640eba804f2f7d588660b9bd74ab97e4d.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-5a52c32b2f71232fe13d6a814a209d0f80d5f0bc.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-ca9f56f611fcf3e1b19458a5bb736c593aa05ce6.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-a64288ebfe8f49312d1142b58372030a4e70a035.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-918396eb3c76ea15a4cb1bb0bb4c9e1fe0890288.jar" />
+    </item>
+    <item
+        jar="C:\Users\raja\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\picasso-2.5.2-4d1eef5b52ffbcb2015729187940027a8b22fb7b.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-54952dd70e9d7d937ef0cb492aeff064303d8b14.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.makeramen\roundedimageview\2.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="814fc0c3ec69a944add398217d90077301501a74">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-2fd5e3ae6d926a51e147fbadf5b3cec4f432211b.jar" />
+    </item>
+    <item
+        jar="C:\Users\raja\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\gson-2.2.4-ec88826e697c20fbf893115bb42d4669ca40e8e6.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-e9103b92df7cb9266794995ca67b22e7c4b420a9.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-be00805e9006de508722d528dace3b165899a37a.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-7a32770449f8102a23f748f078ee826320e35c2b.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\internal_impl-22.2.0-f132eadaacc5505071802a296292b91c6b367213.jar" />
+    </item>
+    <item
+        jar="E:\goounj-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="E:\goounj-android\app\build\intermediates\pre-dexed\release\classes-7880c08f76b4248da453ae82c5685588d9517396.jar" />
     </item>
 
 </items>
