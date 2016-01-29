@@ -85,7 +85,7 @@
 
                 <RadioGroup
                     android:id="@+id/radioGroup1"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -125,9 +125,10 @@
 
                 <TextView
                     android:id="@+id/txtCategory"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_corner"
                     android:drawableRight="@drawable/arrow_right"
@@ -545,8 +546,7 @@
                                 android:layout_toRightOf="@+id/text_opinion_qts_one_choice_six"
                                 android:clickable="false"
                                 android:editable="false"
-                                android:gravity="bottom"
-                                android:paddingBottom="@dimen/padding_small"
+                                android:gravity="center_vertical"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -966,8 +966,7 @@
                                 android:layout_toRightOf="@+id/text_opinion_qts_two_choice_six"
                                 android:clickable="false"
                                 android:editable="false"
-                                android:gravity="bottom"
-                                android:paddingBottom="@dimen/padding_small"
+                                android:gravity="center_vertical"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -1394,9 +1393,8 @@
                                 android:layout_toRightOf="@+id/text_opinion_qts_three_choice_six"
                                 android:clickable="false"
                                 android:editable="false"
-                                android:gravity="bottom"
+                                android:gravity="center_vertical"
                                 android:padding="@dimen/padding_small"
-                                android:paddingBottom="@dimen/padding_small"
                                 android:singleLine="true"
                                 android:text="No Opinion" />
                         </RelativeLayout>
@@ -1422,31 +1420,31 @@
                     android:textSize="@dimen/txtNormal"
                     android:visibility="gone" />
 
-                <RelativeLayout
-                    android:id="@+id/check_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/choosegroup"
-                    android:padding="10dp">
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/check_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/choosegroup"-->
+                <!--android:padding="10dp">-->
 
-                    <TextView
-                        android:id="@+id/dc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:text="Device Contacts"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                <!--<TextView-->
+                <!--android:id="@+id/dc"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:text="Device Contacts"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="15dp" />-->
 
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="15dp"
-                        android:checked="true" />
-                </RelativeLayout>
+                <!--<CheckBox-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="15dp"-->
+                <!--android:checked="true" />-->
+                <!--</RelativeLayout>-->
 
                 <Button
                     android:id="@+id/btnOpinionContact"

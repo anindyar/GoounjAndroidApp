@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.interfaces.Appinterface;

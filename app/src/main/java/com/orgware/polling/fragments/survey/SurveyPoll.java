@@ -28,7 +28,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.ContactGridviewAdapter;

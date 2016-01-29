@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.fragments.chat.ChatHome;
@@ -79,7 +78,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
                 editor.putInt(DASHBOARD_ID, 0).commit();
                 break;
             case R.id.home_chat:
-                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
+//                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
                 break;
             case R.id.home_survey:
                 ((MainHomeActivity) act).setNewFragment(new SurveyPoll(), "Poll Pager", true);

@@ -686,16 +686,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:visibility="gone"
                     android:text="Choose Audience Group From"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/check_lay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/dc"

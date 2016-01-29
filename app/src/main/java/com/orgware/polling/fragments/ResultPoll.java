@@ -28,7 +28,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.ChoicesListviewAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
@@ -383,7 +382,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

@@ -302,9 +302,9 @@ public class ContactGrid extends BaseFragment implements AdapterView.OnItemClick
 //                String s=setArguments("Contact");
                 act.getSupportFragmentManager().popBackStack();
                 break;
-            case R.id.btn_contacts_back:
-                act.getSupportFragmentManager().popBackStack();
-                break;
+//            case R.id.btn_contacts_back:
+//                act.getSupportFragmentManager().popBackStack();
+//                break;
         }
     }
 }

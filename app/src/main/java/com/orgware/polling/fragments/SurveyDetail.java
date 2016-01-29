@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.ChoicesListviewAdapter;
 import com.orgware.polling.interfaces.RestApiListener;

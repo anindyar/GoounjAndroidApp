@@ -28,7 +28,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.ContactGridviewAdapter;
@@ -66,6 +65,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     RelativeLayout mPollNoError, mPollError;
     int firstVisibleItem, visibleItemCount, totalItemCount;
     LinearLayoutManager mLayoutManager;
+    private int mLowerLimit = 0, mUpperLimit = 10;
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // Header View
@@ -120,19 +120,11 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Poll");
 
-        mCurrentPollList.addOnScrollListener(new EndlessRecyclerViewListener(mLayoutManager) {
-            @Override
-            public void onLoadMore(int current_page) {
-                makeToast("Last Count");
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -148,7 +140,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             @Override
             public void run() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -165,7 +157,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -182,12 +174,12 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
 
-    private String showPollParams() {
+    private String showPollParams(int mLowerLimit, int mUpperLimit) {
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put("lowerLimit", 0);
-            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("lowerLimit", mLowerLimit);
+            mShowPollOnject.put("upperLimit", mUpperLimit);
             mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,7 +187,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         return mShowPollOnject.toString();
     }
 
-    private void getPollForCreatedUser(String url, boolean pullDownType) {
+    private void getPollForCreatedUser(int mLowerLimit, int mUpperLimit, String url, boolean pullDownType) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
@@ -217,7 +209,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                 makeToast("Failed to connect to server");
             }
         });
-        processor.execute(showPollParams().toString());
+        processor.execute(showPollParams(mLowerLimit, mUpperLimit).toString());
     }
 
     public void showPollList(String response) {
@@ -249,7 +241,11 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             mAdapter = new CurrentPollAdapter(act, itemList, 1);
             mAdapter.setOnItemClickListener(this);
             mCurrentPollList.setAdapter(mAdapter);
+            mLowerLimit = mLowerLimit + 10;
+            mUpperLimit = mUpperLimit + 10;
         } else {
+            mLowerLimit = 0;
+            mUpperLimit = 10;
             mCurrentPollList.setVisibility(View.GONE);
             mPollNoError.setVisibility(View.VISIBLE);
         }

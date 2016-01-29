@@ -39,7 +39,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     EditText mEdittextopinionPollName, opinion_ques_one, opinion_ques_two, opinion_ques_three, mTxtQtsOneOne, mTxtQtsOneTwo, mTxtQtsOneThree, mTxtQtsOneFour, mTxtQtsOneFive,
             mTxtQtsTwoOne, mTxtQtsTwoTwom, mTxtQtsTwoThree, mTxtQtsTwoFour, mTxtQtsTwoFive, mTxtQtsThOne, mTxtQtsThTwo, mTxtQtsThThree, mTxtQtsThFour, mTxtQtsThFive;
     TextView btnReset_opinion, btnSubmit_opinion;
-    TextView txtCategory;
+    TextView txtCategory, txtNoOpinionOne, txtNoOpinionTwo, txtNoOpinionThree;
     JSONArray mContactArray = new JSONArray();
     JSONArray mChoicesArrayOne, mChoicesArrayTwo, mChoicesArrayThree;
     Button btnContactOpinion;
@@ -67,6 +67,9 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         View v = inflater.inflate(R.layout.fragment_opinion_poll, container, false);
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
         txtCategory.setOnClickListener(this);
+        txtNoOpinionOne = (TextView) v.findViewById(R.id.text_opinion_qts_one_choice_six);
+        txtNoOpinionTwo = (TextView) v.findViewById(R.id.text_opinion_qts_two_choice_six);
+        txtNoOpinionThree = (TextView) v.findViewById(R.id.text_opinion_qts_three_choice_six);
         (btnContactOpinion = (Button) v.findViewById(R.id.btnOpinionContact)).setOnClickListener(this);
         mLayoutQtsOne = (LinearLayout) v.findViewById(R.id.layout_qts_one);
         mLayoutQtsTwo = (LinearLayout) v.findViewById(R.id.layout_qts_two);
@@ -163,6 +166,9 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRbNumQtsOne.setChecked(true);
+        txtNoOpinionOne.setText("3");
+        txtNoOpinionTwo.setText("3");
+        txtNoOpinionThree.setText("3");
     }
 
     /**
@@ -697,6 +703,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         }
         if (mRbQtsOneChoiceTwo.isChecked()) {
             editor.putInt(OPNINON_RB_ONE, 2).commit();
+            txtNoOpinionOne.setText("3");
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
             mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
             mLayoutQtsOneThree.setVisibility(View.GONE);
@@ -704,6 +711,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsOneFive.setVisibility(View.GONE);
         }
         if (mRbQtsOneChoiceThree.isChecked()) {
+            txtNoOpinionOne.setText("4");
             editor.putInt(OPNINON_RB_ONE, 3).commit();
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
             mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
@@ -713,6 +721,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         }
 
         if (mRbQtsOneChoiceFour.isChecked()) {
+            txtNoOpinionOne.setText("5");
             editor.putInt(OPNINON_RB_ONE, 4).commit();
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
             mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
@@ -721,6 +730,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsOneFive.setVisibility(View.GONE);
         }
         if (mRbQtsOneChoiceFive.isChecked()) {
+            txtNoOpinionOne.setText("6");
             editor.putInt(OPNINON_RB_ONE, 5).commit();
             mLayoutQtsOneOne.setVisibility(View.VISIBLE);
             mLayoutQtsOneTwo.setVisibility(View.VISIBLE);
@@ -739,6 +749,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsTwoFive.setVisibility(View.GONE);
         }
         if (mRbQtsTwoChoiceTwo.isChecked()) {
+            txtNoOpinionTwo.setText("3");
             editor.putInt(OPNINON_RB_TWO, 2).commit();
             mLayoutQtsTwoOne.setVisibility(View.VISIBLE);
             mLayoutQtsTwoTwo.setVisibility(View.VISIBLE);
@@ -747,6 +758,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsTwoFive.setVisibility(View.GONE);
         }
         if (mRbQtsTwoChoiceThree.isChecked()) {
+            txtNoOpinionTwo.setText("4");
             editor.putInt(OPNINON_RB_TWO, 3).commit();
             mLayoutQtsTwoOne.setVisibility(View.VISIBLE);
             mLayoutQtsTwoTwo.setVisibility(View.VISIBLE);
@@ -756,6 +768,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         }
 
         if (mRbQtsTwoChoiceFour.isChecked()) {
+            txtNoOpinionTwo.setText("5");
             editor.putInt(OPNINON_RB_TWO, 4).commit();
             mLayoutQtsTwoOne.setVisibility(View.VISIBLE);
             mLayoutQtsTwoTwo.setVisibility(View.VISIBLE);
@@ -764,6 +777,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsTwoFive.setVisibility(View.GONE);
         }
         if (mRbQtsTwoChoiceFive.isChecked()) {
+            txtNoOpinionTwo.setText("6");
             editor.putInt(OPNINON_RB_TWO, 5).commit();
             mLayoutQtsTwoOne.setVisibility(View.VISIBLE);
             mLayoutQtsTwoTwo.setVisibility(View.VISIBLE);
@@ -782,6 +796,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceTwo.isChecked()) {
+            txtNoOpinionTwo.setText("3");
             editor.putInt(OPNINON_RB_THREE, 2).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -790,6 +805,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceThree.isChecked()) {
+            txtNoOpinionTwo.setText("4");
             editor.putInt(OPNINON_RB_THREE, 3).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -799,6 +815,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         }
 
         if (mRbQtsThChoiceFour.isChecked()) {
+            txtNoOpinionTwo.setText("5");
             editor.putInt(OPNINON_RB_THREE, 4).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -807,6 +824,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceFive.isChecked()) {
+            txtNoOpinionTwo.setText("6");
             editor.putInt(OPNINON_RB_THREE, 5).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);

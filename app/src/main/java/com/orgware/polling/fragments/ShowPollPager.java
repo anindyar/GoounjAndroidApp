@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.GridTabAdapter;

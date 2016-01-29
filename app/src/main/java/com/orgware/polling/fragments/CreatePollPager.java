@@ -11,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.orgware.polling.HomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.PollPagerAdapter;
 

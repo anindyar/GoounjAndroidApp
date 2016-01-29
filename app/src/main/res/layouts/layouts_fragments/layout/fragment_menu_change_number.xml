@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:background="@drawable/edit_text_corner"
+            android:inputType="phone"
             android:padding="@dimen/padding_normal"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txtNormal" />
@@ -46,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:background="@drawable/edit_text_corner"
+            android:inputType="phone"
             android:padding="@dimen/padding_normal"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txtNormal" />
