@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,6 +60,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         editor.putBoolean(WELCOME_SCREEN, false).putString(OTP_VALUE, "").commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
+        toolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
         toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -136,6 +138,12 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         return true;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -205,7 +213,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
                 setMenuintent(6);
                 break;
         }
-        mDrawerLayout.closeDrawers();
+//        mDrawerLayout.closeDrawers();
         return false;
     }
 

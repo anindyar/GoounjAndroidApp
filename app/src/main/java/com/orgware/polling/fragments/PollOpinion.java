@@ -46,6 +46,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     JSONArray mQtsOne;
     JSONArray mContactJsonArray;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
+    int mPollType;
 
     @Override
     public void setTitle() {
@@ -54,6 +55,8 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPollType = getArguments().getInt(PAGER_COUNT);
+
         try {
             mContactJsonArray = new JSONArray("[]");
         } catch (Exception e) {
@@ -169,6 +172,15 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         txtNoOpinionOne.setText("3");
         txtNoOpinionTwo.setText("3");
         txtNoOpinionThree.setText("3");
+    }
+
+    private void filterPollType(int mPollType) {
+        switch (mPollType) {
+            case 1:
+                break;
+            case 2:
+                break;
+        }
     }
 
     /**

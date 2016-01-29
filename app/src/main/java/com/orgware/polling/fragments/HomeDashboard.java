@@ -19,7 +19,7 @@ import com.orgware.polling.fragments.vote.VotePager;
  * Created by nandagopal on 21/10/15.
  */
 public class HomeDashboard extends BaseFragment implements View.OnClickListener {
-    ImageView imgVote, imgPoll, imgChat, imgSurvey;
+    public ImageView imgVote, imgPoll, imgChat, imgSurvey;
     TextView mUsername;
 
     @Override

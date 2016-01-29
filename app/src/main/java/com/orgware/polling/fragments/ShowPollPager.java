@@ -97,10 +97,10 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnCreate:
-                ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
                 break;
             case R.id.layout_create:
-                ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
                 break;
         }
     }
@@ -157,7 +157,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

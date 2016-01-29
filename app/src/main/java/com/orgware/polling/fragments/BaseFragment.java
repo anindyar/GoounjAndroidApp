@@ -46,9 +46,12 @@ import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -191,11 +194,24 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         wanted = "" + tokenize.nextToken();
         unwanted = "" + tokenize.nextToken();
         StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
-        Log.e("Date", "" + tokenizer.nextToken());
-        String[] values = tokenizer.nextToken().split("-");
-        String day = values[2];
-        String month = values[1];
-        String date = "" + Methodutils.mMonthArray[Integer.parseInt(month)] + " " + day;
+        String values = tokenizer.nextToken();
+        String str_date = "13-09-2011";
+        Date date = null;
+        try {
+            DateFormat formatter;
+            formatter = new SimpleDateFormat("MMM dd");
+            date = (Date) formatter.parse(values);
+            System.out.println("Today is " + date.getTime());
+            Log.e("Date", "" + date.getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        StringTokenizer tokenizer_1 = new StringTokenizer(values, "-");
+//        String year = tokenizer_1.nextToken();
+//        String month = tokenizer_1.nextToken();
+//        String day = tokenizer_1.nextToken();
+//        String date = "" + Methodutils.mMonthArray[Integer.parseInt(month)] + " " + day;
+//        Log.e("MyDate", month + " - " + day);
         return date.toString();
     }
 

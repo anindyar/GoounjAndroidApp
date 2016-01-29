@@ -26,6 +26,7 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     PollPagerAdapter mAdapter;
     List<Fragment> mFragmentList;
     RadioGroup mRadioGroup;
+    int mPollType;
 
     @Override
     public void setTitle() {
@@ -34,17 +35,31 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-        mFragmentList = new ArrayList<>();
-        mFragmentList.add(setPagerFragment(new PollOpinion(),
-                mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new PollQuick(),
-                mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new PollSurvey(),
-                mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new PollSocial(),
-                mFragmentList.size()));
+
+        mPollType = getArguments().getInt(PAGER_COUNT);
+//        makeToast("" + type);
+        if (mPollType == 1) {
+
+            mFragmentList = new ArrayList<>();
+            mFragmentList.clear();
+            mFragmentList.add(setPagerFragment(new PollOpinion(),
+                    mPollType));
+            mFragmentList.add(setPagerFragment(new PollQuick(),
+                    mPollType));
+            mFragmentList.add(setPagerFragment(new PollSurvey(),
+                    mPollType));
+            mFragmentList.add(setPagerFragment(new PollSocial(),
+                    mPollType));
+        } else {
+            mFragmentList = new ArrayList<>();
+            mFragmentList.clear();
+            mFragmentList.add(setPagerFragment(new PollOpinion(),
+                    mPollType));
+            mFragmentList.add(setPagerFragment(new PollQuick(),
+                    mPollType));
+            mFragmentList.add(setPagerFragment(new PollSurvey(),
+                    mPollType));
+        }
 
         mAdapter = new PollPagerAdapter(
                 getChildFragmentManager(), mFragmentList);
@@ -71,12 +86,11 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        ((HomeActivity) act).mPageTitle.setText("Create Poll");
-//        ((HomeActivity) act).openHome.setVisibility(View.VISIBLE);
-//        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-//        ((HomeActivity) act).openClose.setVisibility(View.GONE);
-//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         mViewPager.setAdapter(mAdapter);
+        if (mPollType == 1)
+            mTabSocial.setVisibility(View.VISIBLE);
+        else
+            mTabSocial.setVisibility(View.GONE);
     }
 
     /**
@@ -111,7 +125,7 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     @Override
     public void onPageSelected(int position) {
 //        enableTabOnPoll(position);
-        enablePosition(position);
+        enablePosition(position, mPollType);
 
     }
 
@@ -130,15 +144,28 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
 
     }
 
-    public void enablePosition(int position) {
-        if (position == 0)
-            mTabOpinion.setChecked(true);
-        else if (position == 1)
-            mTabQuick.setChecked(true);
-        else if (position == 2)
-            mTabSurvey.setChecked(true);
-        else if (position == 3)
-            mTabSocial.setChecked(true);
+    public void enablePosition(int position, int mPollType) {
+        switch (mPollType) {
+            case 1:
+                if (position == 0)
+                    mTabOpinion.setChecked(true);
+                else if (position == 1)
+                    mTabQuick.setChecked(true);
+                else if (position == 2)
+                    mTabSurvey.setChecked(true);
+                else if (position == 3)
+                    mTabSocial.setChecked(true);
+                break;
+            case 2:
+                if (position == 0)
+                    mTabOpinion.setChecked(true);
+                else if (position == 1)
+                    mTabQuick.setChecked(true);
+                else if (position == 2)
+                    mTabSurvey.setChecked(true);
+                break;
+
+        }
     }
 
     private void enableTabOnPoll(int position) {

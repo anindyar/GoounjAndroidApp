@@ -30,6 +30,7 @@ public class TermsAndConditionsActivity extends BaseActivity {
         mWebview = (WebView) findViewById(R.id.webview);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setContentInsetsAbsolute(0, 0);
+        mToolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

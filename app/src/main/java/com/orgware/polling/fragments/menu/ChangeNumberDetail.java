@@ -91,6 +91,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     private void showOtpDialog() {
         mOTPDialog = new Dialog(act, R.style.dialog);
         mOTPDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mOTPDialog.setContentView(R.layout.dialog_otp_change_number);
         mOTPDialog.setCancelable(false);
         mDialogOTPTxt = (EditText) mOTPDialog.findViewById(R.id.txt_otp_change_number);
         mOTPDone = (Button) mOTPDialog.findViewById(R.id.btn_change_number_otp_submit);

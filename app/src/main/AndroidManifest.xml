@@ -40,9 +40,7 @@
         <activity android:name="com.orgware.polling.LoginActivity"></activity>
         <activity android:name="com.orgware.polling.LoginActivityNew" />
         <activity android:name="com.orgware.polling.MainHomeActivity"></activity>
-        <activity
-            android:name="com.orgware.polling.MenuDetailActivity"
-            android:parentActivityName="com.orgware.polling.MainHomeActivity" />
+        <activity android:name="com.orgware.polling.MenuDetailActivity" />
 
         <activity android:name="com.orgware.polling.OTPActivity"></activity>
         <activity

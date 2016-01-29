@@ -8,6 +8,9 @@
     <dimen name="margin_small">20dp</dimen>
     <dimen name="margin_normal">25dp</dimen>
 
+    <!--Menu Profile BG-->
+    <dimen name="menu_profile_bg">400dp</dimen>
+
     <!-- Padding Sizes -->
     <dimen name="padding_small">20dp</dimen>
     <dimen name="padding_normal">25dp</dimen>

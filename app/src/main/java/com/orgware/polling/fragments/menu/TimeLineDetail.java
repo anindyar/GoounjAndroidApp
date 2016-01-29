@@ -14,6 +14,8 @@ import com.orgware.polling.MenuDetailActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.TimeLineAdapter;
 import com.orgware.polling.fragments.BaseFragment;
+import com.orgware.polling.fragments.CurrentPoll;
+import com.orgware.polling.fragments.HomeDashboard;
 import com.orgware.polling.fragments.SurveyDetail;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
@@ -76,6 +78,7 @@ public class TimeLineDetail extends BaseFragment {
 
         try {
             getTimeLinePage(BASE_URL + TIMELINE + preferences.getString(USER_ID, ""));
+            refreshRecyclerView();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,19 +108,15 @@ public class TimeLineDetail extends BaseFragment {
         try {
             String username;
             JSONArray mTimeLineArray = new JSONArray(result);
-            if (mTimeLineArray.length() != 0)
-                for (int j = 0; j < mTimeLineArray.length(); j++) {
-                    JSONObject mQuestions = mTimeLineArray.optJSONObject(j);
-                    if (mQuestions.optString("username").equals("" + mQuestions.optString("createdUser")))
-                        username = "You";
-                    else
-                        username = "" + mQuestions.optString("createdUser");
-                    mTimeLineItems.add(new TimeLineItem(splitDateFromString("" + mQuestions.optString("date")), mQuestions.optString("pollName"), "" + username));
-                }
-            else
-                makeToast("Sorry,No Questions to answer!");
-
-            refreshRecyclerView();
+            for (int j = 0; j < mTimeLineArray.length(); j++) {
+                JSONObject mQuestions = mTimeLineArray.optJSONObject(j);
+                if (mQuestions.optString("username").equals("" + mQuestions.optString("createdUser")))
+                    username = "You";
+                else
+                    username = "" + mQuestions.optString("createdUser");
+                mTimeLineItems.add(new TimeLineItem(splitDateFromString("" + mQuestions.optString("date")), mQuestions.optString("pollName"), "" + username));
+            }
+//            refreshRecyclerView();
 
         } catch (Exception e) {
             e.printStackTrace();

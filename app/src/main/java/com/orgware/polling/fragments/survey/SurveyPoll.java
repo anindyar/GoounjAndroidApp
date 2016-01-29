@@ -160,7 +160,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -307,10 +307,10 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     public void onClick(View v) {
 //        Methodutils.showListSearch(act, itemList, mCurrentPollList);
         if (v.getId() == R.id.layout_create) {
-            ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
         }
         if (v.getId() == R.id.btnCreate) {
-            ((MainHomeActivity) act).setNewFragment(new CreatePollPager(), "Create Poll Pager", true);
+            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
         }
     }
 

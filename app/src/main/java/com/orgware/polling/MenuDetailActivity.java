@@ -3,6 +3,8 @@ package com.orgware.polling;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.orgware.polling.fragments.menu.AboutUsDetail;
 import com.orgware.polling.fragments.menu.ChangeNumberDetail;
@@ -25,6 +27,7 @@ public class MenuDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_menu_detail);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setContentInsetsAbsolute(0, 0);
+        mToolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,5 +57,22 @@ public class MenuDetailActivity extends BaseActivity {
                 setNewFragment(new SettingsDetail(), R.id.fragment_content, "Settings", false);
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
