@@ -796,7 +796,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceTwo.isChecked()) {
-            txtNoOpinionTwo.setText("3");
+            txtNoOpinionThree.setText("3");
             editor.putInt(OPNINON_RB_THREE, 2).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -805,7 +805,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceThree.isChecked()) {
-            txtNoOpinionTwo.setText("4");
+            txtNoOpinionThree.setText("4");
             editor.putInt(OPNINON_RB_THREE, 3).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -815,7 +815,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         }
 
         if (mRbQtsThChoiceFour.isChecked()) {
-            txtNoOpinionTwo.setText("5");
+            txtNoOpinionThree.setText("5");
             editor.putInt(OPNINON_RB_THREE, 4).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);
@@ -824,7 +824,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             mLayoutQtsThFive.setVisibility(View.GONE);
         }
         if (mRbQtsThChoiceFive.isChecked()) {
-            txtNoOpinionTwo.setText("6");
+            txtNoOpinionThree.setText("6");
             editor.putInt(OPNINON_RB_THREE, 5).commit();
             mLayoutQtsThOne.setVisibility(View.VISIBLE);
             mLayoutQtsThTwo.setVisibility(View.VISIBLE);

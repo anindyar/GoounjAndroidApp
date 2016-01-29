@@ -67,6 +67,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     RelativeLayout mPollNoError, mPollError;
     int firstVisibleItem, visibleItemCount, totalItemCount;
     LinearLayoutManager mLayoutManager;
+    private int mLowerLimit = 0, mUpperLimit = 10;
     //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     // Header View
@@ -126,7 +127,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
             @Override
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -142,7 +143,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
             @Override
             public void run() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -159,7 +160,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -176,12 +177,12 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     }
 
 
-    private String showPollParams() {
+    private String showPollParams(int mLowerLimit, int mUpperLimit) {
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put("lowerLimit", 0);
-            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("lowerLimit", mLowerLimit);
+            mShowPollOnject.put("upperLimit", mUpperLimit);
             mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,7 +190,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
         return mShowPollOnject.toString();
     }
 
-    private void getPollForCreatedUser(String url, boolean pullDownType) {
+    private void getPollForCreatedUser(int mLowerLimit, int mUpperLimit, String url, boolean pullDownType) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
@@ -211,7 +212,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
                 makeToast("Failed to connect to server");
             }
         });
-        processor.execute(showPollParams().toString());
+        processor.execute(showPollParams(mLowerLimit, mUpperLimit).toString());
     }
 
     public void showPollList(String response) {
@@ -241,7 +242,11 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
             mAdapter = new CurrentPollAdapter(act, itemList, 1);
             mAdapter.setOnItemClickListener(this);
             mCurrentPollList.setAdapter(mAdapter);
+            mLowerLimit = mLowerLimit + 10;
+            mUpperLimit = mUpperLimit + 10;
         } else {
+            mLowerLimit = 0;
+            mUpperLimit = 10;
             mCurrentPollList.setVisibility(View.GONE);
             mPollNoError.setVisibility(View.VISIBLE);
         }
