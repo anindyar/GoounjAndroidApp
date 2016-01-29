@@ -31,6 +31,7 @@ import java.util.List;
 public class ChatHome extends BaseFragment {
 
     protected Handler handler = new Handler();
+    int mLoadLowerLimit = 0, mLoadUpperLimit = 10;
     private TextView tvEmptyView;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -65,12 +66,18 @@ public class ChatHome extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
+        try {
+            getPollForCreatedUser(mLoadLowerLimit, mLoadUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        loadData();
 
     }
 
     private void refreshList() {
+        mLoadLowerLimit = mLoadLowerLimit + 10;
+        mLoadUpperLimit = mLoadUpperLimit + 10;
         mAdapter = new LoadMoreAdapter(studentList, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
         if (studentList.isEmpty()) {
@@ -88,45 +95,53 @@ public class ChatHome extends BaseFragment {
                 //add null , so the adapter will check view_type and show progress bar at bottom
                 studentList.add(null);
                 mAdapter.notifyItemInserted(studentList.size() - 1);
+                //                        //   remove progress item
+                studentList.remove(studentList.size() - 1);
+                mAdapter.notifyItemRemoved(studentList.size());
+                try {
+                    getPollForCreatedUser(mLoadLowerLimit, mLoadUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+//                mAdapter.notifyItemInserted(studentList.size());
+//                mAdapter.setLoaded();
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //   remove progress item
-                        studentList.remove(studentList.size() - 1);
-                        mAdapter.notifyItemRemoved(studentList.size());
-                        //add items one by one
-                        int start = studentList.size();
-                        int end = start + 20;
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
 
-//                        for (int i = start + 1; i <= end; i++) {
-//                            studentList.add(new CurrentPollItem("Student " + i, "AndroidStudent" + i + "@gmail.com"));
-//                            mAdapter.notifyItemInserted(studentList.size());
-//                        }
-                        getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, false);
-                        mAdapter.setLoaded();
-                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
-                    }
-                }, 2000);
+//                        //add items one by one
+//                        int start = studentList.size();
+//                        int end = start + 20;
+//
+////                        for (int i = start + 1; i <= end; i++) {
+////                            studentList.add(new CurrentPollItem("Student " + i, "AndroidStudent" + i + "@gmail.com"));
+////                        }
+//
+//                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+//                    }
+//                }, 2000);
 
             }
         });
     }
 
 
-    private String showPollParams() {
+    private String showPollParams(int lower_limit_value, int upper_limit_value) {
         JSONObject mShowPollOnject = new JSONObject();
         try {
-            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, "7"));
-            mShowPollOnject.put(POLL_LIMIT, 10);
+            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
+            mShowPollOnject.put("lowerLimit", lower_limit_value);
+            mShowPollOnject.put("upperLimit", upper_limit_value);
+            mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mShowPollOnject.toString();
     }
 
-    private void getPollForCreatedUser(String url, boolean pullDownType) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
+    private void getPollForCreatedUser(int lower_limit_value, int upper_limit_value, String url, boolean pullDownType) throws Exception {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, false, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Poll List Response", "" + response.toString());
@@ -144,7 +159,7 @@ public class ChatHome extends BaseFragment {
                 makeToast("Failed to connect to server");
             }
         });
-        processor.execute(showPollParams().toString());
+        processor.execute(showPollParams(lower_limit_value, upper_limit_value).toString());
     }
 
     public void showPollList(String response) {

@@ -189,7 +189,9 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put(POLL_LIMIT, limit);
+            mShowPollOnject.put("lowerLimit", 0);
+            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
         }

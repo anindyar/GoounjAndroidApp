@@ -42,6 +42,7 @@ import com.orgware.polling.R;
 import com.orgware.polling.adapters.ContactGridviewAdapter;
 import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.pojo.ContactItem;
+import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 
@@ -168,10 +169,10 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     public String splitFromString(String stringName) {
         StringBuilder sb = new StringBuilder();
         String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
-        StringTokenizer tokenize = new StringTokenizer(stringName, ".");
+        StringTokenizer tokenize = new StringTokenizer(stringName, "."); //2016-01-28T08:30:29.000Z
         wanted = "" + tokenize.nextToken();
         unwanted = "" + tokenize.nextToken();
-        StringTokenizer tokenizer = new StringTokenizer(wanted, "T");
+        StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
         sb.append("" + tokenizer.nextToken());
         sb.append(" ");
         unWantedone = "" + tokenizer.nextToken();
@@ -181,6 +182,21 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         sb.append(wantedOne + ":" + wantedTwo);
         Log.e("Date", "" + sb.toString());
         return sb.toString();
+    }
+
+    public String splitDateFromString(String stringName) {
+        StringBuilder sb = new StringBuilder();
+        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
+        StringTokenizer tokenize = new StringTokenizer(stringName, "."); //2016-01-28T08:30:29.000Z
+        wanted = "" + tokenize.nextToken();
+        unwanted = "" + tokenize.nextToken();
+        StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
+        Log.e("Date", "" + tokenizer.nextToken());
+        String[] values = tokenizer.nextToken().split("-");
+        String day = values[2];
+        String month = values[1];
+        String date = "" + Methodutils.mMonthArray[Integer.parseInt(month)] + " " + day;
+        return date.toString();
     }
 
     public List<ContactItem> getNumber(ContentResolver cr, List<ContactItem> contactList) {

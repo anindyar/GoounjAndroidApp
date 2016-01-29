@@ -39,6 +39,7 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.ContactItem;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.utils.EndlessRecyclerViewListener;
 import com.orgware.polling.utils.Methodutils;
 import com.orgware.polling.utils.SuperSwipeRefreshLayout;
 
@@ -119,6 +120,14 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Poll");
 
+        mCurrentPollList.addOnScrollListener(new EndlessRecyclerViewListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+                makeToast("Last Count");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -177,7 +186,9 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put(POLL_LIMIT, limit);
+            mShowPollOnject.put("lowerLimit", 0);
+            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,125 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 174063616 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2627), pid=2183, tid=140260573947648
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_60-b27) (build 1.8.0_60-b27)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.60-b23 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f910c078000):  VMThread [stack: 0x00007f90f59fa000,0x00007f90f5afb000] [id=2199]
+
+Stack: [0x00007f90f59fa000,0x00007f90f5afb000],  sp=0x00007f90f5af9160,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xab97ea]  VMError::report_and_die()+0x2ba
+V  [libjvm.so+0x4f9dab]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0x8b
+V  [libjvm.so+0x91a7c3]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+0x103
+V  [libjvm.so+0x91ad19]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0x29
+V  [libjvm.so+0x91502a]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2a
+V  [libjvm.so+0x9886d3]  PSVirtualSpace::expand_by(unsigned long)+0x53
+V  [libjvm.so+0x989ad8]  PSYoungGen::resize_generation(unsigned long, unsigned long)+0xf8
+V  [libjvm.so+0x988c32]  PSYoungGen::resize(unsigned long, unsigned long)+0x22
+V  [libjvm.so+0x985f0b]  PSScavenge::invoke_no_policy()+0xf3b
+V  [libjvm.so+0x986691]  PSScavenge::invoke()+0x41
+V  [libjvm.so+0x93e430]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x70
+V  [libjvm.so+0xabb207]  VM_ParallelGCFailedAllocation::doit()+0x97
+V  [libjvm.so+0xac2c35]  VM_Operation::evaluate()+0x55
+V  [libjvm.so+0xac100a]  VMThread::evaluate_operation(VM_Operation*)+0xba
+V  [libjvm.so+0xac138e]  VMThread::loop()+0x1ce
+V  [libjvm.so+0xac1800]  VMThread::run()+0x70
+V  [libjvm.so+0x91cb88]  java_start(Thread*)+0x108
+
+VM_Operation (0x00007f90f4c1cc20): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f910c160000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f910c161800 JavaThread "pool-1-thread-4" [_thread_blocked, id=2249, stack(0x00007f90f4a1d000,0x00007f90f4b1e000)]
+  0x00007f910c160000 JavaThread "pool-1-thread-3" [_thread_blocked, id=2248, stack(0x00007f90f4b1e000,0x00007f90f4c1f000)]
+  0x00007f910c15d800 JavaThread "pool-1-thread-2" [_thread_blocked, id=2247, stack(0x00007f90f4c1f000,0x00007f90f4d20000)]
+  0x00007f910c151800 JavaThread "pool-2-thread-1" [_thread_blocked, id=2246, stack(0x00007f90f4d20000,0x00007f90f4e21000)]
+  0x00007f910c14f800 JavaThread "pool-1-thread-1" [_thread_blocked, id=2245, stack(0x00007f90f4e21000,0x00007f90f4f22000)]
+  0x00007f910c0c2000 JavaThread "Service Thread" daemon [_thread_blocked, id=2213, stack(0x00007f90f5023000,0x00007f90f5124000)]
+  0x00007f910c0bd000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=2212, stack(0x00007f90f5124000,0x00007f90f5225000)]
+  0x00007f910c0bb000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=2211, stack(0x00007f90f5225000,0x00007f90f5326000)]
+  0x00007f910c0b8000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=2210, stack(0x00007f90f5326000,0x00007f90f5427000)]
+  0x00007f910c0b7000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2209, stack(0x00007f90f5427000,0x00007f90f5528000)]
+  0x00007f910c07f000 JavaThread "Finalizer" daemon [_thread_blocked, id=2205, stack(0x00007f90f57f8000,0x00007f90f58f9000)]
+  0x00007f910c07d000 JavaThread "Reference Handler" daemon [_thread_blocked, id=2203, stack(0x00007f90f58f9000,0x00007f90f59fa000)]
+  0x00007f910c00a000 JavaThread "main" [_thread_blocked, id=2187, stack(0x00007f911423d000,0x00007f911433e000)]
+
+Other Threads:
+=>0x00007f910c078000 VMThread [stack: 0x00007f90f59fa000,0x00007f90f5afb000] [id=2199]
+  0x00007f910c0c4800 WatcherThread [stack: 0x00007f90f4f22000,0x00007f90f5023000] [id=2219]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f910c006470] Threads_lock - owner thread: 0x00007f910c078000
+[0x00007f910c006970] Heap_lock - owner thread: 0x00007f910c160000
+
+Heap:
+ PSYoungGen      total 130048K, used 5100K [0x00000000eab00000, 0x00000000f2f00000, 0x0000000100000000)
+  eden space 124928K, 0% used [0x00000000eab00000,0x00000000eab00000,0x00000000f2500000)
+  from space 5120K, 99% used [0x00000000f2500000,0x00000000f29fb3f8,0x00000000f2a00000)
+  to   space 5120K, 0% used [0x00000000f2a00000,0x00000000f2a00000,0x00000000f2f00000)
+ ParOldGen       total 83456K, used 41079K [0x00000000c0000000, 0x00000000c5180000, 0x00000000eab00000)
+  object space 83456K, 49% used [0x00000000c0000000,0x00000000c281ddf8,0x00000000c5180000)
+ Metaspace       used 6301K, capacity 7152K, committed 7296K, reserved 1056768K
+  class space    used 587K, capacity 616K, committed 640K, reserved 1048576K
+
+Card table byte_map: [0x00007f9110dd7000,0x00007f9110fd8000] byte_map_base: 0x00007f91107d7000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f9113706de0
+ Begin Bits: [0x00007f90f6000000, 0x00007f90f7000000)
+ End Bits:   [0x00007f90f7000000, 0x00007f90f8000000)
+
+Polling page: 0x00007f911435f000
+
+CodeCache: size=245760Kb used=7775Kb max_used=7791Kb free=237984Kb
+ bounds [0x00007f90fd000000, 0x00007f90fd7b0000, 0x00007f910c000000]
+ total_blobs=2304 nmethods=2037 adapters=182
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 13.812 Thread 0x00007f910c0bb000 nmethod 2036 0x00007f90fd797bd0 code [0x00007f90fd798940, 0x00007f90fd79cdb8]
+Event: 13.812 Thread 0x00007f910c0bb000 2363   !   4       com.android.dx.cf.code.RopperMachine::run (1550 bytes)
+Event: 13.818 Thread 0x00007f910c0bd000 2376       1       com.android.dx.command.dexer.Main::access$1400 (4 bytes)
+Event: 13.818 Thread 0x00007f910c0bd000 nmethod 2376 0x00007f90fd797910 code [0x00007f90fd797a60, 0x00007f90fd797b50]
+Event: 13.818 Thread 0x00007f910c0bd000 2377       2       com.android.dx.command.dexer.Main$ClassDefItemConsumer::call (5 bytes)
+Event: 13.818 Thread 0x00007f910c0bd000 nmethod 2377 0x00007f90fd797590 code [0x00007f90fd797700, 0x00007f90fd797868]
+Event: 13.818 Thread 0x00007f910c0bd000 2378   !   2       com.android.dx.command.dexer.Main$ClassDefItemConsumer::call (161 bytes)
+Event: 13.819 Thread 0x00007f910c0bd000 nmethod 2378 0x00007f90fd796190 code [0x00007f90fd796380, 0x00007f90fd796d38]
+Event: 13.819 Thread 0x00007f910c0bd000 2379       2       java.util.concurrent.FutureTask::get (23 bytes)
+Event: 13.819 Thread 0x00007f910c0bd000 nmethod 2379 0x00007f90fd795d90 code [0x00007f90fd795f00, 0x00007f90fd7960b8]
+
+GC Heap History (9 events):
+Event: 2.371 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 36352K, used 31232K [0x00000000eab00000, 0x00000000ed380000, 0x0000000100000000)
+  eden space 31232K, 100% used [0x00000000eab00000,0x00000000ec980000,0x00000000ec980000)
+  from space 5120K, 0% used [0x00000000ece80000,0x00000000ece80000,0x00000000ed380000)
+  to   space 5120K, 0% used [0x00000000ec980000,0x00000000ec980000,0x00000000ece80000)
+ ParOldGen       total 83456K, used 0K [0x00000000c0000000, 0x00000000c5180000, 0x00000000eab00000)
+  object space 83456K, 0% used [0x00000000c0000000,0x00000000c0000000,0x00000000c5180000)
+ Metaspace       used 5640K, capacity 6640K, committed 6784K, reserved 1056768K
+  class space    used 585K, capacity 616K, committed 640K, reserved 1048576K
+Event: 2.440 

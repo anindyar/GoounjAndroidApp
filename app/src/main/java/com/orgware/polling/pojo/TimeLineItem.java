@@ -18,4 +18,10 @@ public class TimeLineItem {
         this.mTimeLinePollCreator = mTimeLinePollCreator;
     }
 
+    public TimeLineItem(String mTimeLineDate, String mTimeLinePollTitle, String mTimeLinePollCreator) {
+        this.mTimeLineDate = mTimeLineDate;
+        this.mTimeLinePollTitle = mTimeLinePollTitle;
+        this.mTimeLinePollCreator = mTimeLinePollCreator;
+    }
+
 }

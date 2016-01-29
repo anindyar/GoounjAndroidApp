@@ -37,6 +37,7 @@ public class Methodutils {
 
     public static final int[] mResultColor = new int[]{R.color.tab_opinion, R.color.tab_social, R.color.tab_survey,
             R.color.holo_red_light, R.color.home_bg, R.color.home_bg};
+    public static final String[] mMonthArray = new String[]{"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     public static void showCategoryDialog(Context mContext, final TextView mTextview, final List<String> mCategoryList) {
         final Dialog mCategoryDialog = new Dialog(mContext);

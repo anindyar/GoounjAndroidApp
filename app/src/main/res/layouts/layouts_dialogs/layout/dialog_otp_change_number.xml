@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/home_bg"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding_max"
+        android:text="Enter OTP"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/txt_survey_fname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@drawable/bg_curved_rect"
+        android:hint="Enter your name"
+        android:inputType="text"
+        android:padding="@dimen/padding_normal"
+        android:singleLine="true"
+        android:textColor="@color/home_bg"
+        android:textSize="@dimen/txtLarge"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/txt_otp_change_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@drawable/bg_curved_rect"
+        android:hint="Enter OTP here"
+        android:inputType="phone"
+        android:maxLength="12"
+        android:padding="@dimen/padding_normal"
+        android:singleLine="true"
+        android:textColor="@color/home_bg"
+        android:textSize="@dimen/txtLarge" />
+
+    <EditText
+        android:id="@+id/txt_survey_lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@drawable/bg_curved_rect"
+        android:hint="Enter last name"
+        android:inputType="text"
+        android:padding="@dimen/padding_normal"
+        android:singleLine="true"
+        android:textColor="@color/home_bg"
+        android:textSize="@dimen/txtLarge"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_change_number_otp_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@color/home_bg"
+        android:text="SUBMIT"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txtNormal" />
+
+</LinearLayout>

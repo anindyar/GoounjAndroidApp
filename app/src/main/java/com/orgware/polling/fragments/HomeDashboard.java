@@ -79,7 +79,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
                 editor.putInt(DASHBOARD_ID, 0).commit();
                 break;
             case R.id.home_chat:
-//                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
                 break;
             case R.id.home_survey:
                 ((MainHomeActivity) act).setNewFragment(new SurveyPoll(), "Poll Pager", true);

@@ -33,7 +33,7 @@ public class TimeLineDetail extends BaseFragment {
 
     RecyclerView mTimeLineRecycler;
     TimeLineAdapter mAdapter;
-    List<TimeLineItem> timeLineItems = new ArrayList<>();
+    List<TimeLineItem> mTimeLineItems = new ArrayList<>();
 
     //    http://192.168.10.124:3000/users/v1/timeline/3
     @Override
@@ -44,13 +44,14 @@ public class TimeLineDetail extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTimeLineItems.clear();
         String me;
         for (int i = 0; i < 10; i++) {
             if (i == 3 || i == 5 || i == 9)
                 me = "me";
             else
                 me = "nanda";
-            timeLineItems.add(new TimeLineItem("Jan 22", "Title", "Creator", me));
+            mTimeLineItems.add(new TimeLineItem("Jan 22", "Title", "Creator", me));
         }
 
     }
@@ -72,15 +73,19 @@ public class TimeLineDetail extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((MenuDetailActivity) act).setTitle("TimeLine");
-        mAdapter = new TimeLineAdapter(act, timeLineItems);
-        mTimeLineRecycler.setAdapter(mAdapter);
+
+        try {
+            getTimeLinePage(BASE_URL + TIMELINE + preferences.getString(USER_ID, ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void getPollDetailPage(String url) {
+    private void getTimeLinePage(String url) throws Exception {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                savePollDetailResponse(response);
+                saveTimeLineResponse(response);
             }
 
             @Override
@@ -88,7 +93,7 @@ public class TimeLineDetail extends BaseFragment {
                 Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
+                        act.finish();
                     }
                 });
             }
@@ -96,29 +101,32 @@ public class TimeLineDetail extends BaseFragment {
         processor.execute();
     }
 
-    private void savePollDetailResponse(String result) {
+    private void saveTimeLineResponse(String result) {
         try {
-            JSONObject mPollDetailObject = new JSONObject(result);
-            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
-            editor.putInt(QUESTION_SIZE, mQuestionsArray.length()).commit();
-            if (mQuestionsArray.length() != 0)
-                for (int j = 0; j < mQuestionsArray.length(); j++) {
-                    JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
-                    JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
-                    Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
-
-                    editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
-                            putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+            String username;
+            JSONArray mTimeLineArray = new JSONArray(result);
+            if (mTimeLineArray.length() != 0)
+                for (int j = 0; j < mTimeLineArray.length(); j++) {
+                    JSONObject mQuestions = mTimeLineArray.optJSONObject(j);
+                    if (mQuestions.optString("username").equals("" + mQuestions.optString("createdUser")))
+                        username = "You";
+                    else
+                        username = "" + mQuestions.optString("createdUser");
+                    mTimeLineItems.add(new TimeLineItem(splitDateFromString("" + mQuestions.optString("date")), mQuestions.optString("pollName"), "" + username));
                 }
-//                setQuestions(mQuestionsArray.length(), mQuestionsArray);
             else
                 makeToast("Sorry,No Questions to answer!");
 
-            ((MainHomeActivity) act).setNewFragment(new SurveyDetail(), "Pager", true);
-            ((MainHomeActivity) act).setTitle("Survey");
+            refreshRecyclerView();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void refreshRecyclerView() throws Exception {
+        mAdapter = new TimeLineAdapter(act, mTimeLineItems);
+        mTimeLineRecycler.setAdapter(mAdapter);
+    }
+
 }

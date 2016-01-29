@@ -61,6 +61,14 @@ public interface Appinterface {
 
     String SURVEY_POLL_URL = "survey/v1/survey";
 
+    /*Time Line*/
+    String TIMELINE = "users/v1/timeline/";
+
+
+    /* Change Number */
+    String CHANGE_NUMBER = "users/v1/changeNumber/";
+
+
     /*Api Login*/
 
     String USER_LOGIN_URL = "users/v1/user", COUNTRY = "country", USERNAME = "USERNAME", CITY = "city", PHONE = "phone", DEVICE_ID = "device_id", DEVICE_TOKEN = "device_token", OS_TYPE = "os_type", OS_VERSION = "os_version",

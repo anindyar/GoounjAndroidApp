@@ -14,6 +14,7 @@ import com.orgware.polling.R;
 import com.orgware.polling.interfaces.OnLoadMoreListener;
 import com.orgware.polling.pojo.CurrentPollItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadMoreAdapter extends RecyclerView.Adapter {
@@ -60,6 +61,14 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
                             }
                         }
                     });
+        }
+    }
+
+    public void setFilter(List<CurrentPollItem> countryModels) {
+        studentList = new ArrayList<>();
+        if (studentList != null) {
+            studentList.addAll(countryModels);
+            notifyDataSetChanged();
         }
     }
 

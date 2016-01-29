@@ -5,14 +5,12 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/home_bg"
-        android:gravity="center"
+        android:layout_centerInParent="true"
         android:padding="@dimen/padding_normal"
-        android:text="Done"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/txtNormal" />
+        android:text="Under Development"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txtLarge" />
 
 </RelativeLayout>
