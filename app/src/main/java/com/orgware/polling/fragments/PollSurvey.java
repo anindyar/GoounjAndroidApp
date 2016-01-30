@@ -58,6 +58,9 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     SpinnerAdapter mSpinnerAdapter;
     List<String> mCategoryList = new ArrayList<>();
     TextView txtCategory;
+    TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
+    int mPollType;
+
     TextWatcher mPollNameWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,6 +88,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPollType = getArguments().getInt(PAGER_COUNT);
         try {
             mContactJsonArray = new JSONArray("[]");
         } catch (Exception e) {
@@ -97,6 +101,15 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_survey_poll, container, false);
+
+        mPollName = (TextView) v.findViewById(R.id.txt_pollname);
+        mPollTypeOne = (TextView) v.findViewById(R.id.txt_polltype_one);
+        mPollTypeTwo = (TextView) v.findViewById(R.id.txt_polltype_two);
+        mPollTypeTh = (TextView) v.findViewById(R.id.txt_polltype_th);
+        mPollQtsOne = (TextView) v.findViewById(R.id.txt_poll_qts_one);
+        mPollQtsTwo = (TextView) v.findViewById(R.id.txt_poll_qts_two);
+        mPollQtsTh = (TextView) v.findViewById(R.id.txt_poll_qts_th);
+
         btnContactDevice = (Button) v.findViewById(R.id.btncontactFromDevice);
         btnContactDevice.setOnClickListener(this);
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
@@ -142,6 +155,32 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRbNumQtsOne.setChecked(true);
+        filterPollType(mPollType);
+    }
+
+    private void filterPollType(int mPollType) {
+        switch (mPollType) {
+            case 1:
+                mPollName.setText("Poll Name");
+                mEdittextSurveyPollName.setHint("Enter Poll Name");
+                mPollTypeOne.setText("Poll One");
+                mPollQtsOne.setText("Poll Question");
+                mPollTypeTwo.setText("Poll Two");
+                mPollQtsTwo.setText("Poll Question");
+                mPollTypeTh.setText("Poll Three");
+                mPollQtsTh.setText("Poll Question");
+                break;
+            case 2:
+                mPollName.setText("Survey Name");
+                mEdittextSurveyPollName.setHint("Enter Survey Name");
+                mPollTypeOne.setText("Survey Type");
+                mPollQtsOne.setText("Survey Question");
+                mPollTypeTwo.setText("Survey Type");
+                mPollQtsTwo.setText("Survey Question");
+                mPollTypeTh.setText("Survey Type");
+                mPollQtsTh.setText("Survey Question");
+                break;
+        }
     }
 
     private void launchMultiplePhonePicker() {

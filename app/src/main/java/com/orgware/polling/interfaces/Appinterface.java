@@ -8,6 +8,8 @@ import java.util.Locale;
  */
 public interface Appinterface {
 
+    String BASE64PREFIX = "data:image/jpeg;base64", ENCODE_IMAGE = "ENCODE_IMAGE", PROFILE_AGE = "PROFILE_AGE";
+
     /*Push Notification*/
     String APP_ID = "567852824286", NOTIFICATION = "notification", NOTIFICATION_OBJECT = "notifcation", TypeID = "TypeID", GET_DEVICE_TOKEN_KEY = "GET_DEVICE_TOKEN_KEY",
             SERVER_KEY = "AIzaSyDsF2yFanZD302BOPk76a1EUCn1qgPqvH4",

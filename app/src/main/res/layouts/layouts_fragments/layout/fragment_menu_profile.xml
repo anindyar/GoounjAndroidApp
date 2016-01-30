@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ash_bg"
-    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -19,17 +18,21 @@
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
             android:padding="@dimen/padding_small"
             android:src="@drawable/ic_usericon_orange" />
 
         <EditText
-            android:id="@+id/profile_text_detail"
-            android:layout_width="wrap_content"
+            android:id="@+id/profile_name_detail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_toLeftOf="@+id/profile_edit_name"
             android:layout_toRightOf="@+id/profile_image"
+            android:enabled="false"
+            android:singleLine="true"
             android:text="@string/app_name"
             android:textColor="@color/home_bg"
             android:textSize="@dimen/txtLarge" />
@@ -41,8 +44,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/selector_profile_edit"
-            android:button="@null"
-            android:clickable="false" />
+            android:button="@null" />
     </RelativeLayout>
 
     <LinearLayout
@@ -76,8 +78,11 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_normal"
                 android:layout_toRightOf="@+id/gender"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusableInTouchMode="false"
+                android:hint="Select Gender"
                 android:padding="@dimen/padding_normal"
-                android:text="Select Gender"
                 android:textColor="@color/home_bg"
                 android:textSize="@dimen/txtLarge" />
 
@@ -88,8 +93,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/selector_profile_edit"
-                android:button="@null"
-                android:clickable="false" />
+                android:button="@null" />
         </RelativeLayout>
 
         <View
@@ -114,15 +118,20 @@
                 android:textColor="@color/home_bg"
                 android:textSize="@dimen/txtLarge" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/profile_age"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_toLeftOf="@+id/profile_edit_age"
                 android:layout_toRightOf="@+id/dob"
-                android:inputType="number"
+                android:enabled="false"
+                android:hint="Enter your age"
+                android:inputType="phone"
+                android:maxLength="3"
                 android:padding="@dimen/padding_normal"
-                android:text="20"
+                android:singleLine="true"
                 android:textColor="@color/home_bg"
                 android:textSize="@dimen/txtLarge" />
 
@@ -133,8 +142,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/selector_profile_edit"
-                android:button="@null"
-                android:clickable="false" />
+                android:button="@null" />
         </RelativeLayout>
 
         <View
@@ -147,8 +155,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@android:color/white"
-            android:drawableTop="@drawable/ic_currency_large"
             android:gravity="center_horizontal"
+            android:padding="@dimen/padding_max"
+            android:text="Goounj Points"
+            android:textColor="@color/home_bg"
+            android:textSize="@dimen/txtLarge"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/ic_currency_large"
+            android:gravity="center_horizontal|center_vertical"
             android:padding="@dimen/padding_max"
             android:text="0"
             android:textColor="@android:color/black"

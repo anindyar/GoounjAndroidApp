@@ -44,10 +44,10 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 
     public Menu mMenu;
     private NavigationView navigationView;
-    private DrawerLayout mDrawerLayout;
+    public DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mUserAmount;
-    private CircleImageView mProfileImage;
+    public CircleImageView mProfileImage;
     private ImageView mLogout;
 
     @Override
@@ -86,6 +86,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         (mLogout = (ImageView) findViewById(R.id.menu_logout)).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+        mDrawerLayout.closeDrawers();
         addHeader();
         setNewFragment(new HomeDashboard(), "Dashboard", false);
     }
@@ -98,6 +99,11 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
                 .findViewById(R.id.user_amount);
         mProfileImage = (CircleImageView) view.findViewById(R.id.profile_image);
         mUserName.setText("" + preferences.getString(USERNAME, "NA"));
+
+        if (!preferences.getString(ENCODE_IMAGE, "").equals("")) {
+            mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+        } else
+            mProfileImage.setImageResource(R.drawable.ic_usericon_blue);
 
 //        Picasso.with(this)
 //                .load("")
@@ -138,6 +144,13 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     @Override
     protected void onResume() {
         super.onResume();
+        if (!preferences.getString(ENCODE_IMAGE, "").equals("")) {
+            mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+        } else
+            mProfileImage.setImageResource(R.drawable.ic_usericon_blue);
+        mUserName.setText("" + preferences.getString(USERNAME, ""));
+        mDrawerLayout.openDrawer(GravityCompat.START);
+
     }
 
     @Override

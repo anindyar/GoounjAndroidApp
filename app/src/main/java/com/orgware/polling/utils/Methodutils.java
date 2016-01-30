@@ -3,10 +3,13 @@ package com.orgware.polling.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,19 +24,22 @@ import android.widget.TextView;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.SpinnerAdapter;
+import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pojo.MenuListItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by nandagopal on 20/10/15.
  */
-public class Methodutils {
+public class Methodutils implements Appinterface {
 
     public static final int[] mResultColor = new int[]{R.color.tab_opinion, R.color.tab_social, R.color.tab_survey,
             R.color.holo_red_light, R.color.home_bg, R.color.home_bg};
@@ -58,70 +64,95 @@ public class Methodutils {
 
     }
 
-    public static void showListSearch(final Context mContext, final List<CurrentPollItem> itemList, final RecyclerView mCurrentPollList) {
-        final Dialog mCategoryDialog = new Dialog(mContext);
-        mCategoryDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mCategoryDialog.setCancelable(true);
-        mCategoryDialog.setContentView(R.layout.dialog_search);
-        Window window = mCategoryDialog.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        wlp.gravity = Gravity.TOP;
-        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        window.setAttributes(wlp);
+//    public static void showListSearch(final Context mContext, final List<CurrentPollItem> itemList, final RecyclerView mCurrentPollList) {
+//        final Dialog mCategoryDialog = new Dialog(mContext);
+//        mCategoryDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        mCategoryDialog.setCancelable(true);
+//        mCategoryDialog.setContentView(R.layout.dialog_search);
+//        Window window = mCategoryDialog.getWindow();
+//        WindowManager.LayoutParams wlp = window.getAttributes();
+//        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        wlp.gravity = Gravity.TOP;
+//        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//        window.setAttributes(wlp);
+//
+//        ImageView dlg_clear = (ImageView) mCategoryDialog.findViewById(R.id.search_close);
+//        ImageView dlg_back = (ImageView) mCategoryDialog.findViewById(R.id.search_back);
+//        final EditText dlg_textbox = (EditText) mCategoryDialog.findViewById(R.id.search_text);
+//        dlg_textbox.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                CurrentPollAdapter mAdapter;
+//                if (!s.toString().equals("")) {
+//                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
+//                    for (int i = 0; i < itemList.size(); i++) {
+//                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
+//                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
+//                            filteredTitles.add(itemList.get(i));
+//                        }
+//                    }
+//                    mAdapter = new CurrentPollAdapter(mContext, filteredTitles, 1);
+//                    mCurrentPollList.setAdapter(mAdapter);
+////                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
+////                    mRecyclerView.setAdapter(mAdapter);
+//                } else {
+//                    mAdapter = new CurrentPollAdapter(mContext, itemList, 1);
+//                    mCurrentPollList.setAdapter(mAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//        dlg_clear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dlg_textbox.setText("");
+//            }
+//        });
+//        dlg_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mCategoryDialog.dismiss();
+//            }
+//        });
+//
+//        mCategoryDialog.show();
+//
+//    }
 
-        ImageView dlg_clear = (ImageView) mCategoryDialog.findViewById(R.id.search_close);
-        ImageView dlg_back = (ImageView) mCategoryDialog.findViewById(R.id.search_back);
-        final EditText dlg_textbox = (EditText) mCategoryDialog.findViewById(R.id.search_text);
-        dlg_textbox.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    public static String encodeimage(Bitmap bitmap) {
+        try {
 
-            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            return encodedImage.toString();
+        } catch (Exception e) {
+            return "";
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                CurrentPollAdapter mAdapter;
-                if (!s.toString().equals("")) {
-                    List<CurrentPollItem> filteredTitles = new ArrayList<>();
-                    for (int i = 0; i < itemList.size(); i++) {
-                        if (itemList.get(i).mCurrentPollTitle.toString().toLowerCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().toUpperCase().contains(s) ||
-                                itemList.get(i).mCurrentPollTitle.toString().contains(s)) {
-                            filteredTitles.add(itemList.get(i));
-                        }
-                    }
-                    mAdapter = new CurrentPollAdapter(mContext, filteredTitles, 1);
-                    mCurrentPollList.setAdapter(mAdapter);
-//                    mAdapter = new ContactGridviewAdapter(act, filteredTitles);
-//                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    mAdapter = new CurrentPollAdapter(mContext, itemList, 1);
-                    mCurrentPollList.setAdapter(mAdapter);
-                }
-            }
+    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        dlg_clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg_textbox.setText("");
-            }
-        });
-        dlg_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCategoryDialog.dismiss();
-            }
-        });
-
-        mCategoryDialog.show();
-
+    public static Bitmap decodeProfile(String encodedString) {
+        Bitmap decodedByte = null;
+        try {
+            byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
+            decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return decodedByte;
     }
 
     public static List<MenuListItem> setMenuName() {

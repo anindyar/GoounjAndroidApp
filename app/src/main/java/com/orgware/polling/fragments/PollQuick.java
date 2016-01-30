@@ -41,6 +41,8 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     JSONArray mQtsOne;
     JSONArray mContactJsonArray;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
+    TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
+    int mPollType;
 
     @Override
     public void setTitle() {
@@ -49,6 +51,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPollType = getArguments().getInt(PAGER_COUNT);
         try {
             mContactJsonArray = new JSONArray("[]");
         } catch (Exception e) {
@@ -65,6 +68,15 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_quick_poll, container, false);
+
+        mPollName = (TextView) v.findViewById(R.id.txt_pollname);
+        mPollTypeOne = (TextView) v.findViewById(R.id.txt_polltype_one);
+        mPollTypeTwo = (TextView) v.findViewById(R.id.txt_polltype_two);
+        mPollTypeTh = (TextView) v.findViewById(R.id.txt_polltype_th);
+        mPollQtsOne = (TextView) v.findViewById(R.id.txt_poll_qts_one);
+        mPollQtsTwo = (TextView) v.findViewById(R.id.txt_poll_qts_two);
+        mPollQtsTh = (TextView) v.findViewById(R.id.txt_poll_qts_th);
+
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
         txtCategory.setOnClickListener(this);
         mEdittextQuickPollName = (EditText) v.findViewById(R.id.edittext_quick_pollname);
@@ -111,6 +123,33 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRbNumQtsOne.setChecked(true);
+        filterPollType(mPollType);
+    }
+
+
+    private void filterPollType(int mPollType) {
+        switch (mPollType) {
+            case 1:
+                mPollName.setText("Poll Name");
+                mEdittextQuickPollName.setHint("Enter Poll Name");
+                mPollTypeOne.setText("Poll One");
+                mPollQtsOne.setText("Poll Question");
+                mPollTypeTwo.setText("Poll Two");
+                mPollQtsTwo.setText("Poll Question");
+                mPollTypeTh.setText("Poll Three");
+                mPollQtsTh.setText("Poll Question");
+                break;
+            case 2:
+                mPollName.setText("Survey Name");
+                mEdittextQuickPollName.setHint("Enter Survey Name");
+                mPollTypeOne.setText("Survey Type");
+                mPollQtsOne.setText("Survey Question");
+                mPollTypeTwo.setText("Survey Type");
+                mPollQtsTwo.setText("Survey Question");
+                mPollTypeTh.setText("Survey Type");
+                mPollQtsTh.setText("Survey Question");
+                break;
+        }
     }
 
     /**

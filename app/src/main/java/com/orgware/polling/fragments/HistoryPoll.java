@@ -50,7 +50,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     RecyclerView mHistoryPollList;
     //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
-    ProgressDialog mProgress;
     CurrentPollAdapter mAdapter;
     int limit = 15;
     RelativeLayout mPollNoError, mPollError;
@@ -65,9 +64,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProgress = new ProgressDialog(act);
-        mProgress.setMessage("Loading");
-        mProgress.setCancelable(false);
         itemList = new ArrayList<>();
 
 //        for (int i = 0; i < 10; i++) {
@@ -341,7 +337,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onClick(View v) {
-        Methodutils.showListSearch(act, itemList, mHistoryPollList);
+//        Methodutils.showListSearch(act, itemList, mHistoryPollList);
     }
 
     /**
