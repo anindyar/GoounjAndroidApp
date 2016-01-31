@@ -216,10 +216,8 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
             mAdapter.setOnItemClickListener(this);
             mHistoryPollList.setAdapter(mAdapter);
             mLowerLimit = mLowerLimit + 10;
-            mUpperLimit = mUpperLimit + 10;
         } else {
             mLowerLimit = 0;
-            mUpperLimit = 10;
             mHistoryPollList.setVisibility(View.GONE);
             mPollNoError.setVisibility(View.VISIBLE);
         }

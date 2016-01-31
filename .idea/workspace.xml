@@ -52,49 +52,13 @@
       <file leaf-file-name="ProfileDetail.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/ProfileDetail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="184" column="44" selection-start-line="184" selection-start-column="44" selection-end-line="184" selection-end-column="44" />
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="199" column="13" selection-start-line="199" selection-start-column="13" selection-end-line="199" selection-end-column="13" />
               <folding>
-                <element signature="e#3922#4210#0" expanded="true" />
-                <element signature="e#4209#4210#0" expanded="true" />
-                <element signature="e#4212#4517#0" expanded="true" />
-                <element signature="e#4516#4517#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_showpoll_pager.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0344827">
-              <caret line="47" column="46" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
-              <folding>
-                <element signature="e#986#1008#0" expanded="true" />
-                <element signature="e#1134#1151#0" expanded="true" />
-                <element signature="e#1614#1636#0" expanded="true" />
-                <element signature="e#1757#1774#0" expanded="true" />
-                <element signature="e#2231#2253#0" expanded="true" />
-                <element signature="e#2374#2391#0" expanded="true" />
-                <element signature="e#3760#3782#0" expanded="true" />
-                <element signature="e#3816#3838#0" expanded="true" />
-                <element signature="e#3955#3973#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivityNew.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/LoginActivityNew.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
-              <folding>
-                <element signature="e#1511#2795#0" expanded="true" />
-                <element signature="e#2794#2795#0" expanded="true" />
+                <element signature="e#3963#4251#0" expanded="true" />
+                <element signature="e#4250#4251#0" expanded="true" />
+                <element signature="e#4253#4558#0" expanded="true" />
+                <element signature="e#4557#4558#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,30 +70,53 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.724138">
-              <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
+            <state vertical-scroll-proportion="-7.034483">
+              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
               <folding>
                 <element signature="e#493#516#0" expanded="true" />
-                <element signature="e#912#934#0" expanded="true" />
-                <element signature="e#1246#1268#0" expanded="true" />
-                <element signature="e#1487#1505#0" expanded="true" />
-                <element signature="e#1582#1599#0" expanded="true" />
-                <element signature="e#2117#2139#0" expanded="true" />
-                <element signature="e#2479#2502#0" expanded="true" />
-                <element signature="e#2902#2919#0" expanded="true" />
-                <element signature="e#3195#3217#0" expanded="true" />
-                <element signature="e#3485#3508#0" expanded="true" />
-                <element signature="e#3593#3610#0" expanded="true" />
-                <element signature="e#4442#4465#0" expanded="true" />
-                <element signature="e#4865#4882#0" expanded="true" />
-                <element signature="e#5155#5177#0" expanded="true" />
-                <element signature="e#5492#5515#0" expanded="true" />
-                <element signature="e#5642#5659#0" expanded="true" />
-                <element signature="e#6540#6560#0" expanded="true" />
-                <element signature="e#6678#6695#0" expanded="true" />
-                <element signature="e#7132#7152#0" expanded="true" />
-                <element signature="e#7264#7281#0" expanded="true" />
+                <element signature="e#950#972#0" expanded="true" />
+                <element signature="e#1284#1306#0" expanded="true" />
+                <element signature="e#1525#1543#0" expanded="true" />
+                <element signature="e#1620#1637#0" expanded="true" />
+                <element signature="e#2155#2177#0" expanded="true" />
+                <element signature="e#2517#2540#0" expanded="true" />
+                <element signature="e#2940#2957#0" expanded="true" />
+                <element signature="e#3233#3255#0" expanded="true" />
+                <element signature="e#3523#3546#0" expanded="true" />
+                <element signature="e#3631#3648#0" expanded="true" />
+                <element signature="e#4480#4503#0" expanded="true" />
+                <element signature="e#4903#4920#0" expanded="true" />
+                <element signature="e#5193#5215#0" expanded="true" />
+                <element signature="e#5530#5553#0" expanded="true" />
+                <element signature="e#5680#5697#0" expanded="true" />
+                <element signature="e#6578#6598#0" expanded="true" />
+                <element signature="e#6716#6733#0" expanded="true" />
+                <element signature="e#7170#7190#0" expanded="true" />
+                <element signature="e#7302#7319#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyPoll.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/poll/MyPoll.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+              <folding>
+                <element signature="e#5324#6024#0" expanded="true" />
+                <element signature="e#6023#6024#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HistoryPoll.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HistoryPoll.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4861461">
+              <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,67 +125,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MainHomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
+              <caret line="176" column="62" selection-start-line="176" selection-start-column="62" selection-end-line="176" selection-end-column="62" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurveyDetail.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/SurveyDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="82" selection-start-line="77" selection-start-column="82" selection-end-line="77" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_survey_detail.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_survey_detail.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.724138">
-              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultPoll.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/ResultPoll.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeDashboard.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HomeDashboard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2853717">
-              <caret line="48" column="61" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_home_dashboard.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_home_dashboard.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.551724">
-              <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
-              <folding>
-                <element signature="e#973#1002#0" expanded="true" />
-                <element signature="e#1041#1070#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -1964,25 +1892,33 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_current_survey_poll.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/survey/SurveyPoll.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MenuDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/utils/GraphicsUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/utils/Methodutils.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/nav_header_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/interfaces/Appinterface.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HistoryPoll.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_items/layout/item_grid_show_poll.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/poll/MyPoll.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/ShowPollPager.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_menu_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/ProfileDetail.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MainHomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/SurveyDetail.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_survey_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_home_dashboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HomeDashboard.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/pojo/ChoicesItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/ResultPoll.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/adapters/ChoicesListviewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/SurveyDetail.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailTwo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailThree.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailOne.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_result_poll.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_survey_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPoll.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/survey/SurveyPoll.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_menu_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/ProfileDetail.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/poll/MyPoll.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MainHomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HistoryPoll.java" />
       </list>
     </option>
   </component>
@@ -2140,6 +2076,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goounj-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polling" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="survey" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2424,7 +2386,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24319728" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2772109" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -2465,49 +2427,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/drawable-hdpi/ic_opinionpoll.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_current_survey_poll.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.103448">
-          <caret line="97" column="51" selection-start-line="97" selection-start-column="51" selection-end-line="97" selection-end-column="51" />
-          <folding>
-            <element signature="e#4919#4941#0" expanded="true" />
-            <element signature="e#4975#4997#0" expanded="true" />
-            <element signature="e#5114#5132#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/SettingsDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30327868">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MenuDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36448598">
           <caret line="73" column="19" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/survey/SurveyPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5919003">
-          <caret line="311" column="42" selection-start-line="311" selection-start-column="42" selection-end-line="311" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2584,14 +2508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/BaseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2624,21 +2540,6 @@
         <state vertical-scroll-proportion="-4.5919003">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/poll/MyPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-          <folding>
-            <element signature="e#5324#6024#0" expanded="true" />
-            <element signature="e#6023#6024#0" expanded="true" />
-            <element signature="e#6077#6811#0" expanded="true" />
-            <element signature="e#6810#6811#0" expanded="true" />
-            <element signature="e#11983#12223#0" expanded="true" />
-            <element signature="e#12222#12223#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2678,14 +2579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HistoryPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="56" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -2747,94 +2640,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_menu_profile.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.724138">
-          <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-          <folding>
-            <element signature="e#493#516#0" expanded="true" />
-            <element signature="e#912#934#0" expanded="true" />
-            <element signature="e#1246#1268#0" expanded="true" />
-            <element signature="e#1487#1505#0" expanded="true" />
-            <element signature="e#1582#1599#0" expanded="true" />
-            <element signature="e#2117#2139#0" expanded="true" />
-            <element signature="e#2479#2502#0" expanded="true" />
-            <element signature="e#2902#2919#0" expanded="true" />
-            <element signature="e#3195#3217#0" expanded="true" />
-            <element signature="e#3485#3508#0" expanded="true" />
-            <element signature="e#3593#3610#0" expanded="true" />
-            <element signature="e#4442#4465#0" expanded="true" />
-            <element signature="e#4865#4882#0" expanded="true" />
-            <element signature="e#5155#5177#0" expanded="true" />
-            <element signature="e#5492#5515#0" expanded="true" />
-            <element signature="e#5642#5659#0" expanded="true" />
-            <element signature="e#6540#6560#0" expanded="true" />
-            <element signature="e#6678#6695#0" expanded="true" />
-            <element signature="e#7132#7152#0" expanded="true" />
-            <element signature="e#7264#7281#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/LoginActivityNew.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
           <folding>
-            <element signature="e#1511#2795#0" expanded="true" />
-            <element signature="e#2794#2795#0" expanded="true" />
+            <element signature="e#1511#2795#0" expanded="false" />
+            <element signature="e#2794#2795#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/ProfileDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="184" column="44" selection-start-line="184" selection-start-column="44" selection-end-line="184" selection-end-column="44" />
-          <folding>
-            <element signature="e#3922#4210#0" expanded="true" />
-            <element signature="e#4209#4210#0" expanded="true" />
-            <element signature="e#4212#4517#0" expanded="true" />
-            <element signature="e#4516#4517#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MainHomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/SurveyDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="82" selection-start-line="77" selection-start-column="82" selection-end-line="77" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_survey_detail.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.724138">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/ResultPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2854,8 +2667,249 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HomeDashboard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2853717">
-          <caret line="48" column="61" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.3261391">
+          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/utils/piegraph/PieSlice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1414868">
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/pojo/ChoicesItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6146572">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+          <folding>
+            <element signature="e#321#322#0" expanded="false" />
+            <element signature="e#373#374#0" expanded="false" />
+            <element signature="e#321#322#0" expanded="false" />
+            <element signature="e#373#374#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_currentpoll_pager.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/adapters/ChoicesListviewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3803132">
+          <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/SurveyDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41834453">
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailThree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31991053">
+          <caret line="61" column="110" selection-start-line="61" selection-start-column="110" selection-end-line="61" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailTwo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/widget/ListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-23/data/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_result_poll.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8301435">
+          <caret line="204" column="60" selection-start-line="204" selection-start-column="60" selection-end-line="204" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/ResultPoll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5704698">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_survey_detail.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65789473">
+          <caret line="364" column="0" selection-start-line="364" selection-start-column="0" selection-end-line="364" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_currentpoll_detail.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4952153">
+          <caret line="187" column="44" selection-start-line="187" selection-start-column="44" selection-end-line="187" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollDetailOne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45637584">
+          <caret line="65" column="54" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPollPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41834453">
+          <caret line="102" column="42" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.1.1/support-v4-23.1.1-sources.jar!/android/support/v4/widget/SwipeRefreshLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/CurrentPoll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40401146">
+          <caret line="121" column="25" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/survey/SurveyPoll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5329513">
+          <caret line="247" column="29" selection-start-line="247" selection-start-column="29" selection-end-line="247" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_menu_profile.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.034483">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <folding>
+            <element signature="e#493#516#0" expanded="true" />
+            <element signature="e#950#972#0" expanded="true" />
+            <element signature="e#1284#1306#0" expanded="true" />
+            <element signature="e#1525#1543#0" expanded="true" />
+            <element signature="e#1620#1637#0" expanded="true" />
+            <element signature="e#2155#2177#0" expanded="true" />
+            <element signature="e#2517#2540#0" expanded="true" />
+            <element signature="e#2940#2957#0" expanded="true" />
+            <element signature="e#3233#3255#0" expanded="true" />
+            <element signature="e#3523#3546#0" expanded="true" />
+            <element signature="e#3631#3648#0" expanded="true" />
+            <element signature="e#4480#4503#0" expanded="true" />
+            <element signature="e#4903#4920#0" expanded="true" />
+            <element signature="e#5193#5215#0" expanded="true" />
+            <element signature="e#5530#5553#0" expanded="true" />
+            <element signature="e#5680#5697#0" expanded="true" />
+            <element signature="e#6578#6598#0" expanded="true" />
+            <element signature="e#6716#6733#0" expanded="true" />
+            <element signature="e#7170#7190#0" expanded="true" />
+            <element signature="e#7302#7319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/menu/ProfileDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="199" column="13" selection-start-line="199" selection-start-column="13" selection-end-line="199" selection-end-column="13" />
+          <folding>
+            <element signature="e#3963#4251#0" expanded="true" />
+            <element signature="e#4250#4251#0" expanded="true" />
+            <element signature="e#4253#4558#0" expanded="true" />
+            <element signature="e#4557#4558#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/MainHomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="176" column="62" selection-start-line="176" selection-start-column="62" selection-end-line="176" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/poll/MyPoll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+          <folding>
+            <element signature="e#5324#6024#0" expanded="true" />
+            <element signature="e#6023#6024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/BaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3324937">
+          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/orgware/polling/fragments/HistoryPoll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4861461">
+          <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
           <folding />
         </state>
       </provider>

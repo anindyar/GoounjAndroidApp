@@ -119,7 +119,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Poll");
-
+        itemList.clear();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -217,7 +217,6 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
 //            JSONObject object = new JSONObject(response);
 //            JSONArray objectArray = object.optJSONArray(response);
             JSONArray objectArray = new JSONArray(response);
-            itemList.clear();
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
@@ -242,10 +241,8 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             mAdapter.setOnItemClickListener(this);
             mCurrentPollList.setAdapter(mAdapter);
             mLowerLimit = mLowerLimit + 10;
-            mUpperLimit = mUpperLimit + 10;
         } else {
             mLowerLimit = 0;
-            mUpperLimit = 10;
             mCurrentPollList.setVisibility(View.GONE);
             mPollNoError.setVisibility(View.VISIBLE);
         }

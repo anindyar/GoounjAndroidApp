@@ -87,6 +87,23 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            if (NetworkHelper.checkActiveInternet(act))
+                getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+            else
+                Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        act.getSupportFragmentManager().popBackStack();
+                        return;
+                    }
+                });
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
@@ -124,6 +141,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        itemList.clear();
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -202,7 +220,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
 //            JSONObject object = new JSONObject(response);
 //            JSONArray objectArray = object.optJSONArray(response);
             JSONArray objectArray = new JSONArray(response);
-            itemList.clear();
+
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
@@ -227,10 +245,8 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
             mAdapter.setOnItemClickListener(this);
             mHistoryPollList.setAdapter(mAdapter);
             mLowerLimit = mLowerLimit + 10;
-            mUpperLimit = mUpperLimit + 10;
         } else {
             mLowerLimit = 0;
-            mUpperLimit = 10;
             mHistoryPollList.setVisibility(View.GONE);
             mPollNoError.setVisibility(View.VISIBLE);
         }

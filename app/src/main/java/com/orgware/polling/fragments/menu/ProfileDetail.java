@@ -75,6 +75,7 @@ public class ProfileDetail extends BaseFragment implements CompoundButton.OnChec
         mProfileName.setText("" + preferences.getString(USERNAME, "Enter your name"));
         mProfileGender.setText("" + preferences.getString(GENDER, "Select gender"));
         mProfileAge.setText("" + preferences.getString(PROFILE_AGE, "Enter your age"));
+        mProfileImage.setEnabled(false);
         if (!preferences.getString(ENCODE_IMAGE, "").equals("") || !preferences.getString(ENCODE_IMAGE, "").equals("null") ||
                 preferences.getString(ENCODE_IMAGE, "") != null)
             mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
@@ -185,6 +186,8 @@ public class ProfileDetail extends BaseFragment implements CompoundButton.OnChec
         if (mCBProfileNameImg.isChecked()) {
             mProfileImage.setClickable(true);
             mProfileName.setEnabled(true);
+            mProfileImage.setFocusable(true);
+            mProfileImage.setEnabled(true);
             mProfileImage.setFocusableInTouchMode(true);
 //            editor.putString(USERNAME, mProfileName.getText().toString()).commit();
 //            if (thePic != null)
@@ -196,6 +199,8 @@ public class ProfileDetail extends BaseFragment implements CompoundButton.OnChec
                 mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
             }
             mProfileImage.setClickable(false);
+            mProfileImage.setFocusable(false);
+            mProfileImage.setEnabled(false);
             mProfileImage.setFocusableInTouchMode(false);
             mProfileName.setEnabled(false);
         }

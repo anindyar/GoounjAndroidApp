@@ -172,6 +172,14 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
 
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
