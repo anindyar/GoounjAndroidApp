@@ -1,9 +1,14 @@
 package com.orgware.polling.interfaces;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * Created by cool on 09-Sep-15.
  */
 public interface Appinterface {
+
+    String BASE64PREFIX = "data:image/jpeg;base64", ENCODE_IMAGE = "ENCODE_IMAGE", PROFILE_AGE = "PROFILE_AGE";
 
     /*Push Notification*/
     String APP_ID = "567852824286", NOTIFICATION = "notification", NOTIFICATION_OBJECT = "notifcation", TypeID = "TypeID", GET_DEVICE_TOKEN_KEY = "GET_DEVICE_TOKEN_KEY",
@@ -13,6 +18,8 @@ public interface Appinterface {
             DEVICE_TOKEN_NEW = "APA91bEVmzf0Ls7NaVRTjDge-iL5Lzu55wuhKNd4KYZhhF6I6wfnkT16zVdes3Pqm5eQ6cdFrbUVCgipTQSw4rMXx81faaDnV2KQWq7CsaIDMOaj0SuKaxCff62KQ2gDAGRopVxkhBnf",
             DEVICE_TOKEN_7INCH = "APA91bEHeWo3RGLlTZpKk5n2C9BeXyP7dEeQqB1XugPBixHE3-JEnPhmwJM14g3ETVCb605fg_3yDwJvkIyyMgONQbP_QrFvjIMlxxT9BDRxPqMtRlWTcb6e_SIDs9hjGF6CboUiS_Ks";
 
+
+    SimpleDateFormat mUTCFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     String OPINION_NUMOFQTS = "OPINION_NUMOFQTS", QUICK_NUMOFQTS = "QUICK_NUMOFQTS", SURVEY_NUMOFQTS = "SURVEY_NUMOFQTS", CURRENT_POLLDB = "CURRENT_POLLDB",
             CATEGORY_SPINNER = "CATEGORY_SPINNER", OPNINON_RB_ONE = "OPNINON_RB_ONE", OPNINON_RB_TWO = "OPNINON_RB_TWO", OPNINON_RB_THREE = "OPNINON_RB_THREE";
@@ -57,7 +64,7 @@ public interface Appinterface {
 
     String RESULT_URL = "polls/v1/result/", RESULT_QUESTION_SIZE = "RESULT_QUESTION_SIZE", RES_COUNT_0 = "RES_COUNT_0", RES_COUNT_1 = "RES_COUNT_1", RES_COUNT_2 = "RES_COUNT_2",
             RES_COUNT_3 = "RES_COUNT_3", RES_COUNT_4 = "RES_COUNT_4", RES_COUNT_5 = "RES_COUNT_5", RES_COUNT_6 = "RES_COUNT_6", RES_COUNT_7 = "RES_COUNT_7", RES_COUNT_8 = "RES_COUNT_8",
-            RES_QUESTION_0 = "RES_QUESTION_0", RES_QUESTION_1 = "RES_QUESTION_1", RES_QUESTION_2 = "RES_QUESTION_2";
+            RES_QUESTION_0 = "RES_QUESTION_0", RES_QUESTION_1 = "RES_QUESTION_1", authCode = "authCode", userId = "userId", RES_QUESTION_2 = "RES_QUESTION_2";
 
     String SURVEY_POLL_URL = "survey/v1/survey";
 
@@ -68,6 +75,9 @@ public interface Appinterface {
     /* Change Number */
     String CHANGE_NUMBER = "users/v1/changeNumber/";
 
+//    Verify Number
+
+    String VERIFY_NUMBER = "users/v1/verifyNumber";
 
     /*Api Login*/
 

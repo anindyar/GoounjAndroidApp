@@ -9,17 +9,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.MenuDetailActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.fragments.BaseFragment;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
-import com.orgware.polling.pojo.TimeLineItem;
 import com.orgware.polling.utils.Methodutils;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -69,23 +67,31 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
         return mShowPollOnject.toString();
     }
 
-    private void getChangeNumberPage(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.PUT, url, true, true, new RestApiListener<String>() {
-            @Override
-            public void onRequestCompleted(String response) {
-            }
+    private void getChangeNumberPage(String url, String code) {
+        try {
+            JSONObject object = new JSONObject();
+            object.put(authCode, code).put(userId, preferences.getString(USER_ID, ""));
+            RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+                @Override
+                public void onRequestCompleted(String response) {
+                    Toast.makeText(act, "Mobile No Changed Successfully", Toast.LENGTH_SHORT).show();
+                    act.onBackPressed();
+                }
 
-            @Override
-            public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.finish();
-                    }
-                });
-            }
-        });
-        processor.execute(showPollParams().toString());
+                @Override
+                public void onRequestFailed(Exception e) {
+                    Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.finish();
+                        }
+                    });
+                }
+            });
+            processor.execute(object.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showOtpDialog() {
@@ -95,10 +101,45 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
         mOTPDialog.setCancelable(false);
         mDialogOTPTxt = (EditText) mOTPDialog.findViewById(R.id.txt_otp_change_number);
         mOTPDone = (Button) mOTPDialog.findViewById(R.id.btn_change_number_otp_submit);
-        mOTPDone.setOnClickListener(this);
+        mOTPDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    if (mOTPDone.getText().toString().trim().length() == 0) {
+                        Toast.makeText(act, "Enter valid OTP", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    getChangeNumberPage(BASE_URL + VERIFY_NUMBER, mDialogOTPTxt.getText().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        mOTPDialog.show();
 
     }
 
+    private void getChangeNoVerification(String url) throws Exception {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.PUT, url, true, true,
+                new RestApiListener<String>() {
+                    @Override
+                    public void onRequestCompleted(String response) {
+                        showOtpDialog();
+                    }
+
+                    @Override
+                    public void onRequestFailed(Exception e) {
+                        Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                act.finish();
+                            }
+                        });
+                    }
+                });
+        processor.execute(showPollParams().toString());
+    }
 
     /**
      * Called when a view has been clicked.
@@ -137,7 +178,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
             }
 
             try {
-                getChangeNumberPage(BASE_URL + CHANGE_NUMBER + preferences.getString(USER_ID, ""));
+                getChangeNoVerification(BASE_URL + CHANGE_NUMBER + preferences.getString(USER_ID, ""));
             } catch (Exception e) {
                 e.printStackTrace();
             }

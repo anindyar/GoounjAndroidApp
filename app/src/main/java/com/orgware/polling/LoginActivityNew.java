@@ -52,6 +52,9 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
                         currentLat = intent.getExtras().getDouble("currentLat");
                         currentLongt = intent.getExtras().getDouble(
                                 "currentLong");
+                        Log.e("Mine", currentLat + " - " + currentLongt);
+//                        mCountryText.setText("India");
+//                        mCityText.setText("Chennai");
                         if (preferences.getString(COUNTRY, "").equals("") && preferences.getString(CITY, "").equals(""))
                             try {
                                 getLocationDetails(currentLat, currentLongt);
@@ -126,8 +129,8 @@ public class LoginActivityNew extends BaseActivity implements View.OnClickListen
         mCBAccept = (CheckBox) findViewById(R.id.login_cb_accept);
         (mBtnAccept = (Button) findViewById(R.id.login_btn_accept)).setOnClickListener(this);
         ((mTermsOfUse = (TextView) findViewById(R.id.login_termsofuse))).setOnClickListener(this);
-        mCountryText.setText("" + preferences.getString(COUNTRY, ""));
-        mCityText.setText("" + preferences.getString(CITY, ""));
+        mCountryText.setText("" + preferences.getString(COUNTRY, "India"));
+        mCityText.setText("" + preferences.getString(CITY, "Chennai"));
 
     }
 

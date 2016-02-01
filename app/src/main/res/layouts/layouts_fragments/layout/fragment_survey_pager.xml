@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/tab_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_current"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_quick_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_current_poll"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="Current Survey\n "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
+
+        <RadioButton
+            android:id="@+id/tab_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_history"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="My Survey\n "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
+
+    </RadioGroup>
+
+    <!--<GridView-->
+    <!--android:id="@+id/gridShowPoll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:choiceMode="singleChoice"-->
+    <!--android:numColumns="3">-->
+
+    <!--</GridView>-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerShowPoll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_create"
+        android:layout_below="@+id/tab_radio">
+
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/layout_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/home_bg"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnCreate"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/home_bg"
+            android:drawableLeft="@drawable/ic_create"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small"
+            android:text="CREATE"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+    </LinearLayout>
+
+
+</RelativeLayout>

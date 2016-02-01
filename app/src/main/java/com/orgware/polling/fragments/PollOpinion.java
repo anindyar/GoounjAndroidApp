@@ -42,10 +42,11 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     TextView txtCategory, txtNoOpinionOne, txtNoOpinionTwo, txtNoOpinionThree;
     JSONArray mContactArray = new JSONArray();
     JSONArray mChoicesArrayOne, mChoicesArrayTwo, mChoicesArrayThree;
-    Button btnContactOpinion;
+    Button btnContactOpinion, btnViewContact;
     JSONArray mQtsOne;
     JSONArray mContactJsonArray;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
+    TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
     int mPollType;
 
     @Override
@@ -56,7 +57,6 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPollType = getArguments().getInt(PAGER_COUNT);
-
         try {
             mContactJsonArray = new JSONArray("[]");
         } catch (Exception e) {
@@ -68,7 +68,17 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_opinion_poll, container, false);
+
+        mPollName = (TextView) v.findViewById(R.id.txt_pollname);
+        mPollTypeOne = (TextView) v.findViewById(R.id.txt_polltype_one);
+        mPollTypeTwo = (TextView) v.findViewById(R.id.txt_polltype_two);
+        mPollTypeTh = (TextView) v.findViewById(R.id.txt_polltype_th);
+        mPollQtsOne = (TextView) v.findViewById(R.id.txt_poll_qts_one);
+        mPollQtsTwo = (TextView) v.findViewById(R.id.txt_poll_qts_two);
+        mPollQtsTh = (TextView) v.findViewById(R.id.txt_poll_qts_th);
+
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
+        btnViewContact = (Button) v.findViewById(R.id.btnViewContact);
         txtCategory.setOnClickListener(this);
         txtNoOpinionOne = (TextView) v.findViewById(R.id.text_opinion_qts_one_choice_six);
         txtNoOpinionTwo = (TextView) v.findViewById(R.id.text_opinion_qts_two_choice_six);
@@ -166,19 +176,44 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (mContactArray.equals("[]")) {
+            btnViewContact.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRbNumQtsOne.setChecked(true);
         txtNoOpinionOne.setText("3");
         txtNoOpinionTwo.setText("3");
         txtNoOpinionThree.setText("3");
+        filterPollType(mPollType);
     }
 
     private void filterPollType(int mPollType) {
         switch (mPollType) {
             case 1:
+                mPollName.setText("Poll Name");
+                mEdittextopinionPollName.setHint("Enter Poll Name");
+                mPollTypeOne.setText("Poll One");
+                mPollQtsOne.setText("Poll Question");
+                mPollTypeTwo.setText("Poll Two");
+                mPollQtsTwo.setText("Poll Question");
+                mPollTypeTh.setText("Poll Three");
+                mPollQtsTh.setText("Poll Question");
                 break;
             case 2:
+                mPollName.setText("Survey Name");
+                mEdittextopinionPollName.setHint("Enter Survey Name");
+                mPollTypeOne.setText("Survey One");
+                mPollQtsOne.setText("Survey Question");
+                mPollTypeTwo.setText("Survey Two");
+                mPollQtsTwo.setText("Survey Question");
+                mPollTypeTh.setText("Survey Three");
+                mPollQtsTh.setText("Survey Question");
                 break;
         }
     }

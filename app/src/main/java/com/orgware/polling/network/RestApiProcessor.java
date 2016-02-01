@@ -37,7 +37,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Created by Raja Mohamed on 24/9/15.
- * <p/>
+ * <p>
  * This async task handles the api calls from the UI part mostly
  */
 public class RestApiProcessor extends AsyncTask<String, String, String> implements Appinterface {

@@ -92,7 +92,7 @@ public class CurrentLocationService extends Service implements
                 googleApiClient, locationRequest, this);
         if (location != null) {
             Log.e("location:",
-                    "" + location.getLatitude() + "" + location.getLongitude());
+                    "" + location.getLatitude() + " - " + location.getLongitude());
             sendCurrentLatLong(location.getLatitude(), location.getLongitude(),
                     true);
         } else {

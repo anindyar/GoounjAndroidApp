@@ -8,9 +8,14 @@ public class ChoicesItem {
     public boolean mChoiceChecked;
     public String mChoiceName;
     public int mChoiceOptionId;
+    public float mChoicePercent;
 
     public ChoicesItem() {
 
+    }
+
+    public ChoicesItem(float mChoicePercent) {
+        this.mChoicePercent = mChoicePercent;
     }
 
     public ChoicesItem(String mChoiceName) {
@@ -20,6 +25,12 @@ public class ChoicesItem {
     public ChoicesItem(String mChoiceName, int optionId) {
         this.mChoiceName = mChoiceName;
         this.mChoiceOptionId = optionId;
+    }
+
+    public ChoicesItem(String mChoiceName, int optionId, float mChoicePercent) {
+        this.mChoiceName = mChoiceName;
+        this.mChoiceOptionId = optionId;
+        this.mChoicePercent = mChoicePercent;
     }
 
     public ChoicesItem(String mChoiceName, boolean mChoiceChecked) {

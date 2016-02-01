@@ -129,7 +129,7 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
     }
 
     private void setPieGraph(PieGraph pg, final int mTotalCount, final int mTotal, final List<ChoicesItem> itemList) throws Exception {
-        float testCount, totalPercent = 0;
+        float testCount = 0, totalPercent = 0;
         PieSlice slice;
         for (int i = 0; i < mTotalCount; i++) {
             if (itemList.get(i).mChoiceOptionId != 0) {
@@ -144,7 +144,9 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
                 slice.setTitle("first");
 //            totalPercent = totalPercent + testCount;
                 pg.addSlice(slice);
+
             }
+
         }
 //        if (totalPercent != 100) {
 //            Log.e("Percent Total", "" + totalPercent);
@@ -216,36 +218,32 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
         super.onActivityCreated(savedInstanceState);
         if (qtsSize == 1) {
 //            setQtsOneContent();
-            mChoiceListviewOne.setAdapter(mAdapterOne);
-            mQuestionTitleOne.setText(mQuestionOne);
-            mLayoutQtsTwo.setVisibility(View.GONE);
-            mLayoutQtsThree.setVisibility(View.GONE);
             try {
                 setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            mChoiceListviewOne.setAdapter(mAdapterOne);
+            mQuestionTitleOne.setText(mQuestionOne);
+            mLayoutQtsTwo.setVisibility(View.GONE);
+            mLayoutQtsThree.setVisibility(View.GONE);
+
         } else if (qtsSize == 2) {
 //            setQtsTwoContent();
-            mChoiceListviewOne.setAdapter(mAdapterOne);
-            mChoiceListviewTwo.setAdapter(mAdapterTwo);
-            mQuestionTitleOne.setText(mQuestionOne);
-            mQuestionTitleTwo.setText(mQuestionTwo);
-            mLayoutQtsThree.setVisibility(View.GONE);
             try {
                 setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
                 setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (qtsSize == 3) {
-//            setQtsThreeContent();
             mChoiceListviewOne.setAdapter(mAdapterOne);
             mChoiceListviewTwo.setAdapter(mAdapterTwo);
-            mChoiceListviewThree.setAdapter(mAdapterThree);
             mQuestionTitleOne.setText(mQuestionOne);
             mQuestionTitleTwo.setText(mQuestionTwo);
-            mQuestionTitleThree.setText(mQuestionThree);
+            mLayoutQtsThree.setVisibility(View.GONE);
+
+        } else if (qtsSize == 3) {
+//            setQtsThreeContent();
             try {
                 setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
                 setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
@@ -253,6 +251,12 @@ public class ResultPoll extends BaseFragment implements AdapterView.OnItemClickL
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            mChoiceListviewOne.setAdapter(mAdapterOne);
+            mChoiceListviewTwo.setAdapter(mAdapterTwo);
+            mChoiceListviewThree.setAdapter(mAdapterThree);
+            mQuestionTitleOne.setText(mQuestionOne);
+            mQuestionTitleTwo.setText(mQuestionTwo);
+            mQuestionTitleThree.setText(mQuestionThree);
         }
 
     }

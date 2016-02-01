@@ -12,8 +12,12 @@ import android.widget.TextView;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.fragments.chat.ChatHome;
+import com.orgware.polling.fragments.survey.SurveyPager;
 import com.orgware.polling.fragments.survey.SurveyPoll;
 import com.orgware.polling.fragments.vote.VotePager;
+import com.orgware.polling.utils.Methodutils;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by nandagopal on 21/10/15.
@@ -21,6 +25,7 @@ import com.orgware.polling.fragments.vote.VotePager;
 public class HomeDashboard extends BaseFragment implements View.OnClickListener {
     public ImageView imgVote, imgPoll, imgChat, imgSurvey;
     TextView mUsername;
+    CircleImageView mProfileimage;
 
     @Override
     public void setTitle() {
@@ -33,10 +38,28 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mUsername.setText(preferences.getString(USERNAME, ""));
+        mProfileimage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            mUsername.setText(preferences.getString(USERNAME, ""));
+            mProfileimage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+        }
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home_dashboard, container, false);
+        mProfileimage = (CircleImageView) v.findViewById(R.id.menu_profile_image);
         imgVote = (ImageView) v.findViewById(R.id.home_vote);
         imgPoll = (ImageView) v.findViewById(R.id.home_poll);
         imgChat = (ImageView) v.findViewById(R.id.home_chat);
@@ -81,7 +104,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
 //                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
                 break;
             case R.id.home_survey:
-                ((MainHomeActivity) act).setNewFragment(new SurveyPoll(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new SurveyPager(), "Poll Pager", true);
                 editor.putInt(DASHBOARD_ID, 1).commit();
                 break;
         }

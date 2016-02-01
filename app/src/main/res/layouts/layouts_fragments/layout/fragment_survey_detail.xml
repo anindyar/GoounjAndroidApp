@@ -24,7 +24,8 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/rotate_arrow_toright"
             android:padding="@dimen/padding_small"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -194,7 +195,7 @@
                 <ListView
                     android:id="@+id/choicesListviewOne"
                     android:layout_width="wrap_content"
-                    android:layout_height="180dp"
+                    android:layout_height="250dp"
                     android:layout_gravity="center_horizontal"
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
@@ -276,7 +277,7 @@
                 <ListView
                     android:id="@+id/choicesListviewTwo"
                     android:layout_width="wrap_content"
-                    android:layout_height="180dp"
+                    android:layout_height="250dp"
                     android:layout_gravity="center_horizontal"
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
@@ -357,7 +358,7 @@
                 <ListView
                     android:id="@+id/choicesListviewThree"
                     android:layout_width="wrap_content"
-                    android:layout_height="180dp"
+                    android:layout_height="250dp"
                     android:layout_gravity="center_horizontal"
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>

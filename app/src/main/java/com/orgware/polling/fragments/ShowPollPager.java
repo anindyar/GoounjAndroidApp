@@ -11,13 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.GridTabAdapter;
 import com.orgware.polling.adapters.PollPagerAdapter;
+import com.orgware.polling.fragments.poll.MyPoll;
 import com.orgware.polling.pojo.GridItems;
 
 import java.util.ArrayList;
@@ -26,13 +29,14 @@ import java.util.List;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class ShowPollPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener {
+public class ShowPollPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
+    RadioButton mTabOpinion, mTabQuick, mTabSurvey;
     ViewPager mViewPager;
     PollPagerAdapter mAdapter;
     List<Fragment> mFragmentList;
-    GridView mPollGrid;
-    List<GridItems> mGridList;
-    GridTabAdapter mGridAdapter;
+    //    GridView mPollGrid;
+//    List<GridItems> mGridList;
+//    GridTabAdapter mGridAdapter;
     LinearLayout mLayoutCreate;
     Button btnCreate;
 
@@ -46,17 +50,20 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         setHasOptionsMenu(true);
         mFragmentList = new ArrayList<>();
         mFragmentList.clear();
-        mGridList = new ArrayList<GridItems>();
-        mGridList.clear();
-        mGridList.add(new GridItems("Current Poll", R.drawable.ic_current_poll));
-        mGridList.add(new GridItems("History", R.drawable.ic_history));
+//        mGridList = new ArrayList<GridItems>();
+//        mGridList.clear();
+//        mGridList.add(new GridItems("Current Poll", R.drawable.current_poll));
+//        mGridList.add(new GridItems("History", R.drawable.history));
+//        mGridList.add(new GridItems("My Poll", R.drawable.my_poll));
 
         mFragmentList.add(setPagerFragment(new CurrentPoll(),
                 mFragmentList.size()));
         mFragmentList.add(setPagerFragment(new HistoryPoll(),
                 mFragmentList.size()));
+        mFragmentList.add(setPagerFragment(new MyPoll(),
+                mFragmentList.size()));
 
-        mGridAdapter = new GridTabAdapter(act, R.layout.item_grid_show_poll, mGridList);
+//        mGridAdapter = new GridTabAdapter(act, R.layout.item_grid_show_poll, mGridList);
 
         mAdapter = new PollPagerAdapter(
                 getChildFragmentManager(), mFragmentList);
@@ -67,14 +74,20 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_showpoll_pager, container, false);
-        mPollGrid = (GridView) v.findViewById(R.id.gridShowPoll);
+        mTabOpinion = (RadioButton) v.findViewById(R.id.tab_current);
+        mTabQuick = (RadioButton) v.findViewById(R.id.tab_history);
+        mTabSurvey = (RadioButton) v.findViewById(R.id.tab_mine);
+//        mPollGrid = (GridView) v.findViewById(R.id.gridShowPoll);
         mViewPager = (ViewPager) v.findViewById(R.id.pagerShowPoll);
         mLayoutCreate = (LinearLayout) v.findViewById(R.id.layout_create);
         btnCreate = (Button) v.findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(this);
         mLayoutCreate.setOnClickListener(this);
         mViewPager.setOnPageChangeListener(this);
-        mPollGrid.setOnItemClickListener(this);
+//        mPollGrid.setOnItemClickListener(this);
+        mTabOpinion.setOnCheckedChangeListener(this);
+        mTabQuick.setOnCheckedChangeListener(this);
+        mTabSurvey.setOnCheckedChangeListener(this);
         return v;
     }
 
@@ -83,8 +96,9 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         super.onActivityCreated(savedInstanceState);
 //        MenuItem menuItem = ((MainHomeActivity) act).mMenu.findItem(R.id.menu_group_three_search);
 //        menuItem.setVisible(true);
-        mPollGrid.setAdapter(mGridAdapter);
-        mPollGrid.setItemChecked(0, true);
+        mTabOpinion.setChecked(true);
+//        mPollGrid.setAdapter(mGridAdapter);
+//        mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);
     }
 
@@ -132,11 +146,22 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
      */
     @Override
     public void onPageSelected(int position) {
-        mPollGrid.setItemChecked(position, true);
+        enablePosition(position);
+//        mPollGrid.setItemChecked(position, true);
 //        if (position == 0)
+
 //            ((HomeActivity) act).mPageTitle.setText("Current Poll");
 //        else
 //            ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
+    }
+
+    public void enablePosition(int position) {
+        if (position == 0)
+            mTabOpinion.setChecked(true);
+        else if (position == 1)
+            mTabQuick.setChecked(true);
+        else if (position == 2)
+            mTabSurvey.setChecked(true);
     }
 
     /**
@@ -157,7 +182,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -170,5 +195,24 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mViewPager.setCurrentItem(position);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (mTabOpinion.isChecked()) {
+            mViewPager.setCurrentItem(0);
+            mTabOpinion.setTextColor(getResources().getColor(android.R.color.white));
+        } else
+            mTabOpinion.setTextColor(getResources().getColor(android.R.color.black));
+        if (mTabQuick.isChecked()) {
+            mTabQuick.setTextColor(getResources().getColor(android.R.color.white));
+            mViewPager.setCurrentItem(1);
+        } else
+            mTabQuick.setTextColor(getResources().getColor(android.R.color.black));
+        if (mTabSurvey.isChecked()) {
+            mTabSurvey.setTextColor(getResources().getColor(android.R.color.white));
+            mViewPager.setCurrentItem(2);
+        } else
+            mTabSurvey.setTextColor(getResources().getColor(android.R.color.black));
     }
 }

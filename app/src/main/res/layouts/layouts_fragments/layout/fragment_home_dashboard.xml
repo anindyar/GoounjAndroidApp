@@ -21,7 +21,7 @@
             android:orientation="horizontal"
             android:paddingLeft="@dimen/padding_normal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/menu_profile_image"
                 android:layout_width="@dimen/size_home_profileImg"
                 android:layout_height="@dimen/size_home_profileImg"

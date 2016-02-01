@@ -31,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.orgware.polling.fragments.HomeDashboard;
 import com.orgware.polling.fragments.ResultPoll;
@@ -39,18 +38,16 @@ import com.orgware.polling.utils.Methodutils;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.fabric.sdk.android.Fabric;
 
-import java.io.File;
 
 public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     public Menu mMenu;
     private NavigationView navigationView;
-    private DrawerLayout mDrawerLayout;
+    public DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mUserAmount;
-    private CircleImageView mProfileImage;
+    public CircleImageView mProfileImage;
     private ImageView mLogout;
 
     @Override
@@ -78,7 +75,6 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                Fabric.with(MainHomeActivity.this, new Crashlytics());
                 hideSoftInput();
 
             }
@@ -90,6 +86,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         (mLogout = (ImageView) findViewById(R.id.menu_logout)).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+        mDrawerLayout.closeDrawers();
         addHeader();
         setNewFragment(new HomeDashboard(), "Dashboard", false);
     }
@@ -102,6 +99,11 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
                 .findViewById(R.id.user_amount);
         mProfileImage = (CircleImageView) view.findViewById(R.id.profile_image);
         mUserName.setText("" + preferences.getString(USERNAME, "NA"));
+
+        if (!preferences.getString(ENCODE_IMAGE, "").equals("")) {
+            mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+        } else
+            mProfileImage.setImageResource(R.drawable.ic_usericon_blue);
 
 //        Picasso.with(this)
 //                .load("")
@@ -142,6 +144,13 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     @Override
     protected void onResume() {
         super.onResume();
+        if (!preferences.getString(ENCODE_IMAGE, "").equals("")) {
+            mProfileImage.setImageBitmap(Methodutils.decodeProfile(preferences.getString(ENCODE_IMAGE, "")));
+        } else
+            mProfileImage.setImageResource(R.drawable.ic_usericon_blue);
+        mUserName.setText("" + preferences.getString(USERNAME, ""));
+        mDrawerLayout.openDrawer(GravityCompat.START);
+
     }
 
     @Override
@@ -161,6 +170,14 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        }
+    }
 
     @Override
     public void onBackPressed() {

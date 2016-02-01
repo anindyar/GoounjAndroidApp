@@ -51,19 +51,19 @@ public class AboutUsDetail extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((MenuDetailActivity) act).setTitle("About Us");
-        mPrgress = new ProgressDialog(act);
-        mPrgress.setCancelable(false);
-        mPrgress.setMessage("Loading...");
-        mWebview.getSettings().setJavaScriptEnabled(true);
-        mWebview.getSettings().setAppCacheEnabled(true);
-        mWebview.getSettings().setBuiltInZoomControls(true);
-        mWebview.getSettings().setGeolocationEnabled(true);
-        mWebview.getSettings().setSupportMultipleWindows(true);
-        mWebview.getSettings().setUseWideViewPort(true);
-        mWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        mWebview.getSettings().setPluginState(WebSettings.PluginState.ON);
-        mWebview.loadUrl("http://goounj.com");
-        loadWebView(mWebview);
+//        mPrgress = new ProgressDialog(act);
+//        mPrgress.setCancelable(false);
+//        mPrgress.setMessage("Loading...");
+//        mWebview.getSettings().setJavaScriptEnabled(true);
+//        mWebview.getSettings().setAppCacheEnabled(true);
+//        mWebview.getSettings().setBuiltInZoomControls(true);
+//        mWebview.getSettings().setGeolocationEnabled(true);
+//        mWebview.getSettings().setSupportMultipleWindows(true);
+//        mWebview.getSettings().setUseWideViewPort(true);
+//        mWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+//        mWebview.getSettings().setPluginState(WebSettings.PluginState.ON);
+//        mWebview.loadUrl("http://goounj.com");
+//        loadWebView(mWebview);
     }
 
     private void loadWebView(WebView mWebview) {
