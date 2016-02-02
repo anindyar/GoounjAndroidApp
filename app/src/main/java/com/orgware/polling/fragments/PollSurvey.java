@@ -50,7 +50,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     JSONArray mQuestionArray = new JSONArray();
     JSONArray mChoicesArray = new JSONArray();
     JSONArray mQtsOne;
-    JSONArray mContactJsonArray;
+    JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
     Button btnContactDevice;
     Dialog mCategoryDialog;
@@ -254,7 +254,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 validateSubmitValues();
                 break;
             case R.id.btncontactFromDevice:
-                showContactDialog(mContactJsonArray);
+                showContactDialog(mContactJsonArray, mContactArrayNames);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
             case R.id.txtCategory:

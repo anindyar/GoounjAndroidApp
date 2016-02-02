@@ -10,10 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_complete"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/margin_normal">
-
-        <!--</RelativeLayout>-->
+        android:layout_alignParentTop="true">
 
 
         <LinearLayout

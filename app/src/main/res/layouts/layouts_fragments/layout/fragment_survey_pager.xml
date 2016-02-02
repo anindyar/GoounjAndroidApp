@@ -4,23 +4,63 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <GridView
-        android:id="@+id/gridShowPoll"
+    <RadioGroup
+        android:id="@+id/tab_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@android:color/white"
-        android:choiceMode="singleChoice"
-        android:numColumns="2">
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
 
-    </GridView>
+        <RadioButton
+            android:id="@+id/tab_current"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_quick_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_current_poll"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="Current Survey\n "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
+
+        <RadioButton
+            android:id="@+id/tab_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selector"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_history"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="My Survey\n "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtSmall" />
+
+    </RadioGroup>
+
+    <!--<GridView-->
+    <!--android:id="@+id/gridShowPoll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:choiceMode="singleChoice"-->
+    <!--android:numColumns="3">-->
+
+    <!--</GridView>-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pagerShowPoll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/layout_create"
-        android:layout_below="@+id/gridShowPoll">
+        android:layout_below="@+id/tab_radio">
 
     </android.support.v4.view.ViewPager>
 

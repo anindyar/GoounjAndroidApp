@@ -3,6 +3,7 @@ package com.orgware.polling.fragments.survey;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -10,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
@@ -30,17 +33,15 @@ import java.util.List;
 /**
  * Created by Nandagopal on 30-Jan-16.
  */
-public class SurveyPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener {
+public class SurveyPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
     ViewPager mViewPager;
     PollPagerAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
-    private Button mBtnCreate;
     List<Fragment> mFragmentList;
-    GridView mPollGrid;
-    List<GridItems> mGridList;
-    GridTabAdapter mGridAdapter;
+    RadioButton mRBCurrentSurvey, mRBMySurvey;
     LinearLayout mLayoutCreate;
     Button btnCreate;
+    private Button mBtnCreate;
 
     @Override
     public void setTitle() {
@@ -52,17 +53,11 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
         setHasOptionsMenu(true);
         mFragmentList = new ArrayList<>();
         mFragmentList.clear();
-        mGridList = new ArrayList<GridItems>();
-        mGridList.clear();
-        mGridList.add(new GridItems("Current Survey", R.drawable.ic_current_poll));
-        mGridList.add(new GridItems("My Survey", R.drawable.ic_history));
 
         mFragmentList.add(setPagerFragment(new SurveyPoll(),
                 mFragmentList.size()));
         mFragmentList.add(setPagerFragment(new MyPoll(),
                 mFragmentList.size()));
-
-        mGridAdapter = new GridTabAdapter(act, R.layout.item_grid_show_poll, mGridList);
 
         mAdapter = new PollPagerAdapter(
                 getChildFragmentManager(), mFragmentList);
@@ -72,27 +67,24 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_showpoll_pager, container, false);
+        View v = inflater.inflate(R.layout.fragment_survey_pager, container, false);
         (mBtnCreate = (Button) v.findViewById(R.id.btnCreate)).setOnClickListener(this);
         (mLayoutCreate = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
-        mPollGrid = (GridView) v.findViewById(R.id.gridShowPoll);
         mViewPager = (ViewPager) v.findViewById(R.id.pagerShowPoll);
         mLayoutCreate = (LinearLayout) v.findViewById(R.id.layout_create);
         btnCreate = (Button) v.findViewById(R.id.btnCreate);
+        ((mRBCurrentSurvey = (RadioButton) v.findViewById(R.id.tab_current))).setOnCheckedChangeListener(this);
+        ((mRBMySurvey = (RadioButton) v.findViewById(R.id.tab_history))).setOnCheckedChangeListener(this);
         btnCreate.setOnClickListener(this);
         mLayoutCreate.setOnClickListener(this);
         mViewPager.setOnPageChangeListener(this);
-        mPollGrid.setOnItemClickListener(this);
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        MenuItem menuItem = ((MainHomeActivity) act).mMenu.findItem(R.id.menu_group_three_search);
-//        menuItem.setVisible(true);
-        mPollGrid.setAdapter(mGridAdapter);
-        mPollGrid.setItemChecked(0, true);
+        mRBCurrentSurvey.setChecked(true);
         mViewPager.setAdapter(mAdapter);
     }
 
@@ -140,11 +132,10 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
      */
     @Override
     public void onPageSelected(int position) {
-        mPollGrid.setItemChecked(position, true);
-//        if (position == 0)
-//            ((HomeActivity) act).mPageTitle.setText("Current Poll");
-//        else
-//            ((HomeActivity) act).mPageTitle.setText("Poll HistoryVote");
+        if (position == 0)
+            mRBCurrentSurvey.setChecked(true);
+        else
+            mRBMySurvey.setChecked(true);
     }
 
     /**
@@ -178,6 +169,27 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mViewPager.setCurrentItem(position);
+    }
+
+    /**
+     * Called when the checked state of a compound button has changed.
+     *
+     * @param buttonView The compound button view whose state has changed.
+     * @param isChecked  The new checked state of buttonView.
+     */
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (mRBCurrentSurvey.isChecked()) {
+            mViewPager.setCurrentItem(0);
+            mRBCurrentSurvey.setTextColor(ContextCompat.getColor(act, android.R.color.white));
+        } else
+            mRBCurrentSurvey.setTextColor(ContextCompat.getColor(act, android.R.color.black));
+
+        if (mRBMySurvey.isChecked()) {
+            mViewPager.setCurrentItem(1);
+            mRBMySurvey.setTextColor(ContextCompat.getColor(act, android.R.color.white));
+        } else
+            mRBMySurvey.setTextColor(ContextCompat.getColor(act, android.R.color.black));
     }
 }
 

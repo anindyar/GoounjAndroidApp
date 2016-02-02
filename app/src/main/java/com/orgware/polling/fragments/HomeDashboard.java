@@ -2,6 +2,7 @@ package com.orgware.polling.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -35,6 +36,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("User Id", "" + preferences.getString(USER_ID, ""));
         setHasOptionsMenu(true);
     }
 
@@ -104,7 +106,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
 //                ((MainHomeActivity) act).setNewFragment(new ChatHome(), "Poll Pager", true);
                 break;
             case R.id.home_survey:
-                ((MainHomeActivity) act).setNewFragment(new SurveyPoll(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new SurveyPager(), "Poll Pager", true);
                 editor.putInt(DASHBOARD_ID, 1).commit();
                 break;
         }

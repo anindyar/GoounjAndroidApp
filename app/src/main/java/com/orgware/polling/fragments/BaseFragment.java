@@ -239,7 +239,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         return contactList;
     }
 
-    private JSONArray addContactJson(JSONArray mContactsNumbersArrray) {
+    private JSONArray addContactJson(JSONArray mContactsNumbersArrray, JSONArray mContactsNamesArrray) {
 //        String data = "";
 //        mContactsNumbersArrray = null;
         List<ContactItem> stList = ((ContactGridviewAdapter) mAdapter)
@@ -249,13 +249,14 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
             if (singleStudent.mChkSelected == true) {
 //                data = data + "\n" + singleStudent.mContactNumber.toString();
                 mContactsNumbersArrray.put(singleStudent.mContactNumber);
+                mContactsNamesArrray.put(singleStudent.mcontactName);
             }
         }
         //        editor.putString(CONTACT_ARRAY, mContactObject.toString()).commit();
         return mContactsNumbersArrray;
     }
 
-    public JSONArray showContactDialog(final JSONArray mJsonArray) {
+    public JSONArray showContactDialog(final JSONArray mJsonArray, final JSONArray mJsonArrayNames) {
         mContactDialog = new Dialog(act);
         mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mContactDialog.setCancelable(true);
@@ -283,7 +284,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         (mContactsDone = (Button) mContactDialog.findViewById(R.id.btnContacts_done)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addContactJson(mJsonArray);
+                addContactJson(mJsonArray,mJsonArrayNames);
                 mContactDialog.dismiss();
             }
         });

@@ -125,7 +125,22 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
                 new RestApiListener<String>() {
                     @Override
                     public void onRequestCompleted(String response) {
-                        showOtpDialog();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.has("error")) {
+                                String error_value = jsonObject.optString("error");
+                                Methodutils.message(act, "" + error_value, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        return;
+                                    }
+                                });
+                            } else
+                                showOtpDialog();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override

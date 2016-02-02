@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments;
 
+import android.app.Dialog;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -42,9 +44,9 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     TextView txtCategory, txtNoOpinionOne, txtNoOpinionTwo, txtNoOpinionThree;
     JSONArray mContactArray = new JSONArray();
     JSONArray mChoicesArrayOne, mChoicesArrayTwo, mChoicesArrayThree;
-    Button btnContactOpinion;
+    Button btnContactOpinion, btnViewContact;
     JSONArray mQtsOne;
-    JSONArray mContactJsonArray;
+    JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
     TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
     int mPollType;
@@ -78,6 +80,8 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         mPollQtsTh = (TextView) v.findViewById(R.id.txt_poll_qts_th);
 
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
+        btnViewContact = (Button) v.findViewById(R.id.btnViewContact);
+        btnViewContact.setOnClickListener(this);
         txtCategory.setOnClickListener(this);
         txtNoOpinionOne = (TextView) v.findViewById(R.id.text_opinion_qts_one_choice_six);
         txtNoOpinionTwo = (TextView) v.findViewById(R.id.text_opinion_qts_two_choice_six);
@@ -175,6 +179,14 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (mContactArray.equals("[]")) {
+            btnViewContact.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRbNumQtsOne.setChecked(true);
@@ -218,6 +230,9 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     public void onClick(View v) {
 
         switch (v.getId()) {
+            case R.id.btnViewContact:
+                showNamesDialog(mContactArrayNames);
+                break;
             case R.id.btnReset_opinion:
                 resetValues();
                 editor.putString(CONTACT_ARRAY, "").commit();
@@ -234,11 +249,31 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
-                showContactDialog(mContactJsonArray);
+                showContactDialog(mContactJsonArray, mContactArrayNames);
+                if (mContactJsonArray.length() != 0)
+                    btnViewContact.setVisibility(View.VISIBLE);
+                else
+                    btnViewContact.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
 //                ((HomeActivity) act).setNewFragment(new ContactGrid(), "Contacts", true);
                 break;
         }
+    }
+
+    private void showNamesDialog(JSONArray mContactArrayNames) {
+        Dialog mContactDialog = new Dialog(act, R.style.dialog);
+        mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mContactDialog.setCancelable(true);
+        mContactDialog.setContentView(R.layout.dialog_names);
+        TextView textView = (TextView) mContactDialog.findViewById(R.id.dialog_names);
+        for (int i = 0; i < mContactArrayNames.length(); i++) {
+            try {
+                textView.setText("" + mContactArrayNames.getString(i) + "\n");
+            } catch (Exception e) {
+
+            }
+        }
+        mContactDialog.show();
     }
 
     private void resetValues() {

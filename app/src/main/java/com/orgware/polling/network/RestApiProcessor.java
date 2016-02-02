@@ -17,6 +17,7 @@ import com.orgware.polling.exceptions.InternalServerException;
 import com.orgware.polling.exceptions.InvalidParameterException;
 import com.orgware.polling.exceptions.NoNetworkException;
 import com.orgware.polling.exceptions.NoRecordsException;
+import com.orgware.polling.exceptions.ReadException;
 import com.orgware.polling.exceptions.ServerFailureException;
 import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.interfaces.RestApiListener;
@@ -214,13 +215,20 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             if (mStatus == 200 || mStatus == 201)
                 return readResponse(httpsURLConnection.getInputStream()).toString();
 
-            if (mStatus == 404) throw new NoRecordsException();
+            if (mStatus == 400) {
+                Log.e("Status Code", "" + readResponse(httpsURLConnection.getInputStream()).toString());
+                throw new NoRecordsException();
+            }
+//
+//            else if (mStatus == 422) throw new InvalidParameterException();
+//
+//            else if (mStatus == 204) throw new NoSuchElementException();
+//
+//            else if (mStatus == 500) throw new InternalServerException();
 
-            if (mStatus == 422) throw new InvalidParameterException();
+//            if (mStatus == 400)
+//                throw new ReadException(httpsURLConnection.getInputStream().toString());
 
-            if (mStatus == 204) throw new NoSuchElementException();
-
-            if (mStatus == 500) throw new InternalServerException();
 
             return null;
         } catch (Exception e) {
@@ -256,9 +264,9 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             Log.e("No Dialog", "No Dialog - " + response);
         else if (mProgressDialog != null && mProgressDialog.isShowing()) mProgressDialog.dismiss();
         if (mException != null) {
-            if (mException instanceof NoNetworkException || mException instanceof ConnectException) {
+            if (mException instanceof ReadException || mException instanceof NoNetworkException || mException instanceof ConnectException) {
                 Log.e("Exception", "" + mException.getMessage());
-                mException = new ServerFailureException();
+//                mException = new ServerFailureException();
 //                Toast.makeText(mContext, "Failed to connect to server", Toast.LENGTH_SHORT).show();
                 mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
                 return;
@@ -269,7 +277,8 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             mException = new ServerFailureException();
             mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
             return;
-        }
+        } else
+            mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
 
         mRestApiListener.onRequestCompleted(response);
 

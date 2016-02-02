@@ -169,7 +169,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
                 manager.beginTransaction().remove(mCurrentFragment).commit();
         }
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.fragment_attach, R.anim.fragment_detach);
+        transaction.setCustomAnimations(R.anim.bottomtotop, R.anim.bottomtotop);
         transaction.replace(R.id.fragment_content, fragment, title);
         if (addStack)
             transaction.addToBackStack(title);
@@ -187,7 +187,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
                 manager.beginTransaction().remove(mCurrentFragment).commit();
         }
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.fragment_attach, R.anim.fragment_detach);
+        transaction.setCustomAnimations(R.anim.bottomtotop, R.anim.bottomtotop);
         transaction.replace(fragment_content, fragment, title);
         if (addStack)
             transaction.addToBackStack(title);

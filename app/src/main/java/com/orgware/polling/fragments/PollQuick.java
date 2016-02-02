@@ -1,11 +1,13 @@
 package com.orgware.polling.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -39,7 +41,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     JSONArray mChoicesArray = new JSONArray();
     Button btnContactOpen;
     JSONArray mQtsOne;
-    JSONArray mContactJsonArray;
+    JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
     TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
     int mPollType;
@@ -172,10 +174,26 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 break;
             case R.id.btnQuickContact:
 //                ((HomeActivity) act).setNewFragment(new ContactGrid(), "Contacts", true);
-                showContactDialog(mContactJsonArray);
+                showContactDialog(mContactJsonArray, mContactArrayNames);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
         }
+    }
+
+    private void showNamesDialog(JSONArray mContactArrayNames) {
+        Dialog mContactDialog = new Dialog(act, R.style.dialog);
+        mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mContactDialog.setCancelable(true);
+        mContactDialog.setContentView(R.layout.dialog_names);
+        TextView textView = (TextView) mContactDialog.findViewById(R.id.dialog_names);
+        for (int i = 0; i < mContactArrayNames.length(); i++) {
+            try {
+                textView.setText("" + mContactArrayNames.getString(i) + "\n");
+            } catch (Exception e) {
+
+            }
+        }
+        mContactDialog.show();
     }
 
     private void resetValues() {
