@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.PollPagerAdapter;
+import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.utils.Methodutils;
@@ -128,7 +129,12 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
             mBtnNext.setVisibility(View.GONE);
         }
         if (qtsSize == 2) {
+            mRadioIndicatorOne.setChecked(true);
             mRadioIndicatorThree.setVisibility(View.GONE);
+        }
+        if (qtsSize == 3) {
+            mRadioIndicatorOne.setChecked(true);
+            mRadioIndicatorThree.setVisibility(View.VISIBLE);
         }
     }
 
@@ -245,7 +251,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
 
 
     private void pushAnwersPoll(String url, String params) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Answer Response", "" + response);
@@ -328,7 +334,20 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+        if (qtsSize == 2) {
+            if (mRadioIndicatorOne.isChecked())
+                mViewPager.setCurrentItem(0);
+            if (mRadioIndicatorTwo.isChecked())
+                mViewPager.setCurrentItem(1);
+        }
+        if (qtsSize == 2) {
+            if (mRadioIndicatorOne.isChecked())
+                mViewPager.setCurrentItem(0);
+            if (mRadioIndicatorTwo.isChecked())
+                mViewPager.setCurrentItem(1);
+            if (mRadioIndicatorThree.isChecked())
+                mViewPager.setCurrentItem(2);
+        }
     }
 
     /**
@@ -373,7 +392,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     }
 
     private void getResultPollForCreatedUser(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 if (response.equals("[]"))
@@ -381,7 +400,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 else
                     try {
                         showResultPollList(response);
-                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPollNew(), "", true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

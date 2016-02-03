@@ -30,6 +30,7 @@ import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.adapters.HistoryPollAdapter;
 import com.orgware.polling.fragments.BaseFragment;
+import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
@@ -46,7 +47,7 @@ import java.util.List;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener, SearchView.OnQueryTextListener {
+public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     RecyclerView mHistoryPollList;
     //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
@@ -108,34 +109,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.white));
-        searchEditText.setHint("Search");
-        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
-        searchView.setOnQueryTextListener(this);
-
-        MenuItemCompat.setOnActionExpandListener(item,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        // Do something when collapsed
-                        mAdapter.setFilter(itemList);
-                        return true; // Return true to collapse action view
-                    }
-
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        // Do something when expanded
-                        return true; // Return true to expand action view
-                    }
-                });
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -191,7 +164,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     private void getPollForCreatedUser(final int mLowerLimit, final int mUpperLimit, String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 //                mHistoryPollList.setVisibility(View.VISIBLE);
@@ -277,7 +250,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     private void getResultPollForCreatedUser(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 //                mHistoryPollList.setVisibility(View.VISIBLE);
@@ -287,7 +260,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 else
                     try {
                         showResultPollList(response);
-                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPollNew(), "", true);
 //                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -367,24 +340,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
      * @return true if the query has been handled by the listener, false to let the
      * SearchView perform the default action.
      */
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
 
-    /**
-     * Called when the query text is changed by the user.
-     *
-     * @param newText the new content of the query text field.
-     * @return false if the SearchView should perform the default action of showing any
-     * suggestions if available, true if the action was handled by the listener.
-     */
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        final List<CurrentPollItem> filteredModelList = filter(itemList, newText);
-        mAdapter.setFilter(filteredModelList);
-        return true;
-    }
 
     private List<CurrentPollItem> filter(List<CurrentPollItem> models, String query) {
         query = query.toLowerCase();

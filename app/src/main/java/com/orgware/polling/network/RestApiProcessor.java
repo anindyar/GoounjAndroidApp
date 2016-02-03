@@ -10,18 +10,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.orgware.polling.exceptions.InternalServerException;
-import com.orgware.polling.exceptions.InvalidParameterException;
+import com.orgware.polling.exceptions.ErroHandler;
 import com.orgware.polling.exceptions.NoNetworkException;
-import com.orgware.polling.exceptions.NoRecordsException;
-import com.orgware.polling.exceptions.ReadException;
-import com.orgware.polling.exceptions.ServerFailureException;
 import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.interfaces.RestApiListener;
-import com.orgware.polling.utils.Methodutils;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -34,11 +29,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.NoSuchElementException;
 
 /**
  * Created by Raja Mohamed on 24/9/15.
- * <p/>
+ * <p>
  * This async task handles the api calls from the UI part mostly
  */
 public class RestApiProcessor extends AsyncTask<String, String, String> implements Appinterface {
@@ -83,25 +77,20 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
     private Exception mException;
 
 
-    // Flag to Authorisation header for the service call
-    private boolean mAuthorisation;
-
     /**
      * Constructor to initialize the fields which will be used on the execute
      *
-     * @param context       activity context
-     * @param httpMethod    api method type POST, PUT, DELETE, remove this argument if GET method
-     * @param url           api url to connect the method
-     * @param listener      call back listener, call either onRequestCompleted with response or onRequestFailed with exception
-     * @param authorisation flag for set the authorisation header
+     * @param context    activity context
+     * @param httpMethod api method type POST, PUT, DELETE, remove this argument if GET method
+     * @param url        api url to connect the method
+     * @param listener   call back listener, call either onRequestCompleted with response or onRequestFailed with exception
      */
-    public RestApiProcessor(Context context, HttpMethod httpMethod, String url, boolean progress, boolean authorisation, RestApiListener<String> listener) {
+    public RestApiProcessor(Context context, HttpMethod httpMethod, String url, boolean progress, RestApiListener<String> listener) {
         mContext = context;
         mHttpMethod = httpMethod;
         mApiUrl = url;
         this.showProgress = progress;
         mRestApiListener = listener;
-        mAuthorisation = authorisation;
         mPreferences = mContext.getSharedPreferences(SHARED_PREFERENCES_POLLING, Context.MODE_PRIVATE);
     }
 
@@ -113,7 +102,7 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
      * @param listener call back listener, call either onRequestCompleted with response or onRequestFailed with exception
      */
     public RestApiProcessor(Context context, String url, boolean progress, RestApiListener<String> listener) {
-        this(context, HttpMethod.GET, url, true, true, listener);
+        this(context, HttpMethod.GET, url, true, listener);
     }
 
     /**
@@ -180,11 +169,8 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             httpsURLConnection.setReadTimeout(15000);
             httpsURLConnection.setConnectTimeout(20000);
             httpsURLConnection.setDoInput(true);
-//            httpsURLConnection.setRequestProperty(ApiToken, API_TOKEN_FOR_APP);
             httpsURLConnection.setRequestProperty("Content-Type", "application/json");
-//            if (mAuthorisation) {
-//                httpsURLConnection.setRequestProperty("UserId", mPreferences.getString(id, ""));
-//            }
+
             switch (mHttpMethod) {
                 case POST:
                 case PUT:
@@ -209,27 +195,17 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
 
             }
             httpsURLConnection.connect();
-
             int mStatus = httpsURLConnection.getResponseCode();
             Log.e("Status Code", "" + mStatus);
             if (mStatus == 200 || mStatus == 201)
                 return readResponse(httpsURLConnection.getInputStream()).toString();
+            else {
+                String valeu = readResponse(httpsURLConnection.getErrorStream()).toString();
+                JSONObject object = new JSONObject(readResponse(httpsURLConnection.getErrorStream()).toString());
+                if (object != null && object.has(error))
+                    throw new ErroHandler(object.getString(error));
 
-            if (mStatus == 400) {
-                Log.e("Status Code", "" + readResponse(httpsURLConnection.getInputStream()).toString());
-                throw new NoRecordsException();
             }
-//
-//            else if (mStatus == 422) throw new InvalidParameterException();
-//
-//            else if (mStatus == 204) throw new NoSuchElementException();
-//
-//            else if (mStatus == 500) throw new InternalServerException();
-
-//            if (mStatus == 400)
-//                throw new ReadException(httpsURLConnection.getInputStream().toString());
-
-
             return null;
         } catch (Exception e) {
             if (!showProgress)
@@ -259,27 +235,16 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
     @Override
     protected void onPostExecute(String response) {
         super.onPostExecute(response);
-        Log.e("Error", " " + response);
+        Log.e("Response", " " + response);
         if (!showProgress)
             Log.e("No Dialog", "No Dialog - " + response);
-        else if (mProgressDialog != null && mProgressDialog.isShowing()) mProgressDialog.dismiss();
+        else if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
         if (mException != null) {
-            if (mException instanceof ReadException || mException instanceof NoNetworkException || mException instanceof ConnectException) {
-                Log.e("Exception", "" + mException.getMessage());
-//                mException = new ServerFailureException();
-//                Toast.makeText(mContext, "Failed to connect to server", Toast.LENGTH_SHORT).show();
-                mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
-                return;
-            }
-        }
-
-        if (response == null || response.equals("null") || response.equals("")) {
-            mException = new ServerFailureException();
+            Log.e("Exception", "" + mException.getMessage());
             mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
             return;
-        } else
-            mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
-
+        }
         mRestApiListener.onRequestCompleted(response);
 
     }

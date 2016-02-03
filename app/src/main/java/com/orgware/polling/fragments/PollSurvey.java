@@ -52,7 +52,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     JSONArray mQtsOne;
     JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
-    Button btnContactDevice;
+    Button btnContactDevice, btnViewContect;
     Dialog mCategoryDialog;
     ListView mCategoryListview;
     SpinnerAdapter mSpinnerAdapter;
@@ -91,6 +91,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
         mPollType = getArguments().getInt(PAGER_COUNT);
         try {
             mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,6 +112,8 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
         mPollQtsTh = (TextView) v.findViewById(R.id.txt_poll_qts_th);
 
         btnContactDevice = (Button) v.findViewById(R.id.btncontactFromDevice);
+        btnViewContect = (Button) v.findViewById(R.id.btnViewContact);
+        btnViewContect.setOnClickListener(this);
         btnContactDevice.setOnClickListener(this);
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
         txtCategory.setOnClickListener(this);
@@ -246,6 +249,10 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.btnViewContact:
+                Methodutils.showNamesDialog(act, mContactArrayNames);
+                break;
             case R.id.btnReset_survey:
                 resetValues();
                 editor.putString(CONTACT_ARRAY, "").commit();
@@ -255,6 +262,11 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 break;
             case R.id.btncontactFromDevice:
                 showContactDialog(mContactJsonArray, mContactArrayNames);
+                Log.e("Contact Array", "" + mContactJsonArray.toString());
+                if (mContactJsonArray.length() != 0)
+                    btnViewContect.setVisibility(View.VISIBLE);
+                else
+                    btnViewContect.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
             case R.id.txtCategory:
@@ -379,7 +391,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
 
     private void processSurveyPollCreation(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Methodutils.messageWithTitle(act, "Success", "Feedback Poll Created successfully", new View.OnClickListener() {

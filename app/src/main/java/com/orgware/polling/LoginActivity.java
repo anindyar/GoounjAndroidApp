@@ -164,7 +164,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void pushLoginData(String url) throws Exception {
 
-        RestApiProcessor processor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 try {

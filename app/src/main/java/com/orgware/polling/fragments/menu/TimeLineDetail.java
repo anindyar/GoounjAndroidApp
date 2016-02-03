@@ -81,7 +81,7 @@ public class TimeLineDetail extends BaseFragment {
 
     private void getTimeLinePage(String url) throws Exception {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET,
-                url, true, true, new RestApiListener<String>() {
+                url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 

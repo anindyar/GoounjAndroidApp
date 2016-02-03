@@ -2,22 +2,22 @@ package com.orgware.polling.pojo;
 
 public class Model {
 
-	private String name;
-	private boolean selected;
+    private String name;
+    private boolean selected;
 
-	public Model(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public Model(String name) {
+        this.name = name;
+    }
 
-	public boolean isSelected() {
-		return selected;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

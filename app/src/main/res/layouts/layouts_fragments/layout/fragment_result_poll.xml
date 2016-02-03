@@ -75,8 +75,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Question 1 :"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtLarge" />
 
                 <TextView
                     android:id="@+id/qts_survey_detail_one"
@@ -86,8 +86,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Who is the top goal scorer?"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txtLarge" />
 
 
                 <ListView
@@ -128,8 +128,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Question 2 :"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtLarge" />
 
                 <TextView
                     android:id="@+id/qts_survey_detail_two"
@@ -139,8 +139,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Who is the top goal scorer?"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txtLarge" />
 
                 <ListView
                     android:id="@+id/choicesListviewTwo"
@@ -180,8 +180,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Question 3 :"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txtLarge" />
 
                 <TextView
                     android:id="@+id/qts_survey_detail_three"
@@ -191,8 +191,8 @@
                     android:gravity="left"
                     android:padding="@dimen/padding_small"
                     android:text="Who is the top goal scorer?"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="@dimen/txtNormal" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txtLarge" />
 
                 <ListView
                     android:id="@+id/choicesListviewThree"

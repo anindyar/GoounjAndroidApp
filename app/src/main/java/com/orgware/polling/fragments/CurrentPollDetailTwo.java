@@ -182,7 +182,7 @@ public class CurrentPollDetailTwo extends BaseFragment implements CompoundButton
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

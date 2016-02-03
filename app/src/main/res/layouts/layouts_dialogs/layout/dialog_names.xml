@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="300dp"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
-    <ScrollView
+    <TextView
+        android:id="@+id/title_names"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/home_bg"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:text="Selected Contacts"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txtNormal"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/dialog_names"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:padding="@dimen/padding_normal"
-            android:text="Done"
-            android:textColor="@color/home_bg"
-            android:textSize="@dimen/txtNormal" />
-    </ScrollView>
+    <ListView
+        android:id="@+id/list_contact_names"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_names"
+        android:background="@android:color/white"
+        android:divider="@null">
 
-</LinearLayout>
+    </ListView>
+
+</RelativeLayout>

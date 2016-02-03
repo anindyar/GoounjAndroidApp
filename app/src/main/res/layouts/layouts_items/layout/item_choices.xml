@@ -8,4 +8,5 @@
     android:drawableLeft="@drawable/selector_radio_checked_bg"
     android:gravity="center_vertical"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@color/text_color" />
+    android:textColor="@color/colorPrimary"
+    android:textSize="@dimen/txtNormal" />

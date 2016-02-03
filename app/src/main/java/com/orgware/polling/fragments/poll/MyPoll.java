@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Created by Nandagopal on 30-Jan-16.
  */
-public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener, SearchView.OnQueryTextListener {
+public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     RecyclerView mHistoryPollList;
     //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
@@ -71,35 +71,6 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
         mSwipeRefreshLayout.setColorSchemeResources(R.color.home_bg, R.color.bg, R.color.tab_opinion, R.color.tab_quick, R.color.tab_social, R.color.tab_survey);
         mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
         return v;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.white));
-        searchEditText.setHint("Search");
-        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
-        searchView.setOnQueryTextListener(this);
-
-        MenuItemCompat.setOnActionExpandListener(item,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        // Do something when collapsed
-                        mAdapter.setFilter(itemList);
-                        return true; // Return true to collapse action view
-                    }
-
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        // Do something when expanded
-                        return true; // Return true to expand action view
-                    }
-                });
     }
 
     @Override
@@ -164,7 +135,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
 
 
     private void getPollForCreatedUser(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 if (response.equals("[]"))
@@ -226,7 +197,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -248,7 +219,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     }
 
     private void getResultPollForCreatedUser(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 //                mHistoryPollList.setVisibility(View.VISIBLE);
@@ -325,48 +296,5 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     @Override
     public void onClick(View v) {
 //        Methodutils.showListSearch(act, itemList, mHistoryPollList);
-    }
-
-    /**
-     * Called when the user submits the query. This could be due to a key press on the
-     * keyboard or due to pressing a submit button.
-     * The listener can override the standard behavior by returning true
-     * to indicate that it has handled the submit request. Otherwise return false to
-     * let the SearchView handle the submission by launching any associated intent.
-     *
-     * @param query the query text that is to be submitted
-     * @return true if the query has been handled by the listener, false to let the
-     * SearchView perform the default action.
-     */
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    /**
-     * Called when the query text is changed by the user.
-     *
-     * @param newText the new content of the query text field.
-     * @return false if the SearchView should perform the default action of showing any
-     * suggestions if available, true if the action was handled by the listener.
-     */
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        final List<CurrentPollItem> filteredModelList = filter(itemList, newText);
-        mAdapter.setFilter(filteredModelList);
-        return true;
-    }
-
-    private List<CurrentPollItem> filter(List<CurrentPollItem> models, String query) {
-        query = query.toLowerCase();
-
-        final List<CurrentPollItem> filteredModelList = new ArrayList<>();
-        for (CurrentPollItem model : models) {
-            final String text = model.mCurrentPollTitle.toLowerCase();
-            if (text.contains(query)) {
-                filteredModelList.add(model);
-            }
-        }
-        return filteredModelList;
     }
 }

@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         editor = preferences.edit();
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         typefaceMuliRegular = Typeface.createFromAsset(getAssets(),
-                "IDEALIST SANS LIGHT_0.TTF");
+                "LATO_LIGHT_0.TTF");
         db = new GoounjDatabase(this);
         setOrientation(); // Sets the orientation of an application screen by checking mobile width and height
         setMenuSize(); // Sets the menu size of the application

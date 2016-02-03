@@ -28,6 +28,7 @@ import com.orgware.polling.interfaces.Appinterface;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pojo.MenuListItem;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,6 +62,20 @@ public class Methodutils implements Appinterface {
             }
         });
         mCategoryDialog.show();
+
+    }
+
+    public static String encodeimage(Bitmap bitmap) {
+        try {
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            return encodedImage.toString();
+        } catch (Exception e) {
+            return "";
+        }
 
     }
 
@@ -129,20 +144,6 @@ public class Methodutils implements Appinterface {
 //        mCategoryDialog.show();
 //
 //    }
-
-    public static String encodeimage(Bitmap bitmap) {
-        try {
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] b = baos.toByteArray();
-            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-            return encodedImage.toString();
-        } catch (Exception e) {
-            return "";
-        }
-
-    }
 
     public static Bitmap decodeProfile(String encodedString) {
         Bitmap decodedByte = null;
@@ -233,7 +234,6 @@ public class Methodutils implements Appinterface {
         alertDialog.show();
     }
 
-
     /*Dialog method with two button listener*/
     public static void message2btn(Context context, String message, String positivemsg, String negativmsg, final View.OnClickListener onClickListener, final View.OnClickListener onClickListener2) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -265,6 +265,28 @@ public class Methodutils implements Appinterface {
             }
         }
         return objParam.toString();
+    }
+
+    public static void showNamesDialog(Context context, JSONArray mContactArrayNames) {
+        Dialog mContactDialog = new Dialog(context, R.style.dialog);
+        mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mContactDialog.setCancelable(true);
+        mContactDialog.setContentView(R.layout.dialog_names);
+        ListView textView = (ListView) mContactDialog.findViewById(R.id.list_contact_names);
+        SpinnerAdapter mSpinnerAdapter;
+        List<String> mNamesList = new ArrayList<>();
+        mNamesList.clear();
+        try {
+            for (int i = 0; i < mContactArrayNames.length(); i++) {
+                mNamesList.add("" + mContactArrayNames.get(i));
+            }
+            mSpinnerAdapter = new SpinnerAdapter(context, R.layout.item_spinner, mNamesList);
+            textView.setAdapter(mSpinnerAdapter);
+        } catch (Exception e) {
+
+        }
+
+        mContactDialog.show();
     }
 
 }

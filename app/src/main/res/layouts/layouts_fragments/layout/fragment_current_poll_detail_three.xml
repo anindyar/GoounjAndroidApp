@@ -33,7 +33,7 @@
                 android:padding="@dimen/padding_small"
                 android:text="Best Footballer"
                 android:textColor="#000000"
-                android:textSize="@dimen/txtNormal" />
+                android:textSize="@dimen/txtLarge" />
 
             <TextView
                 android:id="@+id/qts_detail_three_user_name"
@@ -106,8 +106,8 @@
                 android:gravity="left"
                 android:padding="@dimen/padding_small"
                 android:text="Who is the top goal scorer?"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/txtNormal" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/txtLarge" />
         </RelativeLayout>
 
         <ListView

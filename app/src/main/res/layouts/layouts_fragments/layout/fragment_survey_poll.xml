@@ -915,6 +915,18 @@
                     android:text="Choose From Contact"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:id="@+id/btnViewContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/bg_lay"
+                    android:text="View Contect"
+                    android:textAllCaps="false"
+                    android:textColor="@color/home_bg" />
+
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

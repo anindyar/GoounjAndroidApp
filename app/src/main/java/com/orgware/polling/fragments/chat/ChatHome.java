@@ -141,7 +141,7 @@ public class ChatHome extends BaseFragment {
     }
 
     private void getPollForCreatedUser(int lower_limit_value, int upper_limit_value, String url, boolean pullDownType) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, false, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Poll List Response", "" + response.toString());

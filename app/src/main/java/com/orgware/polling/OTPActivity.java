@@ -97,7 +97,7 @@ public class OTPActivity extends BaseActivity implements View.OnClickListener {
 
     private void verifyOTPData(String url) throws Exception {
 
-        RestApiProcessor processor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.PUT, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.PUT, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 try {

@@ -277,7 +277,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -307,7 +307,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
 
     private void pushAnwersPoll(String url, String params) throws Exception {
         mSurveyDialog.dismiss();
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 //                Log.e("Answer Response", "" + response);

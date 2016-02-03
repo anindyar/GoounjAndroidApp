@@ -68,6 +68,11 @@ public interface Appinterface {
 
     String SURVEY_POLL_URL = "survey/v1/survey";
 
+
+    String SEARCH_SURVEY = "search/v1/searchSurvey";
+
+    String SEARCH_POLL = "search/v1/searchPoll";
+
     /*Time Line*/
     String TIMELINE = "users/v1/timeline/";
 
@@ -131,6 +136,9 @@ public interface Appinterface {
     /*Parameters*/
     /*LoginActivity*/
     String P_NAME = "name", P_COUNRTY = "country", P_CITY = "city", P_PHONE = "phone", P_DEVICEID = "deviceId", P_DEVICETOKEN = "deviceToken", P_OSTYPE = "osType", P_OSVERSION = "osVersion";
+
+
+    String searchString = "searchString", error = "error", SURVEY = "SURVEY", TYPE = "TYPE", POLL = "POLL";
 
     /*Profile*/
     String GENDER = "GENDER";

@@ -64,7 +64,7 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
             mTxtChoice.setCheckMarkDrawable(null);
             mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(choiceImage[position], 0, 0, 0);
             ChoicesItem item = itemList.get(position);
-            mTxtChoice.setText("" + item.mChoiceName);
+            mTxtChoice.setText("" + item.mChoiceName + " - " + item.mChoicePercent);
         }
 
         return convertView;

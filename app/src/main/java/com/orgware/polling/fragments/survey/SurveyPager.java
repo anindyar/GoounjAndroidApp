@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments.survey;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +22,7 @@ import android.widget.RadioButton;
 
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
+import com.orgware.polling.SearchToolbarActivity;
 import com.orgware.polling.adapters.GridTabAdapter;
 import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.fragments.BaseFragment;
@@ -156,7 +161,7 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -169,6 +174,19 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mViewPager.setCurrentItem(position);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_search)
+            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY));
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -191,5 +209,7 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
         } else
             mRBMySurvey.setTextColor(ContextCompat.getColor(act, android.R.color.black));
     }
+
+
 }
 

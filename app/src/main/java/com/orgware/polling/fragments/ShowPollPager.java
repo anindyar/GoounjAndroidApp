@@ -1,27 +1,27 @@
 package com.orgware.polling.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
-import com.orgware.polling.adapters.GridTabAdapter;
 import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.fragments.poll.MyPoll;
-import com.orgware.polling.pojo.GridItems;
+import com.orgware.polling.SearchToolbarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,8 @@ import java.util.List;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class ShowPollPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
+public class ShowPollPager extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener,
+        AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
     RadioButton mTabOpinion, mTabQuick, mTabSurvey;
     ViewPager mViewPager;
     PollPagerAdapter mAdapter;
@@ -50,12 +51,6 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         setHasOptionsMenu(true);
         mFragmentList = new ArrayList<>();
         mFragmentList.clear();
-//        mGridList = new ArrayList<GridItems>();
-//        mGridList.clear();
-//        mGridList.add(new GridItems("Current Poll", R.drawable.current_poll));
-//        mGridList.add(new GridItems("History", R.drawable.history));
-//        mGridList.add(new GridItems("My Poll", R.drawable.my_poll));
-
         mFragmentList.add(setPagerFragment(new CurrentPoll(),
                 mFragmentList.size()));
         mFragmentList.add(setPagerFragment(new HistoryPoll(),
@@ -63,11 +58,23 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         mFragmentList.add(setPagerFragment(new MyPoll(),
                 mFragmentList.size()));
 
-//        mGridAdapter = new GridTabAdapter(act, R.layout.item_grid_show_poll, mGridList);
 
         mAdapter = new PollPagerAdapter(
                 getChildFragmentManager(), mFragmentList);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_search)
+            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, POLL));
+        return super.onOptionsItemSelected(item);
     }
 
     @Nullable
@@ -101,6 +108,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
 //        mPollGrid.setItemChecked(0, true);
         mViewPager.setAdapter(mAdapter);
     }
+
 
     /**
      * Called when a view has been clicked.
@@ -182,7 +190,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -215,4 +223,6 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
         } else
             mTabSurvey.setTextColor(getResources().getColor(android.R.color.black));
     }
+
+
 }

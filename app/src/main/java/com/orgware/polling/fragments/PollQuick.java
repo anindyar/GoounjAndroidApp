@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +26,9 @@ import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nandagopal on 22/10/15.
@@ -39,7 +44,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     TextView txtCategory;
     JSONArray mContactArray = new JSONArray();
     JSONArray mChoicesArray = new JSONArray();
-    Button btnContactOpen;
+    Button btnContactOpen, btnViewContact;
     JSONArray mQtsOne;
     JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
@@ -56,6 +61,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
         mPollType = getArguments().getInt(PAGER_COUNT);
         try {
             mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,6 +87,8 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
 
         txtCategory = (TextView) v.findViewById(R.id.txtCategory);
         txtCategory.setOnClickListener(this);
+        btnViewContact = (Button) v.findViewById(R.id.btnViewContact);
+        btnViewContact.setOnClickListener(this);
         mEdittextQuickPollName = (EditText) v.findViewById(R.id.edittext_quick_pollname);
         quick_ques_one = (EditText) v.findViewById(R.id.edittext_quick_qts_one_pollqts_one);
         quick_ques_two = (EditText) v.findViewById(R.id.edittext_quick_qts_two_pollqts_one);
@@ -162,6 +170,9 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnViewContact:
+                Methodutils.showNamesDialog(act, mContactArrayNames);
+                break;
             case R.id.btnReset_Quick:
                 resetValues();
                 editor.putString(CONTACT_ARRAY, "").commit();
@@ -173,8 +184,12 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 Methodutils.showCategoryDialog(act, txtCategory, Methodutils.setCategoryName());
                 break;
             case R.id.btnQuickContact:
-//                ((HomeActivity) act).setNewFragment(new ContactGrid(), "Contacts", true);
                 showContactDialog(mContactJsonArray, mContactArrayNames);
+                Log.e("Contact Array", "" + mContactJsonArray.toString());
+                if (mContactJsonArray.length() != 0)
+                    btnViewContact.setVisibility(View.VISIBLE);
+                else
+                    btnViewContact.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
         }
@@ -185,14 +200,20 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
         mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mContactDialog.setCancelable(true);
         mContactDialog.setContentView(R.layout.dialog_names);
-        TextView textView = (TextView) mContactDialog.findViewById(R.id.dialog_names);
-        for (int i = 0; i < mContactArrayNames.length(); i++) {
-            try {
-                textView.setText("" + mContactArrayNames.getString(i) + "\n");
-            } catch (Exception e) {
-
+        ListView textView = (ListView) mContactDialog.findViewById(R.id.list_contact_names);
+        ArrayAdapter<String> mNamesAdapter;
+        List<String> mNamesList = new ArrayList<>();
+        mNamesList.clear();
+        try {
+            for (int i = 0; i < mContactArrayNames.length(); i++) {
+                mNamesList.add("" + mContactArrayNames.get(i));
             }
+            mNamesAdapter = new ArrayAdapter<String>(act, android.R.layout.simple_list_item_1, mNamesList);
+            textView.setAdapter(mNamesAdapter);
+        } catch (Exception e) {
+
         }
+
         mContactDialog.show();
     }
 
@@ -335,7 +356,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     }
 
     private void processQuickPollCreation(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Methodutils.messageWithTitle(act, "Success", "Quick Poll Created successfully", new View.OnClickListener() {

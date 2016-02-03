@@ -86,7 +86,8 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         editor = preferences.edit();
         inflater = (LayoutInflater) act
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        typeface = Typeface.createFromAsset(act.getAssets(), "IDEALIST SANS LIGHT_0.TTF");
+        typeface = Typeface.createFromAsset(act.getAssets(), "LATO_LIGHT_0.TTF");
+        setHasOptionsMenu(true);
     }
 
     /*This calls after view is created*/
@@ -244,13 +245,18 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
 //        mContactsNumbersArrray = null;
         List<ContactItem> stList = ((ContactGridviewAdapter) mAdapter)
                 .getStudentist();
-        for (int i = 0; i < stList.size(); i++) {
-            ContactItem singleStudent = stList.get(i);
-            if (singleStudent.mChkSelected == true) {
+        try {
+            for (int i = 0; i < stList.size(); i++) {
+                ContactItem singleStudent = stList.get(i);
+                if (singleStudent.mChkSelected == true) {
 //                data = data + "\n" + singleStudent.mContactNumber.toString();
-                mContactsNumbersArrray.put(singleStudent.mContactNumber);
-                mContactsNamesArrray.put(singleStudent.mcontactName);
+                    mContactsNumbersArrray.put(singleStudent.mContactNumber);
+                    mContactsNamesArrray.put(singleStudent.mcontactName);
+                    Log.e("Contact", "-" + singleStudent.mcontactName);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //        editor.putString(CONTACT_ARRAY, mContactObject.toString()).commit();
         return mContactsNumbersArrray;
@@ -284,7 +290,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         (mContactsDone = (Button) mContactDialog.findViewById(R.id.btnContacts_done)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addContactJson(mJsonArray,mJsonArrayNames);
+                addContactJson(mJsonArray, mJsonArrayNames);
                 mContactDialog.dismiss();
             }
         });

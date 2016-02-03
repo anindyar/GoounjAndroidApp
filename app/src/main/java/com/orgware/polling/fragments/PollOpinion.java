@@ -9,22 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orgware.polling.R;
+import com.orgware.polling.adapters.SpinnerAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nandagopal on 22/10/15.
@@ -61,6 +67,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         mPollType = getArguments().getInt(PAGER_COUNT);
         try {
             mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -181,9 +188,11 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public void onResume() {
         super.onResume();
-        if (mContactArray.equals("[]")) {
+        if (mContactJsonArray.length() != 0)
             btnViewContact.setVisibility(View.VISIBLE);
-        }
+        else
+            btnViewContact.setVisibility(View.GONE);
+        Log.e("Contact Array", "" + mContactArrayNames.toString());
     }
 
     @Override
@@ -231,7 +240,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
 
         switch (v.getId()) {
             case R.id.btnViewContact:
-                showNamesDialog(mContactArrayNames);
+                Methodutils.showNamesDialog(act, mContactArrayNames);
                 break;
             case R.id.btnReset_opinion:
                 resetValues();
@@ -244,11 +253,6 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 Methodutils.showCategoryDialog(act, txtCategory, Methodutils.setCategoryName());
                 break;
             case R.id.btnOpinionContact:
-//                try {
-////                    mContactJsonArray = new JSONArray("[]");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
                 showContactDialog(mContactJsonArray, mContactArrayNames);
                 if (mContactJsonArray.length() != 0)
                     btnViewContact.setVisibility(View.VISIBLE);
@@ -265,14 +269,20 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         mContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mContactDialog.setCancelable(true);
         mContactDialog.setContentView(R.layout.dialog_names);
-        TextView textView = (TextView) mContactDialog.findViewById(R.id.dialog_names);
-        for (int i = 0; i < mContactArrayNames.length(); i++) {
-            try {
-                textView.setText("" + mContactArrayNames.getString(i) + "\n");
-            } catch (Exception e) {
-
+        ListView textView = (ListView) mContactDialog.findViewById(R.id.list_contact_names);
+        SpinnerAdapter mSpinnerAdapter;
+        List<String> mNamesList = new ArrayList<>();
+        mNamesList.clear();
+        try {
+            for (int i = 0; i < mContactArrayNames.length(); i++) {
+                mNamesList.add("" + mContactArrayNames.get(i));
             }
+            mSpinnerAdapter = new SpinnerAdapter(act, R.layout.item_spinner, mNamesList);
+            textView.setAdapter(mSpinnerAdapter);
+        } catch (Exception e) {
+
         }
+
         mContactDialog.show();
     }
 
@@ -732,7 +742,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     }
 
     private void processOpinionPollCreation(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Methodutils.messageWithTitle(act, "Success", "Opinion Poll Created successfully", new View.OnClickListener() {

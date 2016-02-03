@@ -71,7 +71,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
         try {
             JSONObject object = new JSONObject();
             object.put(authCode, code).put(userId, preferences.getString(USER_ID, ""));
-            RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, true, new RestApiListener<String>() {
+            RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
                 @Override
                 public void onRequestCompleted(String response) {
                     Toast.makeText(act, "Mobile No Changed Successfully", Toast.LENGTH_SHORT).show();
@@ -121,7 +121,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     }
 
     private void getChangeNoVerification(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.PUT, url, true, true,
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.PUT, url, true,
                 new RestApiListener<String>() {
                     @Override
                     public void onRequestCompleted(String response) {

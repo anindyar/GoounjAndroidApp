@@ -55,7 +55,7 @@ import java.util.StringTokenizer;
 /**
  * Created by nandagopal on 26/10/15.
  */
-public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener, SearchView.OnQueryTextListener {
+public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     RecyclerView mCurrentPollList;
     CurrentPollAdapter mAdapter;
@@ -209,7 +209,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     }
 
     private void getPollForCreatedUser(int mLowerLimit, int mUpperLimit, String url, boolean pullDownType) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Poll List Response", "" + response.toString());
@@ -268,7 +268,7 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     }
 
     private void getPollDetailPage(String url) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, true, new RestApiListener<String>() {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 savePollDetailResponse(response);
@@ -329,35 +329,6 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.white));
-        searchEditText.setHint("Search");
-        searchEditText.setBackgroundColor(Color.TRANSPARENT);
-        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
-        searchView.setOnQueryTextListener(this);
-
-        MenuItemCompat.setOnActionExpandListener(item,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        // Do something when collapsed
-                        mAdapter.setFilter(itemList);
-                        return true; // Return true to collapse action view
-                    }
-
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        // Do something when expanded
-                        return true; // Return true to expand action view
-                    }
-                });
-    }
 
     /**
      * Called when the user submits the query. This could be due to a key press on the
@@ -370,25 +341,6 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
      * @return true if the query has been handled by the listener, false to let the
      * SearchView perform the default action.
      */
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    /**
-     * Called when the query text is changed by the user.
-     *
-     * @param newText the new content of the query text field.
-     * @return false if the SearchView should perform the default action of showing any
-     * suggestions if available, true if the action was handled by the listener.
-     */
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        final List<CurrentPollItem> filteredModelList = filter(itemList, newText);
-        mAdapter.setFilter(filteredModelList);
-        return true;
-    }
-
     private List<CurrentPollItem> filter(List<CurrentPollItem> models, String query) {
         query = query.toLowerCase();
 
