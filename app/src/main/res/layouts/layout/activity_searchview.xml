@@ -29,4 +29,32 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"></android.support.v7.widget.RecyclerView>
 
+    <RelativeLayout
+        android:id="@+id/layout_no_poll_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_small"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgNoPoll_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_message_poll_logo" />
+
+        <TextView
+            android:id="@+id/txtNoPollErrorThanks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgNoPoll_error"
+            android:gravity="center_horizontal"
+            android:text="Oops No Poll Lines \n Open Right Now"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtVeryLarge" />
+
+    </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

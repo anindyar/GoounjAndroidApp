@@ -73,7 +73,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_search)
-            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, POLL));
+            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, POLL).putExtra("PAGE_TYPE", mViewPager.getCurrentItem()));
         return super.onOptionsItemSelected(item);
     }
 
@@ -190,7 +190,7 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

@@ -57,6 +57,8 @@ public class MenuDetailActivity extends BaseActivity {
             case 6:
                 setNewFragment(new SettingsDetail(), R.id.fragment_content, "Settings", false);
                 break;
+            case 7:
+
         }
     }
 

@@ -8,11 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,19 +40,23 @@ import java.util.List;
 /**
  * Created by nandagopal on 2/2/16.
  */
-public class SearchToolbarActivity extends BaseActivity implements SearchView.OnQueryTextListener {
+public class SearchToolbarActivity extends BaseActivity implements SearchView.OnQueryTextListener, AdapterView.OnItemClickListener {
 
 
     private List<Search_SurveyPoll> mSearchSurvey;
     private SearchListAdapter mSearchListAdapter;
     private RecyclerView mSearchRecyclerView;
+    private int mTypeOfPage;
+    private RelativeLayout mNoPoll;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_searchview);
         mSearchSurvey = new ArrayList<>();
+        mNoPoll = (RelativeLayout) findViewById(R.id.layout_no_poll_error);
         mSearchListAdapter = new SearchListAdapter(activity, mSearchSurvey, 1);
+        mSearchListAdapter.setOnItemClickListener(this);
         mSearchRecyclerView = (RecyclerView) findViewById(R.id.searchlist);
         mSearchRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mSearchRecyclerView.setAdapter(mSearchListAdapter);
@@ -59,8 +66,20 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (getIntent().getExtras() != null)
+        if (getIntent().getExtras() != null) {
             activity.setTitle(getIntent().getExtras().getString(TYPE).equals(SURVEY) ? "Search Survey" : "Search Poll");
+            mTypeOfPage = getIntent().getExtras().getInt("PAGE_TYPE");
+            Log.e("Search Type", "" + mTypeOfPage);
+        }
+
+        if (mSearchSurvey.size() == 0) {
+            mNoPoll.setVisibility(View.VISIBLE);
+            mSearchRecyclerView.setVisibility(View.GONE);
+        } else {
+            mNoPoll.setVisibility(View.GONE);
+            mSearchRecyclerView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -111,6 +130,21 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         return true;
     }
 
+//    private void setFragValues(int type) {
+//        switch (type) {
+//            case 0:
+//                break;
+//            case 1:
+//                break;
+//            case 2:
+//                break;
+//            case 3:
+//                break;
+//            case 4:
+//                break;
+//        }
+//    }
+
     private void searchSurvey(String value, boolean survey) throws Exception {
         mSearchSurvey.clear();
         JSONObject object = new JSONObject();
@@ -148,6 +182,14 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                 mSearchSurvey.addAll(list);
             }
             mSearchListAdapter.notifyDataSetChanged();
+            if (mSearchSurvey.size() == 0) {
+                mNoPoll.setVisibility(View.VISIBLE);
+                mSearchRecyclerView.setVisibility(View.GONE);
+            } else {
+                mNoPoll.setVisibility(View.GONE);
+                mSearchRecyclerView.setVisibility(View.VISIBLE);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -164,5 +206,23 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

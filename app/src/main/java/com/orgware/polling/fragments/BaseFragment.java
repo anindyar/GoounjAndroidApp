@@ -47,6 +47,7 @@ import com.orgware.polling.utils.Methodutils;
 import org.json.JSONArray;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -171,21 +172,35 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     }
 
     public String splitFromString(String stringName) {
-        StringBuilder sb = new StringBuilder();
-        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
-        StringTokenizer tokenize = new StringTokenizer(stringName, "."); //2016-01-28T08:30:29.000Z
-        wanted = "" + tokenize.nextToken();
-        unwanted = "" + tokenize.nextToken();
-        StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
-        sb.append("" + tokenizer.nextToken());
-        sb.append(" ");
-        unWantedone = "" + tokenizer.nextToken();
-        String[] wantedTime = unWantedone.split(":");
-        wantedOne = wantedTime[0];
-        wantedTwo = wantedTime[1];
-        sb.append(wantedOne + ":" + wantedTwo);
-        Log.e("Date", "" + sb.toString());
-        return sb.toString();
+
+        try {
+            SimpleDateFormat mRequiredDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+            Date date = mSimpleDateFormat.parse(stringName);
+
+            return mRequiredDateFormat.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+//        StringBuilder sb = new StringBuilder();
+//        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
+//        StringTokenizer tokenize = new StringTokenizer(stringName, "."); //2016-01-28T08:30:29.000Z
+//        wanted = "" + tokenize.nextToken();
+//        unwanted = "" + tokenize.nextToken();
+//        StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
+//        sb.append("" + tokenizer.nextToken());
+//        sb.append(" ");
+//        unWantedone = "" + tokenizer.nextToken();
+//        String[] wantedTime = unWantedone.split(":");
+//        wantedOne = wantedTime[0];
+//        wantedTwo = wantedTime[1];
+//        sb.append(wantedOne + ":" + wantedTwo);
+//        Log.e("Date", "" + sb.toString());
+//        return sb.toString();
+        return "";
     }
 
     public String splitDateFromString(String stringName) {

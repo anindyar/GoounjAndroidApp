@@ -43,11 +43,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainHomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     public Menu mMenu;
-    private NavigationView navigationView;
     public DrawerLayout mDrawerLayout;
+    public CircleImageView mProfileImage;
+    private NavigationView navigationView;
     private ActionBarDrawerToggle mBarDrawerToggle;
     private TextView mUserName, mUserAmount;
-    public CircleImageView mProfileImage;
     private ImageView mLogout;
 
     @Override

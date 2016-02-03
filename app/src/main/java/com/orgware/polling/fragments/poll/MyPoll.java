@@ -23,6 +23,7 @@ import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.fragments.BaseFragment;
+import com.orgware.polling.fragments.CurrentPollPager;
 import com.orgware.polling.fragments.ResultPoll;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
@@ -197,7 +198,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -209,14 +210,57 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-////        ((HomeActivity) act).setNewFragment(new ResultPoll(), "Current Poll Pager", true);
-//        try {
-//            getResultPollForCreatedUser(BASE_URL + RESULT_URL + itemList.get(position).currentPollId);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
+        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
     }
+
+    private void getPollDetailPage(String url) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                savePollDetailResponse(response);
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        act.getSupportFragmentManager().popBackStack();
+                    }
+                });
+            }
+        });
+        processor.execute();
+    }
+
+    private void savePollDetailResponse(String result) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(result);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(QUESTION_SIZE, mQuestionsArray.length()).commit();
+            if (mQuestionsArray.length() != 0)
+                for (int j = 0; j < mQuestionsArray.length(); j++) {
+                    JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                    JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                    Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+
+                    editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
+                            putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+                }
+//                setQuestions(mQuestionsArray.length(), mQuestionsArray);
+            else
+                makeToast("Sorry,No Questions to answer!");
+
+            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentPollPager(), 2), "Pager", true);
+            ((MainHomeActivity) act).setTitle("Poll");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void getResultPollForCreatedUser(String url) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {

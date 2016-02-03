@@ -161,7 +161,7 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -184,8 +184,12 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_search)
-            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY));
+        if (item.getItemId() == R.id.menu_search) {
+            if (mViewPager.getCurrentItem() == 0)
+                startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY).putExtra("PAGE_TYPE", 3));
+            else
+                startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY).putExtra("PAGE_TYPE", 4));
+        }
         return super.onOptionsItemSelected(item);
     }
 

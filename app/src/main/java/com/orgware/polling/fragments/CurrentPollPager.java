@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     EditText mFirstName, mLastName, mMobileNumber;
     Button mBtnDialogSubmit;
     ProgressDialog mProgressFake;
+    LinearLayout mSubmissionLayout;
 
     @Override
     public void setTitle() {
@@ -64,6 +66,10 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mType = getArguments().getInt(PAGER_COUNT);
+        Log.e("Count Type", "" + mType);
+
         mProgressFake = new ProgressDialog(act);
         mProgressFake.setMessage("Loading");
         mProgressFake.setCancelable(false);
@@ -96,6 +102,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
         mBtnNext = (TextView) v.findViewById(R.id.btn_next);
         mBtnPrevious = (TextView) v.findViewById(R.id.btn_previous);
         mBtnSubmit = (TextView) v.findViewById(R.id.btn_submit);
+        mSubmissionLayout = (LinearLayout) v.findViewById(R.id.currentpoll_submission);
         mRadioGroupIndicator = (RadioGroup) v.findViewById(R.id.radio_currentpoll_pager);
         mRadioIndicatorOne = (RadioButton) v.findViewById(R.id.radio_currentpoll_fragment_1);
         mRadioIndicatorTwo = (RadioButton) v.findViewById(R.id.radio_currentpoll_fragment_2);
@@ -121,7 +128,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewPager.setAdapter(mPagerAdapter);
-//        makeToast("Pager" + mType);
+
         if (qtsSize == 1) {
             mRadioGroupIndicator.setVisibility(View.INVISIBLE);
             mBtnSubmit.setVisibility(View.VISIBLE);
@@ -136,6 +143,8 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
             mRadioIndicatorOne.setChecked(true);
             mRadioIndicatorThree.setVisibility(View.VISIBLE);
         }
+        if (qtsSize == 1 && mType == 2)
+            mBtnSubmit.setVisibility(View.GONE);
     }
 
     /**
@@ -334,20 +343,12 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (qtsSize == 2) {
-            if (mRadioIndicatorOne.isChecked())
-                mViewPager.setCurrentItem(0);
-            if (mRadioIndicatorTwo.isChecked())
-                mViewPager.setCurrentItem(1);
-        }
-        if (qtsSize == 2) {
-            if (mRadioIndicatorOne.isChecked())
-                mViewPager.setCurrentItem(0);
-            if (mRadioIndicatorTwo.isChecked())
-                mViewPager.setCurrentItem(1);
-            if (mRadioIndicatorThree.isChecked())
-                mViewPager.setCurrentItem(2);
-        }
+        if (mRadioIndicatorOne.isChecked())
+            mViewPager.setCurrentItem(0);
+        if (mRadioIndicatorTwo.isChecked())
+            mViewPager.setCurrentItem(1);
+        if (mRadioIndicatorThree.isChecked())
+            mViewPager.setCurrentItem(2);
     }
 
     /**
@@ -372,8 +373,11 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
      */
     @Override
     public void onPageSelected(int position) {
-        if (qtsSize >= 2)
+        if (qtsSize >= 2 && mType == 1)
             enableButtons(qtsSize, position);
+        else if (qtsSize >= 2 && mType == 2)
+            enableButtonsForMypoll(qtsSize, position);
+
     }
 
     /**
@@ -491,6 +495,49 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 case 2:
                     mBtnNext.setVisibility(View.GONE);
                     mBtnSubmit.setVisibility(View.VISIBLE);
+                    mBtnPrevious.setVisibility(View.VISIBLE);
+                    mRadioIndicatorThree.setChecked(true);
+                    break;
+            }
+        } else
+            Log.e("Enable", "Test");
+    }
+
+    private void enableButtonsForMypoll(int questionSize, int position) {
+        if (questionSize == 2) {
+            mRadioGroupIndicator.setVisibility(View.VISIBLE);
+            switch (position) {
+                case 0:
+                    mBtnNext.setVisibility(View.VISIBLE);
+                    mBtnSubmit.setVisibility(View.GONE);
+                    mBtnPrevious.setVisibility(View.GONE);
+                    mRadioIndicatorOne.setChecked(true);
+                    break;
+                case 1:
+                    mBtnNext.setVisibility(View.GONE);
+                    mBtnSubmit.setVisibility(View.GONE);
+                    mBtnPrevious.setVisibility(View.VISIBLE);
+                    mRadioIndicatorTwo.setChecked(true);
+                    break;
+            }
+        } else if (questionSize == 3) {
+            mRadioGroupIndicator.setVisibility(View.VISIBLE);
+            switch (position) {
+                case 0:
+                    mBtnNext.setVisibility(View.VISIBLE);
+                    mBtnSubmit.setVisibility(View.GONE);
+                    mBtnPrevious.setVisibility(View.GONE);
+                    mRadioIndicatorOne.setChecked(true);
+                    break;
+                case 1:
+                    mBtnNext.setVisibility(View.VISIBLE);
+                    mBtnSubmit.setVisibility(View.GONE);
+                    mBtnPrevious.setVisibility(View.VISIBLE);
+                    mRadioIndicatorTwo.setChecked(true);
+                    break;
+                case 2:
+                    mBtnNext.setVisibility(View.GONE);
+                    mBtnSubmit.setVisibility(View.GONE);
                     mBtnPrevious.setVisibility(View.VISIBLE);
                     mRadioIndicatorThree.setChecked(true);
                     break;
