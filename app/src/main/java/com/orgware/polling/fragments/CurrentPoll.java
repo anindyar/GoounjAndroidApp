@@ -157,7 +157,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -286,7 +286,7 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
             else
                 makeToast("Sorry,No Questions to answer!");
 
-            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentPollPager(), 1), "Pager", true);
+            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentPollPager(), "page", 1, "activity", "main"), "Pager", true);
             ((MainHomeActivity) act).setTitle("Poll");
 
 

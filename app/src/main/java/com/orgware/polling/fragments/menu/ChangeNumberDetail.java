@@ -145,7 +145,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
 
                     @Override
                     public void onRequestFailed(Exception e) {
-                        Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                        Methodutils.messageWithTitle(act, "Failed", "Old phone number does not match.", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 act.finish();

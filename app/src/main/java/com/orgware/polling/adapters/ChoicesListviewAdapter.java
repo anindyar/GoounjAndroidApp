@@ -56,14 +56,14 @@ public class ChoicesListviewAdapter extends ArrayAdapter<ChoicesItem> {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.item_choices, parent, false);
         final CheckedTextView mTxtChoice = (CheckedTextView) convertView.findViewById(android.R.id.text1);
+        ChoicesItem item = itemList.get(position);
+
         if (type == 1) {
             mTxtChoice.setCheckMarkDrawable(null);
-            ChoicesItem item = itemList.get(position);
             mTxtChoice.setText("" + item.mChoiceName);
         } else {
             mTxtChoice.setCheckMarkDrawable(null);
             mTxtChoice.setCompoundDrawablesWithIntrinsicBounds(choiceImage[position], 0, 0, 0);
-            ChoicesItem item = itemList.get(position);
             mTxtChoice.setText("" + item.mChoiceName + " - " + item.mChoicePercent);
         }
 

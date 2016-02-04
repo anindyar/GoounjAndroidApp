@@ -240,12 +240,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-                            makeToast("" + itemListOne.get(position).mChoicePercent);
-                        }
-                    });
+//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//                            makeToast("" + itemListOne.get(position).mChoicePercent);
+//                        }
+//                    });
                 }
             }
             editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).commit();
@@ -283,12 +283,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-                            makeToast("" + itemListOne.get(position).mChoicePercent);
-                        }
-                    });
+//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//                            makeToast("" + itemListOne.get(position).mChoicePercent);
+//                        }
+//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
@@ -305,12 +305,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphTwo.addSlice(slice);
-                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-                            makeToast("" + itemListTwo.get(position).mChoicePercent);
-                        }
-                    });
+//                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//                            makeToast("" + itemListTwo.get(position).mChoicePercent);
+//                        }
+//                    });
                 }
             }
             editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).
@@ -357,12 +357,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-
-                        }
-                    });
+//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//
+//                        }
+//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
@@ -379,12 +379,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphTwo.addSlice(slice);
-                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-
-                        }
-                    });
+//                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//
+//                        }
+//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayThree.length(); i++) {
@@ -401,12 +401,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphThree.addSlice(slice);
-                    pieGraphThree.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-                        @Override
-                        public void onClick(int position) {
-
-                        }
-                    });
+//                    pieGraphThree.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
+//                        @Override
+//                        public void onClick(int position) {
+//
+//                        }
+//                    });
                 }
             }
 //            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalCountThree", mChoiceArrayThree.length()).commit();

@@ -34,6 +34,9 @@ import android.widget.Toast;
 import com.orgware.polling.database.GoounjDatabase;
 import com.orgware.polling.interfaces.Appinterface;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -157,6 +160,39 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         menuDetailIntent.putExtra("Menu_Detail", type);
         startActivity(menuDetailIntent);
     }
+
+    public String splitFromString(String stringName) {
+
+        try {
+            SimpleDateFormat mRequiredDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+            Date date = mSimpleDateFormat.parse(stringName);
+
+            return mRequiredDateFormat.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+//        StringBuilder sb = new StringBuilder();
+//        String unwanted, wanted, wantedOne, wantedTwo, unWantedone;
+//        StringTokenizer tokenize = new StringTokenizer(stringName, "."); //2016-01-28T08:30:29.000Z
+//        wanted = "" + tokenize.nextToken();
+//        unwanted = "" + tokenize.nextToken();
+//        StringTokenizer tokenizer = new StringTokenizer(wanted, "T"); //2016-01-28T08:30:29
+//        sb.append("" + tokenizer.nextToken());
+//        sb.append(" ");
+//        unWantedone = "" + tokenizer.nextToken();
+//        String[] wantedTime = unWantedone.split(":");
+//        wantedOne = wantedTime[0];
+//        wantedTwo = wantedTime[1];
+//        sb.append(wantedOne + ":" + wantedTwo);
+//        Log.e("Date", "" + sb.toString());
+//        return sb.toString();
+        return "";
+    }
+
 
     public void setNewFragment(Fragment fragment, String title, boolean addStack) {
 

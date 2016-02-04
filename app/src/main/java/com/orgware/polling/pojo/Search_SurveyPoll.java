@@ -15,8 +15,9 @@ public class Search_SurveyPoll {
     public String createdUserName;
     public String pollName;
     public int isActive;
+    public String isAnswered;
 
-    public Search_SurveyPoll(int pollId, int isGeneric, String endDate, int isSurvey, String startDate, int isBoost, int createdUserId, String createdUserName, String pollName, int isActive) {
+    public Search_SurveyPoll(int pollId, int isGeneric, String endDate, int isSurvey, String startDate, int isBoost, int createdUserId, String createdUserName, String pollName, int isActive, String isAnswered) {
         this.pollId = pollId;
         this.isGeneric = isGeneric;
         this.endDate = endDate;
@@ -27,6 +28,21 @@ public class Search_SurveyPoll {
         this.createdUserName = createdUserName;
         this.pollName = pollName;
         this.isActive = isActive;
+        this.isAnswered = isAnswered;
+    }
+
+    public Search_SurveyPoll(int pollId, String endDate, String startDate, String createdUserName, String pollName) {
+        this.pollId = pollId;
+        this.isGeneric = isGeneric;
+        this.endDate = endDate;
+        this.isSurvey = isSurvey;
+        this.startDate = startDate;
+        this.isBoost = isBoost;
+        this.createdUserId = createdUserId;
+        this.createdUserName = createdUserName;
+        this.pollName = pollName;
+        this.isActive = isActive;
+        this.isAnswered = isAnswered;
     }
 
     public int getPollId() {
@@ -108,4 +124,14 @@ public class Search_SurveyPoll {
     public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
+
+    public String getIsAnswered() {
+        return isAnswered;
+    }
+
+    public void setIsAnswered(String isAnswered) {
+        this.isAnswered = isAnswered;
+    }
+
+
 }

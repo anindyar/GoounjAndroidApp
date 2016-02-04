@@ -60,6 +60,10 @@
             android:parentActivityName="com.orgware.polling.LoginActivityNew"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".SearchDetailActivity"
+            android:parentActivityName=".SearchToolbarActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SearchToolbarActivity"
             android:launchMode="singleTop">
 

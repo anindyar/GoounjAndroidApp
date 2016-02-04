@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
+import com.orgware.polling.SearchDetailActivity;
 import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
@@ -57,6 +58,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     Button mBtnDialogSubmit;
     ProgressDialog mProgressFake;
     LinearLayout mSubmissionLayout;
+    String mActivityName;
 
     @Override
     public void setTitle() {
@@ -67,7 +69,8 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mType = getArguments().getInt(PAGER_COUNT);
+        mType = getArguments().getInt("page");
+        mActivityName = getArguments().getString("activity");
         Log.e("Count Type", "" + mType);
 
         mProgressFake = new ProgressDialog(act);
@@ -404,7 +407,10 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 else
                     try {
                         showResultPollList(response);
-                        ((MainHomeActivity) act).setNewFragment(new ResultPollNew(), "", true);
+                        if (mActivityName.equals("main"))
+                            ((MainHomeActivity) act).setNewFragment(new ResultPollNew(), "", true);
+                        else
+                            ((SearchDetailActivity) act).setNewFragment(new ResultPollNew(), "", true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

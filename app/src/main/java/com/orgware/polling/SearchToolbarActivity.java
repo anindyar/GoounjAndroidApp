@@ -1,5 +1,6 @@
 package com.orgware.polling;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -23,10 +24,14 @@ import com.google.gson.reflect.TypeToken;
 import com.orgware.polling.BaseActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.SearchListAdapter;
+import com.orgware.polling.fragments.CurrentPollPager;
+import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
+import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pojo.Search_SurveyPoll;
 import com.orgware.polling.pojo.TimeLine;
+import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -179,7 +184,16 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             JSONArray responseArray = new JSONArray(result);
             if (responseArray != null && responseArray.length() > 0) {
                 List<Search_SurveyPoll> list = gson.fromJson(responseArray.toString(), listType);
-                mSearchSurvey.addAll(list);
+
+                for (int i = 0; i < responseArray.length(); i++) {
+                    JSONObject objectPolls = responseArray.optJSONObject(i);
+                    if (objectPolls.optString("isAnswered").equals("0")) {
+                        mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                    }
+                }
+
+//                mSearchSurvey.addAll(list);
             }
             mSearchListAdapter.notifyDataSetChanged();
             if (mSearchSurvey.size() == 0) {
@@ -211,7 +225,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -224,5 +238,152 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        switch (mTypeOfPage) {
+            case 0:
+                editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
+                        putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
+                getPollDetailPage(BASE_URL + SHOW_POLL_URL + mSearchSurvey.get(position).pollId);
+                break;
+            case 1:
+                editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
+                        putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
+//        ((HomeActivity) act).setNewFragment(new ResultPoll(), "Current Poll Pager", true);
+                try {
+                    getResultPollForCreatedUser(BASE_URL + RESULT_URL + mSearchSurvey.get(position).pollId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
+                        putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
+                getPollDetailPage(BASE_URL + SHOW_POLL_URL + mSearchSurvey.get(position).pollId);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+
     }
+
+    private void getPollDetailPage(String url) {
+        RestApiProcessor processor = new RestApiProcessor(activity, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                savePollDetailResponse(response);
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                Methodutils.messageWithTitle(activity, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        act.getSupportFragmentManager().popBackStack();
+                    }
+                });
+            }
+        });
+        processor.execute();
+    }
+
+    private void savePollDetailResponse(String result) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(result);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(QUESTION_SIZE, mQuestionsArray.length()).commit();
+            if (mQuestionsArray.length() != 0) {
+                for (int j = 0; j < mQuestionsArray.length(); j++) {
+                    JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                    JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                    Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+
+                    editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
+                            putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+                }
+//                setQuestions(mQuestionsArray.length(), mQuestionsArray);
+            } else
+                makeToast(this, "Sorry,No Questions to answer!");
+
+//            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentPollPager(), 1), "Pager", true);
+//            ((MainHomeActivity) act).setTitle("Poll");
+            startActivity(new Intent(activity, SearchDetailActivity.class).putExtra("Search_Detail", 1));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getResultPollForCreatedUser(String url) {
+        RestApiProcessor processor = new RestApiProcessor(activity, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+//                mHistoryPollList.setVisibility(View.VISIBLE);
+//                mPollError.setVisibility(View.GONE);
+                if (response.equals("[]"))
+                    makeToast(activity, "No Records Found");
+                else
+                    try {
+                        showResultPollList(response);
+//                        ((MainHomeActivity) activity).setNewFragment(new ResultPollNew(), "", true);
+//                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+                        startActivity(new Intent(activity, SearchDetailActivity.class).putExtra("Search_Detail", 2));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+//                mHistoryPollList.setVisibility(View.GONE);
+//                mPollError.setVisibility(View.VISIBLE);
+                if (e == null) {
+                    Log.e("Error", "" + e.getMessage());
+                    Methodutils.message(activity, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            activity.getSupportFragmentManager().popBackStack();
+                        }
+                    });
+                } else {
+                    if (e.getMessage() == null)
+                        Methodutils.message(activity, "No Records Found", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                activity.getSupportFragmentManager().popBackStack();
+                            }
+                        });
+                    else
+                        Methodutils.message(activity, "Try again, Failed to connect to server", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                activity.getSupportFragmentManager().popBackStack();
+                            }
+                        });
+
+                }
+            }
+        });
+        processor.execute();
+    }
+
+    public void showResultPollList(String response) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(response);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(RESULT_QUESTION_SIZE, mQuestionsArray.length()).commit();
+            for (int j = 0; j < mQuestionsArray.length(); j++) {
+                JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+                editor.putString("RES_QUESTION_" + j, "" + mQuestions.optString(QUESTION)).
+                        putString("RES_CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
