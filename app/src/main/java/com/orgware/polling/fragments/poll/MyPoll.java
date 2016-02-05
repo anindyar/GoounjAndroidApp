@@ -1,6 +1,7 @@
 package com.orgware.polling.fragments.poll;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -29,6 +30,7 @@ import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -100,22 +102,16 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser("http://api.goounj.com/polls/v1/pollList/" + preferences.getString(USER_ID, "0"));
-                else
-                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                            return;
-                        }
-                    });
-            }
-        });
-
+        if (NetworkHelper.checkActiveInternet(act))
+            getPollForCreatedUser("http://api.goounj.com/polls/v1/pollList/" + preferences.getString(USER_ID, "0"));
+        else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -144,6 +140,13 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
                 else
                     try {
                         showPollList(response);
+                        if (itemList.size() == 0) {
+                            mHistoryPollList.setVisibility(View.GONE);
+                            mPollNoError.setVisibility(View.VISIBLE);
+                        } else {
+                            mHistoryPollList.setVisibility(View.VISIBLE);
+                            mPollNoError.setVisibility(View.GONE);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -168,6 +171,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
                 if (objectPolls.optInt("created_user_id") == Integer.parseInt(preferences.getString(USER_ID, "0"))) {
+//                if (objectPolls.optString("created_user_id").equals("" + preferences.getString(USER_ID, "0"))) {
                     itemList.add(new CurrentPollItem(objectPolls.optInt("id"), splitFromString("" + objectPolls.optString("start_date")), splitFromString("" + objectPolls.optString("end_date")),
                             objectPolls.optString("poll_name"), objectPolls.optInt("isBoost"), "You"));
                 }
@@ -198,7 +202,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -211,7 +215,8 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 3));
+        Log.e("Poll Id", "" + itemList.get(position).currentPollId);
     }
 
     private void getPollDetailPage(String url) {

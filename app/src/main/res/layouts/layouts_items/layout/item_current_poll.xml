@@ -25,7 +25,7 @@
             android:layout_toRightOf="@+id/poll_image"
             android:padding="3dp"
             android:text="Weekend Movie"
-            android:textColor="#000000"
+            android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_toRightOf="@+id/poll_image"
             android:padding="2dp"
             android:text="Created By:"
-            android:textColor="#F0AA4C" />
+            android:textColor="@color/bg" />
 
         <TextView
             android:id="@+id/start"
@@ -46,7 +46,7 @@
             android:layout_toRightOf="@+id/poll_image"
             android:padding="3dp"
             android:text="START ON :"
-            android:textColor="#3C746B" />
+            android:textColor="@color/home_bg" />
 
         <TextView
             android:id="@+id/poll_startDate"
@@ -55,7 +55,8 @@
             android:layout_below="@+id/poll_createdBy"
             android:layout_toRightOf="@+id/start"
             android:padding="3dp"
-            android:text="03:00 PM,23 NOV 2015" />
+            android:text="03:00 PM,23 NOV 2015"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/end"
@@ -65,7 +66,7 @@
             android:layout_toRightOf="@+id/poll_image"
             android:padding="3dp"
             android:text="ENDS ON :"
-            android:textColor="#3C746B" />
+            android:textColor="@color/home_bg" />
 
         <TextView
             android:id="@+id/poll_endDate"
@@ -74,7 +75,8 @@
             android:layout_below="@+id/poll_startDate"
             android:layout_toRightOf="@+id/start"
             android:padding="3dp"
-            android:text="03:00 PM,23 NOV 2015" />
+            android:text="03:00 PM,23 NOV 2015"
+            android:textColor="@color/colorPrimary" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

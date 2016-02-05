@@ -149,7 +149,7 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
         } else
             mProfileImage.setImageResource(R.drawable.ic_usericon_blue);
         mUserName.setText("" + preferences.getString(USERNAME, ""));
-        mDrawerLayout.openDrawer(GravityCompat.START);
+//        mDrawerLayout.openDrawer(GravityCompat.START);
 
     }
 
@@ -174,9 +174,6 @@ public class MainHomeActivity extends BaseActivity implements NavigationView.OnN
     @Override
     protected void onStart() {
         super.onStart();
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawers();
-        }
     }
 
     @Override

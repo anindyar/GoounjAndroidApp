@@ -22,6 +22,7 @@ import com.orgware.polling.R;
 import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.fragments.poll.MyPoll;
 import com.orgware.polling.SearchToolbarActivity;
+import com.orgware.polling.pollactivities.PollCreateActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,10 +120,12 @@ public class ShowPollPager extends BaseFragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnCreate:
-                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
+//                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
+                startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 1));
                 break;
             case R.id.layout_create:
-                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
+//                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 1), "Create Poll Pager", true);
+                startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 1));
                 break;
         }
     }

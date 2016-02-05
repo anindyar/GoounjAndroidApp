@@ -31,6 +31,7 @@ import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pojo.Search_SurveyPoll;
 import com.orgware.polling.pojo.TimeLine;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -71,6 +72,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (getIntent().getExtras() != null) {
             activity.setTitle(getIntent().getExtras().getString(TYPE).equals(SURVEY) ? "Search Survey" : "Search Poll");
             mTypeOfPage = getIntent().getExtras().getInt("PAGE_TYPE");
@@ -168,8 +170,9 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             @Override
             public void onRequestFailed(Exception e) {
                 if (e instanceof SocketTimeoutException)
-                    Toast.makeText(SearchToolbarActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-
+                    makeToast(activity, "Something went wrong");
+                else
+                    makeToast(activity, "No Surveys Found");
 
             }
         });
@@ -185,11 +188,29 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             if (responseArray != null && responseArray.length() > 0) {
                 List<Search_SurveyPoll> list = gson.fromJson(responseArray.toString(), listType);
 
-                for (int i = 0; i < responseArray.length(); i++) {
-                    JSONObject objectPolls = responseArray.optJSONObject(i);
-                    if (objectPolls.optString("isAnswered").equals("0")) {
-                        mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
-                                objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                if (mTypeOfPage == 0) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isAnswered").equals("0")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                    objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                        }
+                    }
+                } else if (mTypeOfPage == 1) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isAnswered").equals("1")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                    objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                        }
+                    }
+                } else if (mTypeOfPage == 2) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isAnswered").equals("2")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                    objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                        }
                     }
                 }
 
@@ -225,7 +246,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -242,22 +263,20 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             case 0:
                 editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
-                getPollDetailPage(BASE_URL + SHOW_POLL_URL + mSearchSurvey.get(position).pollId);
+                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 1));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
+
                 break;
             case 1:
                 editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
-//        ((HomeActivity) act).setNewFragment(new ResultPoll(), "Current Poll Pager", true);
-                try {
-                    getResultPollForCreatedUser(BASE_URL + RESULT_URL + mSearchSurvey.get(position).pollId);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 2));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
                 break;
             case 2:
                 editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
-                getPollDetailPage(BASE_URL + SHOW_POLL_URL + mSearchSurvey.get(position).pollId);
+                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 3));
                 break;
             case 3:
                 break;

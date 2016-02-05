@@ -28,6 +28,7 @@ import com.orgware.polling.adapters.PollPagerAdapter;
 import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -47,7 +48,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     RadioGroup mRadioGroupIndicator;
     PollPagerAdapter mPagerAdapter;
     List<Fragment> mFragmentList;
-    int mType;
+    int mType, mPollId;
     int qtsSize;
     JSONObject mSubmitAnsOne = new JSONObject();
     JSONObject mSubmitAnsTwo = new JSONObject();
@@ -56,9 +57,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     Dialog mSurveyDialog;
     EditText mFirstName, mLastName, mMobileNumber;
     Button mBtnDialogSubmit;
-    ProgressDialog mProgressFake;
     LinearLayout mSubmissionLayout;
-    String mActivityName;
 
     @Override
     public void setTitle() {
@@ -70,30 +69,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
 
         mType = getArguments().getInt("page");
-        mActivityName = getArguments().getString("activity");
-        Log.e("Count Type", "" + mType);
-
-        mProgressFake = new ProgressDialog(act);
-        mProgressFake.setMessage("Loading");
-        mProgressFake.setCancelable(false);
-        mFragmentList = new ArrayList<>();
-        qtsSize = preferences.getInt(QUESTION_SIZE, 0);
-        if (qtsSize == 1) {
-            mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
-        } else if (qtsSize == 2) {
-            mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailTwo(), 1));
-        } else if (qtsSize == 3) {
-            mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailTwo(), 1));
-            mFragmentList.add(setPagerFragment(new CurrentPollDetailThree(), 3));
-        } else
-            Log.e("Qts Size", "" + qtsSize);
-//        mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 2));
-        mPagerAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
+        mPollId = getArguments().getInt("poll_id");
 
     }
 
@@ -124,30 +100,106 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+        try {
+            getPollDetailPage(BASE_URL + SHOW_POLL_URL + mPollId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void getPollDetailPage(String url) throws Exception {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                savePollDetailResponse(response);
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        act.getSupportFragmentManager().popBackStack();
+                    }
+                });
+            }
+        });
+        processor.execute();
+    }
+
+    private void savePollDetailResponse(String result) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(result);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(QUESTION_SIZE, mQuestionsArray.length()).commit();
+            qtsSize = mQuestionsArray.length();
+            if (mQuestionsArray.length() != 0) {
+                for (int j = 0; j < mQuestionsArray.length(); j++) {
+                    JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                    JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                    Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+
+                    editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
+                            putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+                }
+            } else
+                makeToast("Sorry,No Questions to answer!");
+
+            mFragmentList = new ArrayList<>();
+//            qtsSize = preferences.getInt(QUESTION_SIZE, 0);
+            if (qtsSize == 1) {
+                mFragmentList.clear();
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
+                mRadioGroupIndicator.setVisibility(View.INVISIBLE);
+                mBtnSubmit.setVisibility(View.VISIBLE);
+                mBtnPrevious.setVisibility(View.GONE);
+                mBtnNext.setVisibility(View.GONE);
+            } else if (qtsSize == 2) {
+                mFragmentList.clear();
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailTwo(), 1));
+                mRadioIndicatorOne.setChecked(true);
+                mRadioIndicatorThree.setVisibility(View.GONE);
+            } else if (qtsSize == 3) {
+                mFragmentList.clear();
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailOne(), 0));
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailTwo(), 1));
+                mFragmentList.add(setPagerFragment(new CurrentPollDetailThree(), 3));
+                mRadioIndicatorOne.setChecked(true);
+                mRadioIndicatorThree.setVisibility(View.VISIBLE);
+            } else
+                Log.e("Qts Size", "" + qtsSize);
+            if (qtsSize == 1 && mType == 2)
+                mBtnSubmit.setVisibility(View.GONE);
+
+            mPagerAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
+            mViewPager.setAdapter(mPagerAdapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewPager.setAdapter(mPagerAdapter);
 
-        if (qtsSize == 1) {
-            mRadioGroupIndicator.setVisibility(View.INVISIBLE);
-            mBtnSubmit.setVisibility(View.VISIBLE);
-            mBtnPrevious.setVisibility(View.GONE);
-            mBtnNext.setVisibility(View.GONE);
-        }
-        if (qtsSize == 2) {
-            mRadioIndicatorOne.setChecked(true);
-            mRadioIndicatorThree.setVisibility(View.GONE);
-        }
-        if (qtsSize == 3) {
-            mRadioIndicatorOne.setChecked(true);
-            mRadioIndicatorThree.setVisibility(View.VISIBLE);
-        }
-        if (qtsSize == 1 && mType == 2)
-            mBtnSubmit.setVisibility(View.GONE);
+//        if (qtsSize == 1) {
+//            mRadioGroupIndicator.setVisibility(View.INVISIBLE);
+//            mBtnSubmit.setVisibility(View.VISIBLE);
+//            mBtnPrevious.setVisibility(View.GONE);
+//            mBtnNext.setVisibility(View.GONE);
+//        }
+//        if (qtsSize == 2) {
+//            mRadioIndicatorOne.setChecked(true);
+//            mRadioIndicatorThree.setVisibility(View.GONE);
+//        }
+//        if (qtsSize == 3) {
+//            mRadioIndicatorOne.setChecked(true);
+//            mRadioIndicatorThree.setVisibility(View.VISIBLE);
+//        }
+//        if (qtsSize == 1 && mType == 2)
+//            mBtnSubmit.setVisibility(View.GONE);
     }
 
     /**
@@ -179,43 +231,43 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
 //                }
                 break;
             case R.id.btn_survey_submit:
-                if (mFirstName.getText().toString().equals("")) {
-                    makeToast("Please enter firstname");
-                    return;
-                }
-                if (mLastName.getText().toString().equals("")) {
-                    makeToast("Please enter firstname");
-                    return;
-                }
-                if (mMobileNumber.getText().toString().equals("")) {
-                    makeToast("Please enter firstname");
-                    return;
-                }
-                editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(LASTNAME_SURVEY, mLastName.getText().toString())
-                        .putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
-                if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
-//                    try {
-//                        pushAnwersPoll(BASE_URL + SURVEY_POLL_URL, answerSurveyParams().toString());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-                    mProgressFake.show();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Methodutils.messageWithTitle(act, "Message", "Survey Poll Updated Successfully.", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    mSurveyDialog.dismiss();
-                                    mProgressFake.dismiss();
-                                    act.getSupportFragmentManager().popBackStack();
-                                }
-                            });
-                        }
-                    }, 500);
-                } else {
-                    Log.e("Test", "Test");
-                }
+//                if (mFirstName.getText().toString().equals("")) {
+//                    makeToast("Please enter firstname");
+//                    return;
+//                }
+//                if (mLastName.getText().toString().equals("")) {
+//                    makeToast("Please enter firstname");
+//                    return;
+//                }
+//                if (mMobileNumber.getText().toString().equals("")) {
+//                    makeToast("Please enter firstname");
+//                    return;
+//                }
+//                editor.putString(FIRSTNAME_SURVEY, mFirstName.getText().toString()).putString(LASTNAME_SURVEY, mLastName.getText().toString())
+//                        .putString(SURVEY_MOBILE, mMobileNumber.getText().toString()).commit();
+//                if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
+////                    try {
+////                        pushAnwersPoll(BASE_URL + SURVEY_POLL_URL, answerSurveyParams().toString());
+////                    } catch (Exception e) {
+////                        e.printStackTrace();
+////                    }
+//                    mProgressFake.show();
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Methodutils.messageWithTitle(act, "Message", "Survey Poll Updated Successfully.", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    mSurveyDialog.dismiss();
+//                                    mProgressFake.dismiss();
+//                                    act.getSupportFragmentManager().popBackStack();
+//                                }
+//                            });
+//                        }
+//                    }, 500);
+//                } else {
+//                    Log.e("Test", "Test");
+//                }
                 break;
         }
     }
@@ -267,8 +319,10 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Answer Response", "" + response);
+                Log.e("Poll Id", "" + mPollId);
                 try {
-                    getResultPollForCreatedUser(BASE_URL + RESULT_URL + preferences.getInt(POLL_ID, 0));
+//                    getResultPollForCreatedUser(BASE_URL + RESULT_URL + mPollId);
+                    ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Result_Poll", true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -407,10 +461,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 else
                     try {
                         showResultPollList(response);
-                        if (mActivityName.equals("main"))
-                            ((MainHomeActivity) act).setNewFragment(new ResultPollNew(), "", true);
-                        else
-                            ((SearchDetailActivity) act).setNewFragment(new ResultPollNew(), "", true);
+                        ((CurrentPollDetailActivity) act).setNewFragment(new ResultPollNew(), "", true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

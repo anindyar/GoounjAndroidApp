@@ -161,6 +161,22 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         startActivity(menuDetailIntent);
     }
 
+
+    public Fragment setPagerFragment(Fragment fragment, int pos) {
+        Bundle args = new Bundle();
+        args.putInt(PAGER_COUNT, pos);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public Fragment setPagerFragment(Fragment fragment, String key, int pos, String json_key, String json_value) {
+        Bundle args = new Bundle();
+        args.putInt(key, pos);
+        args.putString(json_key, json_value);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public String splitFromString(String stringName) {
 
         try {

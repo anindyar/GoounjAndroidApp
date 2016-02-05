@@ -1,6 +1,7 @@
 package com.orgware.polling.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -35,6 +36,7 @@ import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 import com.orgware.polling.utils.SuperSwipeRefreshLayout;
 
@@ -101,6 +103,13 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                         return;
                     }
                 });
+            if (itemList.size() == 0) {
+                mHistoryPollList.setVisibility(View.GONE);
+                mPollNoError.setVisibility(View.VISIBLE);
+            } else {
+                mHistoryPollList.setVisibility(View.VISIBLE);
+                mPollNoError.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -115,21 +124,24 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         itemList.clear();
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE);
-                else
-                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                            return;
-                        }
-                    });
-            }
-        });
+        if (NetworkHelper.checkActiveInternet(act))
+            getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE);
+        else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
+//        if (itemList.size() == 0) {
+//            mHistoryPollList.setVisibility(View.GONE);
+//            mPollNoError.setVisibility(View.VISIBLE);
+//        } else {
+//            mHistoryPollList.setVisibility(View.VISIBLE);
+//            mPollNoError.setVisibility(View.GONE);
+//        }
+
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -174,6 +186,13 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
                 else
                     try {
                         showPollList(response);
+                        if (itemList.size() == 0) {
+                            mHistoryPollList.setVisibility(View.GONE);
+                            mPollNoError.setVisibility(View.VISIBLE);
+                        } else {
+                            mHistoryPollList.setVisibility(View.VISIBLE);
+                            mPollNoError.setVisibility(View.GONE);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -242,11 +261,13 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
 //        ((HomeActivity) act).setNewFragment(new ResultPoll(), "Current Poll Pager", true);
-        try {
-            getResultPollForCreatedUser(BASE_URL + RESULT_URL + itemList.get(position).currentPollId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 2));
+        Log.e("Poll Id", "" + itemList.get(position).currentPollId);
+//        try {
+//            getResultPollForCreatedUser(BASE_URL + RESULT_URL + itemList.get(position).currentPollId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void getResultPollForCreatedUser(String url) {

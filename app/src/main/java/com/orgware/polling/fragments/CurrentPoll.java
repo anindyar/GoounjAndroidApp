@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +39,7 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.ContactItem;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.EndlessRecyclerViewListener;
 import com.orgware.polling.utils.Methodutils;
 import com.orgware.polling.utils.SuperSwipeRefreshLayout;
@@ -116,10 +118,26 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Poll");
         itemList.clear();
+        if (NetworkHelper.checkActiveInternet(act))
+            getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+        else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -135,29 +153,36 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                     });
             }
         });
+//        if (itemList.size() == 0) {
+//            mCurrentPollList.setVisibility(View.GONE);
+//            mPollNoError.setVisibility(View.VISIBLE);
+//        } else {
+//            mCurrentPollList.setVisibility(View.VISIBLE);
+//            mPollNoError.setVisibility(View.GONE);
+//        }
 
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-                else
-                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                            return;
-                        }
-                    });
-            }
-        });
+//        mSwipeRefreshLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (NetworkHelper.checkActiveInternet(act))
+//                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+//                else
+//                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            act.getSupportFragmentManager().popBackStack();
+//                            return;
+//                        }
+//                    });
+//            }
+//        });
 
     }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -170,7 +195,9 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+//        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 1));
+        Log.e("Poll Id", "" + itemList.get(position).currentPollId);
     }
 
 
@@ -196,6 +223,13 @@ public class CurrentPoll extends BaseFragment implements AdapterView.OnItemClick
                     makeToast("No records found");
                 try {
                     showPollList(response);
+                    if (itemList.size() == 0) {
+                        mCurrentPollList.setVisibility(View.GONE);
+                        mPollNoError.setVisibility(View.VISIBLE);
+                    } else {
+                        mCurrentPollList.setVisibility(View.VISIBLE);
+                        mPollNoError.setVisibility(View.GONE);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -31,6 +31,7 @@ import com.orgware.polling.fragments.CurrentPoll;
 import com.orgware.polling.fragments.HistoryPoll;
 import com.orgware.polling.fragments.poll.MyPoll;
 import com.orgware.polling.pojo.GridItems;
+import com.orgware.polling.pollactivities.PollCreateActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,10 +103,12 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnCreate:
-                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
+//                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
+                startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 2));
                 break;
             case R.id.layout_create:
-                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
+//                ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
+                startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 2));
                 break;
         }
     }

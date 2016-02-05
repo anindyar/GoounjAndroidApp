@@ -37,6 +37,11 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".pollactivities.CurrentPollDetailActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.orgware.polling.LoginActivity"
             android:screenOrientation="portrait"></activity>
@@ -50,6 +55,10 @@
         <activity
             android:name="com.orgware.polling.MenuDetailActivity"
             android:configChanges="screenSize|orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".pollactivities.PollCreateActivity"
             android:screenOrientation="portrait" />
 
         <activity

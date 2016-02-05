@@ -24,7 +24,8 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/rotate_arrow_toright"
             android:padding="@dimen/padding_small"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"

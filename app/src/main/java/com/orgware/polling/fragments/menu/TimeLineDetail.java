@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -18,6 +20,7 @@ import com.orgware.polling.fragments.BaseFragment;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.TimeLine;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -30,7 +33,7 @@ import java.util.List;
 /**
  * Created by nandagopal on 21/1/16.
  */
-public class TimeLineDetail extends BaseFragment {
+public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemClickListener {
 
     RecyclerView mTimeLineRecycler;
     TimeLineAdapter mAdapter;
@@ -64,7 +67,9 @@ public class TimeLineDetail extends BaseFragment {
         mTimeLineRecycler = (RecyclerView) view.findViewById(R.id.timelineRecyclerview);
         mTimeLineRecycler.setLayoutManager(new LinearLayoutManager(act));
         mTimeLineRecycler.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -77,6 +82,7 @@ public class TimeLineDetail extends BaseFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     private void getTimeLinePage(String url) throws Exception {
@@ -121,4 +127,23 @@ public class TimeLineDetail extends BaseFragment {
     }
 
 
+    /**
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        editor.putInt(POLL_ID, mTimeLineItems.get(position).pollId).putString(POLL_NAME, "" + mTimeLineItems.get(position).pollName).
+//                putString(CURRENT_CREATED_USER_NAME, "" + mTimeLineItems.get(position).createdUserName).commit();
+//        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", mTimeLineItems.get(position).pollId).putExtra("poll_type", 3));
+    }
 }
