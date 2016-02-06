@@ -20,6 +20,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -165,7 +166,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
                 ((RadioButton) v).setTypeface(typeface);
             } else if (v instanceof DrawerLayout || v instanceof FrameLayout
                     || v instanceof LinearLayout || v instanceof RelativeLayout
-                    || v instanceof RadioGroup || v instanceof ListView) {
+                    || v instanceof RadioGroup || v instanceof ListView || v instanceof RecyclerView || v instanceof Menu) {
                 changeTypeface((ViewGroup) v);
             }
         }

@@ -130,12 +130,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
         mBackToLayout = (RelativeLayout) v.findViewById(R.id.layout_statics_back);
-        mBackToLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                act.finish();
-            }
-        });
+//        mBackToLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                act.finish();
+//            }
+//        });
         (mLayoutSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         (mBtnSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         mLayoutQtsOne = (LinearLayout) v.findViewById(R.id.layout_survey_detail_qts_one);
@@ -475,7 +475,7 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -505,9 +505,10 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                if (response.equals("[]"))
+                if (response.equals("[]")) {
                     makeToast("No Records Found");
-                else
+                    act.getSupportFragmentManager().popBackStack();
+                } else
                     try {
                         showResultPollList(response);
 //                        ((CurrentPollDetailActivity) act).setNewFragment(new ResultPollNew(), "", true);
@@ -518,8 +519,11 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
 
             @Override
             public void onRequestFailed(Exception e) {
-                act.finish();
-                makeToast("No results for the requested poll");
+                if (((CurrentPollDetailActivity) act).getSupportFragmentManager().getBackStackEntryCount() > 1)
+                    act.getSupportFragmentManager().popBackStack();
+                else
+                    act.finish();
+                makeToast("No results found for the requested poll");
             }
         });
         processor.execute();

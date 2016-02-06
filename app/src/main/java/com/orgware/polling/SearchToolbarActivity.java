@@ -156,8 +156,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         mSearchSurvey.clear();
         JSONObject object = new JSONObject();
         object.put(searchString, value);
-        if (!survey)
-            object.put(userId, preferences.getString(USER_ID, ""));
+        object.put(userId, preferences.getString(USER_ID, ""));
 
         RestApiProcessor mProcessor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.POST,
                 BASE_URL + (survey ? SEARCH_SURVEY : SEARCH_POLL), true, new RestApiListener<String>() {
@@ -212,6 +211,22 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                                     objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
                         }
                     }
+                } else if (mTypeOfPage == 3) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isSurvey").equals("1")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                    objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                        }
+                    }
+                } else if (mTypeOfPage == 4) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optInt("createdUserId") == Integer.parseInt(preferences.getString(USER_ID, "0"))) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("endDate")), splitFromString("" + objectPolls.optString("startDate")),
+                                    objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
+                        }
+                    }
                 }
 
 //                mSearchSurvey.addAll(list);
@@ -246,7 +261,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -279,8 +294,17 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                 startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 3));
                 break;
             case 3:
+                editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
+                        putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
+//        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+                startActivity(new Intent(activity, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 4));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
                 break;
             case 4:
+                editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
+                        putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
+                startActivity(new Intent(activity, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 5));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
                 break;
         }
 

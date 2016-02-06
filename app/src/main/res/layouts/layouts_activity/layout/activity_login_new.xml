@@ -38,16 +38,29 @@
             android:textColorHint="@android:color/white"
             android:textSize="@dimen/txtSmall" />
 
-        <EditText
+        <AutoCompleteTextView
+            android:id="@+id/login_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext_white_stroke"
+            android:hint="City"
+            android:inputType="text"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="18dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/txtSmall" />
+
+        <AutoCompleteTextView
             android:id="@+id/login_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_edittext_white_stroke"
-            android:clickable="false"
-            android:editable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
+            android:enabled="false"
+            android:focusableInTouchMode="true"
             android:hint="Country"
             android:inputType="text"
             android:paddingBottom="8dp"
@@ -57,24 +70,6 @@
             android:textColorHint="@android:color/white"
             android:textSize="@dimen/txtSmall" />
 
-        <EditText
-            android:id="@+id/login_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_edittext_white_stroke"
-            android:clickable="false"
-            android:editable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="City"
-            android:inputType="text"
-            android:paddingBottom="8dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="18dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textSize="@dimen/txtSmall" />
 
         <EditText
             android:id="@+id/login_mobile"

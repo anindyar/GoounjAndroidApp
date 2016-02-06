@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.orgware.polling.MainHomeActivity;
 import com.orgware.polling.R;
 import com.orgware.polling.adapters.ChoicesListviewAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
@@ -53,19 +54,14 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     EditText mFirstName, mLastName, mMobileNumber;
     Button mBtnDialogSubmit;
     RelativeLayout mBackToLayout;
+    int mPollId, mType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        qtsSize = preferences.getInt(QUESTION_SIZE, 0);
-        if (qtsSize == 1)
-            setQtsOneContent();
-        else if (qtsSize == 2)
-            setQtsTwoContent();
-        else if (qtsSize == 3)
-            setQtsThreeContent();
-        else
-            Log.e("Survey Details", "Others");
+        mType = getArguments().getInt("page");
+        mPollId = getArguments().getInt("poll_id");
+
     }
 
     @Nullable
@@ -117,38 +113,99 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        try {
+            getPollDetailPage(BASE_URL + SHOW_POLL_URL + mPollId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        ((HomeActivity) act).openSearch.setVisibility(View.GONE);
-        if (qtsSize == 1) {
-            mChoiceListviewOne.setAdapter(mAdapterOne);
-            mQuestionTitleOne.setText(mQuestionOne);
-            mLayoutQtsTwo.setVisibility(View.GONE);
-            mLayoutQtsThree.setVisibility(View.GONE);
-            mChoiceListviewOne.setItemChecked(0, true);
-        } else if (qtsSize == 2) {
-            mChoiceListviewOne.setAdapter(mAdapterOne);
-            mChoiceListviewTwo.setAdapter(mAdapterTwo);
-            mQuestionTitleOne.setText(mQuestionOne);
-            mQuestionTitleTwo.setText(mQuestionTwo);
-            mLayoutQtsThree.setVisibility(View.GONE);
-            mChoiceListviewOne.setItemChecked(0, true);
-            mChoiceListviewTwo.setItemChecked(0, true);
-        } else if (qtsSize == 3) {
-            mChoiceListviewOne.setAdapter(mAdapterOne);
-            mChoiceListviewTwo.setAdapter(mAdapterTwo);
-            mChoiceListviewThree.setAdapter(mAdapterThree);
-            mQuestionTitleOne.setText(mQuestionOne);
-            mQuestionTitleTwo.setText(mQuestionTwo);
-            mQuestionTitleThree.setText(mQuestionThree);
-            mChoiceListviewOne.setItemChecked(0, true);
-            mChoiceListviewTwo.setItemChecked(0, true);
-            mChoiceListviewThree.setItemChecked(0, true);
-        }
 
+    }
+
+    private void getPollDetailPage(String url) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                savePollDetailResponse(response);
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        act.getSupportFragmentManager().popBackStack();
+                    }
+                });
+            }
+        });
+        processor.execute();
+    }
+
+    private void savePollDetailResponse(String result) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(result);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(QUESTION_SIZE, mQuestionsArray.length()).commit();
+            if (mQuestionsArray.length() != 0)
+                for (int j = 0; j < mQuestionsArray.length(); j++) {
+                    JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                    JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                    Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+
+                    editor.putString("QUESTION_SIZE_" + j, "" + mQuestions.optString(QUESTION)).putInt("QUESTION_ID_" + j, mQuestions.optInt(QUESTION_ID)).
+                            putString("CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+                }
+            else
+                makeToast("Sorry,No Questions to answer!");
+
+            qtsSize = preferences.getInt(QUESTION_SIZE, 0);
+            if (qtsSize == 1)
+                setQtsOneContent();
+            else if (qtsSize == 2)
+                setQtsTwoContent();
+            else if (qtsSize == 3)
+                setQtsThreeContent();
+            else
+                Log.e("Survey Details", "Others");
+
+            if (qtsSize == 1) {
+                mChoiceListviewOne.setAdapter(mAdapterOne);
+                mQuestionTitleOne.setText(mQuestionOne);
+                mLayoutQtsTwo.setVisibility(View.GONE);
+                mLayoutQtsThree.setVisibility(View.GONE);
+                mChoiceListviewOne.setItemChecked(0, true);
+            } else if (qtsSize == 2) {
+                mChoiceListviewOne.setAdapter(mAdapterOne);
+                mChoiceListviewTwo.setAdapter(mAdapterTwo);
+                mQuestionTitleOne.setText(mQuestionOne);
+                mQuestionTitleTwo.setText(mQuestionTwo);
+                mLayoutQtsThree.setVisibility(View.GONE);
+                mChoiceListviewOne.setItemChecked(0, true);
+                mChoiceListviewTwo.setItemChecked(0, true);
+            } else if (qtsSize == 3) {
+                mChoiceListviewOne.setAdapter(mAdapterOne);
+                mChoiceListviewTwo.setAdapter(mAdapterTwo);
+                mChoiceListviewThree.setAdapter(mAdapterThree);
+                mQuestionTitleOne.setText(mQuestionOne);
+                mQuestionTitleTwo.setText(mQuestionTwo);
+                mQuestionTitleThree.setText(mQuestionThree);
+                mChoiceListviewOne.setItemChecked(0, true);
+                mChoiceListviewTwo.setItemChecked(0, true);
+                mChoiceListviewThree.setItemChecked(0, true);
+            }
+
+            if (mType == 2)
+                mBtnSubmit.setVisibility(View.GONE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void submitParams(int qtsSize) {
@@ -310,8 +367,6 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-//                Log.e("Answer Response", "" + response);
-//                makeToast("survey answered successfully!");
                 Methodutils.message(act, "Thanks for your support", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -331,7 +386,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                         }
                     });
                 } else
-                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                    Methodutils.message(act, "Try again later", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             return;
@@ -397,7 +452,11 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                     makeToast("Please put a valid mobile number");
                     return;
                 }
-                if (mMobileNumber.getText().toString().length() != 10) {
+                if (mMobileNumber.getText().toString().length() < 10) {
+                    makeToast("Please put a valid mobile number!");
+                    return;
+                }
+                if (mMobileNumber.getText().toString().length() > 10) {
                     makeToast("Please put a valid mobile number!");
                     return;
                 }
@@ -407,7 +466,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
                 submitParams(qtsSize);
                 Log.e("Survey Params", "" + answerSurveyParams().toString());
                 try {
-                    pushAnwersPoll(BASE_URL + SURVEY_POLL_URL, answerSurveyParams().toString());
+                    pushAnwersPoll(BASE_URL + ANSWER_SURVEY, answerSurveyParams().toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

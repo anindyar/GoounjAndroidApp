@@ -6,12 +6,14 @@ package com.orgware.polling.pojo;
 public class TimeLine {
 
     public String userName, date, pollName, createdUser;
+    public int pollId;
 
-    public TimeLine(String userName, String date, String pollName, String createdUser) {
+    public TimeLine(String userName, String date, String pollName, String createdUser, int pollId) {
         this.userName = userName;
         this.date = date;
         this.pollName = pollName;
         this.createdUser = createdUser;
+        this.pollId = pollId;
     }
 
     public String getUserName() {

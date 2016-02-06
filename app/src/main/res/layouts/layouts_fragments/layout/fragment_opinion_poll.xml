@@ -1467,8 +1467,7 @@
                     android:background="@drawable/bg_lay"
                     android:text="View Contact"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:visibility="gone" />
+                    android:textColor="@android:color/holo_green_dark" />
             </LinearLayout>
         </LinearLayout>
 

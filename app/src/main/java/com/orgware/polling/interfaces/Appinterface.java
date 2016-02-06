@@ -133,6 +133,9 @@ public interface Appinterface {
     /*Show Poll For Created User -- GET*/
     String SHOW_POLL_FOR_CREATED_USER_URL = "polls/v1/pollList/:id";
 
+    /*Survey Poll List*/
+    String SHOW_SURVEY_LIST = "survey/v1/surveyList/", CREATE_SURVEY_URL = "survey/v1/survey", ANSWER_SURVEY = "survey/v1/answerSurvey";
+
     /*Parameters*/
     /*LoginActivity*/
     String P_NAME = "name", P_COUNRTY = "country", P_CITY = "city", P_PHONE = "phone", P_DEVICEID = "deviceId", P_DEVICETOKEN = "deviceToken", P_OSTYPE = "osType", P_OSVERSION = "osVersion";

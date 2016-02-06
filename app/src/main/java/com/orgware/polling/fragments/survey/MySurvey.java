@@ -1,5 +1,7 @@
 package com.orgware.polling.fragments.survey;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,11 +25,14 @@ import com.orgware.polling.adapters.CurrentPollAdapter;
 import com.orgware.polling.database.GoounjDatabase;
 import com.orgware.polling.fragments.BaseFragment;
 import com.orgware.polling.fragments.CreatePollPager;
+import com.orgware.polling.fragments.CurrentPollPager;
+import com.orgware.polling.fragments.ResultPoll;
 import com.orgware.polling.fragments.SurveyDetail;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -40,112 +45,80 @@ import java.util.List;
  * Created by nandagopal on 5/2/16.
  */
 public class MySurvey extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
-
-    RecyclerView mCurrentPollList;
-    CurrentPollAdapter mAdapter;
+    RecyclerView mHistoryPollList;
+    //    HistoryPollAdapter mAdapter;
     List<CurrentPollItem> itemList;
-    List<CurrentPollItem> singleItemList;
-    int limit = 15, dashboardId;
-    GoounjDatabase db;
-    boolean currentPollService;
+    ProgressDialog mProgress;
+    CurrentPollAdapter mAdapter;
     RelativeLayout mPollNoError, mPollError;
-    int firstVisibleItem, visibleItemCount, totalItemCount;
-    LinearLayoutManager mLayoutManager;
-    private int mLowerLimit = 0, mUpperLimit = 10;
-    //    private SuperSwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    // Header View
-    private LinearLayout mLayoutCreate;
-    private Button mBtnCreate;
-    private ProgressBar progressBar;
-    private TextView textView;
-    private ImageView imageView;
-    // Footer View
-    private ProgressBar footerProgressBar;
-    private TextView footerTextView;
-    private ImageView footerImageView;
-    private int previousTotal = 0;
-    private boolean loading = true;
-    private int visibleThreshold = 5;
+    private int mLowerLimit = 0, mUpperLimit = 10;
 
     @Override
     public void setTitle() {
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        db = new GoounjDatabase(act);
         itemList = new ArrayList<>();
-        singleItemList = new ArrayList<>();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_current_survey_poll, container, false);
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(v, savedInstanceState);
-        mLayoutManager = new LinearLayoutManager(act);
-        (mBtnCreate = (Button) v.findViewById(R.id.btnCreate)).setOnClickListener(this);
-        (mLayoutCreate = (LinearLayout) v.findViewById(R.id.layout_create)).setOnClickListener(this);
-        mCurrentPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
+        View v = inflater.inflate(R.layout.fragment_current_poll_listview, container, false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
-        mCurrentPollList.setLayoutManager(mLayoutManager);
+        mHistoryPollList = (RecyclerView) v.findViewById(R.id.currentPollListview);
         mPollNoError = (RelativeLayout) v.findViewById(R.id.layout_no_poll_error);
         mPollError = (RelativeLayout) v.findViewById(R.id.layout_poll_error);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.home_bg, R.color.bg, R.color.tab_opinion, R.color.tab_quick, R.color.tab_social, R.color.tab_survey);
-        currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
+        mHistoryPollList.setLayoutManager(new LinearLayoutManager(act));
+        return v;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
-            if (NetworkHelper.checkActiveInternet(act))
-                getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-            else
-                Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
-                        return;
-                    }
-                });
-        }
+            try {
+                if (NetworkHelper.checkActiveInternet(act))
+                    getPollForCreatedUser("http://api.goounj.com/survey/v1/surveyList/" + preferences.getString(USER_ID, "0"));
+                else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
+            } catch (Exception e) {
+
+            }
+        } else
+            Log.e("Visible", "");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((MainHomeActivity) act).setTitle("Survey");
-        itemList.clear();
+        setHasOptionsMenu(true);
+        if (NetworkHelper.checkActiveInternet(act))
+            getPollForCreatedUser("http://api.goounj.com/survey/v1/surveyList/" + preferences.getString(USER_ID, "0"));
+        else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-                else
-                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                            return;
-                        }
-                    });
-            }
-        });
-
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser("http://api.goounj.com/survey/v1/surveyList/" + preferences.getString(USER_ID, "0"));
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -159,10 +132,79 @@ public class MySurvey extends BaseFragment implements AdapterView.OnItemClickLis
 
     }
 
+
+    private void getPollForCreatedUser(String url) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                if (response.equals("[]"))
+                    makeToast("No records found");
+                else
+                    try {
+                        showPollList(response);
+                        if (itemList.size() == 0) {
+                            mHistoryPollList.setVisibility(View.GONE);
+                            mPollNoError.setVisibility(View.VISIBLE);
+                        } else {
+                            mHistoryPollList.setVisibility(View.VISIBLE);
+                            mPollNoError.setVisibility(View.GONE);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                mHistoryPollList.setVisibility(View.GONE);
+                mPollError.setVisibility(View.VISIBLE);
+            }
+        });
+        processor.execute();
+    }
+
+    public void showPollList(String response) {
+        try {
+//            JSONObject object = new JSONObject(response);
+//            JSONArray objectArray = object.optJSONArray(response);
+            JSONArray objectArray = new JSONArray(response);
+            itemList.clear();
+            for (int i = 0; i < objectArray.length(); i++) {
+                JSONObject objectPolls = objectArray.optJSONObject(i);
+                Log.e("Array Values", "" + i);
+                if (objectPolls.optInt("created_user_id") == Integer.parseInt(preferences.getString(USER_ID, "0"))) {
+//                if (objectPolls.optString("created_user_id").equals("" + preferences.getString(USER_ID, "0"))) {
+                    itemList.add(new CurrentPollItem(objectPolls.optInt("id"), splitFromString("" + objectPolls.optString("start_date")), splitFromString("" + objectPolls.optString("end_date")),
+                            objectPolls.optString("poll_name"), objectPolls.optInt("isBoost"), "You"));
+                }
+            }
+            refreshCurrentPollListview();
+            mSwipeRefreshLayout.setRefreshing(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void refreshCurrentPollListview() {
+        if (itemList.size() > 0) {
+            mHistoryPollList.setVisibility(View.VISIBLE);
+            mPollNoError.setVisibility(View.GONE);
+            mPollError.setVisibility(View.GONE);
+            mAdapter = new CurrentPollAdapter(act, itemList, 2);
+            mAdapter.setOnItemClickListener(this);
+            mHistoryPollList.setAdapter(mAdapter);
+            mLowerLimit = mLowerLimit + 10;
+        } else {
+            mLowerLimit = 0;
+            mHistoryPollList.setVisibility(View.GONE);
+            mPollNoError.setVisibility(View.VISIBLE);
+        }
+    }
+
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -175,80 +217,8 @@ public class MySurvey extends BaseFragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
-    }
-
-
-    private String showPollParams(int mLowerLimit, int mUpperLimit) {
-        JSONObject mShowPollOnject = new JSONObject();
-        try {
-            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put("lowerLimit", mLowerLimit);
-            mShowPollOnject.put("upperLimit", mUpperLimit);
-            mShowPollOnject.put("isAnswered", "2");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mShowPollOnject.toString();
-    }
-
-    private void getPollForCreatedUser(int mLowerLimit, int mUpperLimit, String url, boolean pullDownType) {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
-            @Override
-            public void onRequestCompleted(String response) {
-                Log.e("Poll List Response", "" + response.toString());
-                if (response.equals("[]"))
-                    makeToast("No records found");
-                try {
-                    showPollList(response);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onRequestFailed(Exception e) {
-                mCurrentPollList.setVisibility(View.GONE);
-                mPollNoError.setVisibility(View.GONE);
-                mPollError.setVisibility(View.VISIBLE);
-                makeToast("Failed to connect to server");
-            }
-        });
-        processor.execute(showPollParams(mLowerLimit, mUpperLimit).toString());
-    }
-
-    public void showPollList(String response) {
-        try {
-//            JSONObject object = new JSONObject(response);
-//            JSONArray objectArray = object.optJSONArray(response);
-            JSONArray objectArray = new JSONArray(response);
-            for (int i = 0; i < objectArray.length(); i++) {
-                JSONObject objectPolls = objectArray.optJSONObject(i);
-                Log.e("Array Values", "" + i);
-                itemList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
-                        objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
-            }
-            refreshCurrentPollListview();
-            mSwipeRefreshLayout.setRefreshing(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void refreshCurrentPollListview() {
-        if (itemList.size() > 0) {
-            mCurrentPollList.setVisibility(View.VISIBLE);
-            mPollNoError.setVisibility(View.GONE);
-            mPollError.setVisibility(View.GONE);
-            mAdapter = new CurrentPollAdapter(act, itemList, 1);
-            mAdapter.setOnItemClickListener(this);
-            mCurrentPollList.setAdapter(mAdapter);
-            mLowerLimit = mLowerLimit + 10;
-        } else {
-            mLowerLimit = 0;
-            mCurrentPollList.setVisibility(View.GONE);
-            mPollNoError.setVisibility(View.VISIBLE);
-        }
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 5));
+        Log.e("Poll Id", "" + itemList.get(position).currentPollId);
     }
 
     private void getPollDetailPage(String url) {
@@ -289,8 +259,80 @@ public class MySurvey extends BaseFragment implements AdapterView.OnItemClickLis
             else
                 makeToast("Sorry,No Questions to answer!");
 
-            ((MainHomeActivity) act).setNewFragment(new SurveyDetail(), "Pager", true);
-            ((MainHomeActivity) act).setTitle("Survey");
+            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentPollPager(), 2), "Pager", true);
+            ((MainHomeActivity) act).setTitle("Poll");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void getResultPollForCreatedUser(String url) {
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+//                mHistoryPollList.setVisibility(View.VISIBLE);
+//                mPollError.setVisibility(View.GONE);
+                if (response.equals("[]"))
+                    makeToast("No Records Found");
+                else
+                    try {
+                        showResultPollList(response);
+                        ((MainHomeActivity) act).setNewFragment(new ResultPoll(), "", true);
+//                        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+//                mHistoryPollList.setVisibility(View.GONE);
+//                mPollError.setVisibility(View.VISIBLE);
+                if (e == null) {
+                    Log.e("Error", "" + e.getMessage());
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                        }
+                    });
+                } else {
+                    if (e.getMessage() == null)
+                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                act.getSupportFragmentManager().popBackStack();
+                            }
+                        });
+                    else
+                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                act.getSupportFragmentManager().popBackStack();
+                            }
+                        });
+
+                }
+            }
+        });
+        processor.execute();
+    }
+
+    public void showResultPollList(String response) {
+        try {
+            JSONObject mPollDetailObject = new JSONObject(response);
+            JSONArray mQuestionsArray = mPollDetailObject.optJSONArray(ANS_QUESTIONLIST);
+            editor.putInt(RESULT_QUESTION_SIZE, mQuestionsArray.length()).commit();
+            for (int j = 0; j < mQuestionsArray.length(); j++) {
+                JSONObject mQuestions = mQuestionsArray.optJSONObject(j);
+                JSONArray mChoicesArray = mQuestions.optJSONArray(CHOICES);
+                Log.e("Choice Array - " + j, "" + mChoicesArray.toString());
+                editor.putString("RES_QUESTION_" + j, "" + mQuestions.optString(QUESTION)).
+                        putString("RES_CHOICE_" + j, "" + mChoicesArray.toString()).commit();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -304,38 +346,6 @@ public class MySurvey extends BaseFragment implements AdapterView.OnItemClickLis
      */
     @Override
     public void onClick(View v) {
-//        Methodutils.showListSearch(act, itemList, mCurrentPollList);
-        if (v.getId() == R.id.layout_create) {
-            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
-        }
-        if (v.getId() == R.id.btnCreate) {
-            ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CreatePollPager(), 2), "Create Poll Pager", true);
-        }
+//        Methodutils.showListSearch(act, itemList, mHistoryPollList);
     }
-
-
-    /**
-     * Called when the user submits the query. This could be due to a key press on the
-     * keyboard or due to pressing a submit button.
-     * The listener can override the standard behavior by returning true
-     * to indicate that it has handled the submit request. Otherwise return false to
-     * let the SearchView handle the submission by launching any associated intent.
-     *
-     * @param query the query text that is to be submitted
-     * @return true if the query has been handled by the listener, false to let the
-     * SearchView perform the default action.
-     */
-    private List<CurrentPollItem> filter(List<CurrentPollItem> models, String query) {
-        query = query.toLowerCase();
-
-        final List<CurrentPollItem> filteredModelList = new ArrayList<>();
-        for (CurrentPollItem model : models) {
-            final String text = model.mCurrentPollTitle.toLowerCase();
-            if (text.contains(query)) {
-                filteredModelList.add(model);
-            }
-        }
-        return filteredModelList;
-    }
-
 }

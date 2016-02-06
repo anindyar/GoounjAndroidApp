@@ -1,5 +1,6 @@
 package com.orgware.polling.fragments.survey;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +42,7 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.ContactItem;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
 import com.orgware.polling.utils.Methodutils;
 import com.orgware.polling.utils.SuperSwipeRefreshLayout;
 
@@ -119,33 +121,43 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
         currentPollService = preferences.getBoolean(CURRENT_POLLDB, true);
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()) {
-            if (NetworkHelper.checkActiveInternet(act))
-                getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-            else
-                Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
-                        return;
-                    }
-                });
-        }
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser && isResumed()) {
+//            if (NetworkHelper.checkActiveInternet(act))
+//                getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_SURVEY_LIST, true);
+//            else
+//                Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        act.getSupportFragmentManager().popBackStack();
+//                        return;
+//                    }
+//                });
+//        }
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((MainHomeActivity) act).setTitle("Survey");
         itemList.clear();
+        if (NetworkHelper.checkActiveInternet(act))
+            getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_SURVEY_LIST, true);
+        else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_SURVEY_LIST, true);
                 else
                     Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
                         @Override
@@ -157,21 +169,21 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
             }
         });
 
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NetworkHelper.checkActiveInternet(act))
-                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-                else
-                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
-                            return;
-                        }
-                    });
-            }
-        });
+//        mSwipeRefreshLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (NetworkHelper.checkActiveInternet(act))
+//                    getPollForCreatedUser(mLowerLimit, mUpperLimit, BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
+//                else
+//                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            act.getSupportFragmentManager().popBackStack();
+//                            return;
+//                        }
+//                    });
+//            }
+//        });
 
     }
 
@@ -191,17 +203,17 @@ public class SurveyPoll extends BaseFragment implements AdapterView.OnItemClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
-        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+//        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 4));
+        Log.e("Poll Id", "" + itemList.get(position).currentPollId);
     }
 
 
     private String showPollParams(int mLowerLimit, int mUpperLimit) {
         JSONObject mShowPollOnject = new JSONObject();
         try {
-            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
             mShowPollOnject.put("lowerLimit", mLowerLimit);
             mShowPollOnject.put("upperLimit", mUpperLimit);
-            mShowPollOnject.put("isAnswered", "2");
         } catch (Exception e) {
             e.printStackTrace();
         }

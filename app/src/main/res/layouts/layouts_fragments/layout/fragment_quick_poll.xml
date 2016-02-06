@@ -740,8 +740,7 @@
                     android:background="@drawable/edit_text_corner"
                     android:text="View Contact"
                     android:textAllCaps="false"
-                    android:textColor="@color/home_bg"
-                    android:visibility="gone" />
+                    android:textColor="@color/home_bg" />
             </LinearLayout>
         </LinearLayout>
 

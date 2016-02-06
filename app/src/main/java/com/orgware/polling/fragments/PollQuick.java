@@ -42,7 +42,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     TextView mBtnReset, mBtnSubmit;
     EditText mEdittextQuickPollName, quick_ques_one, quick_ques_two, quick_ques_three;
     TextView txtCategory;
-    JSONArray mContactArray = new JSONArray();
+    //    JSONArray mContactArray = new JSONArray();
     JSONArray mChoicesArray = new JSONArray();
     Button btnContactOpen, btnViewContact;
     JSONArray mQtsOne;
@@ -59,16 +59,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPollType = getArguments().getInt(PAGER_COUNT);
-        try {
-            mContactJsonArray = new JSONArray("[]");
-            mContactArrayNames = new JSONArray("[]");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < 2; i++) {
-//            mCategoryList.add(" Category - " + i);
-            mContactArray.put("909591454" + i);
-        }
+
         mChoicesArray.put("Yes").put("No").put("Maybe");
     }
 
@@ -132,6 +123,12 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        try {
+            mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mRbNumQtsOne.setChecked(true);
         filterPollType(mPollType);
     }
@@ -148,8 +145,12 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 mPollQtsTwo.setText("Poll Question");
                 mPollTypeTh.setText("Poll Three");
                 mPollQtsTh.setText("Poll Question");
+                btnContactOpen.setVisibility(View.VISIBLE);
+                btnViewContact.setVisibility(View.VISIBLE);
                 break;
             case 2:
+                btnContactOpen.setVisibility(View.GONE);
+                btnViewContact.setVisibility(View.GONE);
                 mPollName.setText("Survey Name");
                 mEdittextQuickPollName.setHint("Enter Survey Name");
                 mPollTypeOne.setText("Survey Type");
@@ -171,7 +172,10 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnViewContact:
-                Methodutils.showNamesDialog(act, mContactArrayNames);
+                if (mContactJsonArray.length() == 0)
+                    makeToast("No Contacts Added");
+                else
+                    Methodutils.showNamesDialog(act, mContactArrayNames);
                 break;
             case R.id.btnReset_Quick:
                 resetValues();
@@ -186,10 +190,10 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
             case R.id.btnQuickContact:
                 showContactDialog(mContactJsonArray, mContactArrayNames);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
-                if (mContactJsonArray.length() != 0)
-                    btnViewContact.setVisibility(View.VISIBLE);
-                else
-                    btnViewContact.setVisibility(View.GONE);
+//                if (mContactJsonArray.length() != 0)
+//                    btnViewContact.setVisibility(View.VISIBLE);
+//                else
+//                    btnViewContact.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
         }
@@ -313,10 +317,11 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 Log.e("No", "No.3 - " + mQtsOne);
             }
         }
-
-        if (mContactJsonArray.length() == 0) {
-            makeToast("You have to add atleast one contact");
-            return;
+        if (mPollType == 1) {
+            if (mContactJsonArray.length() == 0) {
+                makeToast("You have to add atleast one contact");
+                return;
+            }
         }
 
 //        if (preferences.getString(CONTACT_ARRAY, "").equals("")) {
@@ -325,7 +330,10 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
 //        }
 
         try {
-            processQuickPollCreation(BASE_URL + CREATE_POLL_URL);
+            if (mPollType == 1)
+                processQuickPollCreation(BASE_URL + CREATE_POLL_URL, "Quick Poll Created successfully");
+            else
+                processQuickPollCreation(BASE_URL + CREATE_SURVEY_URL, "Quick Survey Created successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -345,7 +353,11 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
             userdetails.put(POLL_CREATE_USERID, "" + preferences.getString(USER_ID, ""));
             userdetails.put(POLL_TYPE, QUICK_POLL);
             userdetails.put(POLL_QUESTION_LIST, mQtsOne);
-            userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+//            userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            if (mPollType == 1) {
+                userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            } else
+                userdetails.put("isSurvey", 1);
             Log.e("Array", mContactJsonArray.toString());
             Log.e("jsonmessage", userdetails.toString());
 
@@ -355,11 +367,11 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
         return userdetails.toString();
     }
 
-    private void processQuickPollCreation(String url) throws Exception {
+    private void processQuickPollCreation(String url, final String reqMessage) throws Exception {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                Methodutils.messageWithTitle(act, "Success", "Quick Poll Created successfully", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Success", "" + reqMessage, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         act.getSupportFragmentManager().popBackStack();
@@ -369,7 +381,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Error", "Error from server while creating quick", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

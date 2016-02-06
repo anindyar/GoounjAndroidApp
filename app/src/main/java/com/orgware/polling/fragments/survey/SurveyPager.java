@@ -62,7 +62,7 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
 
         mFragmentList.add(setPagerFragment(new SurveyPoll(),
                 mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new MyPoll(),
+        mFragmentList.add(setPagerFragment(new MySurvey(),
                 mFragmentList.size()));
 
         mAdapter = new PollPagerAdapter(
@@ -164,7 +164,7 @@ public class SurveyPager extends BaseFragment implements View.OnClickListener, V
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

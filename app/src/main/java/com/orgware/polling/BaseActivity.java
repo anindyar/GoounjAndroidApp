@@ -13,8 +13,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +128,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
                 ((RadioButton) v).setTypeface(typefaceMuliRegular);
             } else if (v instanceof DrawerLayout || v instanceof FrameLayout
                     || v instanceof LinearLayout || v instanceof RelativeLayout
-                    || v instanceof RadioGroup || v instanceof ViewGroup) {
+                    || v instanceof RadioGroup || v instanceof ViewGroup || v instanceof RecyclerView || v instanceof Menu) {
                 changeTypeface((ViewGroup) v);
             }
         }

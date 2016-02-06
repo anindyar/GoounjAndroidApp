@@ -65,12 +65,12 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPollType = getArguments().getInt(PAGER_COUNT);
-        try {
-            mContactJsonArray = new JSONArray("[]");
-            mContactArrayNames = new JSONArray("[]");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            mContactJsonArray = new JSONArray("[]");
+//            mContactArrayNames = new JSONArray("[]");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Nullable
@@ -188,16 +188,22 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public void onResume() {
         super.onResume();
-        if (mContactJsonArray.length() != 0)
-            btnViewContact.setVisibility(View.VISIBLE);
-        else
-            btnViewContact.setVisibility(View.GONE);
-        Log.e("Contact Array", "" + mContactArrayNames.toString());
+//        if (mContactJsonArray.length() != 0)
+//            btnViewContact.setVisibility(View.VISIBLE);
+//        else
+//            btnViewContact.setVisibility(View.GONE);
+//        Log.e("Contact Array", "" + mContactArrayNames.toString());
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        try {
+            mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mRbNumQtsOne.setChecked(true);
         txtNoOpinionOne.setText("3");
         txtNoOpinionTwo.setText("3");
@@ -216,8 +222,12 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mPollQtsTwo.setText("Poll Question");
                 mPollTypeTh.setText("Poll Three");
                 mPollQtsTh.setText("Poll Question");
+                btnContactOpinion.setVisibility(View.VISIBLE);
+                btnViewContact.setVisibility(View.VISIBLE);
                 break;
             case 2:
+                btnContactOpinion.setVisibility(View.GONE);
+                btnViewContact.setVisibility(View.GONE);
                 mPollName.setText("Survey Name");
                 mEdittextopinionPollName.setHint("Enter Survey Name");
                 mPollTypeOne.setText("Survey One");
@@ -240,7 +250,10 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
 
         switch (v.getId()) {
             case R.id.btnViewContact:
-                Methodutils.showNamesDialog(act, mContactArrayNames);
+                if (mContactJsonArray.length() == 0)
+                    makeToast("No Contacts Added");
+                else
+                    Methodutils.showNamesDialog(act, mContactArrayNames);
                 break;
             case R.id.btnReset_opinion:
                 resetValues();
@@ -254,10 +267,10 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 break;
             case R.id.btnOpinionContact:
                 showContactDialog(mContactJsonArray, mContactArrayNames);
-                if (mContactJsonArray.length() != 0)
-                    btnViewContact.setVisibility(View.VISIBLE);
-                else
-                    btnViewContact.setVisibility(View.GONE);
+//                if (mContactJsonArray.length() != 0)
+//                    btnViewContact.setVisibility(View.VISIBLE);
+//                else
+//                    btnViewContact.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
 //                ((HomeActivity) act).setNewFragment(new ContactGrid(), "Contacts", true);
                 break;
@@ -707,14 +720,18 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 Log.e("No", "No.3 - " + mQtsOne);
             }
         }
-
-        if (mContactJsonArray.length() == 0) {
-            makeToast("You have to add atleast one contact");
-            return;
+        if (mPollType == 1) {
+            if (mContactJsonArray.length() == 0) {
+                makeToast("You have to add atleast one contact");
+                return;
+            }
         }
 
         try {
-            processOpinionPollCreation(BASE_URL + CREATE_POLL_URL);
+            if (mPollType == 1)
+                processOpinionPollCreation(BASE_URL + CREATE_POLL_URL, "Opinion Poll Created successfully");
+            else
+                processOpinionPollCreation(BASE_URL + CREATE_SURVEY_URL, "Opinion Survey Created successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -732,7 +749,10 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
             userdetails.put(POLL_CREATE_USERID, "" + preferences.getString(USER_ID, ""));
             userdetails.put(POLL_TYPE, OPINION_POLL);
             userdetails.put(POLL_QUESTION_LIST, mQtsOne);
-            userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            if (mPollType == 1) {
+                userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            } else
+                userdetails.put("isSurvey", 1);
             Log.e("jsonmessage", userdetails.toString());
 
         } catch (Exception e) {
@@ -741,11 +761,12 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
         return userdetails.toString();
     }
 
-    private void processOpinionPollCreation(String url) throws Exception {
+    private void processOpinionPollCreation(String url, final String reqMessage) throws Exception {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                Methodutils.messageWithTitle(act, "Success", "Opinion Poll Created successfully", new View.OnClickListener() {
+                String message;
+                Methodutils.messageWithTitle(act, "Success", "" + reqMessage, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         act.getSupportFragmentManager().popBackStack();
@@ -755,7 +776,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll ", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Error", "Error from server while creating opinion", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

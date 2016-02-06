@@ -43,7 +43,7 @@ import java.util.List;
 public class CurrentPollPager extends BaseFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
     ViewPager mViewPager;
-    TextView mBtnPrevious, mBtnNext, mBtnSubmit;
+    TextView mBtnPrevious, mBtnNext, mBtnSubmit, mStatistics;
     RadioButton mRadioIndicatorOne, mRadioIndicatorTwo, mRadioIndicatorThree;
     RadioGroup mRadioGroupIndicator;
     PollPagerAdapter mPagerAdapter;
@@ -57,7 +57,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     Dialog mSurveyDialog;
     EditText mFirstName, mLastName, mMobileNumber;
     Button mBtnDialogSubmit;
-    LinearLayout mSubmissionLayout;
+    LinearLayout mSubmissionLayout, mStatisticsLayout;
 
     @Override
     public void setTitle() {
@@ -78,6 +78,8 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_currentpoll_pager, container, false);
         mViewPager = (ViewPager) v.findViewById(R.id.pagerCurrentPoll);
+        (mStatisticsLayout = (LinearLayout) v.findViewById(R.id.layout_statics_back)).setOnClickListener(this);
+        (mStatistics = (TextView) v.findViewById(R.id.txt_statics_back)).setOnClickListener(this);
         mBtnNext = (TextView) v.findViewById(R.id.btn_next);
         mBtnPrevious = (TextView) v.findViewById(R.id.btn_previous);
         mBtnSubmit = (TextView) v.findViewById(R.id.btn_submit);
@@ -170,7 +172,7 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 mRadioIndicatorThree.setVisibility(View.VISIBLE);
             } else
                 Log.e("Qts Size", "" + qtsSize);
-            if (qtsSize == 1 && mType == 2)
+            if (mType == 2)
                 mBtnSubmit.setVisibility(View.GONE);
 
             mPagerAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
@@ -211,6 +213,12 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         final int mPagerPosition = mViewPager.getCurrentItem();
         switch (v.getId()) {
+            case R.id.txt_statics_back:
+                ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Pager_Activity", false);
+                break;
+            case R.id.layout_statics_back:
+                ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Pager_Activity", false);
+                break;
             case R.id.btn_next:
                 mViewPager.setCurrentItem(mPagerPosition + 1);
                 break;

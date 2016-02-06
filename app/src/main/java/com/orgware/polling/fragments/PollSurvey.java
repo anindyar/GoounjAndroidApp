@@ -89,12 +89,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPollType = getArguments().getInt(PAGER_COUNT);
-        try {
-            mContactJsonArray = new JSONArray("[]");
-            mContactArrayNames = new JSONArray("[]");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         mChoicesArray.put("Totally Agree").put("Somewhat Agree").put("Satisfactory").put("Somewhat Disagree").put("Totally Disagree");
     }
 
@@ -157,6 +152,12 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        try {
+            mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mRbNumQtsOne.setChecked(true);
         filterPollType(mPollType);
     }
@@ -172,8 +173,12 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 mPollQtsTwo.setText("Poll Question");
                 mPollTypeTh.setText("Poll Three");
                 mPollQtsTh.setText("Poll Question");
+                btnContactDevice.setVisibility(View.VISIBLE);
+                btnViewContect.setVisibility(View.VISIBLE);
                 break;
             case 2:
+                btnContactDevice.setVisibility(View.GONE);
+                btnViewContect.setVisibility(View.GONE);
                 mPollName.setText("Survey Name");
                 mEdittextSurveyPollName.setHint("Enter Survey Name");
                 mPollTypeOne.setText("Survey Type");
@@ -231,7 +236,11 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
             userdetails.put(POLL_CREATE_USERID, "" + preferences.getString(USER_ID, ""));
             userdetails.put(POLL_TYPE, FEEDBACK);
             userdetails.put(POLL_QUESTION_LIST, mQtsOne);
-            userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+//            userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            if (mPollType == 1) {
+                userdetails.put(POLL_AUDIENCE, mContactJsonArray);
+            } else
+                userdetails.put("isSurvey", 1);
             Log.e("jsonmessage", userdetails.toString());
 
         } catch (Exception e) {
@@ -251,7 +260,10 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
         switch (v.getId()) {
 
             case R.id.btnViewContact:
-                Methodutils.showNamesDialog(act, mContactArrayNames);
+                if (mContactJsonArray.length() == 0)
+                    makeToast("No Contacts Added");
+                else
+                    Methodutils.showNamesDialog(act, mContactArrayNames);
                 break;
             case R.id.btnReset_survey:
                 resetValues();
@@ -263,10 +275,10 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
             case R.id.btncontactFromDevice:
                 showContactDialog(mContactJsonArray, mContactArrayNames);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
-                if (mContactJsonArray.length() != 0)
-                    btnViewContect.setVisibility(View.VISIBLE);
-                else
-                    btnViewContect.setVisibility(View.GONE);
+//                if (mContactJsonArray.length() != 0)
+//                    btnViewContect.setVisibility(View.VISIBLE);
+//                else
+//                    btnViewContect.setVisibility(View.GONE);
                 Log.e("Contact Array", "" + mContactJsonArray.toString());
                 break;
             case R.id.txtCategory:
@@ -375,14 +387,18 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 Log.e("No", "No.3 - " + mQtsOne);
             }
         }
-
-        if (mContactJsonArray.length() == 0) {
-            makeToast("You have to add atleast one contact");
-            return;
+        if (mPollType == 1) {
+            if (mContactJsonArray.length() == 0) {
+                makeToast("You have to add atleast one contact");
+                return;
+            }
         }
 
         try {
-            processSurveyPollCreation(BASE_URL + CREATE_POLL_URL);
+            if (mPollType == 1)
+                processSurveyPollCreation(BASE_URL + CREATE_POLL_URL, "Feedback Poll Created successfully");
+            else
+                processSurveyPollCreation(BASE_URL + CREATE_SURVEY_URL, "Feedback Survey Created successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -390,11 +406,11 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     }
 
 
-    private void processSurveyPollCreation(String url) throws Exception {
+    private void processSurveyPollCreation(String url, final String reqMessage) throws Exception {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
-                Methodutils.messageWithTitle(act, "Success", "Feedback Poll Created successfully", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Success", "" + reqMessage, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         act.getSupportFragmentManager().popBackStack();
@@ -404,7 +420,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Error", "Error from server while creating poll ", new View.OnClickListener() {
+                Methodutils.messageWithTitle(act, "Error", "Error from server while creating feedback ", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         return;

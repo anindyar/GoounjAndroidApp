@@ -59,7 +59,7 @@ public class WelcomeActivity extends BaseActivity {
     String device_id, os_release;
     int os_version;
     int[] test = {1, 2};
-    String[] mPermission = {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    String[] mPermission = {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_SMS, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     ImageView mSplashLogo;
     int INTERNET_CODE = 1, GPS_CODE = 2;
     Runnable loginHandler = new Runnable() {
@@ -67,7 +67,7 @@ public class WelcomeActivity extends BaseActivity {
         @Override
         public void run() {
             mSplashLogo.startAnimation(mEndAnimation);
-            startActivity(new Intent(WelcomeActivity.this, LoginActivityNew.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            startActivity(new Intent(WelcomeActivity.this, LoginHomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
     };
@@ -109,8 +109,6 @@ public class WelcomeActivity extends BaseActivity {
                     ActivityCompat.checkSelfPermission(this, mPermission[1])
                             != MockPackageManager.PERMISSION_GRANTED ||
                     ActivityCompat.checkSelfPermission(this, mPermission[2])
-                            != MockPackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(this, mPermission[3])
                             != MockPackageManager.PERMISSION_GRANTED) {
                 // Request missing location permission.
                 ActivityCompat.requestPermissions(this,
@@ -118,7 +116,7 @@ public class WelcomeActivity extends BaseActivity {
             } else {
                 try {
                     if (preferences.getString(COUNTRY, "").equals("")) {
-                        startService(new Intent(this, CurrentLocationService.class));
+//                        startService(new Intent(this, CurrentLocationService.class));
                         checkInternetAndGpsConnection();
                     } else
                         checkInternetConnection();
@@ -143,15 +141,14 @@ public class WelcomeActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.e("Req Code", "" + requestCode);
         if (requestCode == 2) {
-            if (grantResults.length == 4 &&
+            if (grantResults.length == 3 &&
                     grantResults[0] == MockPackageManager.PERMISSION_GRANTED &&
                     grantResults[1] == MockPackageManager.PERMISSION_GRANTED &&
-                    grantResults[2] == MockPackageManager.PERMISSION_GRANTED &&
-                    grantResults[3] == MockPackageManager.PERMISSION_GRANTED) {
+                    grantResults[2] == MockPackageManager.PERMISSION_GRANTED) {
                 // success!
                 try {
                     if (preferences.getString(COUNTRY, "").equals("")) {
-                        startService(new Intent(this, CurrentLocationService.class));
+//                        startService(new Intent(this, CurrentLocationService.class));
                         checkInternetAndGpsConnection();
                     } else
                         checkInternetConnection();

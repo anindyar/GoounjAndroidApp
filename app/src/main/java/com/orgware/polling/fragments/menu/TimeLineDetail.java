@@ -25,6 +25,7 @@ import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -114,8 +115,15 @@ public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemCl
             }.getType();
             JSONArray responseArray = new JSONArray(result);
             if (responseArray != null && responseArray.length() > 0) {
-                List<TimeLine> list = gson.fromJson(responseArray.toString(), listType);
-                mTimeLineItems.addAll(list);
+//                List<TimeLine> list = gson.fromJson(responseArray.toString(), listType);
+//                mTimeLineItems.addAll(list);
+                mTimeLineItems.clear();
+                for (int i = 0; i < responseArray.length(); i++) {
+                    JSONObject objectPolls = responseArray.optJSONObject(i);
+                    mTimeLineItems.add(new TimeLine(objectPolls.optString("username"), objectPolls.optString("date"), objectPolls.optString("pollName"),
+                            objectPolls.optString("createdUser"), objectPolls.optInt("pollId")));
+                }
+
             } else {
                 mNoRecordsFound.setVisibility(View.VISIBLE);
             }
@@ -130,7 +138,7 @@ public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemCl
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -142,8 +150,8 @@ public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemCl
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        editor.putInt(POLL_ID, mTimeLineItems.get(position).pollId).putString(POLL_NAME, "" + mTimeLineItems.get(position).pollName).
-//                putString(CURRENT_CREATED_USER_NAME, "" + mTimeLineItems.get(position).createdUserName).commit();
-//        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", mTimeLineItems.get(position).pollId).putExtra("poll_type", 3));
+        editor.putInt(POLL_ID, mTimeLineItems.get(position).pollId).putString(POLL_NAME, "" + mTimeLineItems.get(position).pollName).
+                putString(CURRENT_CREATED_USER_NAME, "" + mTimeLineItems.get(position).pollId).commit();
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", mTimeLineItems.get(position).pollId).putExtra("poll_type", 3));
     }
 }
