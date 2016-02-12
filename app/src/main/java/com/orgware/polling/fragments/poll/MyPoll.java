@@ -31,6 +31,7 @@ import com.orgware.polling.network.NetworkHelper;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
 import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
+import com.orgware.polling.pollactivities.PollCreateActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -130,6 +131,19 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
 
     }
 
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_edit_poll, menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.menu.menu_edit_poll) {
+//            startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 3));
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void getPollForCreatedUser(String url) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {

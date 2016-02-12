@@ -90,6 +90,10 @@ public class CurrentPollDetailActivity extends BaseActivity {
         }
     }
 
+    private void showEdit() {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);

@@ -49,7 +49,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     JSONArray mContactJsonArray, mContactArrayNames;
     JSONObject mQtsObjectOne, mQtsObjectTwo, mQtsObjectThree;
     TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
-    int mPollType;
+    int mPollType, mMyPoll;
 
     @Override
     public void setTitle() {
@@ -58,8 +58,10 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPollType = getArguments().getInt(PAGER_COUNT);
-
+//        mPollType = getArguments().getInt("page_type");
+        mPollType = getArguments().getInt("page_type");
+        mMyPoll = getArguments().getInt("myPoll");
+        Log.e("MyPoll Quick", "" + mMyPoll);
         mChoicesArray.put("Yes").put("No").put("Maybe");
     }
 
@@ -121,14 +123,45 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mMyPoll == 1) {
+            restrictUIOnPollUpdate();
+        }
+    }
+
+    private void restrictUIOnPollUpdate() {
+        mEdittextQuickPollName.setText("" + preferences.getString(POLL_NAME, ""));
+        mEdittextQuickPollName.setEnabled(false);
+        mRbNumQtsOne.setEnabled(false);
+        mRbNumQtsTwo.setEnabled(false);
+        mRbNumQtsThree.setEnabled(false);
+        txtCategory.setEnabled(false);
+        mCbOpenQtsOne.setEnabled(false);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            try {
+                mContactJsonArray = new JSONArray("[]");
+                mContactArrayNames = new JSONArray("[]");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        try {
-            mContactJsonArray = new JSONArray("[]");
-            mContactArrayNames = new JSONArray("[]");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            mContactJsonArray = new JSONArray("[]");
+//            mContactArrayNames = new JSONArray("[]");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         mRbNumQtsOne.setChecked(true);
         filterPollType(mPollType);
     }
@@ -182,7 +215,19 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 editor.putString(CONTACT_ARRAY, "").commit();
                 break;
             case R.id.btnSubmit_quick:
-                validateSubmitValues();
+                if (mMyPoll == 0)
+                    validateSubmitValues();
+                else if (mMyPoll == 1) {
+                    try {
+                        if (mContactJsonArray.length() == 0) {
+                            makeToast("You have to add atleast one contact");
+                            return;
+                        }
+                        processQuickPollCreation(RestApiProcessor.HttpMethod.PUT, quickContactsArray(), BASE_URL + CREATE_POLL_URL + "/" + preferences.getInt(POLL_ID, 0), "Updated successfully");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.txtCategory:
                 Methodutils.showCategoryDialog(act, txtCategory, Methodutils.setCategoryName());
@@ -331,13 +376,23 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
 
         try {
             if (mPollType == 1)
-                processQuickPollCreation(BASE_URL + CREATE_POLL_URL, "Quick Poll Created successfully");
+                processQuickPollCreation(RestApiProcessor.HttpMethod.POST, quickParameter(), BASE_URL + CREATE_POLL_URL, "Quick Poll Created successfully");
             else
-                processQuickPollCreation(BASE_URL + CREATE_SURVEY_URL, "Quick Survey Created successfully");
+                processQuickPollCreation(RestApiProcessor.HttpMethod.POST, quickParameter(), BASE_URL + CREATE_SURVEY_URL, "Quick Survey Created successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private String quickContactsArray() {
+        JSONObject userContacts = new JSONObject();
+        try {
+            userContacts.put(POLL_AUDIENCE, mContactJsonArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userContacts.toString();
     }
 
     public String quickParameter() {
@@ -367,8 +422,8 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
         return userdetails.toString();
     }
 
-    private void processQuickPollCreation(String url, final String reqMessage) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
+    private void processQuickPollCreation(RestApiProcessor.HttpMethod httpMethod, String params, String url, final String reqMessage) throws Exception {
+        RestApiProcessor processor = new RestApiProcessor(act, httpMethod, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Methodutils.messageWithTitle(act, "Success", "" + reqMessage, new View.OnClickListener() {
@@ -389,7 +444,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
                 });
             }
         });
-        processor.execute(quickParameter().toString());
+        processor.execute(params);
     }
 
     @Override

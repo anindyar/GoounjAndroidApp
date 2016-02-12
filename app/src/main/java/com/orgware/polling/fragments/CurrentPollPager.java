@@ -2,6 +2,7 @@ package com.orgware.polling.fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orgware.polling.MainHomeActivity;
@@ -29,6 +31,7 @@ import com.orgware.polling.fragments.poll.ResultPollNew;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pollactivities.CurrentPollDetailActivity;
+import com.orgware.polling.pollactivities.PollCreateActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -43,7 +46,7 @@ import java.util.List;
 public class CurrentPollPager extends BaseFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
     ViewPager mViewPager;
-    TextView mBtnPrevious, mBtnNext, mBtnSubmit, mStatistics;
+    TextView mBtnPrevious, mBtnNext, mBtnSubmit, mStatistics, mEdit;
     RadioButton mRadioIndicatorOne, mRadioIndicatorTwo, mRadioIndicatorThree;
     RadioGroup mRadioGroupIndicator;
     PollPagerAdapter mPagerAdapter;
@@ -57,7 +60,8 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     Dialog mSurveyDialog;
     EditText mFirstName, mLastName, mMobileNumber;
     Button mBtnDialogSubmit;
-    LinearLayout mSubmissionLayout, mStatisticsLayout;
+    LinearLayout mSubmissionLayout;
+    RelativeLayout mStatisticsLayout;
 
     @Override
     public void setTitle() {
@@ -78,7 +82,8 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_currentpoll_pager, container, false);
         mViewPager = (ViewPager) v.findViewById(R.id.pagerCurrentPoll);
-        (mStatisticsLayout = (LinearLayout) v.findViewById(R.id.layout_statics_back)).setOnClickListener(this);
+        (mEdit = (TextView) v.findViewById(R.id.txt_statics_edit)).setOnClickListener(this);
+        (mStatisticsLayout = (RelativeLayout) v.findViewById(R.id.layout_statics_back)).setOnClickListener(this);
         (mStatistics = (TextView) v.findViewById(R.id.txt_statics_back)).setOnClickListener(this);
         mBtnNext = (TextView) v.findViewById(R.id.btn_next);
         mBtnPrevious = (TextView) v.findViewById(R.id.btn_previous);
@@ -172,8 +177,10 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 mRadioIndicatorThree.setVisibility(View.VISIBLE);
             } else
                 Log.e("Qts Size", "" + qtsSize);
-            if (mType == 2)
+            if (mType == 2) {
                 mBtnSubmit.setVisibility(View.GONE);
+                mEdit.setVisibility(View.VISIBLE);
+            }
 
             mPagerAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
             mViewPager.setAdapter(mPagerAdapter);
@@ -213,6 +220,9 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         final int mPagerPosition = mViewPager.getCurrentItem();
         switch (v.getId()) {
+            case R.id.txt_statics_edit:
+                startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 3));
+                break;
             case R.id.txt_statics_back:
                 ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Pager_Activity", false);
                 break;

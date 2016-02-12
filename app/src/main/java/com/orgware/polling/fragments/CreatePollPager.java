@@ -26,7 +26,7 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     PollPagerAdapter mAdapter;
     List<Fragment> mFragmentList;
     RadioGroup mRadioGroup;
-    int mPollType;
+    int mPollType, mMyPoll;
 
     @Override
     public void setTitle() {
@@ -36,33 +36,42 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPollType = getArguments().getInt(PAGER_COUNT);
-//        makeToast("" + type);
+        mPollType = getArguments().getInt("page_type");
+        mMyPoll = getArguments().getInt("myPoll");
+
         if (mPollType == 1) {
 
             mFragmentList = new ArrayList<>();
             mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new PollOpinion(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollQuick(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSurvey(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSocial(),
-                    mPollType));
+            mFragmentList.add(setPageFrg(new PollOpinion(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollQuick(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSurvey(),
+                    mPollType,mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSocial(),
+                    mPollType, mMyPoll));
         } else {
             mFragmentList = new ArrayList<>();
             mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new PollOpinion(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollQuick(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSurvey(),
-                    mPollType));
+            mFragmentList.add(setPageFrg(new PollOpinion(),
+                    mPollType,mMyPoll));
+            mFragmentList.add(setPageFrg(new PollQuick(),
+                    mPollType,mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSurvey(),
+                    mPollType,mMyPoll));
         }
 
         mAdapter = new PollPagerAdapter(
                 getChildFragmentManager(), mFragmentList);
+    }
+
+    private Fragment setPageFrg(Fragment frg, int mPollType, int myPoll) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("page_type", mPollType);
+        bundle.putInt("myPoll", myPoll);
+        frg.setArguments(bundle);
+        return frg;
     }
 
     @Nullable

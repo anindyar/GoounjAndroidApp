@@ -87,7 +87,7 @@ public interface Appinterface {
     /*Api Login*/
 
     String USER_LOGIN_URL = "users/v1/user", COUNTRY = "country", USERNAME = "USERNAME", CITY = "city", PHONE = "phone", DEVICE_ID = "device_id", DEVICE_TOKEN = "device_token", OS_TYPE = "os_type", OS_VERSION = "os_version",
-            SECRET_KEY = "secretKey", PUBLIC_KEY = "publicKey", USER_ID = "userId", ERROR = "error", MOBILE = "mobile";
+            SECRET_KEY = "secretKey", PUBLIC_KEY = "publicKey", USER_ID = "userId", ERROR = "error", MOBILE = "mobile", MyPoll_Poll_Id = "MyPoll_Poll_Id";
 
     /*OTP Validation*/
     String OTP_VERIFY_URL = "users/v1/verification/";

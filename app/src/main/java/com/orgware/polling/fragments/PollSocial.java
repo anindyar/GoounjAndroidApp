@@ -31,6 +31,7 @@ public class PollSocial extends BaseFragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mSocialTrendsItemList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             mSocialTrendsItemList.add(new SocialTrendsItem("Lorem ipsum dolor sit amet,consectetur adipiscing edit.", R.drawable.ic_ad_withus));
