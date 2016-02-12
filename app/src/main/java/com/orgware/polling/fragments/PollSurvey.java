@@ -170,22 +170,14 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && isResumed()){
-            try {
-                mContactJsonArray = new JSONArray("[]");
-                mContactArrayNames = new JSONArray("[]");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        try {
+            mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mRbNumQtsOne.setChecked(true);
         filterPollType(mPollType);
     }

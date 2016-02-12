@@ -32,7 +32,7 @@ import java.net.URL;
 
 /**
  * Created by Raja Mohamed on 24/9/15.
- * <p>
+ * <p/>
  * This async task handles the api calls from the UI part mostly
  */
 public class RestApiProcessor extends AsyncTask<String, String, String> implements Appinterface {
@@ -197,6 +197,9 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             httpsURLConnection.connect();
             int mStatus = httpsURLConnection.getResponseCode();
             Log.e("Status Code", "" + mStatus);
+            Log.e("Url", "" + mApiUrl);
+//            Log.e("Params", "" + params[0]);
+
             if (mStatus == 200 || mStatus == 201)
                 return readResponse(httpsURLConnection.getInputStream()).toString();
             else {

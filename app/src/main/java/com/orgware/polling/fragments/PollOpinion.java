@@ -206,27 +206,14 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && isResumed()){
-            try {
-                mContactJsonArray = new JSONArray("[]");
-                mContactArrayNames = new JSONArray("[]");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        try {
-//            mContactJsonArray = new JSONArray("[]");
-//            mContactArrayNames = new JSONArray("[]");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            mContactJsonArray = new JSONArray("[]");
+            mContactArrayNames = new JSONArray("[]");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mRbNumQtsOne.setChecked(true);
         txtNoOpinionOne.setText("3");
         txtNoOpinionTwo.setText("3");
