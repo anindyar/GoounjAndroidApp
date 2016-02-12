@@ -65,12 +65,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPollType = getArguments().getInt(PAGER_COUNT);
-//        try {
-//            mContactJsonArray = new JSONArray("[]");
-//            mContactArrayNames = new JSONArray("[]");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
     }
 
     @Nullable
@@ -188,11 +183,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public void onResume() {
         super.onResume();
-//        if (mContactJsonArray.length() != 0)
-//            btnViewContact.setVisibility(View.VISIBLE);
-//        else
-//            btnViewContact.setVisibility(View.GONE);
-//        Log.e("Contact Array", "" + mContactArrayNames.toString());
+
     }
 
     @Override
