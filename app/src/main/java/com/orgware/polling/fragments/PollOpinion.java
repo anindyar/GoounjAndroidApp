@@ -64,7 +64,7 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPollType = getArguments().getInt(PAGER_COUNT);
+        mPollType = getArguments().getInt("page_type");
 //        try {
 //            mContactJsonArray = new JSONArray("[]");
 //            mContactArrayNames = new JSONArray("[]");
@@ -238,6 +238,15 @@ public class PollOpinion extends BaseFragment implements View.OnClickListener, C
                 mPollQtsTh.setText("Survey Question");
                 break;
         }
+    }
+
+    private void restrictUIOnPollUpdate() {
+        mEdittextopinionPollName.setEnabled(false);
+        mRbNumQtsOne.setEnabled(false);
+        mRbNumQtsTwo.setEnabled(false);
+        mRbNumQtsThree.setEnabled(false);
+        txtCategory.setEnabled(false);
+        mCbQtsOne.setEnabled(false);
     }
 
     /**

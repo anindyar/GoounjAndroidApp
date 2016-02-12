@@ -88,7 +88,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPollType = getArguments().getInt(PAGER_COUNT);
+        mPollType = getArguments().getInt("page_type");
 
         mChoicesArray.put("Totally Agree").put("Somewhat Agree").put("Satisfactory").put("Somewhat Disagree").put("Totally Disagree");
     }

@@ -74,7 +74,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     Button mContactsDone, mCreatedList;
     EditText inputSearch;
     LayoutInflater inflater;
-    private Typeface typeface;
+//    private Typeface typeface;
 
     /*This sets the title as per fragment call and it is reused method*/
     public abstract void setTitle();
@@ -88,7 +88,7 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         editor = preferences.edit();
         inflater = (LayoutInflater) act
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        typeface = Typeface.createFromAsset(act.getAssets(), "LATO_LIGHT_0.TTF");
+//        typeface = Typeface.createFromAsset(act.getAssets(), "LATO_LIGHT_0.TTF");
         setHasOptionsMenu(true);
     }
 
@@ -103,8 +103,8 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
     @Override
     public void onStart() {
         super.onStart();
-        if (mParentView != null)
-            changeTypeface((ViewGroup) mParentView);
+//        if (mParentView != null)
+//            changeTypeface((ViewGroup) mParentView);
     }
 
     /*This resumes the fragment*/
@@ -156,21 +156,21 @@ public abstract class BaseFragment extends Fragment implements Appinterface {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    /*This creates the font style*/
-    protected void changeTypeface(ViewGroup vGroup) {
-        for (int i = 0; i < vGroup.getChildCount(); i++) {
-            View v = vGroup.getChildAt(i);
-            if (v instanceof TextView) {
-                ((TextView) v).setTypeface(typeface);
-            } else if (v instanceof RadioButton) {
-                ((RadioButton) v).setTypeface(typeface);
-            } else if (v instanceof DrawerLayout || v instanceof FrameLayout
-                    || v instanceof LinearLayout || v instanceof RelativeLayout
-                    || v instanceof RadioGroup || v instanceof ListView || v instanceof RecyclerView || v instanceof Menu) {
-                changeTypeface((ViewGroup) v);
-            }
-        }
-    }
+//    /*This creates the font style*/
+//    protected void changeTypeface(ViewGroup vGroup) {
+//        for (int i = 0; i < vGroup.getChildCount(); i++) {
+//            View v = vGroup.getChildAt(i);
+//            if (v instanceof TextView) {
+//                ((TextView) v).setTypeface(typeface);
+//            } else if (v instanceof RadioButton) {
+//                ((RadioButton) v).setTypeface(typeface);
+//            } else if (v instanceof DrawerLayout || v instanceof FrameLayout
+//                    || v instanceof LinearLayout || v instanceof RelativeLayout
+//                    || v instanceof RadioGroup || v instanceof ListView || v instanceof RecyclerView || v instanceof Menu) {
+//                changeTypeface((ViewGroup) v);
+//            }
+//        }
+//    }
 
     public String splitFromString(String stringName) {
 

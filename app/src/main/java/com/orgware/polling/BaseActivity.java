@@ -72,7 +72,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
     GoounjDatabase db;
     Configuration configuration;
     /*Typeface is the class to change the font style of an application*/
-    private Typeface typefaceMuliRegular;
+//    private Typeface typefaceMuliRegular;
 
     /*
     * Declares the variables only one time of an application and reused
@@ -89,8 +89,8 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         preferences = getSharedPreferences(SHARED_PREFERENCES_POLLING, Context.MODE_PRIVATE);
         editor = preferences.edit();
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        typefaceMuliRegular = Typeface.createFromAsset(getAssets(),
-                "LATO_LIGHT_0.TTF");
+//        typefaceMuliRegular = Typeface.createFromAsset(getAssets(),
+//                "LATO_LIGHT_0.TTF");
         db = new GoounjDatabase(this);
         setOrientation(); // Sets the orientation of an application screen by checking mobile width and height
         setMenuSize(); // Sets the menu size of the application
@@ -100,7 +100,7 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
     @Override
     protected void onResume() {
         super.onResume();
-        changeTypeface(); // Change the typeface (font) of an application
+//        changeTypeface(); // Change the typeface (font) of an application
     }
 
 
@@ -110,29 +110,29 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
 
     /*Declares the default content ID to change Font style of the application.*/
     public void changeTypeface() {
-        changeTypeface((ViewGroup) findViewById(android.R.id.content));
+//        changeTypeface((ViewGroup) findViewById(android.R.id.content));
     }
 
     /* Method changes the text default font to muli custom font
     *
     * @param vGroup Base class for layouts and views,this can change the font of every view of an application*/
-    private void changeTypeface(ViewGroup vGroup) {
-        for (int i = 0; i < vGroup.getChildCount(); i++) {
-            View v = vGroup.getChildAt(i);
-            if (v instanceof ImageView || v instanceof ImageButton
-                    || v instanceof ListView)
-                continue;
-            if (v instanceof TextView) {
-                ((TextView) v).setTypeface(typefaceMuliRegular);
-            } else if (v instanceof RadioButton) {
-                ((RadioButton) v).setTypeface(typefaceMuliRegular);
-            } else if (v instanceof DrawerLayout || v instanceof FrameLayout
-                    || v instanceof LinearLayout || v instanceof RelativeLayout
-                    || v instanceof RadioGroup || v instanceof ViewGroup || v instanceof RecyclerView || v instanceof Menu) {
-                changeTypeface((ViewGroup) v);
-            }
-        }
-    }
+//    private void changeTypeface(ViewGroup vGroup) {
+//        for (int i = 0; i < vGroup.getChildCount(); i++) {
+//            View v = vGroup.getChildAt(i);
+//            if (v instanceof ImageView || v instanceof ImageButton
+//                    || v instanceof ListView)
+//                continue;
+//            if (v instanceof TextView) {
+//                ((TextView) v).setTypeface(typefaceMuliRegular);
+//            } else if (v instanceof RadioButton) {
+//                ((RadioButton) v).setTypeface(typefaceMuliRegular);
+//            } else if (v instanceof DrawerLayout || v instanceof FrameLayout
+//                    || v instanceof LinearLayout || v instanceof RelativeLayout
+//                    || v instanceof RadioGroup || v instanceof ViewGroup || v instanceof RecyclerView || v instanceof Menu) {
+//                changeTypeface((ViewGroup) v);
+//            }
+//        }
+//    }
 
     /*Detects the touches of the current screen of an application and finilize whether the keypad enable or not
     *

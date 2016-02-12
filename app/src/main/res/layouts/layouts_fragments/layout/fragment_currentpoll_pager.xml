@@ -5,7 +5,7 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_statics_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,8 +14,21 @@
         android:descendantFocusability="blocksDescendants"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical"
         android:visibility="visible">
+
+        <TextView
+            android:id="@+id/txt_statics_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_normal"
+            android:text="EDIT"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txt_statics_back"
@@ -33,9 +46,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
+            android:layout_below="@+id/txt_statics_back"
             android:background="@android:color/darker_gray" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pagerCurrentPoll"

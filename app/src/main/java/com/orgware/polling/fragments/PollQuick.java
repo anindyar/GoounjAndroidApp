@@ -58,7 +58,7 @@ public class PollQuick extends BaseFragment implements View.OnClickListener, Com
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPollType = getArguments().getInt(PAGER_COUNT);
+        mPollType = getArguments().getInt("page_type");
 
         mChoicesArray.put("Yes").put("No").put("Maybe");
     }

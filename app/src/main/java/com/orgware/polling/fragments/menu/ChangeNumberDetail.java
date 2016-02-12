@@ -58,7 +58,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     private String showPollParams() {
         JSONObject mShowPollOnject = new JSONObject();
         try {
-//            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
+            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
             mShowPollOnject.put("oldNumber", mOldNumberTxt.getText().toString());
             mShowPollOnject.put("newNumber", mNewNumberTxt.getText().toString());
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     private void getChangeNumberPage(String url, String code) {
         try {
             JSONObject object = new JSONObject();
-            object.put(authCode, code).put(userId, preferences.getString(USER_ID, ""));
+            object.put(authCode, code).put(userId, preferences.getString(USER_ID, "")).put("newNumber", mNewNumberTxt.getText().toString());
             RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
                 @Override
                 public void onRequestCompleted(String response) {
@@ -80,10 +80,9 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
 
                 @Override
                 public void onRequestFailed(Exception e) {
-                    Methodutils.messageWithTitle(act, "Failed", "Old phone number does not match.", new View.OnClickListener() {
+                    Methodutils.messageWithTitle(act, "Failed", "OTP does not match.", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            act.finish();
                         }
                     });
                 }
@@ -106,7 +105,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
             public void onClick(View v) {
 
                 try {
-                    if (mOTPDone.getText().toString().trim().length() == 0) {
+                    if (mDialogOTPTxt.getText().toString().trim().length() == 0) {
                         Toast.makeText(act, "Enter valid OTP", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -121,23 +120,23 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     }
 
     private void getChangeNoVerification(String url) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.PUT, url, true,
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true,
                 new RestApiListener<String>() {
                     @Override
                     public void onRequestCompleted(String response) {
 
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.has("error")) {
-                                String error_value = jsonObject.optString("error");
-                                Methodutils.message(act, "" + error_value, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        return;
-                                    }
-                                });
-                            } else
-                                showOtpDialog();
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            if (jsonObject.has("error")) {
+//                                String error_value = jsonObject.optString("error");
+//                                Methodutils.message(act, "" + error_value, new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        return;
+//                                    }
+//                                });
+//                            } else
+                            showOtpDialog();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -145,10 +144,9 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
 
                     @Override
                     public void onRequestFailed(Exception e) {
-                        Methodutils.messageWithTitle(act, "Failed", "Old phone number does not match.", new View.OnClickListener() {
+                        Methodutils.messageWithTitle(act, "Failed", "Old phone number does not match or new number already exists.", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                act.finish();
                             }
                         });
                     }
@@ -193,7 +191,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
             }
 
             try {
-                getChangeNoVerification(BASE_URL + CHANGE_NUMBER + preferences.getString(USER_ID, ""));
+                getChangeNoVerification(BASE_URL + CHANGE_NUMBER);
             } catch (Exception e) {
                 e.printStackTrace();
             }
