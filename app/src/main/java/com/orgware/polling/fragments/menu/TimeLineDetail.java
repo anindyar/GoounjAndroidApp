@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,12 +98,21 @@ public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemCl
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.finish();
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -138,7 +148,7 @@ public class TimeLineDetail extends BaseFragment implements AdapterView.OnItemCl
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

@@ -200,11 +200,10 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             if (mStatus == 200 || mStatus == 201)
                 return readResponse(httpsURLConnection.getInputStream()).toString();
             else {
-                String valeu = readResponse(httpsURLConnection.getErrorStream()).toString();
+//                String valeu = readResponse(httpsURLConnection.getErrorStream()).toString();
                 JSONObject object = new JSONObject(readResponse(httpsURLConnection.getErrorStream()).toString());
                 if (object != null && object.has(error))
                     throw new ErroHandler(object.getString(error));
-
             }
             return null;
         } catch (Exception e) {

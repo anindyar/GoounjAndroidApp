@@ -132,18 +132,18 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     }
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_edit_poll, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.menu.menu_edit_poll) {
-            startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 3));
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_edit_poll, menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.menu.menu_edit_poll) {
+//            startActivity(new Intent(act, PollCreateActivity.class).putExtra("create_type", 3));
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void getPollForCreatedUser(String url) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.GET, url, true, new RestApiListener<String>() {
@@ -170,6 +170,21 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
             public void onRequestFailed(Exception e) {
                 mHistoryPollList.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -216,7 +231,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -242,12 +257,21 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -301,32 +325,20 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
 
             @Override
             public void onRequestFailed(Exception e) {
-//                mHistoryPollList.setVisibility(View.GONE);
-//                mPollError.setVisibility(View.VISIBLE);
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
                         }
                     });
                 } else {
-                    if (e.getMessage() == null)
-                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-                    else
-                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
                 }
             }
         });

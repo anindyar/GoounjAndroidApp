@@ -207,6 +207,12 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
                         return;
                     }
 
+                    if (preferences.getString(DEVICE_TOKEN, "").length() == 0) {
+                        makeToast(this, "Problem with internet connection");
+                        finish();
+                        return;
+                    }
+
                     try {
                         editor.putString(USERNAME, "" + mNameText.getText().toString()).
                                 putString(COUNTRY, "" + mCountryText.getText().toString()).
@@ -254,7 +260,7 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
             public void onRequestCompleted(String response) {
                 try {
                     saveLoginCredentials(response);
-                    stopService(new Intent(LoginHomeActivity.this, CurrentLocationService.class));
+//                    stopService(new Intent(LoginHomeActivity.this, CurrentLocationService.class));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

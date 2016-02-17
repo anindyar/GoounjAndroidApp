@@ -3,6 +3,7 @@ package com.orgware.polling.fragments.menu;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,11 +81,21 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
 
                 @Override
                 public void onRequestFailed(Exception e) {
-                    Methodutils.messageWithTitle(act, "Failed", "OTP does not match.", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    });
+                    if (e == null) {
+                        Log.e("Error", "Exception is null");
+                        Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            }
+                        });
+                    } else {
+                        Log.e("Error", "Exception is not null");
+                        Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            }
+                        });
+                    }
                 }
             });
             processor.execute(object.toString());
@@ -144,11 +155,21 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
 
                     @Override
                     public void onRequestFailed(Exception e) {
-                        Methodutils.messageWithTitle(act, "Failed", "Old phone number does not match or new number already exists.", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                            }
-                        });
+                        if (e == null) {
+                            Log.e("Error", "Exception is null");
+                            Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                }
+                            });
+                        } else {
+                            Log.e("Error", "Exception is not null");
+                            Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                }
+                            });
+                        }
                     }
                 });
         processor.execute(showPollParams().toString());

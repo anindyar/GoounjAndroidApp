@@ -202,6 +202,21 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
             public void onRequestFailed(Exception e) {
                 mHistoryPollList.setVisibility(View.GONE);
                 mPollError.setVisibility(View.VISIBLE);
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute(showPollParams(mLowerLimit, mUpperLimit).toString());

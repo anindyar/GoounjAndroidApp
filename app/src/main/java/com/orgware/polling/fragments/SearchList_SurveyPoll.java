@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.orgware.polling.adapters.SearchListAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.Search_SurveyPoll;
+import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,7 +104,21 @@ public class SearchList_SurveyPoll extends BaseFragment implements SearchView.On
 
             @Override
             public void onRequestFailed(Exception e) {
-
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         mProcessor.execute(object.toString());

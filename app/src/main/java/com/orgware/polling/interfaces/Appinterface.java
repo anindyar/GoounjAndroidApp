@@ -57,7 +57,7 @@ public interface Appinterface {
             CURRENT_CREATED_USER_NAME = "createdUserName", CURRENT_POLL_ID = "pollId", CONTACT_ARRAY = "CONTACT_ARRAY";
 
     /*Web Services*/
-    String BASE_URL = "http://api.goounj.com/";
+    String BASE_URL = "https://api.goounj.com/";
 //    String BASE_URL = "http://goounjdb.cloudapp.net/";
 
     String BASE_URL_ONE = "http://192.168.0.131:3000/", ID = "id", BASE_URL_TWO = "http://goounjdb.cloudapp.net/", BASE_URL_MAIN = "http://goounjdb.cloudapp.net/";

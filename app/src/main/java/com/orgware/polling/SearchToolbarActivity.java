@@ -168,10 +168,23 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
 
             @Override
             public void onRequestFailed(Exception e) {
-                if (e instanceof SocketTimeoutException)
-                    makeToast(activity, "Something went wrong");
-                else
-                    makeToast(activity, "No Surveys Found");
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(SearchToolbarActivity.this, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(SearchToolbarActivity.this, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                }
 
             }
         });
@@ -319,12 +332,23 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(activity, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        act.getSupportFragmentManager().popBackStack();
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(SearchToolbarActivity.this, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(SearchToolbarActivity.this, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -379,32 +403,22 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
 
             @Override
             public void onRequestFailed(Exception e) {
-//                mHistoryPollList.setVisibility(View.GONE);
-//                mPollError.setVisibility(View.VISIBLE);
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
-                    Methodutils.message(activity, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(SearchToolbarActivity.this, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            activity.getSupportFragmentManager().popBackStack();
+                            finish();
                         }
                     });
                 } else {
-                    if (e.getMessage() == null)
-                        Methodutils.message(activity, "No Records Found", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                activity.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-                    else
-                        Methodutils.message(activity, "Try again, Failed to connect to server", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                activity.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(SearchToolbarActivity.this, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
                 }
             }
         });

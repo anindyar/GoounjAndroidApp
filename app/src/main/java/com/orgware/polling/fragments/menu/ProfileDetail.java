@@ -37,8 +37,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by nandagopal on 21/1/16.
  */
 public class ProfileDetail extends BaseFragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
-    private TextView mProfileGender;
     private static final int CAMERA_PICK = 1, GALLERY_PICK = 2, PICK_CROP = 3;
+    private TextView mProfileGender;
     private Dialog mGenderDialog;
     private Bitmap thePic;
     private CircleImageView mProfileImage;

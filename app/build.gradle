@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+
+String APK_NAME = "Goounj", VERSION_NAME = "1.0"
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
@@ -8,8 +10,18 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName VERSION_NAME
     }
+
+    signingConfigs {
+        release {
+            storeFile file('goounj.jks')
+            storePassword 'android'
+            keyAlias 'Goounj'
+            keyPassword 'android'
+        }
+    }
+
     sourceSets {
         main {
             res.srcDirs =
@@ -24,23 +36,80 @@ android {
         }
     }
     buildTypes {
+        debug {
+            debuggable true
+        }
+
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all {
+                variant ->
+                    variant.outputs.each { output ->
+                        def newName = APK_NAME + "-v" + VERSION_NAME + ".apk"
+                        output.outputFile = new File(output.outputFile.parent, newName)
+                    }
+            }
+
         }
     }
 }
+//    android {
+//        compileSdkVersion 22
+//        buildToolsVersion '22.0.1'
+//
+//        defaultConfig {
+//
+//            applicationId "com.orgware.top4drivers"
+//            minSdkVersion 14
+//            targetSdkVersion 22
+//            maxSdkVersion 22
+//            versionCode 10
+//            versionName VERSION_NAME
+//        }
+//
+//        signingConfigs {
+//            release {
+//                storeFile file('top4drivers.jks')
+//                storePassword 'android'
+//                keyAlias 'top4drivers'
+//                keyPassword 'android'
+//            }
+//        }
+//
+//        buildTypes {
+//            debug {
+//                debuggable true
+//            }
+//
+//            release {
+//                minifyEnabled false
+//                signingConfig signingConfigs.release
+//                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//
+//                applicationVariants.all {
+//                    variant ->
+//                        variant.outputs.each { output ->
+//                            def newName = APK_NAME + "-v" + VERSION_NAME + ".apk"
+//                            output.outputFile = new File(output.outputFile.parent, newName)
+//                        }
+//                }
+//
+//            }
+//        }
+//    }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.2'
+    compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
-
-    compile 'com.android.support:design:23.1.1'
 
 }

@@ -18,6 +18,7 @@ import com.orgware.polling.interfaces.OnLoadMoreListener;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.pojo.CurrentPollItem;
+import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -156,7 +157,21 @@ public class ChatHome extends BaseFragment {
 
             @Override
             public void onRequestFailed(Exception e) {
-                makeToast("Failed to connect to server");
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute(showPollParams(lower_limit_value, upper_limit_value).toString());

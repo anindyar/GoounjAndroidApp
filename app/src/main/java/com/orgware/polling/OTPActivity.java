@@ -111,22 +111,23 @@ public class OTPActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onRequestFailed(Exception e) {
-                Log.e("Error", "" + e.getMessage());
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(OTPActivity.this, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            finish();
+                            finish();
                         }
                     });
-                } else
+                } else {
+                    Log.e("Error", "Exception is not null");
                     Methodutils.message(OTPActivity.this, "" + e.getMessage(), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            finish();
+                            finish();
                         }
                     });
+                }
             }
         });
         processor.execute(OtpParams().toString());

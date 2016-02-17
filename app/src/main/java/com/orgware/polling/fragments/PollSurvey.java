@@ -420,12 +420,21 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Error", "Error from server while creating feedback ", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        return;
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute(surveyParameter().toString());

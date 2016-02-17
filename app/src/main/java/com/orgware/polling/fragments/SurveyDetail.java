@@ -136,12 +136,21 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -334,7 +343,7 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -378,20 +387,20 @@ public class SurveyDetail extends BaseFragment implements AdapterView.OnItemClic
             @Override
             public void onRequestFailed(Exception e) {
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            return;
                         }
                     });
-                } else
-                    Methodutils.message(act, "Try again later", new View.OnClickListener() {
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            return;
                         }
                     });
+                }
             }
         });
         processor.execute(params.toString());

@@ -124,12 +124,23 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onRequestFailed(Exception e) {
-                Methodutils.messageWithTitle(act, "Failed", "" + e.getMessage(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
-                    }
-                });
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.finish();
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.finish();
+                        }
+                    });
+                }
             }
         });
         processor.execute();
@@ -350,20 +361,20 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
             @Override
             public void onRequestFailed(Exception e) {
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            return;
                         }
                     });
-                } else
-                    Methodutils.message(act, "Try again. Failed to connect to server.", new View.OnClickListener() {
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            return;
                         }
                     });
+                }
             }
         });
         processor.execute(params.toString());
@@ -488,29 +499,20 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
             @Override
             public void onRequestFailed(Exception e) {
                 if (e == null) {
-                    Log.e("Error", "" + e.getMessage());
+                    Log.e("Error", "Exception is null");
                     Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            act.getSupportFragmentManager().popBackStack();
+
                         }
                     });
                 } else {
-                    if (e.getMessage() == null)
-                        Methodutils.message(act, "No Records Found", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-                    else
-                        Methodutils.message(act, "Try again, Failed to connect to server", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                act.getSupportFragmentManager().popBackStack();
-                            }
-                        });
-
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
                 }
             }
         });
