@@ -21,7 +21,6 @@ android {
             keyPassword 'android'
         }
     }
-
     sourceSets {
         main {
             res.srcDirs =

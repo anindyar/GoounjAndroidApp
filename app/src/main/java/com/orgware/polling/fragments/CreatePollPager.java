@@ -39,7 +39,7 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
         mPollType = getArguments().getInt("page_type");
         mMyPoll = getArguments().getInt("myPoll");
 
-        makeToast("" + mMyPoll);
+//        makeToast("" + mMyPoll);
         if (mPollType == 1) {
 
             mFragmentList = new ArrayList<>();
