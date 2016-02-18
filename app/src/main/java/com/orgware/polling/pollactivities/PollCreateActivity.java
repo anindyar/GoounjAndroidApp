@@ -19,7 +19,7 @@ public class PollCreateActivity extends BaseActivity {
     Toolbar mToolbar;
 
     int mCreateType;
-    Bundle bundle;
+
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -36,7 +36,6 @@ public class PollCreateActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Poll");
 
-        bundle = new Bundle();
 
         try {
             setPollPage(mCreateType);
@@ -69,6 +68,7 @@ public class PollCreateActivity extends BaseActivity {
     private void setPollPage(int mCreateType) throws Exception {
         switch (mCreateType) {
             case 1:
+                Bundle bundle = new Bundle();
                 bundle.putInt("page_type", 1);
                 bundle.putInt("mypoll", 0);
                 Fragment fragmentPoll = new CreatePollPager();
@@ -77,20 +77,22 @@ public class PollCreateActivity extends BaseActivity {
                 getSupportActionBar().setTitle("Poll");
                 break;
             case 2:
-                bundle.putInt("page_type", 2);
-                bundle.putInt("myPoll", 0);
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("page_type", 2);
+                bundle1.putInt("myPoll", 0);
                 Fragment fragmentSurvey = new CreatePollPager();
-                fragmentSurvey.setArguments(bundle);
+                fragmentSurvey.setArguments(bundle1);
                 setNewFragment(fragmentSurvey, "Create Poll Pager", false);
                 getSupportActionBar().setTitle("Survey");
                 break;
             case 3:
-                bundle.putInt("page_type", 1);
-                bundle.putInt("myPoll", 1);
+                Bundle bundle3 = new Bundle();
+                bundle3.putInt("page_type", 1);
+                bundle3.putInt("myPoll", 1);
                 Fragment fragmentmyPoll = new CreatePollPager();
-                fragmentmyPoll.setArguments(bundle);
+                fragmentmyPoll.setArguments(bundle3);
                 setNewFragment(fragmentmyPoll, "Create Poll Pager", false);
-                getSupportActionBar().setTitle("Survey");
+                getSupportActionBar().setTitle("My Poll");
                 break;
         }
     }

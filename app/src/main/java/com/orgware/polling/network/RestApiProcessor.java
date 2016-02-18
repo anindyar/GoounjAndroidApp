@@ -198,6 +198,11 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             int mStatus = httpsURLConnection.getResponseCode();
             Log.e("Status Code", "" + mStatus);
             Log.e("Url", "" + mApiUrl);
+//<<<<<<< HEAD
+//=======
+////            Log.e("Params", "" + params[0]);
+//
+//>>>>>>> 14d03947a80bfeb2ed2e2a6b031bbaf1c06ed5e7
             if (mStatus == 200 || mStatus == 201)
                 return readResponse(httpsURLConnection.getInputStream()).toString();
             else {

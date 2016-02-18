@@ -39,28 +39,31 @@ public class CreatePollPager extends BaseFragment implements View.OnClickListene
         mPollType = getArguments().getInt("page_type");
         mMyPoll = getArguments().getInt("myPoll");
 
-//        makeToast("" + mMyPoll);
+//<<<<<<< HEAD
+////        makeToast("" + mMyPoll);
+//=======
+//>>>>>>> 14d03947a80bfeb2ed2e2a6b031bbaf1c06ed5e7
         if (mPollType == 1) {
 
             mFragmentList = new ArrayList<>();
             mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new PollOpinion(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollQuick(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSurvey(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSocial(),
-                    mPollType));
+            mFragmentList.add(setPageFrg(new PollOpinion(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollQuick(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSurvey(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSocial(),
+                    mPollType, mMyPoll));
         } else {
             mFragmentList = new ArrayList<>();
             mFragmentList.clear();
-            mFragmentList.add(setPagerFragment(new PollOpinion(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollQuick(),
-                    mPollType));
-            mFragmentList.add(setPagerFragment(new PollSurvey(),
-                    mPollType));
+            mFragmentList.add(setPageFrg(new PollOpinion(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollQuick(),
+                    mPollType, mMyPoll));
+            mFragmentList.add(setPageFrg(new PollSurvey(),
+                    mPollType, mMyPoll));
         }
 
         mAdapter = new PollPagerAdapter(

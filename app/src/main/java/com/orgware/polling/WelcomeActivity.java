@@ -127,10 +127,6 @@ public class WelcomeActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
 
     }

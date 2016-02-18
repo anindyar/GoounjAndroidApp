@@ -48,27 +48,6 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
     private Button mBtnAccept;
     private TextView mTermsOfUse;
 
-//    private void getLocationDetails(double latitude, double longitude) throws Exception {
-//        Geocoder geocoder;
-//        StringBuilder sb = new StringBuilder();
-//        List<Address> addresses = null;
-//        geocoder = new Geocoder(this, Locale.getDefault());
-//        try {
-//            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-//        } catch (Exception e) {
-//
-//        }
-//        String city = addresses.get(0).getLocality();
-//        String country = addresses.get(0).getCountryName();
-//        sb.append("City - " + city).append(" \n ").append("Country - " + country);
-//        Log.e("Country", " - " + sb.toString());
-//        mCountryText.setText("" + country);
-//        mCityText.setText("" + city);
-//        editor.putString(COUNTRY, "" + mCountryText.getText().toString()).
-//                putString(CITY, "" + mCityText.getText().toString()).commit();
-//
-//    }
-
 
     @Override
     protected void onCreate(Bundle savedInstance) {

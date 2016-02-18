@@ -103,16 +103,16 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        if (NetworkHelper.checkActiveInternet(act))
-            getPollForCreatedUser("http://api.goounj.com/polls/v1/pollList/" + preferences.getString(USER_ID, "0"));
-        else
-            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    act.getSupportFragmentManager().popBackStack();
-                    return;
-                }
-            });
+//        if (NetworkHelper.checkActiveInternet(act))
+//            getPollForCreatedUser("http://api.goounj.com/polls/v1/pollList/" + preferences.getString(USER_ID, "0"));
+//        else
+//            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    act.getSupportFragmentManager().popBackStack();
+//                    return;
+//                }
+//            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -231,7 +231,7 @@ public class MyPoll extends BaseFragment implements AdapterView.OnItemClickListe
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

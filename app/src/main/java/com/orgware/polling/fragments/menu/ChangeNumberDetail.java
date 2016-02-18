@@ -2,6 +2,7 @@ package com.orgware.polling.fragments.menu;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import com.orgware.polling.network.RestApiProcessor;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONObject;
+
+import java.io.File;
 
 /**
  * Created by nandagopal on 21/1/16.
@@ -45,6 +48,7 @@ public class ChangeNumberDetail extends BaseFragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mOldNumberTxt = (EditText) view.findViewById(R.id.change_number_old);
         mNewNumberTxt = (EditText) view.findViewById(R.id.change_number_new);
         (mChangeNumberDone = (Button) view.findViewById(R.id.change_number_done)).setOnClickListener(this);

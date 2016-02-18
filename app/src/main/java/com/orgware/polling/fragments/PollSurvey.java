@@ -25,6 +25,7 @@ import com.orgware.polling.R;
 import com.orgware.polling.adapters.SpinnerAdapter;
 import com.orgware.polling.interfaces.RestApiListener;
 import com.orgware.polling.network.RestApiProcessor;
+import com.orgware.polling.pollactivities.PollCreateActivity;
 import com.orgware.polling.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -59,7 +60,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     List<String> mCategoryList = new ArrayList<>();
     TextView txtCategory;
     TextView mPollName, mPollTypeOne, mPollTypeTwo, mPollTypeTh, mPollQtsOne, mPollQtsTwo, mPollQtsTh;
-    int mPollType;
+    int mPollType, mMyPoll;
 
     TextWatcher mPollNameWatcher = new TextWatcher() {
         @Override
@@ -88,8 +89,10 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        mPollType = getArguments().getInt("page_type");
         mPollType = getArguments().getInt("page_type");
-
+        mMyPoll = getArguments().getInt("myPoll");
+        Log.e("MyPoll Survey", "" + mMyPoll);
         mChoicesArray.put("Totally Agree").put("Somewhat Agree").put("Satisfactory").put("Somewhat Disagree").put("Totally Disagree");
     }
 
@@ -147,6 +150,24 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mMyPoll == 1) {
+            restrictUIOnPollUpdate();
+        }
+    }
+
+    private void restrictUIOnPollUpdate() {
+        mEdittextSurveyPollName.setText("" + preferences.getString(POLL_NAME, ""));
+        mEdittextSurveyPollName.setEnabled(false);
+        mRbNumQtsOne.setEnabled(false);
+        mRbNumQtsTwo.setEnabled(false);
+        mRbNumQtsThree.setEnabled(false);
+        txtCategory.setEnabled(false);
+        mCbQtsOne.setEnabled(false);
     }
 
     @Override
@@ -225,6 +246,17 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
     }
 
+    private String surveyContactsArray() {
+        JSONObject userContacts = new JSONObject();
+        try {
+            userContacts.put(POLL_AUDIENCE, mContactJsonArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userContacts.toString();
+
+    }
+
     public String surveyParameter() {
         JSONObject userdetails = new JSONObject();
         try {
@@ -270,7 +302,19 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 editor.putString(CONTACT_ARRAY, "").commit();
                 break;
             case R.id.btnSubmit_Survey:
-                validateSubmitValues();
+                if (mMyPoll == 0)
+                    validateSubmitValues();
+                else if (mMyPoll == 1) {
+                    try {
+                        if (mContactJsonArray.length() == 0) {
+                            makeToast("You have to add atleast one contact");
+                            return;
+                        }
+                        processSurveyPollCreation(RestApiProcessor.HttpMethod.PUT, surveyContactsArray().toString(), BASE_URL + CREATE_POLL_URL + "/" + preferences.getInt(POLL_ID, 0), "Feedback Poll Created successfully");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.btncontactFromDevice:
                 showContactDialog(mContactJsonArray, mContactArrayNames);
@@ -396,9 +440,9 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
 
         try {
             if (mPollType == 1)
-                processSurveyPollCreation(BASE_URL + CREATE_POLL_URL, "Feedback Poll Created successfully");
+                processSurveyPollCreation(RestApiProcessor.HttpMethod.POST, surveyParameter().toString(), BASE_URL + CREATE_POLL_URL, "Feedback Poll Created successfully");
             else
-                processSurveyPollCreation(BASE_URL + CREATE_SURVEY_URL, "Feedback Survey Created successfully");
+                processSurveyPollCreation(RestApiProcessor.HttpMethod.POST, surveyParameter().toString(), BASE_URL + CREATE_SURVEY_URL, "Feedback Survey Created successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -406,14 +450,14 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
     }
 
 
-    private void processSurveyPollCreation(String url, final String reqMessage) throws Exception {
-        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, true, new RestApiListener<String>() {
+    private void processSurveyPollCreation(RestApiProcessor.HttpMethod httpMethod, String params, String url, final String reqMessage) throws Exception {
+        RestApiProcessor processor = new RestApiProcessor(act, httpMethod, url, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Methodutils.messageWithTitle(act, "Success", "" + reqMessage, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        act.getSupportFragmentManager().popBackStack();
+                        act.finish();
                     }
                 });
             }
@@ -437,7 +481,7 @@ public class PollSurvey extends BaseFragment implements View.OnClickListener, Co
                 }
             }
         });
-        processor.execute(surveyParameter().toString());
+        processor.execute(params);
     }
 
     @Override

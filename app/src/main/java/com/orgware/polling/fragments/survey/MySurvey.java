@@ -104,16 +104,16 @@ public class MySurvey extends BaseFragment implements AdapterView.OnItemClickLis
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        if (NetworkHelper.checkActiveInternet(act))
-            getPollForCreatedUser("http://api.goounj.com/survey/v1/surveyList/" + preferences.getString(USER_ID, "0"));
-        else
-            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    act.getSupportFragmentManager().popBackStack();
-                    return;
-                }
-            });
+//        if (NetworkHelper.checkActiveInternet(act))
+//            getPollForCreatedUser("http://api.goounj.com/survey/v1/surveyList/" + preferences.getString(USER_ID, "0"));
+//        else
+//            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    act.getSupportFragmentManager().popBackStack();
+//                    return;
+//                }
+//            });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
