@@ -96,6 +96,7 @@ public class GooglePlacesAutoCompleteAdapter extends ArrayAdapter<String> implem
     @Override
     public String getItem(int index) {
         return resultList.get(index);
+
     }
 
     @Override
@@ -106,7 +107,11 @@ public class GooglePlacesAutoCompleteAdapter extends ArrayAdapter<String> implem
                 FilterResults filterResults = new FilterResults();
                 if (constraint != null) {
                     // Retrieve the autocomplete results.
-                    resultList = autocomplete(constraint.toString());
+                    try {
+                        resultList = autocomplete(constraint.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     // Assign the data to the FilterResults
                     filterResults.values = resultList;
