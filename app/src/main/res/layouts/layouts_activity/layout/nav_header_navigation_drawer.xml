@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.orgware.polling.utils.CircleImageView
+        <com.bvocal.goounj.utils.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="64dp"
             android:layout_height="64dp"

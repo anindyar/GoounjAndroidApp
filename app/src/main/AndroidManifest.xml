@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.orgware.polling">
+    package="com.bvocal.goounj">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -27,9 +27,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.orgware.polling.WelcomeActivity"
-            android:label="@string/app_name"
+            android:name="com.bvocal.goounj.WelcomeActivity"
             android:configChanges="screenSize|orientation"
+            android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,45 +40,45 @@
         </activity>
 
         <activity
-            android:name=".LoginHomeActivity"
+            android:name="com.bvocal.goounj.LoginHomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".pollactivities.CurrentPollDetailActivity"
+            android:name="com.bvocal.goounj.pollactivities.CurrentPollDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.orgware.polling.LoginActivity"
+            android:name="com.bvocal.goounj.LoginActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.orgware.polling.LoginActivityNew"
+            android:name="com.bvocal.goounj.LoginActivityNew"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.orgware.polling.MainHomeActivity"
+            android:name="com.bvocal.goounj.MainHomeActivity"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.orgware.polling.MenuDetailActivity"
+            android:name="com.bvocal.goounj.MenuDetailActivity"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".pollactivities.PollCreateActivity"
+            android:name="com.bvocal.goounj.pollactivities.PollCreateActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.orgware.polling.OTPActivity"
+            android:name="com.bvocal.goounj.OTPActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.orgware.polling.TermsAndConditionsActivity"
-            android:parentActivityName="com.orgware.polling.LoginActivityNew"
+            android:name="com.bvocal.goounj.TermsAndConditionsActivity"
+            android:parentActivityName="com.bvocal.goounj.LoginActivityNew"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SearchDetailActivity"
-            android:parentActivityName=".SearchToolbarActivity"
+            android:name="com.bvocal.goounj.SearchDetailActivity"
+            android:parentActivityName="com.bvocal.goounj.SearchToolbarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SearchToolbarActivity"
+            android:name="com.bvocal.goounj.SearchToolbarActivity"
             android:launchMode="singleTop">
 
             <intent-filter>
@@ -93,13 +93,13 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <receiver android:name="com.orgware.polling.receiver.SmsReceiver">
+        <receiver android:name="com.bvocal.goounj.receiver.SmsReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.orgware.polling.receiver.GCMBroadcastreceiver"
+            android:name="com.bvocal.goounj.receiver.GCMBroadcastreceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -109,8 +109,8 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.orgware.polling.service.GcmIntentService" />
-        <service android:name="com.orgware.polling.service.CurrentLocationService" />
+        <service android:name="com.bvocal.goounj.service.GcmIntentService" />
+        <service android:name="com.bvocal.goounj.service.CurrentLocationService" />
     </application>
 
 </manifest>

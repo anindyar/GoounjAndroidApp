@@ -98,7 +98,7 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <com.orgware.polling.utils.piegraph.PieGraph
+                <com.bvocal.goounj.utils.piegraph.PieGraph
                     android:id="@+id/piegraphOne"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
@@ -150,7 +150,7 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <com.orgware.polling.utils.piegraph.PieGraph
+                <com.bvocal.goounj.utils.piegraph.PieGraph
                     android:id="@+id/piegraphTwo"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
@@ -202,7 +202,7 @@
                     android:choiceMode="singleChoice"
                     android:divider="@null"></ListView>
 
-                <com.orgware.polling.utils.piegraph.PieGraph
+                <com.bvocal.goounj.utils.piegraph.PieGraph
                     android:id="@+id/piegraphThree"
                     android:layout_width="150dp"
                     android:layout_height="150dp"

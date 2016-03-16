@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
-String APK_NAME = "Goounj", VERSION_NAME = "1.1"
+String APK_NAME = "Goounj", VERSION_NAME = "1.2"
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.orgware.polling"
+        applicationId "com.bvocal.goounj"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 2
+        versionCode 3
         versionName VERSION_NAME
     }
 
@@ -56,50 +56,6 @@ android {
         }
     }
 }
-//    android {
-//        compileSdkVersion 22
-//        buildToolsVersion '22.0.1'
-//
-//        defaultConfig {
-//
-//            applicationId "com.orgware.top4drivers"
-//            minSdkVersion 14
-//            targetSdkVersion 22
-//            maxSdkVersion 22
-//            versionCode 10
-//            versionName VERSION_NAME
-//        }
-//
-//        signingConfigs {
-//            release {
-//                storeFile file('top4drivers.jks')
-//                storePassword 'android'
-//                keyAlias 'top4drivers'
-//                keyPassword 'android'
-//            }
-//        }
-//
-//        buildTypes {
-//            debug {
-//                debuggable true
-//            }
-//
-//            release {
-//                minifyEnabled false
-//                signingConfig signingConfigs.release
-//                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//
-//                applicationVariants.all {
-//                    variant ->
-//                        variant.outputs.each { output ->
-//                            def newName = APK_NAME + "-v" + VERSION_NAME + ".apk"
-//                            output.outputFile = new File(output.outputFile.parent, newName)
-//                        }
-//                }
-//
-//            }
-//        }
-//    }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -111,9 +67,4 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
-//<<<<<<< HEAD
-//=======
-//    compile 'com.android.support:design:23.1.1'
-//>>>>>>> 14d03947a80bfeb2ed2e2a6b031bbaf1c06ed5e7
-
 }

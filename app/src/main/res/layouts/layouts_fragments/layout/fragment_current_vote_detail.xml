@@ -133,7 +133,7 @@
     <!--android:layout_below="@+id/layout_candidate"-->
     <!--android:background="@android:color/white"></FrameLayout>-->
 
-    <com.orgware.polling.views.CustomViewPager
+    <com.bvocal.goounj.views.CustomViewPager
         android:id="@+id/pagerCandidate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -141,6 +141,6 @@
         android:layout_below="@+id/layout_candidate"
         android:background="@android:color/white">
 
-    </com.orgware.polling.views.CustomViewPager>
+    </com.bvocal.goounj.views.CustomViewPager>
 
 </RelativeLayout>
