@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.bvocal.goounj.exceptions.ConnectionFailedException;
 import com.bvocal.goounj.exceptions.ErroHandler;
 import com.bvocal.goounj.exceptions.NoNetworkException;
 import com.bvocal.goounj.interfaces.Appinterface;
@@ -246,7 +247,10 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             mProgressDialog.dismiss();
         if (mException != null) {
             Log.e("Exception", "" + mException.getMessage());
-            mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
+            if (mException.getMessage().contains("failed to connect to"))
+                mRestApiListener.onRequestFailed(new ConnectionFailedException());
+            else
+                mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
             return;
         }
         mRestApiListener.onRequestCompleted(response);

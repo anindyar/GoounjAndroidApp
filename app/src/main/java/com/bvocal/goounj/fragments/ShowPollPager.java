@@ -21,7 +21,7 @@ import com.bvocal.goounj.R;
 import com.bvocal.goounj.adapters.PollPagerAdapter;
 import com.bvocal.goounj.fragments.poll.MyPoll;
 import com.bvocal.goounj.SearchToolbarActivity;
-import com.bvocal.goounj.pollactivities.PollCreateActivity;
+import com.bvocal.goounj.activities.poll.PollCreateActivity;
 
 import java.util.ArrayList;
 import java.util.List;

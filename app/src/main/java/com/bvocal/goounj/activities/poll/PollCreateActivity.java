@@ -1,4 +1,4 @@
-package com.bvocal.goounj.pollactivities;
+package com.bvocal.goounj.activities.poll;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

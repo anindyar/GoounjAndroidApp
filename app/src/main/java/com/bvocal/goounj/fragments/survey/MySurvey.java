@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 
 import com.bvocal.goounj.MainHomeActivity;
 import com.bvocal.goounj.R;
-import com.bvocal.goounj.adapters.CurrentPollAdapter;
 import com.bvocal.goounj.adapters.MySurveyAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
 import com.bvocal.goounj.fragments.CurrentPollPager;
@@ -25,7 +24,7 @@ import com.bvocal.goounj.interfaces.RestApiListener;
 import com.bvocal.goounj.network.NetworkHelper;
 import com.bvocal.goounj.network.RestApiProcessor;
 import com.bvocal.goounj.pojo.CurrentPollItem;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 import com.bvocal.goounj.utils.Methodutils;
 
 import org.json.JSONArray;

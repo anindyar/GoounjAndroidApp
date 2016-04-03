@@ -85,7 +85,7 @@
                 android:hint="Select Gender"
                 android:padding="@dimen/padding_normal"
                 android:textColor="@color/home_bg"
-                android:textSize="@dimen/txtLarge" />
+                android:textSize="@dimen/txtNormal" />
 
             <CheckBox
                 android:id="@+id/profile_edit_gender"
@@ -134,7 +134,7 @@
                 android:padding="@dimen/padding_normal"
                 android:singleLine="true"
                 android:textColor="@color/home_bg"
-                android:textSize="@dimen/txtLarge" />
+                android:textSize="@dimen/txtNormal" />
 
             <CheckBox
                 android:id="@+id/profile_edit_age"

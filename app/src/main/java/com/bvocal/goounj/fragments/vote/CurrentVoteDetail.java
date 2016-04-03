@@ -19,11 +19,9 @@ import java.util.List;
 /**
  * Created by nandagopal on 12/1/16.
  */
-public class CurrentVoteDetail extends BaseFragment implements ViewPager.OnPageChangeListener {
+public class CurrentVoteDetail extends BaseFragment {
 
-    CustomViewPager mViewPager;
-    List<Fragment> mFragmentList = new ArrayList<>();
-    PollPagerAdapter mAdapter;
+    int id;
 
     @Override
     public void setTitle() {
@@ -33,13 +31,9 @@ public class CurrentVoteDetail extends BaseFragment implements ViewPager.OnPageC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String value = getArguments().getString("PAGER_VALUE");
-        makeToast("" + value);
-        mFragmentList.add(setPagerFragment(new CandidateDetail(),
-                mFragmentList.size()));
-        mFragmentList.add(setPagerFragment(new CandidateDescription(),
-                mFragmentList.size()));
-
+        Bundle bundle = getArguments().getBundle("vote_bundle");
+        id = bundle.getInt("electionId");
+        makeToast("Bundle" + bundle.getString("electionName") + " - " + bundle.getInt("electionId"));
     }
 
     @Nullable
@@ -51,55 +45,11 @@ public class CurrentVoteDetail extends BaseFragment implements ViewPager.OnPageC
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        (mViewPager = (CustomViewPager) view.findViewById(R.id.pagerCandidate)).addOnPageChangeListener(this);
-        mViewPager.setPageEnabled(false);
-//        setNewFragment(new PollOpinion(), R.id.fragment_content_candidate, "Candidate_List", true);
+        setNewFragment(setPagerFragment(new CandidateDetail(), id), R.id.fragment_content_candidate, "Candidate", false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
-        mViewPager.setAdapter(mAdapter);
-    }
-
-    /**
-     * This method will be invoked when the current page is scrolled, either as part
-     * of a programmatically initiated smooth scroll or a user initiated touch scroll.
-     *
-     * @param position             Position index of the first page currently being displayed.
-     *                             Page position+1 will be visible if positionOffset is nonzero.
-     * @param positionOffset       Value from [0, 1) indicating the offset from the page at position.
-     * @param positionOffsetPixels Value in pixels indicating the offset from position.
-     */
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    /**
-     * This method will be invoked when a new page becomes selected. Animation is not
-     * necessarily complete.
-     *
-     * @param position Position index of the new selected page.
-     */
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    /**
-     * Called when the scroll state changes. Useful for discovering when the user
-     * begins dragging, when the pager is automatically settling to the current page,
-     * or when it is fully stopped/idle.
-     *
-     * @param state The new scroll state.
-     * @see ViewPager#SCROLL_STATE_IDLE
-     * @see ViewPager#SCROLL_STATE_DRAGGING
-     * @see ViewPager#SCROLL_STATE_SETTLING
-     */
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 }

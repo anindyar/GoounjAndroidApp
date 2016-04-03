@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text="OTP has been sent to your mobile"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txtLarge"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/edittext_otp_verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:hint="Enter OTP here"
+        android:inputType="phone"
+        android:padding="@dimen/padding_normal"
+        android:singleLine="true"
+        android:textColor="@color/home_bg"
+        android:textSize="@dimen/txtLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_otp_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+        <Button
+            android:id="@+id/btn_otp_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:text="Submit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+    </LinearLayout>
+
+</LinearLayout>

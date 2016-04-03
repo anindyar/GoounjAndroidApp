@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:padding="@dimen/padding_normal"
+        android:text="Thanks For Apply !"
+        android:textColor="@color/btn_bg_click"
+        android:textSize="@dimen/txtLarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialog_candidate_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text="You will be notified after verification"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txtNormal" />
+
+    <Button
+        android:id="@+id/btn_thanks_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg_button_click"
+        android:text="OK"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txtLarge" />
+
+
+</LinearLayout>

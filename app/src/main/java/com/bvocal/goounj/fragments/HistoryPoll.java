@@ -21,7 +21,7 @@ import com.bvocal.goounj.interfaces.RestApiListener;
 import com.bvocal.goounj.network.NetworkHelper;
 import com.bvocal.goounj.network.RestApiProcessor;
 import com.bvocal.goounj.pojo.CurrentPollItem;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 import com.bvocal.goounj.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -208,8 +208,6 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
 
     public void showPollList(String response) {
         try {
-//            JSONObject object = new JSONObject(response);
-//            JSONArray objectArray = object.optJSONArray(response);
             JSONArray objectArray = new JSONArray(response);
 
             for (int i = 0; i < objectArray.length(); i++) {
@@ -246,7 +244,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p>
+     * <p/>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

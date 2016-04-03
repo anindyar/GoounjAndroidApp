@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_small"
+        android:text="Do you want to vote for"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/txtLarge" />
+
+    <TextView
+        android:id="@+id/dialog_candidate_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_small"
+        android:text="Nanda"
+        android:textColor="@color/home_bg"
+        android:textSize="@dimen/txtLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_confirm_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+        <Button
+            android:id="@+id/btn_confirm_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_click"
+            android:text="Confirm"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txtNormal" />
+
+    </LinearLayout>
+
+</LinearLayout>

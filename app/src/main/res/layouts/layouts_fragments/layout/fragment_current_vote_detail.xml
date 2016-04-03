@@ -5,29 +5,11 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/layout_back_vote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:drawableLeft="@drawable/rotate_arrow_toright"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/padding_normal"
-        android:text=""
-        android:textSize="@dimen/txtNormal" />
-
-    <View
-        android:id="@+id/line_vote"
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_below="@+id/layout_back_vote"
-        android:background="@color/home_bg" />
-
     <RelativeLayout
         android:id="@+id/layout_vote_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line_vote"
+        android:layout_alignParentTop="true"
         android:padding="@dimen/padding_normal">
 
         <ImageView
@@ -117,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:drawableLeft="@drawable/ic_about_us"
+            android:drawableLeft="@drawable/ic_candidate_icon"
             android:gravity="center_vertical"
             android:padding="3dp"
             android:text="Candidate : 05"
@@ -125,22 +107,22 @@
             android:textSize="@dimen/txtNormal" />
     </FrameLayout>
 
-    <!--<FrameLayout-->
-    <!--android:id="@+id/fragment_content_candidate"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_below="@+id/layout_candidate"-->
-    <!--android:background="@android:color/white"></FrameLayout>-->
-
-    <com.bvocal.goounj.views.CustomViewPager
-        android:id="@+id/pagerCandidate"
+    <FrameLayout
+        android:id="@+id/fragment_content_candidate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/layout_candidate"
-        android:background="@android:color/white">
+        android:background="@android:color/white"></FrameLayout>
 
-    </com.bvocal.goounj.views.CustomViewPager>
+    <!--<com.bvocal.goounj.views.CustomViewPager-->
+    <!--android:id="@+id/pagerCandidate"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_below="@+id/layout_candidate"-->
+    <!--android:background="@android:color/white">-->
+
+    <!--</com.bvocal.goounj.views.CustomViewPager>-->
 
 </RelativeLayout>

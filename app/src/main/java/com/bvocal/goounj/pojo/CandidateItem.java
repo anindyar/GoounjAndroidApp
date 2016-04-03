@@ -5,13 +5,27 @@ package com.bvocal.goounj.pojo;
  */
 public class CandidateItem {
 
-    public String candidateName, candidateAbout;
-    public int candidateImage;
+    public int candidateId;
+    public String name;
+    public String nickName;
+    public String about;
+    public String manifesto;
 
-    public CandidateItem(String candidateName, String candidateAbout, int candidateImage) {
-        this.candidateName = candidateName;
-        this.candidateAbout = candidateAbout;
-        this.candidateImage = candidateImage;
+//    public String candidateName, candidateAbout;
+//    public int candidateImage;
+//
+//    public CandidateItem(String candidateName, String candidateAbout, int candidateImage) {
+//        this.candidateName = candidateName;
+//        this.candidateAbout = candidateAbout;
+//        this.candidateImage = candidateImage;
+//    }
+
+
+    public CandidateItem(int candidateId, String name, String nickName, String about, String manifesto) {
+        this.candidateId = candidateId;
+        this.name = name;
+        this.nickName = nickName;
+        this.about = about;
+        this.manifesto = manifesto;
     }
-
 }

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:drawableBottom="@drawable/selector_grid_tab_bg"
         android:drawablePadding="@dimen/padding_small"
-        android:drawableTop="@drawable/ic_current_poll"
+        android:drawableTop="@drawable/ic_current_vote"
         android:gravity="center"
         android:padding="@dimen/padding_small"
         android:text="@string/app_name"

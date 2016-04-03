@@ -29,7 +29,7 @@ import com.bvocal.goounj.interfaces.RestApiListener;
 import com.bvocal.goounj.network.NetworkHelper;
 import com.bvocal.goounj.network.RestApiProcessor;
 import com.bvocal.goounj.pojo.CurrentPollItem;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 import com.bvocal.goounj.utils.Methodutils;
 
 import org.json.JSONArray;

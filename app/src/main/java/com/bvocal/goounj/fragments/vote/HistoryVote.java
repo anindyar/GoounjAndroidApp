@@ -15,6 +15,7 @@ import com.bvocal.goounj.R;
 import com.bvocal.goounj.adapters.VoteListAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
 import com.bvocal.goounj.pojo.CurrentPollItem;
+import com.bvocal.goounj.pojo.VoteItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by nandagopal on 11/1/16.
  */
 public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-    private List<CurrentPollItem> mVoteList = new ArrayList<>();
+    private List<VoteItem> mVoteList = new ArrayList<>();
     private RecyclerView mVoteRecyclerView;
     private VoteListAdapter mVoteAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -40,7 +41,7 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
         super.onCreate(savedInstanceState);
         mVoteList.clear();
         for (int i = 0; i < 10; i++) {
-            mVoteList.add(new CurrentPollItem(i, "13-10-2016", "13-10-2016", "Title " + i, 1, "Nanda - " + i, "10-01-2016"));
+            mVoteList.add(new VoteItem(i, "Title " + i, "13-10-2016", "13-10-2016", 1, "10-01-2016", "Nanda - " + i));
         }
     }
 

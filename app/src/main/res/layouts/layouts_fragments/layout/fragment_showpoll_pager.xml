@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_tab_quick_selector"
             android:button="@null"
-            android:drawableTop="@drawable/ic_current_poll"
+            android:drawableTop="@drawable/ic_current_vote"
             android:gravity="center"
             android:padding="@dimen/padding_small"
             android:text="Current Poll\n "

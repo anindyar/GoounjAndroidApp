@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/poll_image"
+            android:ellipsize="end"
             android:padding="3dp"
             android:text="Weekend Movie"
             android:textColor="#000000"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/poll_title"
             android:layout_toRightOf="@+id/poll_image"
+            android:ellipsize="end"
             android:padding="2dp"
             android:text="Created By:"
             android:textColor="#F0AA4C" />
@@ -55,7 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/poll_createdBy"
             android:layout_toRightOf="@+id/start"
+            android:ellipsize="end"
             android:padding="3dp"
+            android:singleLine="true"
             android:text="03:00 PM,23 NOV 2015" />
 
         <TextView
@@ -74,7 +78,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/poll_startDate"
             android:layout_toRightOf="@+id/start"
+            android:ellipsize="end"
             android:padding="3dp"
+            android:singleLine="true"
             android:text="03:00 PM,23 NOV 2015" />
 
         <TextView
@@ -93,7 +99,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/poll_endDate"
             android:layout_toRightOf="@+id/poll_selfNomination"
+            android:ellipsize="end"
             android:padding="3dp"
+            android:singleLine="true"
             android:text="23 NOV 2015" />
 
         <RelativeLayout

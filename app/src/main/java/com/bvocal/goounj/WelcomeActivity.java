@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import com.bvocal.goounj.network.NetworkHelper;
 import com.bvocal.goounj.utils.Methodutils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Nandagopal on 31-Aug-15.
  */
@@ -116,7 +119,6 @@ public class WelcomeActivity extends BaseActivity {
                 // success!
                 try {
                     if (preferences.getString(COUNTRY, "").equals("")) {
-//                        startService(new Intent(this, CurrentLocationService.class));
                         checkInternetAndGpsConnection();
                     } else
                         checkInternetConnection();

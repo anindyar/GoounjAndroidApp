@@ -34,6 +34,8 @@
         android:layout_below="@+id/candidate_name"
         android:layout_toLeftOf="@+id/candidate_detail_view"
         android:layout_toRightOf="@+id/candidate_icon"
+        android:ellipsize="end"
+        android:maxLength="40"
         android:padding="@dimen/padding_small"
         android:text="@string/loream_ipsum"
         android:textColor="@color/home_bg"

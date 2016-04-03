@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bvocal.goounj.R;
 import com.bvocal.goounj.interfaces.Appinterface;
 import com.bvocal.goounj.pojo.CurrentPollItem;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

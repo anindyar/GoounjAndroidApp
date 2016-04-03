@@ -24,6 +24,8 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
     List<CandidateItem> itemList;
     Context mContext;
     AdapterView.OnItemClickListener mOnItemClickListener;
+    View.OnClickListener onClickListenerDetail;
+    View.OnClickListener onClickListenerVote;
 
     public CandidateListAdapter(Context mContext, List<CandidateItem> itemList) {
         this.mContext = mContext;
@@ -33,11 +35,11 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
     /**
      * Called when RecyclerView needs a new {@link CurrentPollViewHolder} of the given type to represent
      * an item.
-     * <p>
+     * <p/>
      * This new ViewHolder should be constructed with a new View that can represent the items
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
-     * <p>
+     * <p/>
      * The new ViewHolder will be used to display items of the adapter using
      * {@link #onBindViewHolder(CurrentPollViewHolder, int)}. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
@@ -61,7 +63,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
      * Called by RecyclerView to display the data at the specified position. This method should
      * update the contents of the {@link CurrentPollViewHolder#itemView} to reflect the item at the given
      * position.
-     * <p>
+     * <p/>
      * Note that unlike {@link ListView}, RecyclerView will not call this method
      * again if the position of the item changes in the data set unless the item itself is
      * invalidated or the new position cannot be determined. For this reason, you should only
@@ -69,7 +71,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
      * this method and should not keep a copy of it. If you need the position of an item later
      * on (e.g. in a click listener), use {@link CurrentPollViewHolder#getAdapterPosition()} which will
      * have the updated adapter position.
-     * <p>
+     * <p/>
      * Override {@link #onBindViewHolder(CurrentPollViewHolder, int)} instead if Adapter can
      * handle effcient partial bind.
      *
@@ -80,11 +82,11 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
     @Override
     public void onBindViewHolder(CurrentPollViewHolder holder, int position) {
         CandidateItem items = itemList.get(position);
-        holder.candidaterName.setText(items.candidateName);
-        holder.candidateAbout.setText(items.candidateAbout);
-        holder.imgCandidateImage.setImageResource(items.candidateImage);
-        holder.mBtnCandidateVote.setOnClickListener(this);
-        holder.mBtnCandidateView.setOnClickListener(this);
+        holder.candidaterName.setText(items.name);
+        holder.candidateAbout.setText(items.about);
+//        holder.imgCandidateImage.setImageResource(items.candidateImage);
+        holder.mBtnCandidateVote.setTag(position);
+        holder.mBtnCandidateView.setTag(position);
 
     }
 
@@ -98,6 +100,27 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
                     itemHolder.getAdapterPosition(), itemHolder.getItemId());
         }
     }
+
+    public void setOnDetailClickListener(View.OnClickListener onClickListener) {
+        this.onClickListenerDetail = onClickListener;
+    }
+
+    private void onDetailClick(CurrentPollViewHolder currentPollViewHolder) {
+        if (onClickListenerDetail != null) {
+            onClickListenerDetail.onClick(currentPollViewHolder.mBtnCandidateView);
+        }
+    }
+
+    public void setOnVoteClickListener(View.OnClickListener onClickListener) {
+        this.onClickListenerVote = onClickListener;
+    }
+
+    private void onVoteClick(CurrentPollViewHolder currentPollViewHolder) {
+        if (onClickListenerVote != null) {
+            onClickListenerVote.onClick(currentPollViewHolder.mBtnCandidateVote);
+        }
+    }
+
 
     /**
      * Returns the total number of items in the data set hold by the adapter.
@@ -132,7 +155,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
         ImageView imgCandidateImage, mBtnCandidateVote, mBtnCandidateView;
         CandidateListAdapter mAdapter;
 
-        public CurrentPollViewHolder(View itemView, CandidateListAdapter mAdapter) {
+        public CurrentPollViewHolder(View itemView, final CandidateListAdapter mAdapter) {
             super(itemView);
             itemView.setOnClickListener(this);
             this.mAdapter = mAdapter;
@@ -141,6 +164,8 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
             imgCandidateImage = (ImageView) itemView.findViewById(R.id.candidate_icon);
             mBtnCandidateView = (ImageView) itemView.findViewById(R.id.candidate_detail_view);
             mBtnCandidateVote = (ImageView) itemView.findViewById(R.id.candidate_vote);
+            mBtnCandidateView.setOnClickListener(this);
+            mBtnCandidateVote.setOnClickListener(this);
         }
 
         /**
@@ -150,7 +175,16 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
          */
         @Override
         public void onClick(View v) {
-            mAdapter.onItemHolderClick(this);
+            switch (v.getId()) {
+                case R.id.candidate_vote:
+                    mAdapter.onVoteClick(this);
+                    break;
+                case R.id.candidate_detail_view:
+                    mAdapter.onDetailClick(this);
+                    break;
+            }
+
+//            mAdapter.onItemHolderClick(this);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class VotePager extends BaseFragment implements ViewPager.OnPageChangeLis
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mCurrentVoteRadio.setChecked(true);
+        mCurrentVoteRadio.setTextColor(ContextCompat.getColor(act, android.R.color.white));
         mPagerAdapter = new PollPagerAdapter(getChildFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
     }
@@ -127,6 +129,7 @@ public class VotePager extends BaseFragment implements ViewPager.OnPageChangeLis
             mCurrentVoteRadio.setTextColor(Color.WHITE);
         } else
             mCurrentVoteRadio.setTextColor(Color.BLACK);
+
         if (mHistoryVoteRadio.isChecked()) {
             mViewPager.setCurrentItem(1);
             mHistoryVoteRadio.setTextColor(Color.WHITE);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bvocal.goounj.MainHomeActivity;
 import com.bvocal.goounj.R;
 import com.bvocal.goounj.fragments.survey.SurveyPager;
+import com.bvocal.goounj.fragments.vote.VotePager;
 import com.bvocal.goounj.utils.Methodutils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -93,7 +94,7 @@ public class HomeDashboard extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_vote:
-//                ((MainHomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
+                ((MainHomeActivity) act).setNewFragment(new VotePager(), "Poll Pager", true);
                 break;
             case R.id.home_poll:
                 ((MainHomeActivity) act).setNewFragment(new ShowPollPager(), "Poll Pager", true);

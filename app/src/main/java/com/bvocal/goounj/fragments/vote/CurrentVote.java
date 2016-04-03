@@ -1,5 +1,6 @@
 package com.bvocal.goounj.fragments.vote;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,11 +16,15 @@ import android.widget.RelativeLayout;
 
 import com.bvocal.goounj.MainHomeActivity;
 import com.bvocal.goounj.R;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 import com.bvocal.goounj.adapters.VoteListAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
+import com.bvocal.goounj.interfaces.Appinterface;
 import com.bvocal.goounj.interfaces.RestApiListener;
+import com.bvocal.goounj.network.NetworkHelper;
 import com.bvocal.goounj.network.RestApiProcessor;
 import com.bvocal.goounj.pojo.CurrentPollItem;
+import com.bvocal.goounj.pojo.VoteItem;
 import com.bvocal.goounj.utils.Methodutils;
 
 import org.json.JSONArray;
@@ -31,9 +36,9 @@ import java.util.List;
 /**
  * Created by nandagopal on 11/1/16.
  */
-public class CurrentVote extends BaseFragment implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class CurrentVote extends BaseFragment implements Appinterface, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private List<CurrentPollItem> mVoteList = new ArrayList<>();
+    private List<VoteItem> mVoteList = new ArrayList<>();
     private RecyclerView mVoteRecyclerView;
     private VoteListAdapter mVoteAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -49,9 +54,15 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mVoteList.clear();
-        for (int i = 0; i < 10; i++) {
-            mVoteList.add(new CurrentPollItem(i, "13-10-2016", "13-10-2016", "Title " + i, 1, "Nanda - " + i, "10-01-2016"));
+        try {
+            getVoteList("http://192.168.10.45:3000/" + ELECTION_LIST, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+//        for (int i = 0; i < 10; i++) {
+////            mVoteList.add(new VoteItem(i, "13-10-2016", "13-10-2016", "Title " + i, 1, "Nanda - " + i, "10-01-2016"));
+//            mVoteList.add(new VoteItem(i, "Title " + i, "13-10-2016", "13-10-2016", 1, "10-01-2016", "Nanda - " + i));
+//        }
     }
 
     @Nullable
@@ -88,31 +99,29 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
             mNoVoteImage.setVisibility(View.GONE);
         }
 
-        mSwipeRefreshLayout.post(new Runnable() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void run() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
+            public void onRefresh() {
+                if (NetworkHelper.checkActiveInternet(act)) {
+                    try {
+                        getVoteList("http://192.168.10.45:3000/" + ELECTION_LIST, true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }, 1000);
-//                if (NetworkHelper.checkActiveInternet(act))
-//                    getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-//                else
-//                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            act.getSupportFragmentManager().popBackStack();
-//                            return;
-//                        }
-//                    });
+                } else
+                    Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            act.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+                    });
             }
         });
     }
 
 
-    private void getPollForCreatedUser(String url, boolean pullDownType) {
+    private void getVoteList(String url, boolean pullDownType) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
@@ -155,7 +164,9 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put(POLL_LIMIT, 10);
+            mShowPollOnject.put("lowerLimit", 0);
+            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("isVoted", "2");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,28 +189,19 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
 
     public void showPollList(String response) {
         try {
-//            JSONObject object = new JSONObject(response);
-//            JSONArray objectArray = object.optJSONArray(response);
             JSONArray objectArray = new JSONArray(response);
             mVoteList.clear();
-            if (preferences.getInt(DASHBOARD_ID, 0) == 0) {
-                for (int i = 0; i < objectArray.length(); i++) {
-                    JSONObject objectPolls = objectArray.optJSONObject(i);
-                    Log.e("Array Values", "" + i);
-                    if (objectPolls.optString("isAnswered").equals("0")) {
-                        mVoteList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
-                                objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
-                    }
+            for (int i = 0; i < objectArray.length(); i++) {
+                JSONObject objectPolls = objectArray.optJSONObject(i);
+                Log.e("Array Values", "" + i);
+                if (objectPolls.optString("isVoted").equals("1")) {
+                    mVoteList.add(new VoteItem(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
+                            objectPolls.optString("endDate"), objectPolls.optString("startDate"), objectPolls.optInt("isVoted"),
+                            objectPolls.optString("nominationEndDate"), objectPolls.optString("associationName")));
+
                 }
             }
-            if (preferences.getInt(DASHBOARD_ID, 0) == 1) {
-                for (int i = 0; i < objectArray.length(); i++) {
-                    JSONObject objectPolls = objectArray.optJSONObject(i);
-                    Log.e("Array Values", "" + i);
-                    mVoteList.add(new CurrentPollItem(objectPolls.optInt("pollId"), splitFromString("" + objectPolls.optString("startDate")), splitFromString("" + objectPolls.optString("endDate")),
-                            objectPolls.optString("pollName"), objectPolls.optInt("isBoost"), objectPolls.optString("createdUserName")));
-                }
-            }
+
             refreshCurrentPollListview();
             mSwipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
@@ -223,7 +225,18 @@ public class CurrentVote extends BaseFragment implements AdapterView.OnItemClick
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ((MainHomeActivity) act).setNewFragment(setPagerFragment(new CurrentVoteDetail(), "PAGER", 1, "PAGER_VALUE", "test"), "Vote Detail", true);
+        VoteItem item = mVoteList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("electionId", item.electionId);
+        bundle.putString("electionName", item.electionName);
+        bundle.putString("endDate", item.endDate);
+        bundle.putString("startDate", item.startDate);
+        bundle.putInt("isVoted", item.isVoted);
+        bundle.putString("nominationEndDate", item.nominationEndDate);
+        bundle.putString("associationName", item.associationName);
+//        editor.putInt(POLL_ID, mVoteList.get(position).currentPollId).putString(POLL_NAME, "" + mVoteList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + mVoteList.get(position).mCreatedUserName).commit();
+        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", item.electionId).putExtra("poll_type", 7).putExtra("vote_bundle", bundle));
+        Log.e("Poll Id", "" + mVoteList.get(position).electionId);
     }
 
     @Override

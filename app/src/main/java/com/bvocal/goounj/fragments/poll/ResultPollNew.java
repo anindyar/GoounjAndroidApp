@@ -24,7 +24,7 @@ import com.bvocal.goounj.fragments.BaseFragment;
 import com.bvocal.goounj.interfaces.RestApiListener;
 import com.bvocal.goounj.network.RestApiProcessor;
 import com.bvocal.goounj.pojo.ChoicesItem;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
 import com.bvocal.goounj.utils.Methodutils;
 import com.bvocal.goounj.utils.piegraph.PieGraph;
 import com.bvocal.goounj.utils.piegraph.PieSlice;

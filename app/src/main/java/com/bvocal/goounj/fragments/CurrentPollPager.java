@@ -25,8 +25,8 @@ import com.bvocal.goounj.adapters.PollPagerAdapter;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
 import com.bvocal.goounj.interfaces.RestApiListener;
 import com.bvocal.goounj.network.RestApiProcessor;
-import com.bvocal.goounj.pollactivities.CurrentPollDetailActivity;
-import com.bvocal.goounj.pollactivities.PollCreateActivity;
+import com.bvocal.goounj.activities.poll.CurrentPollDetailActivity;
+import com.bvocal.goounj.activities.poll.PollCreateActivity;
 import com.bvocal.goounj.utils.Methodutils;
 
 import org.json.JSONArray;

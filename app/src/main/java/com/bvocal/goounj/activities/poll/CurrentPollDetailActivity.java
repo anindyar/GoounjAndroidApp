@@ -1,4 +1,4 @@
-package com.bvocal.goounj.pollactivities;
+package com.bvocal.goounj.activities.poll;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,7 @@ import com.bvocal.goounj.R;
 import com.bvocal.goounj.fragments.CurrentPollPager;
 import com.bvocal.goounj.fragments.SurveyDetail;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
+import com.bvocal.goounj.fragments.vote.CurrentVoteDetail;
 
 /**
  * Created by nandagopal on 5/2/16.
@@ -88,6 +89,14 @@ public class CurrentPollDetailActivity extends BaseActivity {
             case 6:
                 getSupportActionBar().setTitle("Survery");
                 setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Pager_Activity", false);
+                break;
+            case 7:
+                getSupportActionBar().setTitle("Vote");
+
+                Fragment fragmentVoteListDetail = new CurrentVoteDetail();
+                fragmentVoteListDetail.setArguments(getIntent().getExtras());
+                setNewFragment(fragmentVoteListDetail, "Pager_Activity", false);
+
                 break;
         }
     }

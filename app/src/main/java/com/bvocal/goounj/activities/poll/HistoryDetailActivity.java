@@ -1,4 +1,4 @@
-package com.bvocal.goounj.pollactivities;
+package com.bvocal.goounj.activities.poll;
 
 import com.bvocal.goounj.BaseActivity;
 
