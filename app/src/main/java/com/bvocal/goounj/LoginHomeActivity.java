@@ -33,7 +33,7 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
     boolean get_device_token;
     private GooglePlacesAutoCompleteAdapter mPlacesAdapter;
     private String mGCM_ID;
-    private EditText mNameText, mMobileNumber;
+    private EditText mNameText, mMobileNumber, mIPText;
     private AutoCompleteTextView mCountryText, mCityText;
     private CheckBox mCBAccept;
     private Button mBtnAccept;
@@ -59,6 +59,7 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
                 }
             });
         mNameText = (EditText) findViewById(R.id.login_name);
+        mIPText = (EditText) findViewById(R.id.ip_address);
         mCountryText = (AutoCompleteTextView) findViewById(R.id.login_country);
         mCityText = (AutoCompleteTextView) findViewById(R.id.login_city);
 //        mCountryText.setThreshold(1);
@@ -172,6 +173,12 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
                         makeToast(this, "Mobile number should be valueable!");
                         return;
                     }
+
+                    if (mIPText.getText().toString().equals("")) {
+                        makeToast(this, "Enter IP Address!");
+                        return;
+                    }
+
                     if (!mCBAccept.isChecked()) {
                         makeToast(this, "Please accept the terms of use!");
                         return;
@@ -185,9 +192,10 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
 
                     try {
                         editor.putString(USERNAME, "" + mNameText.getText().toString()).
+                                putString("voting", mIPText.getText().toString()).
                                 putString(COUNTRY, "" + mCountryText.getText().toString()).
                                 putString(CITY, "" + mCityText.getText().toString()).putString(MOBILE, "" + mMobileNumber.getText().toString()).commit();
-                        pushLoginData(BASE_URL + USER_LOGIN_URL);
+                        pushLoginData("http://" + mIPText.getText().toString() + ":3000/" + USER_LOGIN_URL);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

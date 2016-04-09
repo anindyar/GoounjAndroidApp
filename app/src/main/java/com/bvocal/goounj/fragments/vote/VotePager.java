@@ -1,5 +1,6 @@
 package com.bvocal.goounj.fragments.vote;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,12 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.bvocal.goounj.R;
+import com.bvocal.goounj.SearchToolbarActivity;
 import com.bvocal.goounj.adapters.PollPagerAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
 
@@ -109,6 +114,19 @@ public class VotePager extends BaseFragment implements ViewPager.OnPageChangeLis
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_search)
+            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, POLL).putExtra("PAGE_TYPE", mViewPager.getCurrentItem()));
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -57,13 +57,15 @@ public interface Appinterface {
             CURRENT_CREATED_USER_NAME = "createdUserName", CURRENT_POLL_ID = "pollId", CONTACT_ARRAY = "CONTACT_ARRAY";
 
     /*Web Services*/
-    String BASE_URL = "https://api.goounj.com/";
+//    String BASE_URL = "https://api.goounj.com/";
+//    String BASE_URL = "http://192.168.43.25:3000/";
+    String BASE_URL = "http://192.168.43.25:3000/";
 //    String BASE_URL = "http://goounjdb.cloudapp.net/";
 
     /*Vote*/
 
     String ELECTION_LIST = "vote/v1/electionList", CANDIDATE_LIST = "vote/v1/candidateList/", VOTE_REQ_OTP = "vote/v1/requestOtp",
-            VOTE_VERIFY_OTP = "vote/v1/verifyOtp", SELF_NOMINATION = "vote/v1/candidate";
+            VOTE_VERIFY_OTP = "vote/v1/verifyOtp", SELF_NOMINATION = "vote/v1/candidate", VOTE_PUSH = "vote/v1/vote", VOTE_RESULT = "vote/v1/voteResult/", VOTE = "VOTE";
 
     String BASE_URL_ONE = "http://192.168.0.131:3000/", ID = "id", BASE_URL_TWO = "http://goounjdb.cloudapp.net/", BASE_URL_MAIN = "http://goounjdb.cloudapp.net/";
 

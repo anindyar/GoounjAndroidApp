@@ -40,6 +40,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
 
     private List<VoteItem> mVoteList = new ArrayList<>();
     private RecyclerView mVoteRecyclerView;
+    private int mLowerLimit = 0, mUpperLimit = 10;
     private VoteListAdapter mVoteAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RelativeLayout mNoVoteImage, mPageError;
@@ -53,16 +54,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mVoteList.clear();
-        try {
-            getVoteList("http://192.168.10.45:3000/" + ELECTION_LIST, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        for (int i = 0; i < 10; i++) {
-////            mVoteList.add(new VoteItem(i, "13-10-2016", "13-10-2016", "Title " + i, 1, "Nanda - " + i, "10-01-2016"));
-//            mVoteList.add(new VoteItem(i, "Title " + i, "13-10-2016", "13-10-2016", 1, "10-01-2016", "Nanda - " + i));
-//        }
+
     }
 
     @Nullable
@@ -86,25 +78,29 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mVoteList.clear();
-        mVoteAdapter = new VoteListAdapter(act, mVoteList, 1);
-        mVoteRecyclerView.setAdapter(mVoteAdapter);
-        mVoteAdapter.setOnItemClickListener(this);
-
-        if (mVoteList.isEmpty()) {
-            mVoteRecyclerView.setVisibility(View.GONE);
-            mNoVoteImage.setVisibility(View.VISIBLE);
-        } else {
-            mVoteRecyclerView.setVisibility(View.VISIBLE);
-            mNoVoteImage.setVisibility(View.GONE);
-        }
+        act.setTitle("Vote");
+        mVoteList.clear();
+        if (NetworkHelper.checkActiveInternet(act)) {
+            try {
+                getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else
+            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    act.getSupportFragmentManager().popBackStack();
+                    return;
+                }
+            });
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act)) {
                     try {
-                        getVoteList("http://192.168.10.45:3000/" + ELECTION_LIST, true);
+                        getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -121,7 +117,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
     }
 
 
-    private void getVoteList(String url, boolean pullDownType) {
+    private void getVoteList(String url, boolean pullDownType, int mLowerLimit, int mUpperLimit) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
@@ -157,15 +153,15 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
                 }
             }
         });
-        processor.execute(showPollParams().toString());
+        processor.execute(showPollParams(mLowerLimit, mUpperLimit).toString());
     }
 
-    private String showPollParams() {
+    private String showPollParams(int mLowerLimit, int mUpperLimit) {
         JSONObject mShowPollOnject = new JSONObject();
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
-            mShowPollOnject.put("lowerLimit", 0);
-            mShowPollOnject.put("upperLimit", 10);
+            mShowPollOnject.put("lowerLimit", mLowerLimit);
+            mShowPollOnject.put("upperLimit", mUpperLimit);
             mShowPollOnject.put("isVoted", "2");
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,7 +177,9 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
             mVoteAdapter = new VoteListAdapter(act, mVoteList, 1);
             mVoteAdapter.setOnItemClickListener(this);
             mVoteRecyclerView.setAdapter(mVoteAdapter);
+            mLowerLimit = mLowerLimit + 10;
         } else {
+            mLowerLimit = 0;
             mVoteRecyclerView.setVisibility(View.GONE);
             mNoVoteImage.setVisibility(View.VISIBLE);
         }
@@ -190,14 +188,14 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
     public void showPollList(String response) {
         try {
             JSONArray objectArray = new JSONArray(response);
-            mVoteList.clear();
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
                 if (objectPolls.optString("isVoted").equals("1")) {
                     mVoteList.add(new VoteItem(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
-                            objectPolls.optString("endDate"), objectPolls.optString("startDate"), objectPolls.optInt("isVoted"),
-                            objectPolls.optString("nominationEndDate"), objectPolls.optString("associationName")));
+                            splitOnlyDateFromString(objectPolls.optString("endDate")), splitOnlyDateFromString(objectPolls.optString("startDate")),
+                            objectPolls.optInt("isVoted"), splitOnlyDateFromString(objectPolls.optString("nominationEndDate")),
+                            objectPolls.optString("associationName")));
 
                 }
             }

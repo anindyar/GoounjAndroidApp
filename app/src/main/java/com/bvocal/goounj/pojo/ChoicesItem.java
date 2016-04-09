@@ -14,10 +14,6 @@ public class ChoicesItem {
 
     }
 
-//    public ChoicesItem(String mChoicePercent) {
-//        this.mChoicePercent = mChoicePercent;
-//    }
-
     public ChoicesItem(String mChoiceName) {
         this.mChoiceName = mChoiceName;
     }
@@ -28,6 +24,12 @@ public class ChoicesItem {
     }
 
     public ChoicesItem(String mChoiceName, int optionId, String mChoicePercent) {
+        this.mChoiceName = mChoiceName;
+        this.mChoiceOptionId = optionId;
+        this.mChoicePercent = mChoicePercent;
+    }
+
+    public ChoicesItem(int optionId, String mChoiceName, String mChoicePercent) {
         this.mChoiceName = mChoiceName;
         this.mChoiceOptionId = optionId;
         this.mChoicePercent = mChoicePercent;

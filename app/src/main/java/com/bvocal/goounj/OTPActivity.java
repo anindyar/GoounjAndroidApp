@@ -136,7 +136,7 @@ public class OTPActivity extends BaseActivity implements View.OnClickListener {
                 if (NetworkHelper.checkActiveInternet(this)) {
                     if (!mOTP.getText().toString().equals("")) {
                         try {
-                            verifyOTPData(BASE_URL + OTP_VERIFY_URL + preferences.getString(USER_ID, ""));
+                            verifyOTPData("http://" + preferences.getString("voting", "") + ":3000/" + OTP_VERIFY_URL + preferences.getString(USER_ID, ""));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

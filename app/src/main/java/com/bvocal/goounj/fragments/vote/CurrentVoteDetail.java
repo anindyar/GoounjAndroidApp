@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bvocal.goounj.R;
 import com.bvocal.goounj.adapters.PollPagerAdapter;
@@ -20,8 +21,10 @@ import java.util.List;
  * Created by nandagopal on 12/1/16.
  */
 public class CurrentVoteDetail extends BaseFragment {
-
     int id;
+    String electionName, associationName, startDate, endDate;
+    int electionId;
+    private TextView txtPollTitle, txtPollCreatedBy, txtPollStartDate, txtPollEndDate, txtSelfNominationDate;
 
     @Override
     public void setTitle() {
@@ -31,9 +34,21 @@ public class CurrentVoteDetail extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments().getBundle("vote_bundle");
-        id = bundle.getInt("electionId");
-        makeToast("Bundle" + bundle.getString("electionName") + " - " + bundle.getInt("electionId"));
+//        Bundle bundle = getArguments().getBundle("vote_bundle");
+//        id = bundle.getInt("electionId");
+//        makeToast("Bundle" + bundle.getString("electionName") + " - " + bundle.getInt("electionId"));
+        try {
+            if (getArguments() != null) {
+                Bundle bundle = getArguments().getBundle("vote_bundle");
+                electionId = bundle.getInt("electionId");
+                electionName = bundle.getString("electionName");
+                associationName = bundle.getString("associationName");
+                startDate = bundle.getString("startDate");
+                endDate = bundle.getString("endDate");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Nullable
@@ -43,13 +58,25 @@ public class CurrentVoteDetail extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setNewFragment(setPagerFragment(new CandidateDetail(), id), R.id.fragment_content_candidate, "Candidate", false);
+    public void onViewCreated(View itemView, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(itemView, savedInstanceState);
+        txtPollTitle = (TextView) itemView.findViewById(R.id.poll_title);
+        txtPollCreatedBy = (TextView) itemView.findViewById(R.id.poll_createdBy);
+        txtPollStartDate = (TextView) itemView.findViewById(R.id.poll_startDate);
+        txtPollEndDate = (TextView) itemView.findViewById(R.id.poll_endDate);
+        setNewFragment(setPagerFragment(new CandidateDetail(), electionId), R.id.fragment_content_candidate, "Candidate", false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        try {
+            txtPollTitle.setText("" + electionName);
+            txtPollCreatedBy.setText("Created By: " + associationName);
+            txtPollStartDate.setText("" + startDate);
+            txtPollEndDate.setText("" + endDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

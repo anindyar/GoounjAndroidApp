@@ -13,6 +13,7 @@ import com.bvocal.goounj.fragments.CurrentPollPager;
 import com.bvocal.goounj.fragments.SurveyDetail;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
 import com.bvocal.goounj.fragments.vote.CurrentVoteDetail;
+import com.bvocal.goounj.fragments.vote.ResultVote;
 
 /**
  * Created by nandagopal on 5/2/16.
@@ -92,11 +93,16 @@ public class CurrentPollDetailActivity extends BaseActivity {
                 break;
             case 7:
                 getSupportActionBar().setTitle("Vote");
-
                 Fragment fragmentVoteListDetail = new CurrentVoteDetail();
                 fragmentVoteListDetail.setArguments(getIntent().getExtras());
                 setNewFragment(fragmentVoteListDetail, "Pager_Activity", false);
 
+                break;
+            case 8:
+                getSupportActionBar().setTitle("Vote");
+                Fragment fragmentVoteResult = new ResultVote();
+                fragmentVoteResult.setArguments(getIntent().getExtras());
+                setNewFragment(fragmentVoteResult, "", false);
                 break;
         }
     }

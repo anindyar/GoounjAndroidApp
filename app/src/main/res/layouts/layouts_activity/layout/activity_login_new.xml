@@ -86,6 +86,21 @@
             android:textColorHint="@android:color/white"
             android:textSize="@dimen/txtSmall" />
 
+        <EditText
+            android:id="@+id/ip_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext_white_stroke"
+            android:hint="192.168.43.25"
+            android:inputType="text"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="18dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/txtSmall" />
+
 
     </LinearLayout>
 

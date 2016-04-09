@@ -45,7 +45,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
     List<CandidateItem> itemList = new ArrayList<>();
     CandidateListAdapter mAdapter;
     Button mBtnSelfNomination;
-    int id;
+    int id, mVotePosition;
     private Dialog mConfirmDialog, mOTPDialog, mThanksDialog;
     private Button mCancel, mConfirm, mOtpCancel, mOtpSubmit, mBtnOtpOk, mBtnThanksOk;
     private EditText mTxtVerifyOTP;
@@ -82,7 +82,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
         super.onActivityCreated(savedInstanceState);
 
         try {
-            getVoteList("http://192.168.10.45:3000/" + CANDIDATE_LIST + id, true);
+            getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + CANDIDATE_LIST + id, true);
             refreshCurrentPollListview();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
             case R.id.btn_confirm_confirm:
                 mConfirmDialog.dismiss();
                 try {
-                    pushRequestForOtp("http://192.168.10.45:3000/"+VOTE_REQ_OTP, true);
+                    pushRequestForOtp("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_REQ_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -116,7 +116,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                     return;
                 }
                 try {
-                    verifyOtp("http://192.168.10.45:3000/"+VOTE_VERIFY_OTP, true);
+                    verifyOtp("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_VERIFY_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -201,7 +201,9 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                     int position = (Integer) v.getTag();
                     String description = itemList.get(position).about;
                     Bundle bundle = new Bundle();
-                    bundle.putInt("can_position", position);
+                    bundle.putInt("electionID", id);
+                    bundle.putInt("can_position", itemList.get(position).candidateId);
+                    bundle.putString("can_name", itemList.get(position).name);
                     bundle.putString("can_desc", description);
                     Fragment fragmentDescription = new CandidateDescription();
                     fragmentDescription.setArguments(bundle);
@@ -217,6 +219,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
             public void onClick(View v) {
                 try {
                     int position = (Integer) v.getTag();
+                    mVotePosition = itemList.get(position).candidateId;
                     String candidate_name = itemList.get(position).name;
 
                     showConfirmDialog(candidate_name);
@@ -225,22 +228,6 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                 }
             }
         });
-//        mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("can_position", position);
-//                bundle.putString("can_desc", itemList.get(position).about);
-//                Fragment fragmentDescription = new CandidateDescription();
-//                fragmentDescription.setArguments(bundle);
-//
-//                setNewFragment(fragmentDescription, R.id.fragment_content_candidate, "Candidate", true);
-//            }
-//        });
-//        else {
-//            mVoteRecyclerView.setVisibility(View.GONE);
-//            mNoVoteImage.setVisibility(View.VISIBLE);
-//        }
     }
 
     private void showConfirmDialog(String name) throws Exception {
@@ -330,6 +317,50 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
         try {
             mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
             mShowPollOnject.put("authCode", "" + mTxtVerifyOTP.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
+            @Override
+            public void onRequestCompleted(String response) {
+                Log.e("Poll List Response", "" + response.toString());
+                if (response.equals("OK")) {
+                    try {
+                        pushVote("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_PUSH, true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onRequestFailed(Exception e) {
+                if (e == null) {
+                    Log.e("Error", "Exception is null");
+                    Methodutils.message(act, "Internal Server Error. Requested Action Failed", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "Exception is not null");
+                    Methodutils.message(act, "" + e.getMessage(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
+            }
+        });
+        processor.execute(mShowPollOnject.toString());
+    }
+
+    private void pushVote(String url, boolean pullDownType) {
+        JSONObject mShowPollOnject = new JSONObject();
+        try {
+            mShowPollOnject.put(USER_ID, "" + preferences.getString(USER_ID, ""));
+            mShowPollOnject.put("electionId", "" + id);
+            mShowPollOnject.put("candidateId", "" + mVotePosition);
         } catch (Exception e) {
             e.printStackTrace();
         }

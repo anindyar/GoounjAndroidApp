@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_top_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_statics_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/rotate_arrow_toright"
+                android:padding="@dimen/padding_small"
+                android:textColor="@android:color/darker_gray"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@drawable/stats"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_small"
+                android:text="STATISTICS"
+                android:textColor="@android:color/darker_gray" />
+
+            <View
+                android:id="@+id/layout_seperatoe"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_below="@+id/stat"
+                android:background="@android:color/darker_gray" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small">
+
+            <ImageView
+                android:id="@+id/poll_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/padding_small"
+                android:src="@drawable/ic_usericon_blue" />
+
+            <TextView
+                android:id="@+id/poll_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/poll_image"
+                android:ellipsize="end"
+                android:padding="3dp"
+                android:text="Weekend Movie"
+                android:textColor="#000000"
+                android:textSize="@dimen/txtNormal" />
+
+            <TextView
+                android:id="@+id/poll_createdBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_title"
+                android:layout_toRightOf="@+id/poll_image"
+                android:ellipsize="end"
+                android:padding="2dp"
+                android:text="Created By:"
+                android:textColor="#F0AA4C"
+                android:textSize="@dimen/txtSmall" />
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_createdBy"
+                android:layout_toRightOf="@+id/poll_image"
+                android:padding="3dp"
+                android:text="START ON :"
+                android:textColor="#3C746B"
+                android:textSize="@dimen/txtSmall" />
+
+            <TextView
+                android:id="@+id/poll_startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_createdBy"
+                android:layout_toRightOf="@+id/start"
+                android:ellipsize="end"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="03:00 PM,23 NOV 2015"
+                android:textSize="@dimen/txtSmall" />
+
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/start"
+                android:layout_toRightOf="@+id/poll_image"
+                android:padding="3dp"
+                android:text="ENDS ON :"
+                android:textColor="#3C746B"
+                android:textSize="@dimen/txtSmall" />
+
+            <TextView
+                android:id="@+id/poll_endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/poll_startDate"
+                android:layout_toRightOf="@+id/start"
+                android:ellipsize="end"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="03:00 PM,23 NOV 2015"
+                android:textSize="@dimen/txtSmall" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_above="@+id/candidate_name"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/candidate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@drawable/ic_candidate_icon"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_small"
+                android:text="Candidate"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txtNormal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_below="@+id/candidate_name"
+                android:background="@android:color/black" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_top_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/voteChoiceListVieView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_above="@+id/bargraph"
+            android:layout_below="@+id/layout_top_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:choiceMode="singleChoice"
+            android:divider="@null"></ListView>
+
+
+        <com.bvocal.goounj.utils.bargraph.BarGraph
+            android:id="@+id/bargraph"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</RelativeLayout>
