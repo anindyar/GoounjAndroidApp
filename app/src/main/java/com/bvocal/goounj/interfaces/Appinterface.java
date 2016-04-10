@@ -81,7 +81,7 @@ public interface Appinterface {
     String SEARCH_POLL = "search/v1/searchPoll";
 
 
-    String SEARCH_VOTE = "search/v1/searchVote";
+    String SEARCH_VOTE = "search/v1/searchElection";
 
 
     /*Time Line*/
