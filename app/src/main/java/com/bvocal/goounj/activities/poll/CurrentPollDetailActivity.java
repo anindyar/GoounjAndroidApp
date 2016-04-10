@@ -107,10 +107,6 @@ public class CurrentPollDetailActivity extends BaseActivity {
         }
     }
 
-    private void showEdit() {
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -124,5 +120,18 @@ public class CurrentPollDetailActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0 &&
+                getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() != ResultPollNew.class)
+            super.onBackPressed();
+        else if (getSupportFragmentManager().getBackStackEntryCount() > 0 &&
+                getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() == ResultPollNew.class)
+            finish();
+        else
+            finish();
     }
 }

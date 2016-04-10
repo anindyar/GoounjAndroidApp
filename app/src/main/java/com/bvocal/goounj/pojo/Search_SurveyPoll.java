@@ -16,6 +16,8 @@ public class Search_SurveyPoll {
     public String pollName;
     public int isActive;
     public String isAnswered;
+    public String electionName, nominationEndDate, associationName;
+    public int electionId, isVoted;
 
     public Search_SurveyPoll(int pollId, int isGeneric, String endDate, int isSurvey, String startDate, int isBoost, int createdUserId, String createdUserName, String pollName, int isActive, String isAnswered) {
         this.pollId = pollId;
@@ -43,6 +45,17 @@ public class Search_SurveyPoll {
         this.pollName = pollName;
         this.isActive = isActive;
         this.isAnswered = isAnswered;
+    }
+
+    public Search_SurveyPoll(int electionId, String electionName, String endDate, String startDate, int isVoted, String nominationEndDate, String associationName) {
+        this.electionId = electionId;
+        this.electionName = electionName;
+        this.endDate = endDate;
+        this.startDate = startDate;
+        this.isVoted = isVoted;
+        this.nominationEndDate = nominationEndDate;
+        this.associationName = associationName;
+
     }
 
     public int getPollId() {

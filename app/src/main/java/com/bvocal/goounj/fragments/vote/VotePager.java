@@ -124,8 +124,14 @@ public class VotePager extends BaseFragment implements ViewPager.OnPageChangeLis
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_search)
-            startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, POLL).putExtra("PAGE_TYPE", mViewPager.getCurrentItem()));
+        if (item.getItemId() == R.id.menu_search) {
+            if (item.getItemId() == R.id.menu_search) {
+                if (mViewPager.getCurrentItem() == 0)
+                    startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY).putExtra("PAGE_TYPE", 5));
+                else
+                    startActivity(new Intent(getActivity(), SearchToolbarActivity.class).putExtra(TYPE, SURVEY).putExtra("PAGE_TYPE", 6));
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 

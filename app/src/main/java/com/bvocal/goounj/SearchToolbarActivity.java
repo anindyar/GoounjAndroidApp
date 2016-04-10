@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.bvocal.goounj.pojo.VoteItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.bvocal.goounj.adapters.SearchListAdapter;
@@ -67,6 +68,8 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
         if (getIntent().getExtras() != null) {
             activity.setTitle(getIntent().getExtras().getString(TYPE).equals(SURVEY) ? "Search Survey" : "Search Poll");
             mTypeOfPage = getIntent().getExtras().getInt("PAGE_TYPE");
+            activity.setTitle((mTypeOfPage == 0 || mTypeOfPage == 1 || mTypeOfPage == 2) ? "Search Poll" :
+                    (mTypeOfPage == 3 || mTypeOfPage == 4) ? "Search Survey" : "Search Vote");
             Log.e("Search Type", "" + mTypeOfPage);
         }
 
@@ -115,7 +118,8 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     @Override
     public boolean onQueryTextSubmit(String query) {
         try {
-            searchSurvey(query, getIntent().getExtras().getString(TYPE).equals(SURVEY) ? true : false);
+            searchSurvey(query, (mTypeOfPage == 0 || mTypeOfPage == 1 || mTypeOfPage == 2) ? SEARCH_POLL :
+                    (mTypeOfPage == 3 || mTypeOfPage == 4) ? SEARCH_SURVEY : SEARCH_VOTE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -143,14 +147,14 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
 //        }
 //    }
 
-    private void searchSurvey(String value, boolean survey) throws Exception {
+    private void searchSurvey(String value, String survey) throws Exception {
         mSearchSurvey.clear();
         JSONObject object = new JSONObject();
         object.put(searchString, value);
         object.put(userId, preferences.getString(USER_ID, ""));
 
         RestApiProcessor mProcessor = new RestApiProcessor(this, RestApiProcessor.HttpMethod.POST,
-                BASE_URL + (survey ? SEARCH_SURVEY : SEARCH_POLL), true, new RestApiListener<String>() {
+                "http://" + preferences.getString("voting", "") + ":3000/" + survey, true, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
 
@@ -231,6 +235,26 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                                     objectPolls.optString("createdUserName"), objectPolls.optString("pollName")));
                         }
                     }
+                } else if (mTypeOfPage == 5) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isVoted").equals("1")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
+                                    splitOnlyDateFromString(objectPolls.optString("endDate")), splitOnlyDateFromString(objectPolls.optString("startDate")),
+                                    objectPolls.optInt("isVoted"), splitOnlyDateFromString(objectPolls.optString("nominationEndDate")),
+                                    objectPolls.optString("associationName")));
+                        }
+                    }
+                } else if (mTypeOfPage == 6) {
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        JSONObject objectPolls = responseArray.optJSONObject(i);
+                        if (objectPolls.optString("isVoted").equals("0")) {
+                            mSearchSurvey.add(new Search_SurveyPoll(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
+                                    splitOnlyDateFromString(objectPolls.optString("endDate")), splitOnlyDateFromString(objectPolls.optString("startDate")),
+                                    objectPolls.optInt("isVoted"), splitOnlyDateFromString(objectPolls.optString("nominationEndDate")),
+                                    objectPolls.optString("associationName")));
+                        }
+                    }
                 }
 
 //                mSearchSurvey.addAll(list);
@@ -309,6 +333,32 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
                 startActivity(new Intent(activity, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 5));
                 Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
+                break;
+            case 5:
+                Search_SurveyPoll item = mSearchSurvey.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("electionId", item.electionId);
+                bundle.putString("electionName", item.electionName);
+                bundle.putString("endDate", item.endDate);
+                bundle.putString("startDate", item.startDate);
+                bundle.putInt("isVoted", item.isVoted);
+                bundle.putString("nominationEndDate", item.nominationEndDate);
+                bundle.putString("associationName", item.associationName);
+                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", item.electionId).putExtra("poll_type", 7).putExtra("vote_bundle", bundle));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).electionId);
+                break;
+            case 6:
+                Search_SurveyPoll itemHistory = mSearchSurvey.get(position);
+                Bundle bundleHistory = new Bundle();
+                bundleHistory.putInt("electionId", itemHistory.electionId);
+                bundleHistory.putString("electionName", itemHistory.electionName);
+                bundleHistory.putString("endDate", itemHistory.endDate);
+                bundleHistory.putString("startDate", itemHistory.startDate);
+                bundleHistory.putInt("isVoted", itemHistory.isVoted);
+                bundleHistory.putString("nominationEndDate", itemHistory.nominationEndDate);
+                bundleHistory.putString("associationName", itemHistory.associationName);
+                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", itemHistory.electionId).putExtra("poll_type", 8).putExtra("vote_bundle", bundleHistory));
+                Log.e("Poll Id", "" + mSearchSurvey.get(position).electionId);
                 break;
         }
 

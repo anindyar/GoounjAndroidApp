@@ -165,6 +165,21 @@ public class BaseActivity extends AppCompatActivity implements Appinterface {
         return fragment;
     }
 
+    public String splitOnlyDateFromString(String stringName) {
+
+        try {
+            SimpleDateFormat mRequiredDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+            Date date = mSimpleDateFormat.parse(stringName);
+
+            return mRequiredDateFormat.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public String splitFromString(String stringName) {
 
         try {
