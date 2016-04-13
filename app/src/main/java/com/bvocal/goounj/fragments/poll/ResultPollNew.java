@@ -49,70 +49,24 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
     JSONArray mChoiceArrayOne, mChoiceArrayTwo, mChoiceArrayThree, mSubmitValuesArray;
     LinearLayout mLayoutQtsOne, mLayoutQtsTwo, mLayoutQtsThree, mBtnSubmit;
     TextView mQuestionTitleOne, mQuestionTitleTwo, mQuestionTitleThree;
-    //    FrameLayout mFrameLayoutOne, mFrameLayoutTwo, mFrameLayoutThree;
     LinearLayout mLayoutOne, mLayoutTwo, mLayoutThree, mLayoutSubmit;
     RelativeLayout mBackToLayout;
     Resources resources;
     PieGraph mPieOne, mPieTwo, mPieThree;
-    //    private CircularProg mQtsOneProgressOne, mQtsOneProgressTwo, mQtsOneProgressTh, mQtsTwoProgressOne, mQtsTwoProgressTwo, mQtsTwoProgressTh,
-//            mQtsThProgressOne, mQtsThProgressTwo, mQtsThProgressTh;
     int mPollId;
     private int mTotalCountOne, mTotalCountTwo, mTotalCountThree;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ((HomeActivity) act).mSearchPollsTxt.setVisibility(View.GONE);
         mPollId = getArguments().getInt(PAGER_COUNT);
 
-//        qtsSize = preferences.getInt(RESULT_QUESTION_SIZE, 0);
-//        if (qtsSize == 1)
-//            setQtsOneContent();
-//        else if (qtsSize == 2)
-//            setQtsTwoContent();
-//        else if (qtsSize == 3)
-//            setQtsThreeContent();
-//        else
-//            Log.e("Result", "test");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_result_poll, container, false);
-    }
-
-    private void setPieGraph(PieGraph pg, final int mTotalCount, final int mTotal, final List<ChoicesItem> itemList) throws Exception {
-        float testCount = 0;
-        PieSlice slice;
-        for (int i = 0; i < mTotalCount; i++) {
-            if (itemList.get(i).mChoiceOptionId != 0) {
-                slice = new PieSlice();
-                slice.setColor(resources.getColor(Methodutils.mResultColor[i]));
-                testCount = ((itemList.get(i).mChoiceOptionId * 100) / mTotal);
-                Log.e("Total count", "" + mTotalCount);
-                Log.e("Test Count", itemList.get(i).mChoiceOptionId + " - " + itemList.get(i).mChoiceName + " - " + testCount);
-                slice.setValue(testCount);
-                slice.setTitle("first");
-                pg.addSlice(slice);
-
-            }
-
-        }
-        pg.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-
-            @Override
-            public void onClick(int position) {
-                if (position != -1) {
-                    float value = ((itemList.get(position).mChoiceOptionId * 100) / mTotal);
-                    makeToast(" " + value + "%");
-                }
-            }
-        });
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_app_icon);
-        pg.setBackgroundBitmap(b);
-        pg.setInnerCircleRatio(128);
-        pg.setPadding(2);
     }
 
     @Override
@@ -127,12 +81,6 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
         (mChoiceListviewTwo = (ListView) v.findViewById(R.id.choicesListviewTwo)).setOnItemClickListener(this);
         (mChoiceListviewThree = (ListView) v.findViewById(R.id.choicesListviewThree)).setOnItemClickListener(this);
         mBackToLayout = (RelativeLayout) v.findViewById(R.id.layout_statics_back);
-//        mBackToLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                act.finish();
-//            }
-//        });
         (mLayoutSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         (mBtnSubmit = (LinearLayout) v.findViewById(R.id.layout_survey_detail_submit)).setOnClickListener(this);
         mLayoutQtsOne = (LinearLayout) v.findViewById(R.id.layout_survey_detail_qts_one);
@@ -163,76 +111,9 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        if (qtsSize == 1) {
-////            setQtsOneContent();
-//            try {
-////                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
-//                setQtsOneContent(mPieOne);
-//
-//
-//                mChoiceListviewOne.setAdapter(mAdapterOne);
-//                mQuestionTitleOne.setText(mQuestionOne);
-//                mLayoutQtsTwo.setVisibility(View.GONE);
-//                mLayoutQtsThree.setVisibility(View.GONE);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        } else if (qtsSize == 2) {
-////            setQtsTwoContent();
-//            try {
-////                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
-////                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
-//                setQtsTwoContent(mPieOne, mPieTwo);
-//                mChoiceListviewOne.setAdapter(mAdapterOne);
-//                mChoiceListviewTwo.setAdapter(mAdapterTwo);
-//                mQuestionTitleOne.setText(mQuestionOne);
-//                mQuestionTitleTwo.setText(mQuestionTwo);
-//                mLayoutQtsThree.setVisibility(View.GONE);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        } else if (qtsSize == 3) {
-////            setQtsThreeContent();
-//            try {
-////                setPieGraph(mPieOne, preferences.getInt("mTotalCountOne", 0), preferences.getInt("mTotalOne", 0), itemListOne);
-////                setPieGraph(mPieTwo, preferences.getInt("mTotalCountTwo", 0), preferences.getInt("mTotalTwo", 0), itemListTwo);
-////                setPieGraph(mPieThree, preferences.getInt("mTotalCountThree", 0), preferences.getInt("mTotalThree", 0), itemListThree);
-//                setQtsThreeContent(mPieOne, mPieTwo, mPieThree);
-//                mChoiceListviewOne.setAdapter(mAdapterOne);
-//                mChoiceListviewTwo.setAdapter(mAdapterTwo);
-//                mChoiceListviewThree.setAdapter(mAdapterThree);
-//                mQuestionTitleOne.setText(mQuestionOne);
-//                mQuestionTitleTwo.setText(mQuestionTwo);
-//                mQuestionTitleThree.setText(mQuestionThree);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
 
     }
 
-
-//    private void setResultsWithPieChart(JSONArray mQtsListArray) {
-//        try {
-//            for (int i = 0; i < mQtsListArray.length(); i++) {
-//                JSONObject mChoicesObject = mQtsListArray.getJSONObject(i);
-//                JSONObject mTotalCountObject = mChoicesObject.optJSONObject("totalCount");
-//                JSONArray mChoicesArray = mChoicesObject.optJSONArray("choices");
-//
-////                for (int j = 0; j < mChoicesArray.length(); j++) {
-////
-////                }
-//
-//
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
     private void setQtsOneContent(PieGraph pieGraphOne) {
         try {
@@ -254,12 +135,6 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//                            makeToast("" + itemListOne.get(position).mChoicePercent);
-//                        }
-//                    });
                 }
             }
             editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).commit();
@@ -296,12 +171,6 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//                            makeToast("" + itemListOne.get(position).mChoicePercent);
-//                        }
-//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
@@ -318,20 +187,10 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphTwo.addSlice(slice);
-//                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//                            makeToast("" + itemListTwo.get(position).mChoicePercent);
-//                        }
-//                    });
                 }
             }
             editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).
                     putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalTwo", mTotalCountTwo).commit();
-//            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
-//            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
-//            editor.putInt(RES_COUNT_0, itemListTwo.get(0).mChoiceOptionId);
-//            editor.putInt(RES_COUNT_1, itemListTwo.get(1).mChoiceOptionId);
             Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_app_icon);
             pieGraphOne.setBackgroundBitmap(b);
             pieGraphOne.setInnerCircleRatio(128);
@@ -370,12 +229,6 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphOne.addSlice(slice);
-//                    pieGraphOne.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//
-//                        }
-//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayTwo.length(); i++) {
@@ -392,12 +245,6 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphTwo.addSlice(slice);
-//                    pieGraphTwo.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//
-//                        }
-//                    });
                 }
             }
             for (int i = 0; i < mChoiceArrayThree.length(); i++) {
@@ -414,23 +261,12 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
                     slice.setValue(Float.parseFloat(percentValue));
                     slice.setTitle("first");
                     pieGraphThree.addSlice(slice);
-//                    pieGraphThree.setOnSliceClickedListener(new PieGraph.OnSliceClickedListener() {
-//                        @Override
-//                        public void onClick(int position) {
-//
-//                        }
-//                    });
                 }
             }
 //            editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalCountThree", mChoiceArrayThree.length()).commit();
             editor.putInt("mTotalCountOne", mChoiceArrayOne.length()).putInt("mTotalOne", mTotalCountOne).
                     putInt("mTotalCountTwo", mChoiceArrayTwo.length()).putInt("mTotalTwo", mTotalCountTwo).
                     putInt("mTotalCountThree", mChoiceArrayThree.length()).putInt("mTotalThree", mTotalCountThree).commit();
-//            mAdapterOne = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListOne, 2);
-//            mAdapterTwo = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListTwo, 2);
-//            mAdapterThree = new ChoicesListviewAdapter(act, android.R.layout.simple_list_item_single_choice, itemListThree, 2);
-//            editor.putInt(RES_COUNT_0, itemListThree.get(0).mChoiceOptionId);
-//            editor.putInt(RES_COUNT_1, itemListThree.get(1).mChoiceOptionId);
             Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_app_icon);
             pieGraphOne.setBackgroundBitmap(b);
             pieGraphOne.setInnerCircleRatio(128);

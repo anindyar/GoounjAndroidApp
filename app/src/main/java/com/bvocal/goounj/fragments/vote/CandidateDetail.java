@@ -49,7 +49,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
     private Dialog mConfirmDialog, mOTPDialog, mThanksDialog;
     private Button mCancel, mConfirm, mOtpCancel, mOtpSubmit, mBtnOtpOk, mBtnThanksOk;
     private EditText mTxtVerifyOTP;
-    private TextView mCandidateName;
+    private TextView mCandidateName, mNoOfCandidates;
 
     @Override
     public void setTitle() {
@@ -72,6 +72,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         (mBtnSelfNomination = (Button) view.findViewById(R.id.btnSelfNomination)).setOnClickListener(this);
+        mNoOfCandidates = (TextView) view.findViewById(R.id.vote_candidate);
         mCandidateRecyclerView = (RecyclerView) view.findViewById(R.id.candidate_list);
         mCandidateRecyclerView.setLayoutManager(new LinearLayoutManager(act));
 
@@ -82,7 +83,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
         super.onActivityCreated(savedInstanceState);
 
         try {
-            getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + CANDIDATE_LIST + id, true);
+            getVoteList(BASE_URL + CANDIDATE_LIST + id, true);
             refreshCurrentPollListview();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +96,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
             case R.id.btn_confirm_confirm:
                 mConfirmDialog.dismiss();
                 try {
-                    pushRequestForOtp("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_REQ_OTP, true);
+                    pushRequestForOtp(BASE_URL + VOTE_REQ_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -116,7 +117,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                     return;
                 }
                 try {
-                    verifyOtp("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_VERIFY_OTP, true);
+                    verifyOtp(BASE_URL + VOTE_VERIFY_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -173,7 +174,13 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
     public void showPollList(String response) {
         try {
             JSONObject mParentObject = new JSONObject(response);
+
+//            ((CurrentVoteDetail) getParentFragment()).mNoOfCandidates.setText("" + mParentObject.optInt("candidateCount"));
+            mNoOfCandidates.setText("Candidate: " + mParentObject.optInt("candidateCount"));
+
+
             JSONArray objectArray = mParentObject.optJSONArray("candidates");
+
             itemList.clear();
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
@@ -203,6 +210,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                     Bundle bundle = new Bundle();
                     bundle.putInt("electionID", id);
                     bundle.putInt("can_position", itemList.get(position).candidateId);
+                    bundle.putString("candidate_count", "" + mNoOfCandidates.getText().toString());
                     bundle.putString("can_name", itemList.get(position).name);
                     bundle.putString("can_desc", description);
                     Fragment fragmentDescription = new CandidateDescription();
@@ -326,7 +334,7 @@ public class CandidateDetail extends BaseFragment implements Appinterface, View.
                 Log.e("Poll List Response", "" + response.toString());
                 if (response.equals("OK")) {
                     try {
-                        pushVote("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_PUSH, true);
+                        pushVote(BASE_URL + VOTE_PUSH, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

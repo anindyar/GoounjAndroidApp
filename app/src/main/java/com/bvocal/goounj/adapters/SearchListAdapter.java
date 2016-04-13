@@ -47,7 +47,16 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             holder.imgRightArrow.setVisibility(View.GONE);
             holder.imgStatistics.setVisibility(View.VISIBLE);
         }
-        holder.txtPollTitle.setText("" + items.getPollName());
+
+//        if (!items.getPollName().equals("") || !items.getPollName().equals("null"))
+//            holder.txtPollTitle.setText("" + items.getPollName());
+//        else if (!items.getElectionName().equals("") || !items.getElectionName().equals("null"))
+//            holder.txtPollTitle.setText("" + items.getElectionName());
+        if (!items.getPollName().equals("") || !items.getPollName().equals("null"))
+            holder.txtPollTitle.setText("" + items.getPollName());
+        else
+            holder.txtPollTitle.setText("No Title Found");
+
         holder.txtPollCreatedBy.setText("Created by: " + items.getCreatedUserName());
         holder.txtPollStartDate.setText("" + items.getStartDate());
         holder.txtPollEndDate.setText("" + items.getEndDate());

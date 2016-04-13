@@ -82,37 +82,11 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/layout_candidate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_vote_detail">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_vote_bg" />
-
-        <TextView
-            android:id="@+id/vote_candidate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:drawableLeft="@drawable/ic_candidate_icon"
-            android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="Candidate : 05"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/txtNormal" />
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/fragment_content_candidate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/layout_candidate"
+        android:layout_below="@+id/layout_vote_detail"
         android:background="@android:color/white"></FrameLayout>
 
     <!--<com.bvocal.goounj.views.CustomViewPager-->

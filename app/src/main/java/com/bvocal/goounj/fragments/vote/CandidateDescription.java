@@ -28,9 +28,9 @@ import org.json.JSONObject;
  */
 public class CandidateDescription extends BaseFragment implements View.OnClickListener {
 
-    private TextView mCandidateDescription;
+    private TextView mCandidateDescription, mNoOfCandidate;
     private Button mVote;
-    private String mDesc, mCanName;
+    private String mDesc, mCanName, mCanCount;
     private int mCanId, id;
     private Dialog mConfirmDialog, mOTPDialog, mThanksDialog;
     private Button mCancel, mConfirm, mOtpCancel, mOtpSubmit, mBtnOtpOk, mBtnThanksOk;
@@ -50,6 +50,7 @@ public class CandidateDescription extends BaseFragment implements View.OnClickLi
             id = getArguments().getInt("electionID");
             mCanName = getArguments().getString("can_name");
             mCanId = getArguments().getInt("can_position");
+            mCanCount = getArguments().getString("candidate_count");
 //            makeToast("" + getArguments().getString("can_desc"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +67,8 @@ public class CandidateDescription extends BaseFragment implements View.OnClickLi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mCandidateDescription = (TextView) view.findViewById(R.id.candidate_detail_description);
+        mNoOfCandidate = (TextView) view.findViewById(R.id.vote_candidate);
+        mNoOfCandidate.setText("" + mCanCount);
         mCandidateDescription.setText("" + mDesc);
         (mVote = (Button) view.findViewById(R.id.btnVote)).setOnClickListener(this);
     }
@@ -76,7 +79,7 @@ public class CandidateDescription extends BaseFragment implements View.OnClickLi
             case R.id.btn_confirm_confirm:
                 mConfirmDialog.dismiss();
                 try {
-                    pushRequestForOtp("http://192.168.43.25:3000/" + VOTE_REQ_OTP, true);
+                    pushRequestForOtp(BASE_URL + VOTE_REQ_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

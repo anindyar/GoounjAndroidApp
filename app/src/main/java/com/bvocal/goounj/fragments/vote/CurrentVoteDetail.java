@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bvocal.goounj.R;
 import com.bvocal.goounj.adapters.PollPagerAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
+import com.bvocal.goounj.pojo.CandidateItem;
 import com.bvocal.goounj.views.CustomViewPager;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import java.util.List;
  */
 public class CurrentVoteDetail extends BaseFragment {
     int id;
-    String electionName, associationName, startDate, endDate;
     int electionId;
+    private String electionName, associationName, startDate, endDate;
     private TextView txtPollTitle, txtPollCreatedBy, txtPollStartDate, txtPollEndDate, txtSelfNominationDate;
 
     @Override
@@ -34,9 +35,6 @@ public class CurrentVoteDetail extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Bundle bundle = getArguments().getBundle("vote_bundle");
-//        id = bundle.getInt("electionId");
-//        makeToast("Bundle" + bundle.getString("electionName") + " - " + bundle.getInt("electionId"));
         try {
             if (getArguments() != null) {
                 Bundle bundle = getArguments().getBundle("vote_bundle");

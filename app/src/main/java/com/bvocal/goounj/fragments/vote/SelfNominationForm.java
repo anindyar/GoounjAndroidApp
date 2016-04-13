@@ -98,7 +98,7 @@ public class SelfNominationForm extends BaseFragment implements View.OnClickList
                 }
 
                 try {
-                    pushSelfNomination("http://" + preferences.getString("voting", "") + ":3000/" + SELF_NOMINATION, true);
+                    pushSelfNomination(BASE_URL + SELF_NOMINATION, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

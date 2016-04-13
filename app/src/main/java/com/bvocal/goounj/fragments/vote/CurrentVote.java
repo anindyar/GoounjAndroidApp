@@ -82,7 +82,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
         mVoteList.clear();
         if (NetworkHelper.checkActiveInternet(act)) {
             try {
-                getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+                getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -100,7 +100,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act)) {
                     try {
-                        getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+                        getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -191,7 +191,7 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
-                if (objectPolls.optString("isVoted").equals("1")) {
+                if (objectPolls.optString("isVoted").equals("0")) {
                     mVoteList.add(new VoteItem(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
                             splitOnlyDateFromString(objectPolls.optString("endDate")), splitOnlyDateFromString(objectPolls.optString("startDate")),
                             objectPolls.optInt("isVoted"), splitOnlyDateFromString(objectPolls.optString("nominationEndDate")),

@@ -14,6 +14,7 @@ import android.util.Log;
 import com.bvocal.goounj.exceptions.ConnectionFailedException;
 import com.bvocal.goounj.exceptions.ErroHandler;
 import com.bvocal.goounj.exceptions.NoNetworkException;
+import com.bvocal.goounj.exceptions.TypeNotFoundException;
 import com.bvocal.goounj.interfaces.Appinterface;
 import com.bvocal.goounj.interfaces.RestApiListener;
 
@@ -245,6 +246,8 @@ public class RestApiProcessor extends AsyncTask<String, String, String> implemen
             Log.e("Exception", "" + mException.getMessage());
             if (mException.getMessage().contains("failed to connect to"))
                 mRestApiListener.onRequestFailed(new ConnectionFailedException());
+            else if (mException.getMessage().contains("Value Cannot of type"))
+                mRestApiListener.onRequestFailed(new TypeNotFoundException());
             else
                 mRestApiListener.onRequestFailed(mException != null ? mException : new NullPointerException());
             return;

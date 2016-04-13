@@ -47,15 +47,55 @@ public class Search_SurveyPoll {
         this.isAnswered = isAnswered;
     }
 
-    public Search_SurveyPoll(int electionId, String electionName, String endDate, String startDate, int isVoted, String nominationEndDate, String associationName) {
+    public Search_SurveyPoll(int electionId, String pollName, String endDate, String startDate, int isVoted, String nominationEndDate, String createdUserName) {
         this.electionId = electionId;
-        this.electionName = electionName;
+        this.pollName = pollName;
         this.endDate = endDate;
         this.startDate = startDate;
         this.isVoted = isVoted;
         this.nominationEndDate = nominationEndDate;
-        this.associationName = associationName;
+        this.createdUserName = createdUserName;
 
+    }
+
+    public String getElectionName() {
+        return electionName;
+    }
+
+    public void setElectionName(String electionName) {
+        this.electionName = electionName;
+    }
+
+    public String getNominationEndDate() {
+        return nominationEndDate;
+    }
+
+    public void setNominationEndDate(String nominationEndDate) {
+        this.nominationEndDate = nominationEndDate;
+    }
+
+    public String getAssociationName() {
+        return associationName;
+    }
+
+    public void setAssociationName(String associationName) {
+        this.associationName = associationName;
+    }
+
+    public int getElectionId() {
+        return electionId;
+    }
+
+    public void setElectionId(int electionId) {
+        this.electionId = electionId;
+    }
+
+    public int getIsVoted() {
+        return isVoted;
+    }
+
+    public void setIsVoted(int isVoted) {
+        this.isVoted = isVoted;
     }
 
     public int getPollId() {

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.bvocal.goounj.BaseActivity;
 import com.bvocal.goounj.R;
 import com.bvocal.goounj.fragments.CurrentPollPager;
+import com.bvocal.goounj.fragments.ResultPoll;
 import com.bvocal.goounj.fragments.SurveyDetail;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
 import com.bvocal.goounj.fragments.vote.CurrentVoteDetail;
@@ -116,22 +117,14 @@ public class CurrentPollDetailActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == android.R.id.home) {
-            super.onBackPressed();
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
+
+            if (fragment instanceof ResultVote || fragment instanceof ResultPoll)
+                CurrentPollDetailActivity.this.finish();
+            else
+                super.onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0 &&
-                getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() != ResultPollNew.class)
-            super.onBackPressed();
-        else if (getSupportFragmentManager().getBackStackEntryCount() > 0 &&
-                getSupportFragmentManager().findFragmentById(R.id.fragment_content).getClass() == ResultPollNew.class)
-            finish();
-        else
-            finish();
     }
 }

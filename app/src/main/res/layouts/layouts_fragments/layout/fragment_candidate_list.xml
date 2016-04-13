@@ -4,12 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/layout_candidate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/layout_vote_detail">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_vote_bg" />
+
+        <TextView
+            android:id="@+id/vote_candidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_candidate_icon"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtNormal" />
+    </FrameLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/candidate_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btnSelfNomination"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/layout_candidate" />
+
 
     <Button
         android:id="@+id/btnSelfNomination"

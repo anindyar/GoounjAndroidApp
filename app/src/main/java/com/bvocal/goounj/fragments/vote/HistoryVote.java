@@ -35,11 +35,12 @@ import java.util.List;
  * Created by nandagopal on 11/1/16.
  */
 public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
+    private static final int mUpperLimit = 10;
     private List<VoteItem> mVoteList = new ArrayList<>();
     private RecyclerView mVoteRecyclerView;
     private VoteListAdapter mVoteAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private int mLowerLimit = 0, mUpperLimit = 10;
+    private int mLowerLimit = 0;
     private RelativeLayout mNoVoteImage, mPageError;
     private Handler handler = new Handler();
 
@@ -76,7 +77,6 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Vote");
-        mVoteList.clear();
 //        if (NetworkHelper.checkActiveInternet(act)) {
 //            try {
 //                getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
@@ -97,7 +97,7 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
             public void onRefresh() {
                 if (NetworkHelper.checkActiveInternet(act)) {
                     try {
-                        getVoteList("http://" + preferences.getString("voting", "") + ":3000/"  + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+                        getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -118,10 +118,10 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
-            mVoteList.clear();
+            mLowerLimit = 0;
             if (NetworkHelper.checkActiveInternet(act)) {
                 try {
-                    getVoteList("http://" + preferences.getString("voting", "") + ":3000/" + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+                    getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -136,11 +136,12 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    private void getVoteList(String url, boolean pullDownType, int mLowerLimit, int mUpperLimit) {
+    private void getVoteList(String url, boolean pullDownType, final int mLowerLimit, final int mUpperLimit) {
         RestApiProcessor processor = new RestApiProcessor(act, RestApiProcessor.HttpMethod.POST, url, pullDownType, new RestApiListener<String>() {
             @Override
             public void onRequestCompleted(String response) {
                 Log.e("Poll List Response", "" + response.toString());
+                Log.e("Limit", mLowerLimit + " - " + mUpperLimit);
                 if (response.equals("[]"))
                     makeToast("No records found");
                 try {
@@ -196,7 +197,10 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
             mVoteAdapter = new VoteListAdapter(act, mVoteList, 1);
             mVoteAdapter.setOnItemClickListener(this);
             mVoteRecyclerView.setAdapter(mVoteAdapter);
-            mLowerLimit = mLowerLimit + 10;
+            if (mVoteList.size() > 10)
+                mLowerLimit = mLowerLimit + 10;
+            else
+                mLowerLimit = 0;
         } else {
             mLowerLimit = 0;
             mVoteRecyclerView.setVisibility(View.GONE);
@@ -207,10 +211,11 @@ public class HistoryVote extends BaseFragment implements SwipeRefreshLayout.OnRe
     public void showPollList(String response) {
         try {
             JSONArray objectArray = new JSONArray(response);
+            mVoteList.clear();
             for (int i = 0; i < objectArray.length(); i++) {
                 JSONObject objectPolls = objectArray.optJSONObject(i);
                 Log.e("Array Values", "" + i);
-                if (objectPolls.optString("isVoted").equals("0")) {
+                if (objectPolls.optString("isVoted").equals("1")) {
                     mVoteList.add(new VoteItem(objectPolls.optInt("electionId"), objectPolls.optString("electionName"),
                             splitOnlyDateFromString(objectPolls.optString("endDate")), splitOnlyDateFromString(objectPolls.optString("startDate")),
                             objectPolls.optInt("isVoted"), splitOnlyDateFromString(objectPolls.optString("nominationEndDate")),

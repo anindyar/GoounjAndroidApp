@@ -116,7 +116,7 @@ public class ResultVote extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         try {
             mVoteList.clear();
-            pushRequestForOtp("http://" + preferences.getString("voting", "") + ":3000/" + VOTE_RESULT + electionId, true);
+            pushRequestForOtp(BASE_URL + VOTE_RESULT + electionId, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

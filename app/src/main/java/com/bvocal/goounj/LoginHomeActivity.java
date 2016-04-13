@@ -88,19 +88,6 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void setAutoCompleteListener() {
-//        mCountryText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                makeToast(activity, "" + parent.getItemAtPosition(position));
-//                try {
-//                    setCountries("" + parent.getItemAtPosition(position));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-
         mCityText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -174,10 +161,10 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
                         return;
                     }
 
-                    if (mIPText.getText().toString().equals("")) {
-                        makeToast(this, "Enter IP Address!");
-                        return;
-                    }
+//                    if (mIPText.getText().toString().equals("")) {
+//                        makeToast(this, "Enter IP Address!");
+//                        return;
+//                    }
 
                     if (!mCBAccept.isChecked()) {
                         makeToast(this, "Please accept the terms of use!");
@@ -192,10 +179,9 @@ public class LoginHomeActivity extends BaseActivity implements View.OnClickListe
 
                     try {
                         editor.putString(USERNAME, "" + mNameText.getText().toString()).
-                                putString("voting", mIPText.getText().toString()).
                                 putString(COUNTRY, "" + mCountryText.getText().toString()).
                                 putString(CITY, "" + mCityText.getText().toString()).putString(MOBILE, "" + mMobileNumber.getText().toString()).commit();
-                        pushLoginData("http://" + mIPText.getText().toString() + ":3000/" + USER_LOGIN_URL);
+                        pushLoginData(BASE_URL + USER_LOGIN_URL);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
