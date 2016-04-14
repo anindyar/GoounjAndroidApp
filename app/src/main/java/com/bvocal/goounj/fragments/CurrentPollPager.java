@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bvocal.goounj.R;
+import com.bvocal.goounj.activities.results.ResultActivity;
 import com.bvocal.goounj.adapters.PollPagerAdapter;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
 import com.bvocal.goounj.interfaces.RestApiListener;
@@ -346,7 +347,9 @@ public class CurrentPollPager extends BaseFragment implements View.OnClickListen
                 Log.e("Poll Id", "" + mPollId);
                 try {
 //                    getResultPollForCreatedUser(BASE_URL + RESULT_URL + mPollId);
-                    ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Result_Poll", true);
+//                    ((CurrentPollDetailActivity) act).setNewFragment(setPagerFragment(new ResultPollNew(), mPollId), "Result_Poll", true);
+                    startActivity(new Intent(act, ResultActivity.class).putExtra("poll_id", mPollId));
+                    act.finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

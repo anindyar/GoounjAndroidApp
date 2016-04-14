@@ -2,6 +2,9 @@ package com.bvocal.goounj.activities.results;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.bvocal.goounj.BaseActivity;
 import com.bvocal.goounj.R;
@@ -10,17 +13,31 @@ import com.bvocal.goounj.fragments.vote.ResultVote;
 
 public class ResultActivity extends BaseActivity {
 
-    int mResultType;
+    int mPollID;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_current_poll_detail_home);
 
-        mResultType = getIntent().getExtras().getInt("result_type");
+        mPollID = getIntent().getExtras().getInt("poll_id");
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setContentInsetsAbsolute(0, 0);
+        mToolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
+        setSupportActionBar(mToolbar);
+        mToolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
+        getSupportActionBar().setTitle("Poll");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
-            setResultPage(mResultType);
+            Bundle bundle = new Bundle();
+            bundle.putInt(PAGER_COUNT, mPollID);
+            Fragment fragment = new ResultPollNew();
+            fragment.setArguments(bundle);
+
+            setNewFragment(fragment, "Pager_Activity", false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,19 +45,14 @@ public class ResultActivity extends BaseActivity {
 
     }
 
-    private void setResultPage(int pageType) throws Exception {
-        switch (pageType) {
-            case 0:
-                getSupportActionBar().setTitle("Poll");
-                setNewFragment(setPagerFragment(new ResultPollNew(), getIntent().getExtras().getInt("poll_id")), "Pager_Activity", false);
-                break;
-            case 1:
-                getSupportActionBar().setTitle("Vote");
-                Fragment fragmentVoteResult = new ResultVote();
-                fragmentVoteResult.setArguments(getIntent().getExtras());
-                setNewFragment(fragmentVoteResult, "", false);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
                 break;
         }
+        return super.onOptionsItemSelected(item);
     }
-
 }

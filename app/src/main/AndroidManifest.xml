@@ -73,7 +73,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.bvocal.goounj.TermsAndConditionsActivity"
-            android:parentActivityName="com.bvocal.goounj.LoginActivityNew"
+            android:parentActivityName="com.bvocal.goounj.LoginHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.bvocal.goounj.SearchDetailActivity"

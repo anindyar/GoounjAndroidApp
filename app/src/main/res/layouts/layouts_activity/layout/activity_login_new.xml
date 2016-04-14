@@ -23,6 +23,7 @@
         android:layout_marginRight="@dimen/margin_small"
         android:orientation="vertical">
 
+
         <EditText
             android:id="@+id/login_name"
             android:layout_width="match_parent"

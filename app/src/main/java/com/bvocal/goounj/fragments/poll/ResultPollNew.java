@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bvocal.goounj.R;
+import com.bvocal.goounj.activities.results.ResultActivity;
 import com.bvocal.goounj.adapters.ChoicesListviewAdapter;
 import com.bvocal.goounj.fragments.BaseFragment;
 import com.bvocal.goounj.interfaces.RestApiListener;
@@ -102,10 +103,10 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
         super.onActivityCreated(savedInstanceState);
         try {
             if (preferences.getInt(DASHBOARD_ID, 0) == 0) {
-                ((CurrentPollDetailActivity) act).getSupportActionBar().setTitle("Poll");
+                ((ResultActivity) act).getSupportActionBar().setTitle("Poll");
                 getResultPollForCreatedUser(BASE_URL + RESULT_URL + mPollId);
             } else {
-                ((CurrentPollDetailActivity) act).getSupportActionBar().setTitle("Survey");
+                ((ResultActivity) act).getSupportActionBar().setTitle("Survey");
                 getResultPollForCreatedUser(BASE_URL + SURVEY_RESULT_URL + mPollId);
             }
         } catch (Exception e) {
@@ -314,7 +315,7 @@ public class ResultPollNew extends BaseFragment implements AdapterView.OnItemCli
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *

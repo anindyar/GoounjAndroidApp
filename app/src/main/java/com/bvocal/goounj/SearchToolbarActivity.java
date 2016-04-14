@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.bvocal.goounj.activities.results.ResultActivity;
 import com.bvocal.goounj.pojo.VoteItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -232,6 +233,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
                         }
                     }
                 } else if (mTypeOfPage == 6) {
+
                     for (int i = 0; i < responseArray.length(); i++) {
                         JSONObject objectPolls = responseArray.optJSONObject(i);
                         if (objectPolls.optString("isVoted").equals("1")) {
@@ -275,7 +277,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -299,7 +301,7 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             case 1:
                 editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
-                startActivity(new Intent(this, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 2));
+                startActivity(new Intent(this, ResultActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 2));
                 Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
                 break;
             case 2:
@@ -310,7 +312,6 @@ public class SearchToolbarActivity extends BaseActivity implements SearchView.On
             case 3:
                 editor.putInt(POLL_ID, mSearchSurvey.get(position).pollId).putString(POLL_NAME, "" + mSearchSurvey.get(position).pollName).
                         putString(CURRENT_CREATED_USER_NAME, "" + mSearchSurvey.get(position).createdUserName).commit();
-//        getPollDetailPage(BASE_URL + SHOW_POLL_URL + itemList.get(position).currentPollId);
                 startActivity(new Intent(activity, CurrentPollDetailActivity.class).putExtra("poll_id", mSearchSurvey.get(position).pollId).putExtra("poll_type", 4));
                 Log.e("Poll Id", "" + mSearchSurvey.get(position).pollId);
                 break;

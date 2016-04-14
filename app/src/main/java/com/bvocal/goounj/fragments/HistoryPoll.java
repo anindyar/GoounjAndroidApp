@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.bvocal.goounj.MainHomeActivity;
 import com.bvocal.goounj.R;
+import com.bvocal.goounj.activities.results.ResultActivity;
 import com.bvocal.goounj.adapters.CurrentPollAdapter;
 import com.bvocal.goounj.fragments.poll.ResultPollNew;
 import com.bvocal.goounj.interfaces.RestApiListener;
@@ -244,7 +245,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
-     * <p/>
+     * <p>
      * Implementers can call getItemAtPosition(position) if they need
      * to access the data associated with the selected item.
      *
@@ -258,7 +259,7 @@ public class HistoryPoll extends BaseFragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         editor.putInt(POLL_ID, itemList.get(position).currentPollId).putString(POLL_NAME, "" + itemList.get(position).mCurrentPollTitle).putString(CURRENT_CREATED_USER_NAME, "" + itemList.get(position).mCreatedUserName).commit();
 //        ((HomeActivity) act).setNewFragment(new ResultPoll(), "Current Poll Pager", true);
-        startActivity(new Intent(act, CurrentPollDetailActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 2));
+        startActivity(new Intent(act, ResultActivity.class).putExtra("poll_id", itemList.get(position).currentPollId).putExtra("poll_type", 2));
         Log.e("Poll Id", "" + itemList.get(position).currentPollId);
 //        try {
 //            getResultPollForCreatedUser(BASE_URL + RESULT_URL + itemList.get(position).currentPollId);
