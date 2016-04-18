@@ -100,7 +100,7 @@ public class CandidateDescription extends BaseFragment implements View.OnClickLi
                     return;
                 }
                 try {
-                    verifyOtp("http://192.168.43.25:3000/" + VOTE_VERIFY_OTP, true);
+                    verifyOtp(BASE_URL + VOTE_VERIFY_OTP, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -217,7 +217,7 @@ public class CandidateDescription extends BaseFragment implements View.OnClickLi
                 Log.e("Poll List Response", "" + response.toString());
                 if (response.equals("OK")) {
                     try {
-                        pushVote("http://192.168.43.25:3000/" + VOTE_PUSH, true);
+                        pushVote(BASE_URL + VOTE_PUSH, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

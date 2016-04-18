@@ -76,6 +76,28 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            mVoteList.clear();
+            if (NetworkHelper.checkActiveInternet(act)) {
+                try {
+                    getVoteList(BASE_URL + ELECTION_LIST, true, mLowerLimit, mUpperLimit);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else
+                Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        act.getSupportFragmentManager().popBackStack();
+                        return;
+                    }
+                });
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         act.setTitle("Vote");
@@ -94,7 +116,6 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
                     return;
                 }
             });
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -245,15 +266,5 @@ public class CurrentVote extends BaseFragment implements Appinterface, AdapterVi
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1000);
-//        if (NetworkHelper.checkActiveInternet(act))
-//            getPollForCreatedUser(BASE_URL + SHOW_POLL_FOR_AUDIENCE, true);
-//        else
-//            Methodutils.messageWithTitle(act, "No Internet connection", "Please check your internet connection", new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    act.getSupportFragmentManager().popBackStack();
-//                    return;
-//                }
-//            });
     }
 }

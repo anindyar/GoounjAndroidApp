@@ -65,18 +65,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/results/ResultActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/results/ResultActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/poll/ResultPollNew.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/poll/ResultPollNew.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_login_new.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_login_new.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="goounj-android.iws" />
@@ -105,106 +99,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchToolbarActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginHomeActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/LoginHomeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="51" selection-start-line="43" selection-start-column="51" selection-end-line="43" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.04761905">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OTPActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/OTPActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_otp.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_otp.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.245283">
-              <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CurrentVote.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeDashboard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/HomeDashboard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="96" column="63" selection-start-line="96" selection-start-column="63" selection-end-line="96" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VotePager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/VotePager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="70" selection-start-line="129" selection-start-column="70" selection-end-line="129" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CurrentPollPager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="350" column="0" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ResultActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/results/ResultActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CurrentVote.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22245763">
+              <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#11149#11301#0" expanded="true" />
+                <element signature="e#11300#11301#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2153,9 +2066,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_items/layout/item_candidate_description.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVoteDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDetail.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/poll/CurrentPollDetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/poll/ResultPollNew.java" />
@@ -2164,6 +2075,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_login_new.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_otp.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java" />
       </list>
     </option>
   </component>
@@ -2409,7 +2322,7 @@
     <property name="recentsLimit" value="5" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="device.picker.selection" value="4203dad6debf3200" />
-    <property name="SearchEverywhereHistoryKey" value="OTP&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/OTPActivity.java&#10;Login&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/LoginHomeActivity.java&#10;Otp&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/OTPActivity.java&#10;Sear&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java&#10;Op&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/PollOpinion.java&#10;Curre&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;CurrentV&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java&#10;Pager&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;Result&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java&#10;Histo&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;Histor&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;History&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;Resul&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java&#10;App&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/interfaces/Appinterface.java&#10;S&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/ShowPollPager.java&#10;CurrentPoll&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/activities/poll/CurrentPollDetailActivity.java&#10;AppI&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/interfaces/Appinterface.java&#10;His&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/HistoryVote.java&#10;Bar&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/utils/bargraph/BarGraph.java&#10;Sel&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;Curren&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPoll.java&#10;Se&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;RestA&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/network/RestApiProcessor.java&#10;Self&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;Surv&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;SurveyD&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;Surve&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/survey/SurveyPoll.java&#10;Show&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml&#10;Sh&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml&#10;current&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;dialog&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layout/dialog_vote_confirmation.xml&#10;pager&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_poll_pager.xml&#10;ic_can&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/drawable-xhdpi/ic_vote_candidate_img.png&#10;SurveyDe&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;vote&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_vote_pager.xml&#10;Vote&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_current_vote_detail.xml&#10;Current&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java&#10;Search&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/search/SearchFragment.java" />
+    <property name="SearchEverywhereHistoryKey" value=".gr&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/build.gradle&#10;Curren&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java&#10;Self&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;Vote&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVoteDetail.java&#10;OTP&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/OTPActivity.java&#10;Login&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/LoginHomeActivity.java&#10;Otp&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/OTPActivity.java&#10;Sear&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java&#10;Op&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/PollOpinion.java&#10;Curre&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;CurrentV&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java&#10;Pager&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;Result&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java&#10;Histo&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;Histor&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;History&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/HistoryPoll.java&#10;Resul&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java&#10;App&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/interfaces/Appinterface.java&#10;S&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/ShowPollPager.java&#10;CurrentPoll&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/activities/poll/CurrentPollDetailActivity.java&#10;AppI&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/interfaces/Appinterface.java&#10;His&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/HistoryVote.java&#10;Bar&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/utils/bargraph/BarGraph.java&#10;Sel&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;Se&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java&#10;RestA&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/network/RestApiProcessor.java&#10;Surv&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;SurveyD&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;Surve&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/survey/SurveyPoll.java&#10;Show&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml&#10;Sh&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_showpoll_pager.xml&#10;current&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java&#10;dialog&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layout/dialog_vote_confirmation.xml&#10;pager&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_poll_pager.xml&#10;ic_can&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/drawable-xhdpi/ic_vote_candidate_img.png&#10;SurveyDe&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/SurveyDetail.java&#10;vote&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/res/layouts/layouts_fragments/layout/fragment_vote_pager.xml&#10;Current&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java&#10;Search&#9;FILE&#9;file:///Users/admin/Documents/Workspace/Goounj New/goounj-android/app/src/main/java/com/bvocal/goounj/fragments/search/SearchFragment.java" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/layouts/drawable-hdpi" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Apk Builds/Goounj/Play Store Builds/V1.3" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/../../../Apk Builds/Goounj/Play Store Builds/V1.3" />
@@ -2710,7 +2623,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1279" height="727" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32569557" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2718,11 +2631,11 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4114671" sideWeight="0.50646204" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43862522" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1816694" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2708165" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32577905" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28968903" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30278233" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2794,49 +2707,49 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>120</line>
+          <line>141</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>155</line>
+          <line>176</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>161</line>
+          <line>182</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>162</line>
+          <line>183</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>163</line>
+          <line>184</line>
           <properties />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>164</line>
+          <line>185</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>168</line>
+          <line>189</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>235</line>
+          <line>256</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -2860,25 +2773,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>123</line>
+          <line>144</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>135</line>
+          <line>156</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>138</line>
+          <line>159</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java</url>
-          <line>145</line>
+          <line>166</line>
           <properties />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
@@ -2964,7 +2877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="176" column="47" selection-start-line="176" selection-start-column="47" selection-end-line="176" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2991,7 +2903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2999,7 +2910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="179" column="54" selection-start-line="179" selection-start-column="54" selection-end-line="179" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3007,7 +2917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3015,7 +2924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="63" selection-start-line="91" selection-start-column="63" selection-end-line="91" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3037,7 +2945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.23893805">
           <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3045,7 +2952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5575221">
           <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3053,13 +2959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2920354">
           <caret line="44" column="70" selection-start-line="44" selection-start-column="70" selection-end-line="44" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70866144">
-          <caret line="100" column="73" selection-start-line="100" selection-start-column="73" selection-end-line="100" selection-end-column="73" />
         </state>
       </provider>
     </entry>
@@ -3082,7 +2981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04385965">
           <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3090,10 +2988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
-          <folding>
-            <element signature="e#4088#4089#0" expanded="true" />
-            <element signature="e#4126#4127#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3101,7 +2995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3166,13 +3059,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031055901">
-          <caret line="61" column="103" selection-start-line="61" selection-start-column="103" selection-end-line="61" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_fragments/layout/fragment_currentpoll_pager.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.31132075">
@@ -3188,33 +3074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36036035">
           <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3153153">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVoteDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="72" selection-start-line="81" selection-start-column="72" selection-end-line="81" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3222,7 +3081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.082417585">
           <caret line="92" column="66" selection-start-line="92" selection-start-column="66" selection-end-line="92" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3257,7 +3115,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3265,7 +3122,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="156" column="24" selection-start-line="156" selection-start-column="24" selection-end-line="156" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3273,7 +3129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1939" column="0" selection-start-line="1939" selection-start-column="0" selection-end-line="1939" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3281,65 +3136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="350" column="0" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/results/ResultActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/poll/ResultPollNew.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/HomeDashboard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="63" selection-start-line="96" selection-start-column="63" selection-end-line="96" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/VotePager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="70" selection-start-line="129" selection-start-column="70" selection-end-line="129" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3349,25 +3145,6 @@
           <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/OTPActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_otp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.245283">
-          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_login_new.xml">
@@ -3383,17 +3160,138 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/LoginHomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.03768844">
           <caret line="43" column="51" selection-start-line="43" selection-start-column="51" selection-end-line="43" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/SearchToolbarActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33919597">
+          <caret line="359" column="0" selection-start-line="359" selection-start-column="0" selection-end-line="359" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/OTPActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03768844">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/layouts_activity/layout/activity_otp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04347826">
+          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/HomeDashboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17085427">
+          <caret line="96" column="63" selection-start-line="96" selection-start-column="63" selection-end-line="96" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/VotePager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03768844">
+          <caret line="129" column="70" selection-start-line="129" selection-start-column="70" selection-end-line="129" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/CurrentPollPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03768844">
+          <caret line="350" column="0" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/poll/ResultPollNew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37688443">
+          <caret line="106" column="48" selection-start-line="106" selection-start-column="48" selection-end-line="106" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/ResultVote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37688443">
+          <caret line="152" column="84" selection-start-line="152" selection-start-column="84" selection-end-line="152" selection-end-column="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDescription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5251257">
+          <caret line="259" column="61" selection-start-line="259" selection-start-column="61" selection-end-line="259" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CandidateDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25067386">
+          <caret line="114" column="65" selection-start-line="114" selection-start-column="65" selection-end-line="114" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/SelfNominationForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4698492">
+          <caret line="134" column="21" selection-start-line="134" selection-start-column="21" selection-end-line="134" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVoteDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43467337">
+          <caret line="67" column="13" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/activities/results/ResultActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04761905">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.67839193">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bvocal/goounj/fragments/vote/CurrentVote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22245763">
+          <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11149#11301#0" expanded="true" />
+            <element signature="e#11300#11301#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
